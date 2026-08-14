@@ -315,9 +315,9 @@ PEARL_SVG = f"""
 
 
 # lotus petals for the Buddha's throne — curled scallops, outer first
-_petal = ('<path class="b-petal" d="M-10 -8 C-12 -14 -7 -19 0 -19 C7 -19 12 -14 10 -8 '
-          'C9 -2 5 2 0 2 C-5 2 -9 -2 -10 -8 Z"/>'
-          '<path class="b-line" d="M-4 -14 C-1 -16 3 -15 4 -11"/>')
+_petal = ('<path class="b-petal" d="M-10 -15 C-6 -19 6 -19 10 -15 C13 -9 11 -1 4 3 '
+          'C2 4 -2 4 -4 3 C-11 -1 -13 -9 -10 -15 Z"/>'
+          '<path class="b-line" d="M-5 -14 C-2 -16 3 -16 5 -13 M0 -12 C-1 -7 -1 -2 0 1"/>')
 b_petals = "".join(f'<g transform="translate({x} 36)">{_petal}</g>'
                    for x in (-63, 63, -42, 42, -21, 21, 0))
 
@@ -349,8 +349,9 @@ BUDDHA_SVG = f"""
       C40 -75 38 -86 33 -96
       C29 -103 20 -108 8 -110
       C3 -111 -3 -111 -8 -110 Z"/>
-    <!-- neck -->
-    <path class="b-line" d="M-7 -116 C-4 -112 4 -112 7 -116"/>
+    <!-- neck: filled column joining head to chest, stroked sides only -->
+    <path class="b-neck" d="M-9 -124 L-9 -105 L9 -105 L9 -124 Z"/>
+    <path class="b-line" d="M-9 -120 C-9 -114 -8.5 -110 -8 -106 M9 -120 C9 -114 8.5 -110 8 -106"/>
     <!-- robe edges across the chest -->
     <path class="b-line" d="M-15 -104 C-6 -96 6 -96 15 -104"/>
     <path class="b-line" d="M-13 -99 C-5 -92 5 -92 13 -99"/>
@@ -481,6 +482,7 @@ dragon_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="330 -290 1260 
   .b-line {{ fill:none; stroke:var(--gb); stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }}
   .b-solid {{ fill:#0e1c34; stroke:var(--gb); stroke-width:1.5; stroke-linejoin:round; }}
   .b-dot {{ fill:var(--gb); }}
+  .b-neck {{ fill:#0e1c34; }}
   .b-petal {{ fill:url(#maneGrad); stroke:var(--gb); stroke-width:1.3; stroke-linejoin:round; }}
   .b-aura {{ fill:url(#discGrad); stroke:var(--g); stroke-width:1.7; opacity:.95; }}
   .b-halo {{ fill:url(#haloGrad); animation:pulse 8s ease-in-out infinite alternate; }}
