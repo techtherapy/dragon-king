@@ -326,9 +326,9 @@ b_petals = "".join(f'<g transform="translate({x} 36)">{_petal}</g>'
 # and becomes the pearl — the Dharma received.
 BUDDHA_SVG = f"""
 <g class="buddha" transform="translate({fmt(PEARL[0])} -40) scale(1.12)">
-  <!-- descending light, drawn first (sits behind the figure's lotus) -->
-  <path class="b-beam" d="M-24 60 L-74 400 L74 400 L24 60 Z"/>
-  <path class="b-ray" d="M0 64 L0 396 M-44 70 L-62 380 M44 70 L62 380"/>
+  <!-- descending light: radiates from the heart, behind the figure -->
+  <path class="b-beam" d="M-6 -82 L-74 400 L74 400 L6 -82 Z"/>
+  <path class="b-ray" d="M0 -74 L0 396 M-22 -56 L-62 380 M22 -56 L62 380"/>
   <!-- halo glow -->
   <g transform="translate(0 -92)"><circle class="b-halo" r="128"/></g>
   <!-- mandorla (egg aureole) + head nimbus: inscribe themselves -->
@@ -377,6 +377,11 @@ BUDDHA_SVG = f"""
     <!-- sleeves hanging from the forearms -->
     <path class="b-solid" d="M33 -46 C38 -37 37 -26 30 -19 C26 -22 27 -33 30 -43 Z"/>
     <path class="b-solid" d="M-33 -46 C-38 -37 -37 -26 -30 -19 C-26 -22 -27 -33 -30 -43 Z"/>
+    <!-- heart chakra: the source of the light -->
+    <g transform="translate(0 -82)">
+      <circle class="hg-halo" r="17"/>
+      <circle class="hg-core" r="3"/>
+    </g>
     <!-- dhyana mudra: hands together, palms up, thumbs touching -->
     <path class="b-solid" d="M-13 -33 C-11 -38 11 -38 13 -33 C10 -28.5 -10 -28.5 -13 -33 Z"/>
     <path class="b-line" d="M-4 -37.5 C-2 -39.5 2 -39.5 4 -37.5"/>
@@ -506,6 +511,12 @@ dragon_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="330 -290 1260 
     animation:beamPour 1.5s cubic-bezier(.3,0,.2,1) 2.6s forwards, breathe 7s ease-in-out 4.1s infinite alternate; }}
   .b-ray {{ fill:none; stroke:url(#beamGrad); stroke-width:1.4; opacity:0;
     animation:fadeIn 1.2s ease 3.1s forwards, breathe 8s ease-in-out 4.6s infinite alternate; }}
+  .hg-halo {{ fill:url(#haloGrad); opacity:0; transform-box:fill-box; transform-origin:center;
+    animation:heartIn .9s ease 2.2s forwards, heartPulse 7s ease-in-out 3.1s infinite alternate; }}
+  .hg-core {{ fill:#fff8e6; opacity:0; animation:coreIn .9s ease 2.2s forwards; }}
+  @keyframes heartIn {{ to {{ opacity:.9; }} }}
+  @keyframes coreIn {{ to {{ opacity:1; }} }}
+  @keyframes heartPulse {{ from {{ opacity:.9; transform:scale(1); }} to {{ opacity:.55; transform:scale(.86); }} }}
   @keyframes bloom {{ to {{ opacity:.55; transform:scale(.94); }} }}
   @keyframes drawAura {{ to {{ stroke-dashoffset:0; }} }}
   @keyframes manifest {{ from {{ opacity:0; transform:scale(.92) translateY(7px); }} to {{ opacity:1; transform:none; }} }}
@@ -541,6 +552,9 @@ dragon_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="330 -290 1260 
     .head-inner,.whisker,.spikes,.frond,.detail,.leg,.head,.body-fill,
     .b-halo,.b-beam,.b-ray,.b-in,.b-aura-m,.b-aura-n {{ animation:none; }}
     .b-aura-m,.b-aura-n {{ stroke-dasharray:none; }}
+    .hg-halo,.hg-core {{ animation:none; }}
+    .hg-halo {{ opacity:.8; }}
+    .hg-core {{ opacity:1; }}
     .b-in,.b-beam,.b-ray {{ opacity:1; transform:none; }}
     .b-halo {{ opacity:.75; transform:none; }}
     .body-fill {{ stroke-dasharray:none; fill-opacity:1; }}
