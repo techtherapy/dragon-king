@@ -149,7 +149,7 @@
 .sutra-title .t1 {
   font-family: var(--font-tc);
   font-size: clamp(2.2rem, 5.5vw, 3.4rem);
-  font-weight: 600;
+  font-weight: 400;
   color: var(--gold-bright);
   letter-spacing: 0.18em;
   text-shadow: 0 0 38px rgba(217, 178, 95, 0.35);
@@ -172,7 +172,7 @@
 .seclabel .s1 {
   font-family: var(--font-tc);
   font-size: clamp(1.7rem, 3.8vw, 2.4rem);
-  font-weight: 600;
+  font-weight: 400;
   color: var(--gold-bright);
   letter-spacing: 0.16em;
 }
@@ -183,11 +183,11 @@
 .prow { margin: 0 0 1.35rem; }
 .prow .hanzi {
   font-family: var(--font-tc);
-  font-size: 1.5rem;
+  font-size: 1.55rem;
   line-height: 1.85;
   color: var(--gold-bright);
   margin: 0;
-  font-weight: 500;
+  font-weight: 400;
 }
 .prow .pinyin {
   font-family: var(--font-body);

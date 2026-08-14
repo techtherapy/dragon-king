@@ -143,7 +143,8 @@ CHROME_HEAD = """<!DOCTYPE html>
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/reader.css">
 </head>
@@ -202,7 +203,7 @@ CHROME_FOOT = """
       </ul>
     </div>
     <div>
-      <h4>Community</h4>
+      <h4>About</h4>
       <ul>
         <li><a href="his-holiness-living-buddha-lian-sheng.html">H.H. Living Buddha Lian Sheng</a></li>
         <li><a href="refuge.html">Take Refuge</a></li>
@@ -210,21 +211,22 @@ CHROME_FOOT = """
       </ul>
     </div>
     <div>
-      <h4>Facebook</h4>
+      <h4>Temple Websites</h4>
       <ul>
-        <li><a href="https://www.facebook.com/syltbsnenglish" rel="noopener">Official Page</a></li>
-        <li><a href="https://www.facebook.com/groups/tbsenglish" rel="noopener">Discussion Group</a></li>
-        <li><a href="https://www.facebook.com/VajraLotsawas" rel="noopener">Vajra Lotsawas</a></li>
+        <li><a href="https://english.tbsseattle.org/" rel="noopener">Seattle Leizang Temple</a></li>
+        <li><a href="https://tbs-rainbow.org/" rel="noopener">Rainbow Temple</a></li>
       </ul>
     </div>
     <div>
-      <h4>Related Sutras</h4>
+      <h4>Related Sites</h4>
       <ul>
         <li><a href="https://truebuddhasutra.org" rel="noopener">True Buddha Sutra</a></li>
         <li><a href="https://vajrasutra.org" rel="noopener">Vajra Sutra</a></li>
         <li><a href="https://highkingsutra.org" rel="noopener">High King Sutra</a></li>
         <li><a href="https://surangamasutra.org" rel="noopener">Surangama Sutra</a></li>
+        <li><a href="https://amitabhasutra.org" rel="noopener">Amitabha Sutra</a></li>
         <li><a href="https://drashilhamo.org" rel="noopener">Drashi Lhamo</a></li>
+        <li><a href="https://vlotus.org" rel="noopener">VLotus 蓮花飄香</a></li>
       </ul>
     </div>
     <div>
@@ -236,10 +238,19 @@ CHROME_FOOT = """
         <li><a href="https://sylfoundation.org" rel="noopener">Sheng-Yen Lu Foundation</a></li>
       </ul>
     </div>
+    <div>
+      <h4>Facebook</h4>
+      <ul>
+        <li><a href="https://www.facebook.com/syltbsnenglish" rel="noopener">Official Page</a></li>
+        <li><a href="https://www.facebook.com/groups/tbsenglish" rel="noopener">Discussion Group</a></li>
+        <li><a href="https://www.facebook.com/VajraLotsawas" rel="noopener">Vajra Lotsawas</a></li>
+      </ul>
+    </div>
   </div>
+  
   <div class="footer-bottom">
     <span class="tc" lang="zh-Hant">南無海龍王菩薩</span>
-    <span>May all beings share in the merit of this offering of the Dharma · 嗡嘛呢唄咪吽</span>
+    <span>May all beings share in the merit of this offering of the Dharma · 嗡咕嚕蓮生悉地吽</span>
   </div>
 </footer>
 

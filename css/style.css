@@ -31,7 +31,7 @@
   /* type */
   --font-display: "Cormorant Garamond", "Times New Roman", serif;
   --font-body: "EB Garamond", Georgia, "Times New Roman", serif;
-  --font-tc: "Noto Serif TC", "Songti TC", "SimSun", serif;
+  --font-tc: "LXGW WenKai TC", "Kaiti TC", "STKaiti", "DFKai-SB", "BiauKai", "Noto Serif TC", serif;
 
   --measure: 66ch;
   --pad: clamp(1.25rem, 4vw, 2.5rem);

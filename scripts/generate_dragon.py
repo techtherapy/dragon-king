@@ -122,6 +122,11 @@ widths = [width_at(i / (N - 1)) for i in range(N)]
 outer = [(pts[i][0] + norms[i][0] * widths[i], pts[i][1] + norms[i][1] * widths[i]) for i in range(N)]
 inner = [(pts[i][0] - norms[i][0] * widths[i], pts[i][1] - norms[i][1] * widths[i]) for i in range(N)]
 body_d = poly_path(outer + inner[::-1], close=True)
+# perimeter of the outline loop, for the stroke draw-in animation
+_loop = outer + inner[::-1]
+BODY_LEN = sum(math.hypot(_loop[i][0] - _loop[i - 1][0], _loop[i][1] - _loop[i - 1][1])
+               for i in range(1, len(_loop))) + math.hypot(
+                   _loop[0][0] - _loop[-1][0], _loop[0][1] - _loop[-1][1])
 
 # ---- dorsal spikes along the outer edge --------------------------------
 spikes = []
@@ -248,7 +253,7 @@ for t_pos in (0.53, 0.78):
 
 # ---- hand-authored head (local coords, facing -x, neck joint at ~(46,0)) --
 HEAD = f"""
-<g class="head" transform="translate({fmt(hx)} {fmt(hy)}) rotate({fmt(head_angle)}) scale(1.32)">
+<g class="head" transform="translate({fmt(hx)} {fmt(hy)}) rotate({fmt(head_angle)}) scale(1.32)"><g class="head-inner">
   <!-- mane locks sweeping back over the neck -->
   <path class="mane" d="M30 -28 C64 -60 100 -72 138 -66 C106 -50 88 -36 80 -18 C76 -22 50 -26 30 -28 Z"/>
   <path class="mane" d="M36 -18 C78 -34 116 -32 146 -14 C112 -12 90 -4 78 10 C72 0 52 -12 36 -18 Z"/>
@@ -282,11 +287,11 @@ HEAD = f"""
   <path class="horn" d="M50 -60 C56 -74 68 -84 84 -90 C88 -91 91 -88 89 -84 C86 -80 82 -78 78 -74 C70 -68 64 -62 60 -54 Z"/>
   <!-- whiskers -->
   <path class="whisker" d="M-76 -8 C-104 -14 -130 -6 -146 16 C-154 28 -150 40 -140 40 C-146 30 -144 22 -132 16 C-116 4 -96 -2 -76 -4"/>
-  <path class="whisker" d="M-72 8 C-94 14 -110 28 -118 50 C-122 62 -114 70 -106 66 C-114 58 -113 50 -104 44 C-94 30 -82 18 -68 12"/>
+  <path class="whisker w2" d="M-72 8 C-94 14 -110 28 -118 50 C-122 62 -114 70 -106 66 C-114 58 -113 50 -104 44 C-94 30 -82 18 -68 12"/>
   <!-- chin beard locks -->
   <path class="mane" d="M-30 34 C-36 48 -32 62 -20 70 C-22 58 -19 48 -10 42 C-18 40 -25 38 -30 34 Z"/>
   <path class="mane mane2" d="M-46 36 C-54 46 -56 58 -50 68 C-48 58 -43 50 -36 46 Z"/>
-</g>
+</g></g>
 """
 
 # ---- flaming pearl -------------------------------------------------------
@@ -378,14 +383,38 @@ dragon_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="330 10 1260 98
   .d1 {{ animation:twinkle 4s ease-in-out infinite alternate; }}
   .d2 {{ animation:twinkle 6s ease-in-out infinite alternate-reverse; }}
   .d3 {{ animation:twinkle 5s ease-in-out infinite alternate; opacity:.5; }}
-  .dragon {{ animation:bob 14s ease-in-out infinite alternate; }}
+  /* ---- entrance: the dragon draws itself in gold ink ---- */
+  .body-fill {{
+    stroke-dasharray:{BODY_LEN:.0f}; stroke-dashoffset:{BODY_LEN:.0f}; fill-opacity:0;
+    animation:drawBody 3s cubic-bezier(.45,0,.25,1) .3s forwards, fillBody 1.4s ease 2.1s forwards;
+  }}
+  .spikes, .frond {{ opacity:0; animation:fadeIn 1.1s ease 2s forwards; }}
+  .detail {{ opacity:0; animation:fadeIn 1.2s ease 2.4s forwards; }}
+  .leg {{ opacity:0; animation:fadeIn 1s ease 2.2s forwards; }}
+  .head {{ opacity:0; animation:fadeIn 1s ease 1.5s forwards; }}
+  /* ---- ambient: swimming ---- */
+  .dragon {{ transform-origin:912px 468px; animation:swim 16s ease-in-out infinite alternate; }}
+  .head-inner {{ transform-box:fill-box; transform-origin:82% 34%; animation:nod 9s ease-in-out infinite alternate; }}
+  .whisker {{ transform-box:fill-box; transform-origin:96% 12%; animation:whisk 6.5s ease-in-out infinite alternate; }}
+  .whisker.w2 {{ animation-duration:8s; animation-delay:-2.5s; }}
+  @keyframes drawBody {{ to {{ stroke-dashoffset:0; }} }}
+  @keyframes fillBody {{ to {{ fill-opacity:1; }} }}
+  @keyframes fadeIn {{ to {{ opacity:1; }} }}
+  @keyframes swim {{
+    from {{ transform:translate(0,-7px) rotate(-1.5deg); }}
+    to {{ transform:translate(0,8px) rotate(1.7deg); }}
+  }}
+  @keyframes nod {{ from {{ transform:rotate(-1.3deg); }} to {{ transform:rotate(1.9deg); }} }}
+  @keyframes whisk {{ from {{ transform:rotate(-2.4deg); }} to {{ transform:rotate(2.8deg); }} }}
   @keyframes pulse {{ from {{ opacity:.55; transform:scale(.94); }} to {{ opacity:1; transform:scale(1.05); }} }}
   @keyframes flick {{ from {{ transform:rotate(-3deg) scale(.98); }} to {{ transform:rotate(3deg) scale(1.03); }} }}
   @keyframes drift {{ from {{ transform:translateX(-22px); }} to {{ transform:translateX(22px); }} }}
   @keyframes twinkle {{ from {{ opacity:.12; }} to {{ opacity:.95; }} }}
-  @keyframes bob {{ from {{ transform:translateY(-7px); }} to {{ transform:translateY(7px); }} }}
   @media (prefers-reduced-motion: reduce) {{
-    .pearl-halo,.pearl-halo2,.pearl-flames,.cloud-a,.cloud-b,.dust,.dragon {{ animation:none; }}
+    .pearl-halo,.pearl-halo2,.pearl-flames,.cloud-a,.cloud-b,.dust,.dragon,
+    .head-inner,.whisker,.spikes,.frond,.detail,.leg,.head,.body-fill {{ animation:none; }}
+    .body-fill {{ stroke-dasharray:none; fill-opacity:1; }}
+    .spikes,.frond,.detail,.leg,.head {{ opacity:1; }}
   }}
 </style>
 <defs>
@@ -447,7 +476,7 @@ dragon_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="330 10 1260 98
   <g class="spikes">{'' if not spikes_d else f'<path class="spike" d="{spikes_d}"/>'}</g>
   <path class="frond" d="{fronds_d}"/>
   <path class="body-fill" d="{body_d}"/>
-  <g clip-path="url(#bodyClip)">
+  <g class="detail" clip-path="url(#bodyClip)">
     <path class="scale" d="{scales_d}"/>
     <path class="plate" d="{plates_d}"/>
     <path class="belly-line" d="{belly_line}"/>
@@ -481,36 +510,66 @@ def curl(cx, cy, size, turns=1.75, k=0.34, samples=70):
 
 
 random.seed(21)
+PERIOD = 1600.0
+
+
+def tiled(x):
+    """Emit x plus wrapped twins so the pattern tiles with period 1600."""
+    xs = [x]
+    if x < 220:
+        xs.append(x + PERIOD)
+    if x > PERIOD - 220:
+        xs.append(x - PERIOD)
+    return xs
+
+
 back_curls, front_curls, swells = [], [], []
-x = -40
-while x < 1680:
-    s = random.uniform(46, 78)
-    back_curls.append(curl(x + random.uniform(-10, 10), 118 + random.uniform(-8, 8), s * 0.8))
-    x += s * 1.9
-x = -70
-while x < 1700:
-    s = random.uniform(56, 92)
-    cx0, cy0 = x, 172 + random.uniform(-6, 6)
-    front_curls.append(curl(cx0, cy0, s))
-    # trailing swell line flowing right from under the curl
-    ox, oy = cx0 + s * math.cos(-0.35), cy0 - s * math.sin(-0.35)
-    swells.append(f"M{fmt(ox)} {fmt(oy)} "
-                  f"C{fmt(ox + s * 0.6)} {fmt(oy + s * 0.34)} {fmt(ox + s * 1.2)} {fmt(oy + s * 0.3)} "
-                  f"{fmt(ox + s * 1.8)} {fmt(oy - s * 0.2)}")
-    x += s * 1.85
+# back row: 16 curls on a fixed grid with jitter (grid keeps the loop seamless)
+for i in range(16):
+    x0 = i * PERIOD / 16 + random.uniform(-14, 14)
+    s = random.uniform(40, 62)
+    y0 = 116 + random.uniform(-8, 8)
+    for x in tiled(x0):
+        back_curls.append(curl(x, y0, s))
+# front row: 10 larger curls with trailing swells
+for i in range(10):
+    x0 = i * PERIOD / 10 + random.uniform(-20, 20)
+    s = random.uniform(58, 92)
+    y0 = 172 + random.uniform(-6, 6)
+    for x in tiled(x0):
+        front_curls.append(curl(x, y0, s))
+        ox, oy = x + s * math.cos(-0.35), y0 - s * math.sin(-0.35)
+        swells.append(f"M{fmt(ox)} {fmt(oy)} "
+                      f"C{fmt(ox + s * 0.6)} {fmt(oy + s * 0.34)} {fmt(ox + s * 1.2)} {fmt(oy + s * 0.3)} "
+                      f"{fmt(ox + s * 1.8)} {fmt(oy - s * 0.2)}")
 
 waves_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 260" preserveAspectRatio="none" aria-hidden="true">
 <style>
   .wb {{ fill:none; stroke:#8d7440; stroke-width:1.6; opacity:.4; }}
   .wf {{ fill:none; stroke:#d9b25f; stroke-width:2; opacity:.75; }}
   .ws {{ fill:none; stroke:#d9b25f; stroke-width:1.3; opacity:.35; }}
+  .roll-back {{ animation:roll 110s linear infinite; }}
+  .roll-front {{ animation:roll 62s linear infinite; }}
+  .bob-back {{ animation:bobY 9s ease-in-out infinite alternate; }}
+  .bob-front {{ animation:bobY 7s ease-in-out -3.5s infinite alternate-reverse; }}
+  @keyframes roll {{ from {{ transform:translateX(0); }} to {{ transform:translateX(-1600px); }} }}
+  @keyframes bobY {{ from {{ transform:translateY(-4px); }} to {{ transform:translateY(4px); }} }}
+  @media (prefers-reduced-motion: reduce) {{
+    .roll-back,.roll-front,.bob-back,.bob-front {{ animation:none; }}
+  }}
 </style>
-<rect width="1600" height="260" fill="none"/>
-<path class="wb" d="{''.join(back_curls)}"/>
-<path class="ws" d="{''.join(swells)}"/>
-<path class="wf" d="{''.join(front_curls)}"/>
-</svg>
+<defs>
+  <g id="back-row"><path class="wb" d="{''.join(back_curls)}"/></g>
+  <g id="front-row"><path class="ws" d="{''.join(swells)}"/><path class="wf" d="{''.join(front_curls)}"/></g>
+</defs>
+<g class="bob-back"><g class="roll-back">
+  <use href="#back-row"/><use href="#back-row" x="1600"/>
+</g></g>
+<g class="bob-front"><g class="roll-front">
+  <use href="#front-row"/><use href="#front-row" x="1600"/>
+</g></g>
 """
+waves_svg += "</svg>\n"
 (ASSETS / "waves.svg").write_text(waves_svg, encoding="utf-8")
 
 print(f"dragon-hero.svg: {len(dragon_svg) / 1024:.0f} KB, spine samples={N}")
