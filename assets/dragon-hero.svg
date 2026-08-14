@@ -195,10 +195,28 @@
     <!-- robe: diagonal sanghati edge -->
     <path class="b-line" d="M-14 -100 C-6 -92 8 -89 17 -91"/>
     <path class="b-line" d="M-15 -97 C-8 -90 2 -88 10 -89"/>
-    <!-- sleeve fold lines -->
-    <path class="b-line" d="M-37 -66 C-36 -55 -33 -46 -29 -41 M37 -66 C36 -55 33 -46 29 -41"/>
-    <!-- forearms meeting at the lap -->
-    <path class="b-line" d="M-29 -42 C-20 -38 -10 -36 -4 -36 M29 -42 C20 -38 10 -36 4 -36"/>
+    <!-- arms: shoulder to elbow, forearm crossing to the lap -->
+    <path class="b-solid" d="M16 -107
+      C27 -104 33 -98 36 -89
+      C39 -79 40 -70 39 -61
+      C38 -53 36 -46 32 -41
+      C26 -36 16 -33 7 -32
+      L10 -40
+      C16 -44 21 -49 24 -55
+      C27 -67 26 -82 22 -94
+      C20 -100 18 -104 16 -107 Z"/>
+    <path class="b-solid" d="M-16 -107
+      C-27 -104 -33 -98 -36 -89
+      C-39 -79 -40 -70 -39 -61
+      C-38 -53 -36 -46 -32 -41
+      C-26 -36 -16 -33 -7 -32
+      L-10 -40
+      C-16 -44 -21 -49 -24 -55
+      C-27 -67 -26 -82 -22 -94
+      C-20 -100 -18 -104 -16 -107 Z"/>
+    <!-- sleeves hanging from the forearms -->
+    <path class="b-solid" d="M33 -46 C38 -37 37 -26 30 -19 C26 -22 27 -33 30 -43 Z"/>
+    <path class="b-solid" d="M-33 -46 C-38 -37 -37 -26 -30 -19 C-26 -22 -27 -33 -30 -43 Z"/>
     <!-- dhyana mudra: hands together, palms up, thumbs touching -->
     <path class="b-solid" d="M-13 -33 C-11 -38 11 -38 13 -33 C10 -28.5 -10 -28.5 -13 -33 Z"/>
     <path class="b-line" d="M-4 -37.5 C-2 -39.5 2 -39.5 4 -37.5"/>
