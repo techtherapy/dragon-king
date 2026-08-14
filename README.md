@@ -12,7 +12,7 @@ SVG line-art in the style of a sutra frontispiece.
 
 | Page | Purpose |
 |---|---|
-| `index.html` | Hero (dragon roundel + vertical title), teachings, chapter index |
+| `index.html` | Hero (Buddha silhouette in halo above the dragon roundel, vertical title), teachings, chapter index |
 | `read.html` | **Generated** — complete trilingual reader (20 chapters, 3,204 verse-lines) with chapter drawer, layer toggles (漢字/pinyin/English), progress bar, print stylesheet |
 | `about.html` | About the sutra + full bilingual study reflection |
 | `his-holiness-living-buddha-lian-sheng.html` | Biography of the root guru |

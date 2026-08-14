@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="330 10 1260 980" role="img"
-     aria-label="A golden dragon coiled around a flaming pearl, drawn in the style of a classical sutra frontispiece">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="330 -290 1260 1280" role="img"
+     aria-label="Beneath a radiant silhouette of the Buddha seated on a lotus, a golden dragon coils around a flaming pearl — drawn in the style of a classical sutra frontispiece">
 <style>
   :root { --g:#d9b25f; --gb:#f4dc96; --gd:#8d7440; --body:#101f39; --body2:#16294a; }
   .body-fill { fill:url(#bodyGrad); stroke:var(--g); stroke-width:2.6; stroke-linejoin:round; }
@@ -33,6 +33,15 @@
   .pearl-swirl { fill:rgba(141,116,64,.55); }
   .flame { fill:url(#flameGrad); stroke:var(--gb); stroke-width:1; opacity:.9; }
   .pearl-flames { transform-origin:0 0; animation:flick 9s ease-in-out infinite alternate; }
+  .b-fig { fill:url(#buddhaGrad); stroke:var(--gb); stroke-width:1.3; stroke-linejoin:round; }
+  .b-petal { fill:url(#maneGrad); stroke:var(--g); stroke-width:1.2; }
+  .b-base { fill:#12233f; stroke:var(--g); stroke-width:1.3; }
+  .b-ring { fill:none; stroke:var(--gb); stroke-width:1.2; }
+  .b-halo { fill:url(#haloGrad); animation:pulse 8s ease-in-out infinite alternate; }
+  .b-beam { fill:url(#beamGrad); animation:breathe 7s ease-in-out infinite alternate; }
+  .b-ray { fill:none; stroke:url(#beamGrad); stroke-width:1.4; animation:breathe 7s ease-in-out -3s infinite alternate; }
+  .b-in { opacity:0; animation:fadeIn 1.8s ease .15s forwards; }
+  @keyframes breathe { from { opacity:.65; } to { opacity:1; } }
   .cline { fill:none; stroke:var(--g); stroke-width:2; stroke-linecap:round; }
   .cloud { opacity:.38; }
   .cloud-a { animation:drift 26s ease-in-out infinite alternate; }
@@ -70,7 +79,9 @@
   @keyframes twinkle { from { opacity:.12; } to { opacity:.95; } }
   @media (prefers-reduced-motion: reduce) {
     .pearl-halo,.pearl-halo2,.pearl-flames,.cloud-a,.cloud-b,.dust,.dragon,
-    .head-inner,.whisker,.spikes,.frond,.detail,.leg,.head,.body-fill { animation:none; }
+    .head-inner,.whisker,.spikes,.frond,.detail,.leg,.head,.body-fill,
+    .b-halo,.b-beam,.b-ray,.b-in { animation:none; }
+    .b-in { opacity:1; }
     .body-fill { stroke-dasharray:none; fill-opacity:1; }
     .spikes,.frond,.detail,.leg,.head { opacity:1; }
   }
@@ -111,6 +122,16 @@
     <stop offset="0%" stop-color="#f4dc96" stop-opacity=".22"/>
     <stop offset="60%" stop-color="#f4dc96" stop-opacity="0"/>
   </radialGradient>
+  <linearGradient id="buddhaGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#f4dc96"/>
+    <stop offset="70%" stop-color="#d9b25f"/>
+    <stop offset="100%" stop-color="#b3893f"/>
+  </linearGradient>
+  <linearGradient id="beamGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#f4dc96" stop-opacity=".30"/>
+    <stop offset="70%" stop-color="#f4dc96" stop-opacity=".08"/>
+    <stop offset="100%" stop-color="#f4dc96" stop-opacity="0"/>
+  </linearGradient>
   <filter id="soft" x="-80%" y="-80%" width="260%" height="260%">
     <feGaussianBlur stdDeviation="6"/>
   </filter>
@@ -128,13 +149,55 @@
 </defs>
 
 <!-- gold dust field -->
-<g><circle class="dust d1" cx="752.1" cy="175.8" r="1.1" style="animation-delay:4.9s"/><circle class="dust d1" cx="481.1" cy="564.5" r="1.5" style="animation-delay:0.5s"/><circle class="dust d1" cx="863.4" cy="256.6" r="2.6" style="animation-delay:5.0s"/><circle class="dust d3" cx="516.1" cy="240.9" r="1.1" style="animation-delay:3.5s"/><circle class="dust d2" cx="428.5" cy="239" r="1.5" style="animation-delay:2.5s"/><circle class="dust d1" cx="1008" cy="553.8" r="1.5" style="animation-delay:3.5s"/><circle class="dust d3" cx="1123.9" cy="375.2" r="1.1" style="animation-delay:0.4s"/><circle class="dust d2" cx="613" cy="652.4" r="2.6" style="animation-delay:2.8s"/><circle class="dust d1" cx="1459.7" cy="365.4" r="1.5" style="animation-delay:4.2s"/><circle class="dust d2" cx="658" cy="557" r="2.6" style="animation-delay:4.4s"/><circle class="dust d3" cx="709.8" cy="922.2" r="1.1" style="animation-delay:2.5s"/><circle class="dust d2" cx="1263.4" cy="176.8" r="2.6" style="animation-delay:0.2s"/><circle class="dust d2" cx="1158.5" cy="728.1" r="2.0" style="animation-delay:4.2s"/><circle class="dust d1" cx="1071.4" cy="561.9" r="2.6" style="animation-delay:5.0s"/><circle class="dust d1" cx="1484.7" cy="466.7" r="1.1" style="animation-delay:4.4s"/><circle class="dust d2" cx="735.3" cy="560.2" r="2.6" style="animation-delay:4.3s"/><circle class="dust d2" cx="1416.7" cy="352.3" r="2.6" style="animation-delay:1.0s"/><circle class="dust d1" cx="508.2" cy="93.1" r="2.0" style="animation-delay:4.4s"/><circle class="dust d1" cx="839.5" cy="865.1" r="2.6" style="animation-delay:1.0s"/><circle class="dust d2" cx="843.9" cy="290.1" r="1.5" style="animation-delay:5.2s"/><circle class="dust d3" cx="698.5" cy="413.8" r="2.0" style="animation-delay:5.3s"/><circle class="dust d1" cx="1500.1" cy="175.8" r="1.5" style="animation-delay:1.4s"/><circle class="dust d2" cx="645.3" cy="476.5" r="1.5" style="animation-delay:1.7s"/><circle class="dust d1" cx="541.9" cy="521.1" r="2.0" style="animation-delay:4.1s"/><circle class="dust d2" cx="978.3" cy="595.8" r="1.1" style="animation-delay:5.4s"/><circle class="dust d2" cx="1290.4" cy="827.1" r="2.6" style="animation-delay:2.4s"/><circle class="dust d1" cx="492.2" cy="610.9" r="1.1" style="animation-delay:0.4s"/><circle class="dust d3" cx="616.3" cy="186.1" r="2.0" style="animation-delay:0.3s"/><circle class="dust d2" cx="370.3" cy="176.1" r="1.1" style="animation-delay:3.7s"/><circle class="dust d1" cx="453" cy="227.2" r="2.6" style="animation-delay:3.8s"/></g>
+<g><circle class="dust d1" cx="752.1" cy="-79" r="1.1" style="animation-delay:4.9s"/><circle class="dust d1" cx="481.1" cy="439.3" r="1.5" style="animation-delay:0.5s"/><circle class="dust d1" cx="863.4" cy="28.8" r="2.6" style="animation-delay:5.0s"/><circle class="dust d3" cx="516.1" cy="7.9" r="1.1" style="animation-delay:3.5s"/><circle class="dust d2" cx="428.5" cy="5.3" r="1.5" style="animation-delay:2.5s"/><circle class="dust d1" cx="1008" cy="425.1" r="1.5" style="animation-delay:3.5s"/><circle class="dust d3" cx="1123.9" cy="186.9" r="1.1" style="animation-delay:0.4s"/><circle class="dust d2" cx="613" cy="556.5" r="2.6" style="animation-delay:2.8s"/><circle class="dust d1" cx="1459.7" cy="173.9" r="1.5" style="animation-delay:4.2s"/><circle class="dust d2" cx="658" cy="429.3" r="2.6" style="animation-delay:4.4s"/><circle class="dust d3" cx="709.8" cy="916.2" r="1.1" style="animation-delay:2.5s"/><circle class="dust d2" cx="1263.4" cy="-77.6" r="2.6" style="animation-delay:0.2s"/><circle class="dust d2" cx="1158.5" cy="657.5" r="2.0" style="animation-delay:4.2s"/><circle class="dust d1" cx="1071.4" cy="435.9" r="2.6" style="animation-delay:5.0s"/><circle class="dust d1" cx="1484.7" cy="308.9" r="1.1" style="animation-delay:4.4s"/><circle class="dust d2" cx="735.3" cy="433.5" r="2.6" style="animation-delay:4.3s"/><circle class="dust d2" cx="1416.7" cy="156.4" r="2.6" style="animation-delay:1.0s"/><circle class="dust d1" cx="508.2" cy="-189.3" r="2.0" style="animation-delay:4.4s"/><circle class="dust d1" cx="839.5" cy="840.2" r="2.6" style="animation-delay:1.0s"/><circle class="dust d2" cx="843.9" cy="73.4" r="1.5" style="animation-delay:5.2s"/><circle class="dust d3" cx="698.5" cy="238.4" r="2.0" style="animation-delay:5.3s"/><circle class="dust d1" cx="1500.1" cy="-78.9" r="1.5" style="animation-delay:1.4s"/><circle class="dust d2" cx="645.3" cy="322" r="1.5" style="animation-delay:1.7s"/><circle class="dust d1" cx="541.9" cy="381.5" r="2.0" style="animation-delay:4.1s"/><circle class="dust d2" cx="978.3" cy="481.1" r="1.1" style="animation-delay:5.4s"/><circle class="dust d2" cx="1290.4" cy="789.4" r="2.6" style="animation-delay:2.4s"/><circle class="dust d1" cx="492.2" cy="501.1" r="1.1" style="animation-delay:0.4s"/><circle class="dust d3" cx="616.3" cy="-65.2" r="2.0" style="animation-delay:0.3s"/><circle class="dust d2" cx="370.3" cy="-78.5" r="1.1" style="animation-delay:3.7s"/><circle class="dust d1" cx="453" cy="-10.5" r="2.6" style="animation-delay:3.8s"/></g>
 
 <!-- drifting auspicious clouds -->
 <g transform="translate(470 160) scale(1.45)"><use href="#cloud" class="cloud cloud-a"/></g>
+<g transform="translate(600 -140) scale(0.85)"><use href="#cloud" class="cloud cloud-b"/></g>
+<g transform="translate(1105 -175) scale(1.0)"><use href="#cloud" class="cloud cloud-a"/></g>
 <g transform="translate(1230 895) scale(1.8)"><use href="#cloud" class="cloud cloud-b"/></g>
 <g transform="translate(1445 330) scale(1.0)"><use href="#cloud" class="cloud cloud-a"/></g>
 <g transform="translate(470 820) scale(1.15)"><use href="#cloud" class="cloud cloud-b"/></g>
+
+
+<g class="buddha" transform="translate(836 -48) scale(1.08)">
+  <!-- descending light, drawn first (sits behind the figure's lotus) -->
+  <path class="b-beam" d="M-24 60 L-74 400 L74 400 L24 60 Z"/>
+  <path class="b-ray" d="M0 64 L0 396 M-44 70 L-62 380 M44 70 L62 380"/>
+  <!-- halo glow -->
+  <g transform="translate(0 -95)"><circle class="b-halo" r="150"/></g>
+  <g class="b-in">
+    <!-- aureole + head nimbus rings -->
+    <circle class="b-ring" cx="0" cy="-92" r="118" opacity=".22"/>
+    <circle class="b-ring" cx="0" cy="-150" r="42" opacity=".5"/>
+    <circle class="b-ring" cx="0" cy="-150" r="52" opacity=".25"/>
+    <!-- seated figure: pure silhouette, no features -->
+    <circle class="b-fig" cx="0" cy="-182" r="9"/>
+    <circle class="b-fig" cx="0" cy="-152" r="27"/>
+    <path class="b-fig" d="M-17 -136
+      C-34 -132 -46 -126 -52 -116
+      C-50 -95 -44 -75 -42 -58
+      C-40 -52 -36 -48 -30 -44
+      C-52 -38 -76 -26 -88 -12
+      C-94 -4 -94 6 -88 12
+      C-62 20 -24 22 0 22
+      C24 22 62 20 88 12
+      C94 6 94 -4 88 -12
+      C76 -26 52 -38 30 -44
+      C36 -48 40 -52 42 -58
+      C44 -75 50 -95 52 -116
+      C46 -126 34 -132 17 -136
+      C6 -139 -6 -139 -17 -136 Z"/>
+    <!-- lotus seat -->
+    <path class="b-petal" d="M0 21 C-13 25 -19 35 -14 44 L14 44 C19 35 13 25 0 21 Z"/>
+    <path class="b-petal" d="M-38 23 C-50 27 -56 36 -51 44 L-25 44 C-23 34 -28 26 -38 23 Z"/>
+    <path class="b-petal" d="M38 23 C50 27 56 36 51 44 L25 44 C23 34 28 26 38 23 Z"/>
+    <path class="b-petal" d="M-72 27 C-84 31 -89 39 -83 45 L-58 45 C-57 37 -62 30 -72 27 Z"/>
+    <path class="b-petal" d="M72 27 C84 31 89 39 83 45 L58 45 C57 37 62 30 72 27 Z"/>
+    <path class="b-base" d="M-97 46 C-50 58 50 58 97 46 C68 68 -68 68 -97 46 Z"/>
+  </g>
+</g>
+
 
 <g class="dragon" filter="url(#dglow)">
   <g class="spikes"><path class="spike" d="M890.1 144.9Q895.2 140.7 893.3 137.9Q879.2 141 876.1 144.6ZM858 144Q862.8 138.7 861 135.4Q846.9 139.9 844 144.4ZM825.8 144.5Q830.3 138.2 828.4 134.3Q814.4 140.4 811.8 145.7ZM793.5 146.8Q797.5 139.6 795.6 135.4Q781.8 143 779.7 148.8ZM761.3 151.3Q764.6 143.7 762.6 139.6Q749.3 148.4 747.7 154.5ZM729.6 158.4Q732.5 150.9 730.6 147Q717.5 156.6 716.2 162.5ZM698.3 167.5Q700.7 159.9 698.9 156.1Q686.1 166.6 685.3 172.6ZM667.6 178.8Q668.9 169.9 666.6 165Q654.9 177.8 655 184.9ZM637.6 192.5Q637.6 182.5 634.8 176.9Q624.5 191.7 625.5 199.5ZM608.8 208.6Q607.6 198.2 604.4 192.3Q595.4 208.6 597.4 216.7ZM581.3 227.1Q579.3 216.9 576 211Q568 228.3 570.5 236.1ZM555.3 247.9Q552.9 238.4 549.7 233Q542.5 250.7 545.3 257.8ZM531 271.4Q527.1 261.7 523.2 256Q518.1 275.1 522.1 282.2ZM509.2 297.5Q502.8 287.5 497.4 281.1Q495.6 301.9 501.6 309.3ZM490.4 325.9Q482 315.9 475.3 309.3Q476.5 331.1 484 338.3ZM474.5 356.1Q464.8 347 457.3 340.6Q460.9 362.7 469.5 369.2ZM461.8 388.3Q451.6 380.6 444 374.9Q449.5 396.6 458.3 401.9ZM453.2 422.7Q443.2 416.6 435.9 411.8Q443.3 432.7 451.7 436.6ZM449.6 457.9Q437.2 453.2 427.9 449.1Q439.7 469.1 450 471.9ZM450.6 493Q435.9 490.2 424.6 487.1Q440.7 505.6 452.7 506.9ZM455.9 527.9Q440 527 427.6 525.1Q446.7 541.8 459.6 541.4ZM462.6 553.6Q447 554.1 434.6 553.1Q454.9 568.2 467.5 566.7ZM471.7 578.6Q457.4 579.9 445.8 579.3Q466.3 593.3 477.7 591.2ZM482.9 602.5Q469.8 604.3 458.9 604Q479.6 617.2 489.9 614.6ZM496 625.5Q481.2 629.6 468.8 631.1Q492.4 641.4 504 637ZM511.1 647.4Q495.5 653.7 482.1 656.9Q507.8 664.3 520 658.2ZM528.2 668Q512.9 676.1 499.5 680.6Q526.1 685.5 538 678ZM547.2 687.1Q533.2 695.9 520.6 701Q547.1 704.2 557.8 696.2ZM567.5 704.1Q555.3 712.5 544 717.3Q569.7 720 578.9 712.3ZM588.8 719.3Q577.3 728.3 566.3 733.7Q592.1 734.8 600.7 726.7ZM610.9 732.9Q598.9 744.3 587.3 751.8Q614.2 749.7 623.1 739.6ZM633.5 745Q621.6 758.1 610.1 767Q637.3 762.5 646.1 751.1ZM656.6 755.9Q645.4 769.4 634.3 778.8Q661.2 773.1 669.5 761.4ZM680.4 765.8Q670.4 778.6 660.2 787.6Q686.4 781.6 693.6 770.6ZM704.6 774.3Q695.9 785.6 686.6 793.3Q711.8 788.2 718 778.4ZM729 781.5Q720.4 794.2 711.3 803.2Q736.5 796 742.5 785.1ZM753.5 787.8Q745 802.6 736 813.3Q761.3 803.3 767.1 790.8ZM778.1 793Q770.1 808.9 761.2 820.6Q786.3 809 791.8 795.6ZM802.8 797.4Q795.4 813.1 787 824.7Q811.6 812.7 816.7 799.5ZM827.6 801Q820.9 815.3 813 825.9Q837 814.6 841.5 802.6ZM852.4 803.8Q846.3 816.1 838.9 825.1Q862.4 815.4 866.4 805ZM877.4 805.8Q871.6 820.6 864.4 831.7Q887.7 818.9 891.4 806.6ZM902.6 807.1Q897.2 823.6 890.5 836.2Q913.3 821 916.6 807.3ZM927.9 807.3Q923.2 824.5 917 837.7Q939.2 821.2 941.9 807.1ZM953.4 806.6Q949.5 823.1 943.8 835.9Q965.2 819.3 967.4 805.7ZM979 804.6Q975.7 819.5 970.5 831.1Q991.3 815.2 992.9 803ZM1004.3 801.3Q1001.6 815.4 996.8 826.6Q1017 810.6 1018.1 799ZM1029.3 796.9Q1027.6 813.2 1023.7 826.2Q1042.7 807.3 1043 794.1ZM1054.1 791.5Q1053.4 809.1 1050.2 823.3Q1068.2 802.4 1067.7 788.1ZM1078.7 785.1Q1078.8 802.7 1076.2 817.1Q1093.3 795.4 1092.1 781.1ZM1103.1 777.5Q1103.6 794.1 1101.4 807.6Q1117.8 786.2 1116.3 772.9ZM1127.2 768.8Q1127.8 783.4 1125.7 795.5Q1141.7 775.2 1140.2 763.5ZM1151.1 758.7Q1152.7 773.6 1151.5 786.1Q1166.1 764.5 1163.8 752.6ZM1174.2 747.3Q1177.5 763.8 1177.7 777.7Q1190.2 753.7 1186.5 740.6ZM1196.6 734.7Q1201.3 751.8 1202.6 766.4Q1213.4 740.9 1208.6 727.3ZM1218.5 720.9Q1223.9 737.4 1225.9 751.7Q1235.4 726 1230 712.9ZM1239.6 705.8Q1245.1 720.8 1247.2 734Q1256.1 708.9 1250.6 697.1ZM1259.9 689.3Q1264.9 702.3 1266.7 714Q1275.4 690 1270.3 679.9ZM1279.3 671.2Q1286.5 685.1 1290.1 697.6Q1295.7 671.8 1289 661.1ZM1297.3 651.7Q1306.9 665.9 1312.6 679Q1314.9 651.8 1306.2 640.8ZM1313.6 631Q1324.7 644.9 1331.7 657.8Q1331.5 630.1 1321.7 619.5ZM1328.4 609.3Q1339.8 622.1 1347.2 634.2Q1345.7 607 1335.6 597.3ZM1341.6 586.7Q1352.3 598 1359.2 608.9Q1357.5 582.6 1348.1 574.3ZM1353.4 563.3Q1363.4 573.2 1369.9 583.1Q1367.8 557.6 1359 550.5ZM1363.6 538.9Q1376.4 548.7 1385.3 558.7Q1379.3 532.7 1368.2 525.7ZM1372 513.4Q1387 522.5 1397.8 532Q1388.2 506.3 1375.5 499.9ZM1378.2 487.5Q1394 495.4 1405.8 504.1Q1393.9 479.2 1380.6 473.8ZM1382.3 461.3Q1397.7 467.9 1409.3 475.6Q1396.6 451.7 1383.7 447.4ZM1384.4 434.9Q1398.3 440.1 1408.9 446.9Q1396.3 424.1 1384.7 420.9ZM1384.4 407.9Q1398.5 412 1409.5 417.8Q1395.1 396.2 1383.5 394ZM1381.9 380.5Q1398.3 382.7 1411.4 387Q1392.9 367.4 1379.4 366.7ZM1376 352.7Q1393.6 352.2 1408.1 354.4Q1386 337.9 1371.7 339.3ZM1366.4 326.1Q1383.7 323.4 1398.2 323.8Q1374.3 310.2 1360.4 313.4ZM1353.9 301.4Q1369.7 297.5 1383.2 296.8Q1359 285.3 1346.5 289.5ZM1338.8 278.4Q1352.5 274.2 1364.5 273.2Q1340.9 262.9 1330.3 267.3ZM1321.6 257.1Q1335.5 250.8 1348 247.9Q1322.7 240.9 1311.9 247ZM1302 237.6Q1316.4 228.4 1329.4 223.1Q1302.3 220.2 1291.3 228.6ZM1279.7 220.2Q1293.1 208.6 1305.6 201Q1278 202.4 1267.9 212.7ZM1256.2 206.4Q1268.1 194 1279.5 185.7Q1252.5 189.3 1243.7 200.1ZM1232 195.3Q1242.1 183.6 1252.2 175.6Q1226.4 179.8 1219 190ZM1207.1 186.3Q1215.7 176 1224.4 169Q1199.8 173.1 1193.8 182ZM1181.6 179.3Q1189.8 166.5 1198 157.3Q1173.6 165.2 1168 176.1ZM1154.6 174.4Q1161.4 159.6 1168.5 148.5Q1145.2 160.3 1140.7 172.8ZM1127.2 172.9Q1132.2 157.3 1137.6 145.4Q1116.2 159.9 1113.2 172.9ZM1100.4 174.4Q1103.9 159.5 1108 147.9Q1088.2 163.5 1086.4 175.8ZM1074.2 178.4Q1076.7 165.1 1079.9 154.8Q1061.4 170.2 1060.4 181Z"/></g>

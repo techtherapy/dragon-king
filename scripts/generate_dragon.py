@@ -313,6 +313,50 @@ PEARL_SVG = f"""
 </g>
 """
 
+
+# ---- the Buddha: aniconic gold silhouette on a lotus, within a halo ------
+# Placed on the pearl's vertical axis; light descends behind the dragon
+# and becomes the pearl — the Dharma received.
+BUDDHA_SVG = f"""
+<g class="buddha" transform="translate({fmt(PEARL[0])} -48) scale(1.08)">
+  <!-- descending light, drawn first (sits behind the figure's lotus) -->
+  <path class="b-beam" d="M-24 60 L-74 400 L74 400 L24 60 Z"/>
+  <path class="b-ray" d="M0 64 L0 396 M-44 70 L-62 380 M44 70 L62 380"/>
+  <!-- halo glow -->
+  <g transform="translate(0 -95)"><circle class="b-halo" r="150"/></g>
+  <g class="b-in">
+    <!-- aureole + head nimbus rings -->
+    <circle class="b-ring" cx="0" cy="-92" r="118" opacity=".22"/>
+    <circle class="b-ring" cx="0" cy="-150" r="42" opacity=".5"/>
+    <circle class="b-ring" cx="0" cy="-150" r="52" opacity=".25"/>
+    <!-- seated figure: pure silhouette, no features -->
+    <circle class="b-fig" cx="0" cy="-182" r="9"/>
+    <circle class="b-fig" cx="0" cy="-152" r="27"/>
+    <path class="b-fig" d="M-17 -136
+      C-34 -132 -46 -126 -52 -116
+      C-50 -95 -44 -75 -42 -58
+      C-40 -52 -36 -48 -30 -44
+      C-52 -38 -76 -26 -88 -12
+      C-94 -4 -94 6 -88 12
+      C-62 20 -24 22 0 22
+      C24 22 62 20 88 12
+      C94 6 94 -4 88 -12
+      C76 -26 52 -38 30 -44
+      C36 -48 40 -52 42 -58
+      C44 -75 50 -95 52 -116
+      C46 -126 34 -132 17 -136
+      C6 -139 -6 -139 -17 -136 Z"/>
+    <!-- lotus seat -->
+    <path class="b-petal" d="M0 21 C-13 25 -19 35 -14 44 L14 44 C19 35 13 25 0 21 Z"/>
+    <path class="b-petal" d="M-38 23 C-50 27 -56 36 -51 44 L-25 44 C-23 34 -28 26 -38 23 Z"/>
+    <path class="b-petal" d="M38 23 C50 27 56 36 51 44 L25 44 C23 34 28 26 38 23 Z"/>
+    <path class="b-petal" d="M-72 27 C-84 31 -89 39 -83 45 L-58 45 C-57 37 -62 30 -72 27 Z"/>
+    <path class="b-petal" d="M72 27 C84 31 89 39 83 45 L58 45 C57 37 62 30 72 27 Z"/>
+    <path class="b-base" d="M-97 46 C-50 58 50 58 97 46 C68 68 -68 68 -97 46 Z"/>
+  </g>
+</g>
+"""
+
 # ---- auspicious cloud (hand-authored, reused) ----------------------------
 CLOUD_DEF = """
 <g id="cloud">
@@ -327,7 +371,7 @@ random.seed(7)
 dust = ""
 for _ in range(30):
     dx = random.uniform(370, 1550)
-    dy = random.uniform(40, 940)
+    dy = random.uniform(-260, 940)
     r = random.choice((1.1, 1.5, 2.0, 2.6))
     cls = random.choice(("d1", "d2", "d3"))
     dust += f'<circle class="dust {cls}" cx="{fmt(dx)}" cy="{fmt(dy)}" r="{r}" style="animation-delay:{random.uniform(0, 6):.1f}s"/>'
@@ -340,8 +384,8 @@ plates_d = "".join(plates)
 scales_d = "".join(scales)
 fronds_d = "".join(tail_fronds)
 
-dragon_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="330 10 1260 980" role="img"
-     aria-label="A golden dragon coiled around a flaming pearl, drawn in the style of a classical sutra frontispiece">
+dragon_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="330 -290 1260 1280" role="img"
+     aria-label="Beneath a radiant silhouette of the Buddha seated on a lotus, a golden dragon coils around a flaming pearl — drawn in the style of a classical sutra frontispiece">
 <style>
   :root {{ --g:#d9b25f; --gb:#f4dc96; --gd:#8d7440; --body:#101f39; --body2:#16294a; }}
   .body-fill {{ fill:url(#bodyGrad); stroke:var(--g); stroke-width:2.6; stroke-linejoin:round; }}
@@ -375,6 +419,15 @@ dragon_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="330 10 1260 98
   .pearl-swirl {{ fill:rgba(141,116,64,.55); }}
   .flame {{ fill:url(#flameGrad); stroke:var(--gb); stroke-width:1; opacity:.9; }}
   .pearl-flames {{ transform-origin:0 0; animation:flick 9s ease-in-out infinite alternate; }}
+  .b-fig {{ fill:url(#buddhaGrad); stroke:var(--gb); stroke-width:1.3; stroke-linejoin:round; }}
+  .b-petal {{ fill:url(#maneGrad); stroke:var(--g); stroke-width:1.2; }}
+  .b-base {{ fill:#12233f; stroke:var(--g); stroke-width:1.3; }}
+  .b-ring {{ fill:none; stroke:var(--gb); stroke-width:1.2; }}
+  .b-halo {{ fill:url(#haloGrad); animation:pulse 8s ease-in-out infinite alternate; }}
+  .b-beam {{ fill:url(#beamGrad); animation:breathe 7s ease-in-out infinite alternate; }}
+  .b-ray {{ fill:none; stroke:url(#beamGrad); stroke-width:1.4; animation:breathe 7s ease-in-out -3s infinite alternate; }}
+  .b-in {{ opacity:0; animation:fadeIn 1.8s ease .15s forwards; }}
+  @keyframes breathe {{ from {{ opacity:.65; }} to {{ opacity:1; }} }}
   .cline {{ fill:none; stroke:var(--g); stroke-width:2; stroke-linecap:round; }}
   .cloud {{ opacity:.38; }}
   .cloud-a {{ animation:drift 26s ease-in-out infinite alternate; }}
@@ -412,7 +465,9 @@ dragon_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="330 10 1260 98
   @keyframes twinkle {{ from {{ opacity:.12; }} to {{ opacity:.95; }} }}
   @media (prefers-reduced-motion: reduce) {{
     .pearl-halo,.pearl-halo2,.pearl-flames,.cloud-a,.cloud-b,.dust,.dragon,
-    .head-inner,.whisker,.spikes,.frond,.detail,.leg,.head,.body-fill {{ animation:none; }}
+    .head-inner,.whisker,.spikes,.frond,.detail,.leg,.head,.body-fill,
+    .b-halo,.b-beam,.b-ray,.b-in {{ animation:none; }}
+    .b-in {{ opacity:1; }}
     .body-fill {{ stroke-dasharray:none; fill-opacity:1; }}
     .spikes,.frond,.detail,.leg,.head {{ opacity:1; }}
   }}
@@ -453,6 +508,16 @@ dragon_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="330 10 1260 98
     <stop offset="0%" stop-color="#f4dc96" stop-opacity=".22"/>
     <stop offset="60%" stop-color="#f4dc96" stop-opacity="0"/>
   </radialGradient>
+  <linearGradient id="buddhaGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#f4dc96"/>
+    <stop offset="70%" stop-color="#d9b25f"/>
+    <stop offset="100%" stop-color="#b3893f"/>
+  </linearGradient>
+  <linearGradient id="beamGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#f4dc96" stop-opacity=".30"/>
+    <stop offset="70%" stop-color="#f4dc96" stop-opacity=".08"/>
+    <stop offset="100%" stop-color="#f4dc96" stop-opacity="0"/>
+  </linearGradient>
   <filter id="soft" x="-80%" y="-80%" width="260%" height="260%">
     <feGaussianBlur stdDeviation="6"/>
   </filter>
@@ -468,9 +533,13 @@ dragon_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="330 10 1260 98
 
 <!-- drifting auspicious clouds -->
 <g transform="translate(470 160) scale(1.45)"><use href="#cloud" class="cloud cloud-a"/></g>
+<g transform="translate(600 -140) scale(0.85)"><use href="#cloud" class="cloud cloud-b"/></g>
+<g transform="translate(1105 -175) scale(1.0)"><use href="#cloud" class="cloud cloud-a"/></g>
 <g transform="translate(1230 895) scale(1.8)"><use href="#cloud" class="cloud cloud-b"/></g>
 <g transform="translate(1445 330) scale(1.0)"><use href="#cloud" class="cloud cloud-a"/></g>
 <g transform="translate(470 820) scale(1.15)"><use href="#cloud" class="cloud cloud-b"/></g>
+
+{BUDDHA_SVG}
 
 <g class="dragon" filter="url(#dglow)">
   <g class="spikes">{'' if not spikes_d else f'<path class="spike" d="{spikes_d}"/>'}</g>
