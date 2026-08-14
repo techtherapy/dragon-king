@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    display: flex;
+    align-items: center;
+    background:
+      radial-gradient(ellipse 70% 70% at 72% 45%, rgba(29,53,96,.6), transparent 62%),
+      radial-gradient(ellipse 50% 45% at 15% 80%, rgba(18,35,64,.5), transparent 65%),
+      linear-gradient(160deg, #060c17, #0a1424 55%, #070e1a);
+    font-family: "Cormorant Garamond", serif;
+    color: #f4dc96;
+    position: relative;
+  }
+  .frame {
+    position: absolute; inset: 26px;
+    border: 1px solid rgba(217,178,95,.28);
+    pointer-events: none;
+  }
+  .frame::before, .frame::after {
+    content: ""; position: absolute; width: 26px; height: 26px;
+    border: 2px solid #d9b25f;
+  }
+  .frame::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+  .frame::after { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+  .left { width: 640px; padding: 0 0 0 88px; }
+  .zh {
+    font-family: "LXGW WenKai TC", serif;
+    font-size: 40px;
+    letter-spacing: .42em;
+    color: #d9b25f;
+    margin-bottom: 26px;
+  }
+  h1 {
+    font-size: 62px;
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: .01em;
+    text-shadow: 0 0 44px rgba(217,178,95,.35);
+  }
+  .rule { width: 96px; height: 1px; background: linear-gradient(90deg, #d9b25f, transparent); margin: 30px 0 24px; }
+  .sub {
+    font-size: 23px;
+    white-space: nowrap;
+    color: #c9bfa6;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .art { position: absolute; right: -46px; top: 18px; width: 620px; opacity: .97; }
+</style>
+</head>
+<body>
+  <img class="art" src="../assets/dragon-hero.svg" alt="">
+  <div class="frame"></div>
+  <div class="left">
+    <div class="zh">佛說海龍王經</div>
+    <h1>The Sutra Spoken by the Buddha on the Sea Dragon King</h1>
+    <div class="rule"></div>
+    <div class="sub">Read in Chinese · Pinyin · English</div>
+  </div>
+</body>
+</html>

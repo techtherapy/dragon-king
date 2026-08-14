@@ -56,7 +56,7 @@ def render(items):
     frags = []
     for kind, text in items:
         if kind == "h":
-            frags.append(f'      <h3 class="article-sub reveal">{text}</h3>')
+            frags.append(f'      <h2 class="article-sub reveal">{text}</h2>')
         else:
             frags.append(f'      <p class="reveal">{text}</p>')
     return "\n".join(frags)

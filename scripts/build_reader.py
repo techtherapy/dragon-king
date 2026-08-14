@@ -322,7 +322,7 @@ def build():
     # title
     t1, t2, t3 = title_lines[:3]
     out.append('      <header class="sutra-title">')
-    out.append(f'        <div class="t1" lang="zh-Hant">{t1}</div>')
+    out.append(f'        <h1 class="t1" lang="zh-Hant">{t1}</h1>')
     out.append(f'        <div class="t2" aria-hidden="true">{t2}</div>')
     out.append(f'        <div class="t3">{t3}</div>')
     out.append("      </header>")
@@ -341,7 +341,7 @@ def build():
         out.append('        <header class="seclabel">')
         out.append('          <div class="seal-row"><span class="seal small" aria-hidden="true" lang="zh-Hant">'
                    + CJK_NUM[i - 1] + "</span></div>")
-        out.append(f'          <div class="s1" lang="zh-Hant">{zh}</div>')
+        out.append(f'          <h2 class="s1" lang="zh-Hant">{zh}</h2>')
         out.append(f'          <div class="s2" aria-hidden="true">{py}</div>')
         out.append(f'          <div class="s3">{en}</div>')
         out.append("        </header>")

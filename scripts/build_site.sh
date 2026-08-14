@@ -16,6 +16,9 @@ OUT="dist"
 # the source text the reader is generated FROM — never published
 SOURCE_HTML="Dragon king sutra hailongwang_complete.html"
 
+# refresh canonical/OG/JSON-LD tags, sitemap.xml and robots.txt
+python3 scripts/add_seo.py
+
 rm -rf "$OUT"
 mkdir -p "$OUT"
 
@@ -33,7 +36,11 @@ for d in css js assets; do
   echo "  dir     $d/"
 done
 
-# --- Cloudflare headers file (must sit at the output root) ---
+# --- crawler files + Cloudflare headers (all must sit at the output root) ---
+for f in robots.txt sitemap.xml; do
+  cp "$f" "$OUT/"
+  echo "  config  $f"
+done
 cp deploy/_headers "$OUT/_headers"
 echo "  config  _headers"
 

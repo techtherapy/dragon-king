@@ -147,6 +147,7 @@
   rotate: 45deg;
 }
 .sutra-title .t1 {
+  margin: 0;
   font-family: var(--font-tc);
   font-size: clamp(2.2rem, 5.5vw, 3.4rem);
   font-weight: 400;
@@ -170,6 +171,7 @@
   margin-bottom: 1.4rem;
 }
 .seclabel .s1 {
+  margin: 0;
   font-family: var(--font-tc);
   font-size: clamp(1.7rem, 3.8vw, 2.4rem);
   font-weight: 400;

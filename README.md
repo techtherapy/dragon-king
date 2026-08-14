@@ -33,7 +33,27 @@ python3 scripts/build_reader.py
 
 # Treasure Vase Yoga page from the transcripts in extra-content/
 python3 scripts/build_practice.py
+
+# SEO tags (canonical, Open Graph, JSON-LD), sitemap.xml and robots.txt
+python3 scripts/add_seo.py
 ```
+
+`scripts/add_seo.py` is idempotent and runs automatically as the first step of
+`build_site.sh`, so generated pages never lose their tags. It reads each page's
+existing `<title>` and `<meta name="description">` and never rewrites them.
+The share image is rendered from `scripts/og-image.html` with headless Chrome:
+
+```bash
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+  --headless=new --force-prefers-reduced-motion --window-size=1200,630 \
+  --screenshot=assets/og-image.png --virtual-time-budget=9000 \
+  "file://$PWD/scripts/og-image.html"
+sips -s format jpeg -s formatOptions 88 assets/og-image.png --out assets/og-image.jpg
+```
+
+**Changing the domain:** edit `SITE` at the top of `scripts/add_seo.py` and
+re-run it — canonical URLs, Open Graph URLs, JSON-LD and the sitemap all
+derive from that one constant.
 
 `read.html` is built from `Dragon king sutra hailongwang_complete.html`
 (the source of truth for the sutra text — do not edit `read.html` by hand).
