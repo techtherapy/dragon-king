@@ -37,8 +37,7 @@
   .b-solid { fill:#0e1c34; stroke:var(--gb); stroke-width:1.5; stroke-linejoin:round; }
   .b-dot { fill:var(--gb); }
   .b-petal { fill:url(#maneGrad); stroke:var(--gb); stroke-width:1.3; stroke-linejoin:round; }
-  .b-disc { fill:url(#discGrad); stroke:var(--g); stroke-width:1.2; opacity:.9; }
-  .b-star { fill:none; stroke:var(--g); stroke-width:1; opacity:.5; }
+  .b-aura { fill:url(#discGrad); stroke:var(--g); stroke-width:1.7; opacity:.95; }
   .b-halo { fill:url(#haloGrad); animation:pulse 8s ease-in-out infinite alternate; }
   .b-beam { fill:url(#beamGrad); animation:breathe 7s ease-in-out infinite alternate; }
   .b-ray { fill:none; stroke:url(#beamGrad); stroke-width:1.4; animation:breathe 7s ease-in-out -3s infinite alternate; }
@@ -172,70 +171,68 @@
   <path class="b-beam" d="M-24 60 L-74 400 L74 400 L24 60 Z"/>
   <path class="b-ray" d="M0 64 L0 396 M-44 70 L-62 380 M44 70 L62 380"/>
   <!-- halo glow -->
-  <g transform="translate(0 -95)"><circle class="b-halo" r="150"/></g>
+  <g transform="translate(0 -105)"><circle class="b-halo" r="138"/></g>
   <g class="b-in">
-    <!-- moon disc -->
-    <circle class="b-disc" cx="0" cy="-92" r="112"/>
-    <!-- sparkle stars around the disc -->
-    <path class="b-star" d="M-128 -168 l4 8 8 3 -8 3 -4 8 -4 -8 -8 -3 8 -3 Z"/>
-    <path class="b-star" d="M132 -140 l3.5 7 7 2.5 -7 2.5 -3.5 7 -3.5 -7 -7 -2.5 7 -2.5 Z"/>
-    <path class="b-star" d="M-146 -60 l3 6 6 2 -6 2 -3 6 -3 -6 -6 -2 6 -2 Z"/>
-    <path class="b-star" d="M148 -52 l3 6 6 2 -6 2 -3 6 -3 -6 -6 -2 6 -2 Z"/>
-    <path class="b-star" d="M-102 -196 l2.5 5 5 1.5 -5 1.5 -2.5 5 -2.5 -5 -5 -1.5 5 -1.5 Z"/>
-    <path class="b-star" d="M104 -198 l2.5 5 5 1.5 -5 1.5 -2.5 5 -2.5 -5 -5 -1.5 5 -1.5 Z"/>
-    <!-- ==== figure (fine line art, reference style) ==== -->
-    <!-- torso: shoulders, hanging sleeves, wide lap (one masked shape) -->
-    <path class="b-solid" d="M-10 -121
-      C-24 -119 -36 -114 -42 -105
-      C-49 -94 -52 -80 -51 -66
-      C-50 -52 -46 -42 -39 -36
-      C-56 -30 -66 -21 -68 -10
-      C-68 -3 -60 1 -46 3
-      C-20 6 20 6 46 3
-      C60 1 68 -3 68 -10
-      C66 -21 56 -30 39 -36
-      C46 -42 50 -52 51 -66
-      C52 -80 49 -94 42 -105
-      C36 -114 24 -119 10 -121
-      C3 -122 -3 -122 -10 -121 Z"/>
-    <!-- neck + collar -->
-    <path class="b-line" d="M-9 -126 C-6 -121 6 -121 9 -126"/>
-    <!-- robe V collar -->
-    <path class="b-line" d="M-19 -111 C-9 -101 9 -101 19 -111"/>
-    <path class="b-line" d="M-49 -70 C-47 -55 -43 -44 -37 -38 M49 -70 C47 -55 43 -44 37 -38"/>
-    <path class="b-line" d="M-34 -20 C-18 -14 18 -14 34 -20"/>
-    <path class="b-line" d="M-48 -26 C-42 -21 -36 -19 -30 -18 M48 -26 C42 -21 36 -19 30 -18"/>
-    <!-- right forearm raised in vitarka mudra; left arm resting to the lap -->
-    <path class="b-line" d="M42 -56 C38 -66 33 -74 28 -79 M-42 -54 C-34 -46 -22 -40 -10 -38"/>
-    <!-- right hand: palm out, thumb and index joined in a circle -->
-    <path class="b-solid" d="M20 -80 C16 -86 18 -94 25 -97 C31 -99 36 -95 36 -88 C36 -81 30 -76 24 -77 C22 -77.5 21 -78.5 20 -80 Z"/>
-    <circle class="b-line" cx="21.5" cy="-81.5" r="3.2"/>
-    <path class="b-line" d="M27 -97 L27 -90 M31 -96 L31 -89"/>
-    <!-- left hand resting palm-up on the lap -->
-    <path class="b-solid" d="M-12 -37 C-10 -42 -2 -43 3 -40 C6 -38 6 -35 3 -33 C-3 -31 -10 -32 -12 -37 Z"/>
-    <path class="b-line" d="M-6 -41 L-6 -34 M-1 -41 L-1 -34"/>
-    <!-- crossed legs: fold arcs -->
-    <path class="b-line" d="M-26 -10 C-12 -5 12 -5 26 -10 M-40 -16 C-30 -10 -18 -8 -8 -8"/>
-    <!-- head: face, ears, hair, ushnisha -->
-    <path class="b-solid" d="M-23 -148 C-23 -164 -12 -173 0 -173 C12 -173 23 -164 23 -148 C23 -134 13 -123 0 -123 C-13 -123 -23 -134 -23 -148 Z"/>
-    <path class="b-line" d="M-20 -156 C-9 -161 -3 -159.5 0 -157.5 C3 -159.5 9 -161 20 -156"/>
-    <path class="b-solid" d="M-10 -171 C-10 -181 10 -181 10 -171 C6 -174 -6 -174 -10 -171 Z"/>
-    <path class="b-line" d="M0 -186 C-2.5 -183 -2.5 -180.5 0 -179 C2.5 -180.5 2.5 -183 0 -186 Z"/>
-    <!-- ears with long lobes -->
-    <path class="b-solid" d="M23 -152 C28 -153 29 -147 28 -140 C27 -131 25 -126 22 -126 C20 -128 21 -140 23 -152 Z"/>
-    <path class="b-solid" d="M-23 -152 C-28 -153 -29 -147 -28 -140 C-27 -131 -25 -126 -22 -126 C-20 -128 -21 -140 -23 -152 Z"/>
-    <!-- face: brows into nose, lowered eyes, urna, smile -->
-    <path class="b-line" d="M-11 -150 C-7 -153 -3 -153 -1.5 -151 L-1.5 -141 C-2.5 -139.5 -1 -139 0 -139 C1 -139 2.5 -139.5 1.5 -141 L1.5 -151 C3 -153 7 -153 11 -150"/>
-    <path class="b-line" d="M-12 -146 C-9 -143.5 -5 -143.5 -3 -146 M12 -146 C9 -143.5 5 -143.5 3 -146"/>
-    <circle class="b-dot" cx="0" cy="-154" r="1.3"/>
-    <path class="b-line" d="M-4 -132 C-2 -130 2 -130 4 -132"/>
-    <!-- lotus throne: two rows of big rounded petals -->
-    <path class="b-petal" d="M-52 4 C-62 6 -68 14 -66 24 C-58 28 -46 26 -40 18 C-42 10 -46 5 -52 4 Z"/>
-    <path class="b-petal" d="M52 4 C62 6 68 14 66 24 C58 28 46 26 40 18 C42 10 46 5 52 4 Z"/>
-    <path class="b-petal" d="M-27 7 C-38 10 -43 20 -40 30 C-30 33 -19 30 -14 21 C-17 12 -21 7 -27 7 Z"/>
-    <path class="b-petal" d="M27 7 C38 10 43 20 40 30 C30 33 19 30 14 21 C17 12 21 7 27 7 Z"/>
-    <path class="b-petal" d="M0 8 C-9 10 -14 19 -12 30 C-4 34 4 34 12 30 C14 19 9 10 0 8 Z"/>
-    <path class="b-line" d="M-70 26 C-40 34 40 34 70 26" opacity=".5"/>
+    <!-- mandorla (egg aureole) + head nimbus, gold outline on indigo -->
+    <path class="b-aura" d="M0 -216 C50 -212 84 -166 84 -106 C84 -50 48 -10 0 -10 C-48 -10 -84 -50 -84 -106 C-84 -166 -50 -212 0 -216 Z"/>
+    <circle class="b-aura" cx="0" cy="-157" r="33"/>
+    <!-- ==== figure: simplified gold line-art ==== -->
+    <!-- torso: shoulders, sleeves, lap -->
+    <path class="b-solid" d="M-8 -134
+      C-20 -132 -29 -127 -33 -119
+      C-38 -108 -40 -95 -39 -82
+      C-38 -68 -35 -58 -30 -51
+      C-43 -45 -51 -37 -53 -27
+      C-54 -18 -48 -12 -36 -9
+      C-14 -5 14 -5 36 -9
+      C48 -12 54 -18 53 -27
+      C51 -37 43 -45 30 -51
+      C35 -58 38 -68 39 -82
+      C40 -95 38 -108 33 -119
+      C29 -127 20 -132 8 -134
+      C3 -135 -3 -135 -8 -134 Z"/>
+    <!-- neck -->
+    <path class="b-line" d="M-7 -138 C-4 -134 4 -134 7 -138"/>
+    <!-- robe: diagonal sanghati edge + V collar -->
+    <path class="b-line" d="M-14 -124 C-6 -114 8 -110 17 -113"/>
+    <path class="b-line" d="M-15 -121 C-8 -113 2 -110 10 -111"/>
+    <!-- sleeve fold lines -->
+    <path class="b-line" d="M-37 -84 C-36 -70 -33 -59 -29 -53 M37 -84 C36 -74 34 -66 31 -59"/>
+    <!-- right forearm raised in vitarka; left arm resting to the lap -->
+    <path class="b-line" d="M31 -58 C29 -68 26 -78 22 -86 M-31 -52 C-24 -46 -14 -42 -5 -41"/>
+    <!-- right hand: palm out, thumb-index circle -->
+    <path class="b-solid" d="M15 -88 C12 -94 14 -101 20 -103 C25 -105 29 -101 29 -95 C29 -89 24 -85 19 -86 C17 -86.5 16 -87 15 -88 Z"/>
+    <circle class="b-line" cx="17" cy="-89" r="2.6"/>
+    <path class="b-line" d="M21 -103 L21 -97 M24.5 -102 L24.5 -96"/>
+    <!-- left hand palm-up in the lap -->
+    <path class="b-solid" d="M-10 -40 C-8 -44 -2 -45 2 -42 C4 -40 4 -38 2 -36 C-3 -34 -8 -36 -10 -40 Z"/>
+    <path class="b-line" d="M-5 -43 L-5 -37 M-1 -43 L-1 -37"/>
+    <!-- cascading robe folds over the crossed legs -->
+    <path class="b-line" d="M-22 -28 C-16 -20 -8 -16 0 -16 C8 -16 16 -20 22 -28"/>
+    <path class="b-line" d="M-12 -26 C-8 -18 8 -18 12 -26 M0 -24 C-2 -18 2 -18 0 -24"/>
+    <path class="b-line" d="M-44 -30 C-38 -22 -30 -17 -22 -15 M44 -30 C38 -22 30 -17 22 -15"/>
+    <!-- head -->
+    <path class="b-solid" d="M-17 -158 C-17 -170 -9 -177 0 -177 C9 -177 17 -170 17 -158 C17 -147 10 -139 0 -139 C-10 -139 -17 -147 -17 -158 Z"/>
+    <path class="b-line" d="M-15 -164 C-7 -168 7 -168 15 -164"/>
+    <path class="b-solid" d="M-7 -175 C-7 -183 7 -183 7 -175 C4 -177 -4 -177 -7 -175 Z"/>
+    <!-- ears -->
+    <path class="b-solid" d="M17 -160 C21 -161 22 -156 21 -150 C20 -143 18 -139 16 -139 C14.5 -141 15.5 -150 17 -160 Z"/>
+    <path class="b-solid" d="M-17 -160 C-21 -161 -22 -156 -21 -150 C-20 -143 -18 -139 -16 -139 C-14.5 -141 -15.5 -150 -17 -160 Z"/>
+    <!-- face -->
+    <path class="b-line" d="M-8 -160 C-5 -162 -2 -162 -1 -160.5 L-1 -153.5 M8 -160 C5 -162 2 -162 1 -160.5 M-1.5 -152.5 C-0.5 -152 0.5 -152 1.5 -152.5"/>
+    <path class="b-line" d="M-8.5 -157 C-6.5 -155.5 -4 -155.5 -2.5 -157 M8.5 -157 C6.5 -155.5 4 -155.5 2.5 -157"/>
+    <circle class="b-dot" cx="0" cy="-163" r="1.1"/>
+    <path class="b-line" d="M-3 -147 C-1.5 -145.5 1.5 -145.5 3 -147"/>
+    <!-- lotus throne: upturned petals + scalloped skirt -->
+    <path class="b-petal" d="M0 -8 C-7 -6 -11 1 -9 9 C-3 12 3 12 9 9 C11 1 7 -6 0 -8 Z"/>
+    <path class="b-petal" d="M-22 -7 C-30 -4 -33 3 -31 10 C-24 13 -17 12 -13 8 C-13 1 -16 -5 -22 -7 Z"/>
+    <path class="b-petal" d="M22 -7 C30 -4 33 3 31 10 C24 13 17 12 13 8 C13 1 16 -5 22 -7 Z"/>
+    <path class="b-petal" d="M-43 -4 C-51 -1 -54 6 -51 12 C-45 14 -38 13 -34 9 C-35 3 -38 -2 -43 -4 Z"/>
+    <path class="b-petal" d="M43 -4 C51 -1 54 6 51 12 C45 14 38 13 34 9 C35 3 38 -2 43 -4 Z"/>
+    <path class="b-line" d="M-56 14 C-30 19 30 19 56 14"/>
+    <!-- scalloped skirt row -->
+    <path class="b-line" d="M-62 20 C-60 28 -54 32 -47 31 C-44 36 -37 38 -31 36 C-28 41 -20 43 -14 40 C-9 44 0 45 5 41 C11 44 19 43 23 39 C29 42 37 40 40 35 C46 37 53 34 55 28 C59 26 62 23 62 20"/>
+    <path class="b-line" d="M-62 20 C-40 26 40 26 62 20" opacity=".55"/>
   </g>
 </g>
 
