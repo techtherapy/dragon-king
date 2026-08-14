@@ -20,7 +20,7 @@
 
 .reader-shell {
   display: grid;
-  grid-template-columns: clamp(300px, 23vw, 356px) minmax(0, 1fr);
+  grid-template-columns: clamp(300px, 25vw, 380px) minmax(0, 1fr);
   max-width: 1400px;
   margin: 0 auto;
   padding-top: var(--header-h);
@@ -41,13 +41,13 @@
   font-family: var(--font-tc);
   color: var(--gold);
   letter-spacing: 0.4em;
-  font-size: clamp(0.95rem, 0.9rem + 0.17vw, 1.12rem);
+  font-size: clamp(0.95rem, 0.88rem + 0.3vw, 1.25rem);
   margin-bottom: 1.6rem;
 }
 .toc-vol {
   font-family: var(--font-tc);
   color: var(--vermillion-bright);
-  font-size: clamp(0.82rem, 0.78rem + 0.15vw, 0.98rem);
+  font-size: clamp(0.82rem, 0.76rem + 0.26vw, 1.08rem);
   letter-spacing: 0.3em;
   margin: 1.4rem 0 0.5rem;
   border-bottom: 1px solid var(--gold-ghost);
@@ -63,12 +63,12 @@
 }
 .reader-toc nav a .t-zh {
   font-family: var(--font-tc); display: block; color: var(--cream);
-  font-size: clamp(1rem, 0.94rem + 0.22vw, 1.22rem);
+  font-size: clamp(1rem, 0.9rem + 0.42vw, 1.4rem);
   line-height: 1.5;
 }
 .reader-toc nav a .t-en {
   display: block; color: var(--muted); font-style: italic;
-  font-size: clamp(0.8rem, 0.76rem + 0.17vw, 0.98rem);
+  font-size: clamp(0.8rem, 0.74rem + 0.28vw, 1.06rem);
   line-height: 1.45;
 }
 .reader-toc nav a:hover { background: rgba(217, 178, 95, 0.06); }
@@ -163,7 +163,7 @@
   letter-spacing: 0.18em;
   text-shadow: 0 0 38px rgba(217, 178, 95, 0.35);
 }
-.sutra-title .t2 { font-family: var(--font-display); font-style: italic; color: var(--aqua); font-size: 1.05rem; margin-top: 0.7rem; }
+.sutra-title .t2 { font-family: var(--font-display); font-style: italic; color: var(--aqua); font-size: clamp(1.05rem, 1rem + 0.28vw, 1.36rem); margin-top: 0.7rem; }
 .sutra-title .t3 { font-family: var(--font-display); color: var(--cream); font-size: clamp(1.1rem, 2.4vw, 1.45rem); margin-top: 0.9rem; }
 .sutra-colophon { text-align: center; margin-bottom: 3.5rem; }
 
@@ -181,13 +181,13 @@
 .seclabel .s1 {
   margin: 0;
   font-family: var(--font-tc);
-  font-size: clamp(1.7rem, 3.8vw, 2.4rem);
+  font-size: clamp(1.7rem, 0.9rem + 2.2vw, 2.9rem);
   font-weight: 400;
   color: var(--gold-bright);
   letter-spacing: 0.16em;
 }
-.seclabel .s2 { font-family: var(--font-display); font-style: italic; color: var(--aqua-dim); font-size: 0.98rem; margin-top: 0.5rem; }
-.seclabel .s3 { font-family: var(--font-display); color: var(--cream-dim); font-size: 1.12rem; margin-top: 0.6rem; letter-spacing: 0.06em; }
+.seclabel .s2 { font-family: var(--font-display); font-style: italic; color: var(--aqua-dim); font-size: clamp(0.98rem, 0.95rem + 0.28vw, 1.3rem); margin-top: 0.5rem; }
+.seclabel .s3 { font-family: var(--font-display); color: var(--cream-dim); font-size: clamp(1.12rem, 1rem + 0.5vw, 1.6rem); margin-top: 0.6rem; letter-spacing: 0.06em; }
 
 .block { margin: 0 0 2.4rem; }
 .prow { margin: 0 0 1.35rem; }
