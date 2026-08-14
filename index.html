@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dragon King Sutra 佛說海龍王經 — The Sutra Spoken by the Buddha on the Sea Dragon King</title>
+<meta name="description" content="Read the complete Sutra Spoken by the Buddha on the Sea Dragon King (佛說海龍王經) in Chinese, pinyin and English — with teachings, study notes, and guidance on taking refuge.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* ---------- home hero ---------- */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding: calc(var(--header-h) + 3rem) 0 9rem;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 75% 65% at 68% 42%, rgba(29, 53, 96, 0.55), transparent 62%),
+      radial-gradient(ellipse 55% 45% at 20% 80%, rgba(18, 35, 64, 0.5), transparent 65%),
+      linear-gradient(180deg, #060c17 0%, var(--abyss) 45%, #0a1424 100%);
+  }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: minmax(340px, 5fr) 7fr;
+    gap: 2rem;
+    align-items: center;
+    width: 100%;
+  }
+  .hero-title-block { display: flex; gap: clamp(1.4rem, 3vw, 2.6rem); align-items: stretch; }
+  .hero-zh {
+    writing-mode: vertical-rl;
+    font-family: var(--font-tc);
+    font-weight: 600;
+    font-size: clamp(2.6rem, 5.2vw, 4.1rem);
+    letter-spacing: 0.32em;
+    color: var(--gold-bright);
+    text-shadow: 0 0 42px rgba(217, 178, 95, 0.4);
+    border-left: 1px solid var(--gold-faint);
+    border-right: 1px solid var(--gold-faint);
+    padding: 0.45em 0.28em;
+    margin: 0;
+    line-height: 1;
+    background: linear-gradient(180deg, rgba(217, 178, 95, 0.06), transparent 70%);
+  }
+  .hero-pinyin {
+    writing-mode: vertical-rl;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 0.8rem;
+    letter-spacing: 0.5em;
+    color: var(--aqua-dim);
+    align-self: center;
+  }
+  .hero-copy .kicker {
+    font-family: var(--font-display);
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+  .hero-copy h1 {
+    font-size: clamp(1.9rem, 3.6vw, 2.9rem);
+    font-weight: 500;
+    max-width: 17ch;
+    margin-bottom: 1.4rem;
+  }
+  .hero-copy .lede { font-size: clamp(1.05rem, 1.7vw, 1.22rem); color: var(--cream-dim); max-width: 46ch; }
+  .hero-copy .btn-row { margin-top: 2.4rem; }
+  .hero-art { position: relative; }
+  .hero-art img.dragon {
+    width: min(122%, 880px);
+    margin: -4% auto 0 -6%;
+    filter: drop-shadow(0 24px 70px rgba(3, 7, 14, 0.8));
+  }
+  .hero-waves {
+    position: absolute;
+    left: 0; right: 0; bottom: -6px;
+    pointer-events: none;
+  }
+  .hero-waves img { width: 100%; height: clamp(110px, 16vw, 210px); object-fit: cover; object-position: top; }
+  .hero-waves::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 60%;
+    background: linear-gradient(180deg, transparent, var(--abyss) 90%);
+  }
+  .hero-scroll-hint {
+    position: absolute;
+    bottom: 2rem; left: 50%;
+    transform: translateX(-50%);
+    color: var(--gold-dim);
+    font-family: var(--font-display);
+    letter-spacing: 0.4em;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    animation: hintFloat 3.2s ease-in-out infinite;
+    z-index: 3;
+  }
+  @keyframes hintFloat { 0%, 100% { transform: translate(-50%, 0); opacity: .65; } 50% { transform: translate(-50%, 9px); opacity: 1; } }
+
+  /* load-in choreography */
+  .hero .rise { opacity: 0; transform: translateY(30px); animation: rise 1.2s cubic-bezier(.2,.65,.3,1) forwards; }
+  .hero .rise.d1 { animation-delay: .15s; }
+  .hero .rise.d2 { animation-delay: .3s; }
+  .hero .rise.d3 { animation-delay: .5s; }
+  .hero .rise.d4 { animation-delay: .7s; }
+  .hero-art { opacity: 0; animation: emerge 1.8s ease .35s forwards; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+  @keyframes emerge { from { opacity: 0; transform: scale(.965) translateY(16px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .hero .rise, .hero-art { opacity: 1; transform: none; animation: none; }
+  }
+  @media (max-width: 980px) {
+    .hero { padding-bottom: 7rem; }
+    .hero-inner { grid-template-columns: 1fr; gap: 0; }
+    .hero-art { order: -1; }
+    .hero-art img.dragon { width: min(112%, 620px); margin: 0 auto; }
+    .hero-title-block { justify-content: flex-start; }
+    .hero-zh { font-size: clamp(2rem, 8vw, 2.8rem); }
+  }
+
+  /* scene section ornaments */
+  .colophon-line {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    margin-top: 2.4rem;
+    flex-wrap: wrap;
+  }
+  .colophon-line .tc { color: var(--gold); font-size: 1.05rem; letter-spacing: 0.18em; }
+  .colophon-line .en { color: var(--muted); font-style: italic; font-size: 0.98rem; }
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: center;
+  }
+  @media (max-width: 880px) { .split { grid-template-columns: 1fr; } }
+  .palace-figure {
+    border: 1px solid var(--gold-faint);
+    padding: 10px;
+    position: relative;
+  }
+  .palace-figure .inner {
+    border: 1px solid var(--gold-ghost);
+    padding: clamp(1.6rem, 3vw, 2.6rem);
+    text-align: center;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 20%, rgba(29, 53, 96, 0.55), transparent 70%),
+      linear-gradient(180deg, rgba(13, 25, 48, 0.6), rgba(7, 14, 26, 0.8));
+  }
+  .palace-figure .big-zh {
+    font-family: var(--font-tc);
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    color: var(--gold-bright);
+    writing-mode: vertical-rl;
+    letter-spacing: 0.45em;
+    margin: 0 auto;
+    line-height: 1.9;
+    text-shadow: 0 0 34px rgba(217, 178, 95, 0.35);
+  }
+  .palace-figure figcaption { margin-top: 1.2rem; color: var(--muted); font-style: italic; font-size: 0.95rem; }
+  .benefit-list { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; gap: 1.1rem; }
+  .benefit-list li {
+    display: flex;
+    gap: 1.1rem;
+    align-items: baseline;
+    border-bottom: 1px solid var(--gold-ghost);
+    padding-bottom: 1.1rem;
+  }
+  .benefit-list .zh-tag {
+    font-family: var(--font-tc);
+    color: var(--gold);
+    flex: none;
+    font-size: 1.15rem;
+    letter-spacing: 0.15em;
+    min-width: 4.6em;
+  }
+  .benefit-list p { margin: 0; color: var(--cream-dim); }
+  .cta-band {
+    text-align: center;
+    padding: clamp(4.5rem, 9vw, 7.5rem) 0;
+    position: relative;
+    background:
+      radial-gradient(ellipse 55% 75% at 50% 100%, rgba(29, 53, 96, 0.45), transparent 70%),
+      linear-gradient(180deg, var(--abyss), #081020);
+    overflow: hidden;
+  }
+  .cta-band .pearl-mini { width: 92px; margin: 0 auto 2rem; filter: drop-shadow(0 0 26px rgba(244, 220, 150, 0.45)); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="brand" aria-label="Dragon King Sutra home">
+    <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true">
+      <circle cx="24" cy="24" r="21.5" fill="none" stroke="#8d7440" stroke-width="1" opacity=".6"/>
+      <path d="M24 6 C35 6 42 14 42 24 C42 34 35 41 25 41 C17 41 11 36 11 29 C11 22 16 18 22 18 C27 18 30 21 30 25 C30 28 28 30 25 30"
+            fill="none" stroke="#d9b25f" stroke-width="2" stroke-linecap="round"/>
+      <path d="M24 6 L20 2.5 M24 6 L20 9.5" stroke="#f4dc96" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+      <circle cx="24" cy="25.5" r="3.2" fill="#f4dc96"/>
+    </svg>
+    <span class="brand-name">Dragon King Sutra<span class="tc">佛說海龍王經</span></span>
+  </a>
+  <button class="nav-toggle" aria-expanded="false" aria-label="Menu">☰</button>
+  <nav class="site-nav">
+    <a href="about.html">About</a>
+    <a href="read.html">Read</a>
+    <a href="his-holiness-living-buddha-lian-sheng.html">Living Buddha Lian Sheng</a>
+    <a href="contact.html">Contact</a>
+    <a href="refuge.html" class="nav-cta">Take Refuge</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div>
+      <div class="hero-title-block">
+        <h2 class="hero-zh rise d1" lang="zh-Hant">佛說海龍王經</h2>
+        <span class="hero-pinyin rise d2" aria-hidden="true">fó shuō hǎi lóng wáng jīng</span>
+        <div class="hero-copy">
+          <span class="kicker rise d1">A Mahayana Sutra · 大乘經典</span>
+          <h1 class="rise d2">The Sutra Spoken by the Buddha on the Sea Dragon King</h1>
+          <p class="lede rise d3">Seldom noticed, yet exceedingly sublime — the record of Shakyamuni Buddha expounding the profound Mahayana for the Sea Dragon King on Vulture Peak, and descending to teach within the Dragon Palace beneath the ocean.</p>
+          <div class="btn-row rise d4">
+            <a class="btn btn-solid" href="read.html">Read the Sutra</a>
+            <a class="btn" href="about.html">About the Sutra</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-art" data-parallax="0.06">
+      <img class="dragon" src="assets/dragon-hero.svg" alt="A golden dragon coiled around a flaming pearl, drawn as fine gold line-art in the style of a classical sutra frontispiece" fetchpriority="high">
+    </div>
+  </div>
+  <div class="hero-waves" data-parallax="-0.05" aria-hidden="true">
+    <img src="assets/waves.svg" alt="">
+  </div>
+  <span class="hero-scroll-hint" aria-hidden="true">Descend</span>
+</section>
+
+<!-- ============ INTRODUCTION ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="split">
+      <div class="reveal">
+        <p class="eyebrow">Introduction · 緣起</p>
+        <h2 class="section-title">A hidden jewel of the canon</h2>
+        <div class="prose" style="margin-top:1.6rem">
+          <p class="zh" lang="zh-Hant">在浩瀚的佛典中，有一部鮮少人注意卻極為殊勝的經典——《佛說海龍王經》。記載了釋迦牟尼佛在靈鷲山為海龍王及眷屬宣說大乘深義，並應邀至龍宮弘法的莊嚴場景。</p>
+          <p class="en">Among the vast collection of Buddhist scriptures there is a text seldom noticed yet exceedingly sublime — the <em>Sutra Spoken by the Buddha on the Sea Dragon King</em>. It records the solemn scene in which Shakyamuni Buddha, upon Vulture Peak, expounded the profound meaning of the Mahayana for the Sea Dragon King and his retinue, and accepted their invitation to propagate the Dharma in the Dragon Palace.</p>
+        </div>
+        <div class="colophon-line reveal">
+          <span class="seal small" aria-hidden="true" lang="zh-Hant">龍</span>
+          <div>
+            <div class="tc" lang="zh-Hant">西晉月氏國三藏竺法護譯</div>
+            <div class="en">Translated in the Western Jin dynasty by the Tripitaka Master Dharmaraksa of the Yuezhi</div>
+          </div>
+        </div>
+      </div>
+      <figure class="palace-figure reveal" style="margin:0">
+        <div class="inner">
+          <p class="big-zh" lang="zh-Hant">靈鷲山說法&#x3000;龍宮弘經</p>
+          <figcaption>From Vulture Peak to the Dragon Palace — the Dharma flows like the tide.</figcaption>
+        </div>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true">
+  <svg viewBox="0 0 68 22" fill="none" stroke="#8d7440" stroke-width="1.5" stroke-linecap="round">
+    <path d="M2 16 C10 16 12 6 20 6 C28 6 30 16 38 16 C46 16 48 6 56 6 C62 6 64 12 66 14"/>
+    <circle cx="34" cy="11" r="2.6" fill="#d9b25f" stroke="none"/>
+  </svg>
+</div>
+
+<!-- ============ TEACHINGS CARDS ============ -->
+<section class="section">
+  <div class="wrap">
+    <p class="eyebrow center reveal">From the Study Reflection · 學習心得</p>
+    <h2 class="section-title center reveal">What the sutra reveals</h2>
+    <div class="card-grid">
+      <article class="card reveal">
+        <span class="glyph" aria-hidden="true" lang="zh-Hant">龍</span>
+        <h3>Origins of the Dragon Clan</h3>
+        <span class="tc-sub" lang="zh-Hant">龍族的來歷</span>
+        <p>Dragon kings are not merely Dharma-protecting deities but sentient beings capable of attaining Buddhahood — cultivators of former lives, reborn as dragons, still turning within the Six Realms like every people of the world.</p>
+        <a class="more" href="about.html#origins">Learn more →</a>
+      </article>
+      <article class="card reveal">
+        <span class="glyph" aria-hidden="true" lang="zh-Hant">火</span>
+        <h3>The Three Burning Sufferings</h3>
+        <span class="tc-sub" lang="zh-Hant">三熱苦</span>
+        <p>Long-lived and vast in form, dragons still endure three sufferings: scorching sand that burns to the marrow, humiliation of form, and the constant dread of the Garuda. Even splendour is not beyond suffering.</p>
+        <a class="more" href="about.html#sufferings">Learn more →</a>
+      </article>
+      <article class="card reveal">
+        <span class="glyph" aria-hidden="true" lang="zh-Hant">和</span>
+        <h3>Harmonising the Eight Classes</h3>
+        <span class="tc-sub" lang="zh-Hant">調和天龍八部</span>
+        <p>The Eight Classes of Heavenly and Dragon Beings stand closest to the human realm. Reciting this sutra, the Deva, Dragon, Asura and Garuda classes all extend their protection, and prayers meet a swift response.</p>
+        <a class="more" href="about.html#reminder">Learn more →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUOTE ============ -->
+<section class="quote-band">
+  <div class="wrap reveal">
+    <blockquote>
+      <p class="zh-quote" lang="zh-Hant">「《龍王經》是真的很好！<br>因為它調和天龍八部！」</p>
+      <p class="en-quote">“The Dragon King Sutra is truly excellent — because it harmonises the Eight Classes of Heavenly and Dragon Beings!”</p>
+      <cite>— His Holiness Living Buddha Lian Sheng</cite>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ============ BENEFITS ============ -->
+<section class="section section-deep">
+  <div class="wrap">
+    <div class="split">
+      <div class="reveal">
+        <p class="eyebrow">Benefits of Recitation · 誦持功德</p>
+        <h2 class="section-title">Why recite this sutra</h2>
+        <p class="lede">Upholding the <em>Sutra of the Sea Dragon King</em> is said to bring the greatest of blessings, for it moves the beings who dwell nearest to our world.</p>
+      </div>
+      <ul class="benefit-list">
+        <li class="reveal"><span class="zh-tag" lang="zh-Hant">四部護持</span><p>The four classes — Devas, Dragons, Asuras and Garudas — extend their protection and bestow blessings on those who recite and circulate the sutra.</p></li>
+        <li class="reveal"><span class="zh-tag" lang="zh-Hant">福報增長</span><p>Merit and worldly wellbeing increase; those who have printed and shared this sutra have swiftly seen a spiritual response in daily life.</p></li>
+        <li class="reveal"><span class="zh-tag" lang="zh-Hant">障礙消除</span><p>Obstacles dissolve as the Eight Classes are harmonised — the sutra soothes the unseen world that surrounds the human realm.</p></li>
+        <li class="reveal"><span class="zh-tag" lang="zh-Hant">明心見性</span><p>Beyond blessings, the sutra opens the cultivator to the true meaning of realising the mind and seeing one's original nature.</p></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHAPTERS ============ -->
+<section class="section">
+  <div class="wrap">
+    <p class="eyebrow center reveal">Four Volumes · Twenty Chapters</p>
+    <h2 class="section-title center reveal">Enter the Dragon Palace<span class="tc" lang="zh-Hant">目錄</span></h2>
+    <div class="chapter-grid reveal">
+      <a class="chapter-tile" href="read.html#ch01"><span class="ch-num" lang="zh-Hant">卷一</span><span><span class="ch-zh" lang="zh-Hant">行品第一</span><span class="ch-en">Practice</span></span></a>
+      <a class="chapter-tile" href="read.html#ch02"><span class="ch-num" lang="zh-Hant">卷一</span><span><span class="ch-zh" lang="zh-Hant">分別品第二</span><span class="ch-en">Discernment</span></span></a>
+      <a class="chapter-tile" href="read.html#ch03"><span class="ch-num" lang="zh-Hant">卷一</span><span><span class="ch-zh" lang="zh-Hant">六度品第三</span><span class="ch-en">The Six Perfections</span></span></a>
+      <a class="chapter-tile" href="read.html#ch04"><span class="ch-num" lang="zh-Hant">卷一</span><span><span class="ch-zh" lang="zh-Hant">無盡藏品第四</span><span class="ch-en">The Inexhaustible Treasury</span></span></a>
+      <a class="chapter-tile" href="read.html#ch05"><span class="ch-num" lang="zh-Hant">卷二</span><span><span class="ch-zh" lang="zh-Hant">總持品第五</span><span class="ch-en">Dharani</span></span></a>
+      <a class="chapter-tile" href="read.html#ch06"><span class="ch-num" lang="zh-Hant">卷二</span><span><span class="ch-zh" lang="zh-Hant">總持身品第六</span><span class="ch-en">The Body of Dharani</span></span></a>
+      <a class="chapter-tile" href="read.html#ch07"><span class="ch-num" lang="zh-Hant">卷二</span><span><span class="ch-zh" lang="zh-Hant">總持門品第七</span><span class="ch-en">The Gate of Dharani</span></span></a>
+      <a class="chapter-tile" href="read.html#ch08"><span class="ch-num" lang="zh-Hant">卷二</span><span><span class="ch-zh" lang="zh-Hant">分別名品第八</span><span class="ch-en">Discerning the Name</span></span></a>
+      <a class="chapter-tile" href="read.html#ch09"><span class="ch-num" lang="zh-Hant">卷二</span><span><span class="ch-zh" lang="zh-Hant">授決品第九</span><span class="ch-en">Bestowing the Prediction</span></span></a>
+      <a class="chapter-tile" href="read.html#ch10"><span class="ch-num" lang="zh-Hant">卷三</span><span><span class="ch-zh" lang="zh-Hant">請佛品第十</span><span class="ch-en">Inviting the Buddha</span></span></a>
+      <a class="chapter-tile" href="read.html#ch11"><span class="ch-num" lang="zh-Hant">卷三</span><span><span class="ch-zh" lang="zh-Hant">十德六度品第十一</span><span class="ch-en">The Ten Virtues and Six Perfections</span></span></a>
+      <a class="chapter-tile" href="read.html#ch12"><span class="ch-num" lang="zh-Hant">卷三</span><span><span class="ch-zh" lang="zh-Hant">燕居阿須倫受決品第十二</span><span class="ch-en">The Prediction for the Asura Yanju</span></span></a>
+      <a class="chapter-tile" href="read.html#ch13"><span class="ch-num" lang="zh-Hant">卷三</span><span><span class="ch-zh" lang="zh-Hant">無焚龍王受決品第十三</span><span class="ch-en">The Prediction for Anavatapta</span></span></a>
+      <a class="chapter-tile" href="read.html#ch14"><span class="ch-num" lang="zh-Hant">卷三</span><span><span class="ch-zh" lang="zh-Hant">女寶錦受決品第十四</span><span class="ch-en">The Prediction for Jewel Brocade</span></span></a>
+      <a class="chapter-tile" href="read.html#ch15"><span class="ch-num" lang="zh-Hant">卷三</span><span><span class="ch-zh" lang="zh-Hant">天帝釋品第十五</span><span class="ch-en">Sakra, Lord of the Devas</span></span></a>
+      <a class="chapter-tile" href="read.html#ch16"><span class="ch-num" lang="zh-Hant">卷四</span><span><span class="ch-zh" lang="zh-Hant">金翅鳥品第十六</span><span class="ch-en">The Garudas</span></span></a>
+      <a class="chapter-tile" href="read.html#ch17"><span class="ch-num" lang="zh-Hant">卷四</span><span><span class="ch-zh" lang="zh-Hant">舍利品第十七</span><span class="ch-en">The Relics</span></span></a>
+      <a class="chapter-tile" href="read.html#ch18"><span class="ch-num" lang="zh-Hant">卷四</span><span><span class="ch-zh" lang="zh-Hant">法供養品第十八</span><span class="ch-en">The Offering of Dharma</span></span></a>
+      <a class="chapter-tile" href="read.html#ch19"><span class="ch-num" lang="zh-Hant">卷四</span><span><span class="ch-zh" lang="zh-Hant">空淨品第十九</span><span class="ch-en">Emptiness and Purity</span></span></a>
+      <a class="chapter-tile" href="read.html#ch20"><span class="ch-num" lang="zh-Hant">卷四</span><span><span class="ch-zh" lang="zh-Hant">囑累受持品第二十</span><span class="ch-en">Entrusting and Upholding</span></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta-band">
+  <div class="wrap reveal">
+    <svg class="pearl-mini" viewBox="0 0 100 100" aria-hidden="true">
+      <defs>
+        <radialGradient id="pmg" cx="38%" cy="32%">
+          <stop offset="0%" stop-color="#fffdf4"/><stop offset="45%" stop-color="#f4dc96"/><stop offset="100%" stop-color="#b3893f"/>
+        </radialGradient>
+      </defs>
+      <path d="M50 8 C42 20 44 30 50 36 C56 30 58 20 50 8 Z" fill="#d9b25f" opacity=".8"/>
+      <circle cx="50" cy="58" r="26" fill="url(#pmg)" stroke="#f4dc96"/>
+      <circle cx="50" cy="58" r="34" fill="none" stroke="#d9b25f" opacity=".4"/>
+    </svg>
+    <h2 class="section-title">Begin the journey</h2>
+    <p class="lede" style="margin: 0 auto 2.4rem">Read the complete sutra in Chinese, pinyin and English — or take refuge and enter the stream of the lineage.</p>
+    <div class="btn-row" style="justify-content:center">
+      <a class="btn btn-solid" href="read.html">Read the Sutra</a>
+      <a class="btn" href="refuge.html">Take Refuge</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-crest" aria-hidden="true">
+    <svg viewBox="0 0 100 100" fill="none">
+      <circle cx="50" cy="54" r="18" fill="none" stroke="#d9b25f" stroke-width="1.6"/>
+      <path d="M50 20 C44 30 45 38 50 44 C55 38 56 30 50 20 Z" fill="#d9b25f"/>
+      <path d="M30 34 C32 42 37 47 44 49 M70 34 C68 42 63 47 56 49" stroke="#8d7440" stroke-width="1.4"/>
+      <circle cx="50" cy="54" r="26" stroke="#8d7440" stroke-width="0.8" opacity=".5"/>
+    </svg>
+  </div>
+  <div class="wrap footer-grid">
+    <div>
+      <h4>The Sutra</h4>
+      <ul>
+        <li><a href="about.html">About the Sutra</a></li>
+        <li><a href="read.html">Read the Sutra</a></li>
+        <li><a href="about.html#reflection">Study Reflection</a></li>
+        <li><a href="read.html?print">Print the Sutra</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Community</h4>
+      <ul>
+        <li><a href="his-holiness-living-buddha-lian-sheng.html">H.H. Living Buddha Lian Sheng</a></li>
+        <li><a href="refuge.html">Take Refuge</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Facebook</h4>
+      <ul>
+        <li><a href="https://www.facebook.com/syltbsnenglish" rel="noopener">Official Page</a></li>
+        <li><a href="https://www.facebook.com/groups/tbsenglish" rel="noopener">Discussion Group</a></li>
+        <li><a href="https://www.facebook.com/VajraLotsawas" rel="noopener">Vajra Lotsawas</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Related Sutras</h4>
+      <ul>
+        <li><a href="https://truebuddhasutra.org" rel="noopener">True Buddha Sutra</a></li>
+        <li><a href="https://vajrasutra.org" rel="noopener">Vajra Sutra</a></li>
+        <li><a href="https://highkingsutra.org" rel="noopener">High King Sutra</a></li>
+        <li><a href="https://surangamasutra.org" rel="noopener">Surangama Sutra</a></li>
+        <li><a href="https://drashilhamo.org" rel="noopener">Drashi Lhamo</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>True Buddha School</h4>
+      <ul>
+        <li><a href="https://en.tbsn.org/" rel="noopener">TBSN.org</a></li>
+        <li><a href="https://tbboyeh.org/eng#/index" rel="noopener">TBBoyeh</a></li>
+        <li><a href="https://yifucultural.com" rel="noopener">Yifu Publications</a></li>
+        <li><a href="https://sylfoundation.org" rel="noopener">Sheng-Yen Lu Foundation</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="tc" lang="zh-Hant">南無海龍王菩薩</span>
+    <span>May all beings share in the merit of this offering of the Dharma · 嗡嘛呢唄咪吽</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+/* ============================================================
+   READER — gold ink on indigo paper (紺紙金泥)
+   ============================================================ */
+
+.progress-track {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  z-index: 300;
+  background: rgba(217, 178, 95, 0.08);
+}
+.progress-fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--gold-deep), var(--gold-bright));
+  box-shadow: 0 0 12px rgba(244, 220, 150, 0.55);
+  transition: width .12s linear;
+}
+
+.reader-shell {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-top: var(--header-h);
+}
+
+/* ---------- chapter sidebar ---------- */
+.reader-toc {
+  position: sticky;
+  top: var(--header-h);
+  height: calc(100vh - var(--header-h));
+  overflow-y: auto;
+  padding: 2rem 1.4rem 3rem 2rem;
+  border-right: 1px solid var(--gold-ghost);
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-dim) transparent;
+}
+.toc-head {
+  font-family: var(--font-tc);
+  color: var(--gold);
+  letter-spacing: 0.4em;
+  font-size: 0.95rem;
+  margin-bottom: 1.6rem;
+}
+.toc-vol {
+  font-family: var(--font-tc);
+  color: var(--vermillion-bright);
+  font-size: 0.82rem;
+  letter-spacing: 0.3em;
+  margin: 1.4rem 0 0.5rem;
+  border-bottom: 1px solid var(--gold-ghost);
+  padding-bottom: 0.35rem;
+}
+.reader-toc nav a {
+  display: block;
+  padding: 0.5rem 0.7rem;
+  margin: 0.15rem -0.7rem;
+  color: var(--cream-dim);
+  border-left: 2px solid transparent;
+  transition: background .25s ease, border-color .25s ease, color .25s ease;
+}
+.reader-toc nav a .t-zh { font-family: var(--font-tc); display: block; font-size: 1rem; color: var(--cream); }
+.reader-toc nav a .t-en { display: block; font-size: 0.8rem; color: var(--muted); font-style: italic; }
+.reader-toc nav a:hover { background: rgba(217, 178, 95, 0.06); }
+.reader-toc nav a.current {
+  border-left-color: var(--gold);
+  background: linear-gradient(90deg, rgba(217, 178, 95, 0.1), transparent);
+}
+.reader-toc nav a.current .t-zh { color: var(--gold-bright); }
+
+/* ---------- toolbar ---------- */
+.reader-tools {
+  position: sticky;
+  top: var(--header-h);
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  padding: 0.8rem clamp(1rem, 4vw, 3rem);
+  background: linear-gradient(rgba(7, 14, 26, 0.92), rgba(7, 14, 26, 0.85));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--gold-ghost);
+}
+.reader-tools .spacer { flex: 1; }
+.chip, .tool-btn {
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  letter-spacing: 0.14em;
+  padding: 7px 16px;
+  background: rgba(15, 31, 56, 0.5);
+  border: 1px solid var(--gold-ghost);
+  color: var(--muted);
+  cursor: pointer;
+  transition: all .25s ease;
+}
+.chip:hover, .tool-btn:hover { border-color: var(--gold-dim); color: var(--cream); }
+.chip[aria-pressed="true"] {
+  color: var(--gold-bright);
+  border-color: var(--gold-dim);
+  background: rgba(217, 178, 95, 0.1);
+  box-shadow: inset 0 0 12px rgba(217, 178, 95, 0.08);
+}
+.chip .dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  margin-right: 7px;
+  opacity: 0.5;
+  vertical-align: 2px;
+}
+.chip[aria-pressed="true"] .dot { opacity: 1; box-shadow: 0 0 8px currentColor; }
+.tool-btn.toc-btn { display: none; }
+.layer-label {
+  color: var(--gold-dim);
+  font-family: var(--font-display);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+}
+
+/* ---------- the sutra text ---------- */
+.reader-main { min-width: 0; }
+.sutra {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 4rem) clamp(1.2rem, 4vw, 3rem) 6rem;
+}
+.sutra-title {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2.6rem;
+  border-bottom: 1px solid var(--gold-faint);
+  position: relative;
+}
+.sutra-title::after {
+  content: "";
+  position: absolute;
+  bottom: -5px; left: 50%;
+  transform: translateX(-50%);
+  width: 9px; height: 9px;
+  background: var(--gold);
+  rotate: 45deg;
+}
+.sutra-title .t1 {
+  font-family: var(--font-tc);
+  font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+  font-weight: 600;
+  color: var(--gold-bright);
+  letter-spacing: 0.18em;
+  text-shadow: 0 0 38px rgba(217, 178, 95, 0.35);
+}
+.sutra-title .t2 { font-family: var(--font-display); font-style: italic; color: var(--aqua); font-size: 1.05rem; margin-top: 0.7rem; }
+.sutra-title .t3 { font-family: var(--font-display); color: var(--cream); font-size: clamp(1.1rem, 2.4vw, 1.45rem); margin-top: 0.9rem; }
+.sutra-colophon { text-align: center; margin-bottom: 3.5rem; }
+
+.chapter { padding-top: 1rem; scroll-margin-top: calc(var(--header-h) + 78px); }
+.seclabel {
+  text-align: center;
+  margin: 4.5rem 0 3rem;
+  position: relative;
+}
+.seclabel .seal-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.4rem;
+}
+.seclabel .s1 {
+  font-family: var(--font-tc);
+  font-size: clamp(1.7rem, 3.8vw, 2.4rem);
+  font-weight: 600;
+  color: var(--gold-bright);
+  letter-spacing: 0.16em;
+}
+.seclabel .s2 { font-family: var(--font-display); font-style: italic; color: var(--aqua-dim); font-size: 0.98rem; margin-top: 0.5rem; }
+.seclabel .s3 { font-family: var(--font-display); color: var(--cream-dim); font-size: 1.12rem; margin-top: 0.6rem; letter-spacing: 0.06em; }
+
+.block { margin: 0 0 2.4rem; }
+.prow { margin: 0 0 1.35rem; }
+.prow .hanzi {
+  font-family: var(--font-tc);
+  font-size: 1.5rem;
+  line-height: 1.85;
+  color: var(--gold-bright);
+  margin: 0;
+  font-weight: 500;
+}
+.prow .pinyin {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.02rem;
+  color: var(--aqua-dim);
+  margin: 0.15rem 0 0;
+  line-height: 1.5;
+}
+.prow .english {
+  font-size: 1.08rem;
+  color: var(--cream-dim);
+  margin: 0.3rem 0 0;
+  line-height: 1.6;
+}
+
+/* verse blocks — centered, framed by side rules */
+.block.verse {
+  text-align: center;
+  padding: 1.4rem clamp(1rem, 4vw, 2.5rem);
+  border-left: 1px solid var(--gold-faint);
+  border-right: 1px solid var(--gold-faint);
+  background: linear-gradient(180deg, rgba(217, 178, 95, 0.035), transparent 60%);
+}
+.block.center { text-align: center; }
+
+/* layer visibility */
+body.hide-zh .prow .hanzi { display: none; }
+body.hide-py .prow .pinyin { display: none; }
+body.hide-en .prow .english { display: none; }
+body.hide-py .sutra-title .t2, body.hide-py .seclabel .s2 { display: none; }
+body.hide-en .sutra-title .t3, body.hide-en .seclabel .s3 { display: none; }
+
+/* back-to-top pearl */
+.to-top {
+  position: fixed;
+  right: 1.6rem; bottom: 1.6rem;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  border: 1px solid var(--gold-dim);
+  background: radial-gradient(circle at 35% 30%, #fffdf4, #f4dc96 45%, #b3893f);
+  color: var(--abyss);
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s ease, transform .3s ease;
+  box-shadow: 0 0 26px rgba(217, 178, 95, 0.35);
+  z-index: 95;
+}
+.to-top.show { opacity: 1; pointer-events: auto; }
+.to-top:hover { transform: translateY(-4px); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1020px) {
+  .reader-shell { grid-template-columns: 1fr; }
+  .reader-toc {
+    position: fixed;
+    inset: var(--header-h) auto 0 0;
+    width: min(320px, 85vw);
+    background: linear-gradient(180deg, #0a1424, #070e1a);
+    border-right: 1px solid var(--gold-faint);
+    transform: translateX(-105%);
+    transition: transform .4s cubic-bezier(.7, 0, .25, 1);
+    z-index: 120;
+    box-shadow: 24px 0 60px rgba(0, 0, 0, 0.5);
+  }
+  .reader-toc.open { transform: translateX(0); }
+  .tool-btn.toc-btn { display: inline-block; }
+  .toc-scrim {
+    position: fixed;
+    inset: 0;
+    background: rgba(3, 7, 14, 0.6);
+    backdrop-filter: blur(3px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease;
+    z-index: 110;
+  }
+  .toc-scrim.show { opacity: 1; pointer-events: auto; }
+}
+
+/* ---------- print ---------- */
+@media print {
+  body { background: #fff; color: #000; font-size: 11pt; }
+  body::before, body::after { display: none; }
+  .site-header, .reader-tools, .reader-toc, .to-top, .site-footer, .progress-track, .toc-scrim { display: none !important; }
+  .reader-shell { display: block; padding: 0; }
+  .sutra { max-width: none; padding: 0; }
+  .sutra-title .t1, .seclabel .s1, .prow .hanzi { color: #000; text-shadow: none; }
+  .prow .pinyin, .sutra-title .t2, .seclabel .s2 { color: #333; }
+  .prow .english, .sutra-title .t3, .seclabel .s3 { color: #000; }
+  .chapter { break-before: page; }
+  .prow { break-inside: avoid; }
+  .block.verse { border-color: #999; background: none; }
+}
