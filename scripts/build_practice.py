@@ -47,6 +47,14 @@ def paragraphs(path, skip):
         t = t.replace("Gastrodia(Rl0)", "Gastrodia")
         # house style: one word, as used everywhere else on the site
         t = t.replace("Grand Master", "Grandmaster")
+        # house style: lowercase the generic "dharma"/"buddhahood",
+        # keeping names such as "Dharma Protectors" and "Buddha Dharma"
+        for _a, _b in (("to teach the Dharma", "to teach the dharma"),
+                       ("as the Dharma currently", "as the dharma currently"),
+                       ("great Dharma masters", "great dharma masters"),
+                       ("this Dharma teaching", "this dharma teaching"),
+                       ("attain Buddhahood", "attain buddhahood")):
+            t = t.replace(_a, _b)
         if t in HEADINGS:
             out.append(("h", t))
         else:

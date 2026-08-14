@@ -266,7 +266,7 @@ CHROME_FOOT = """
   
   <div class="footer-bottom">
     <span class="tc" lang="zh-Hant">南無海龍王菩薩</span>
-    <span>May all beings share in the merit of this offering of the Dharma</span>
+    <span>May all beings share in the merit of this offering of the dharma</span>
     <span class="mantra-line">Om Guru Lian Sheng Siddhi Hum · <span lang="zh-Hant">嗡咕嚕蓮生悉地吽</span></span>
   </div>
 </footer>
