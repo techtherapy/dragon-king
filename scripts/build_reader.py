@@ -309,13 +309,13 @@ def build():
     # ---- main column ----
     out.append('  <div class="reader-main">')
     out.append('    <div class="reader-tools">')
-    out.append('      <button class="tool-btn toc-btn" id="tocBtn" aria-expanded="false" aria-controls="readerToc">☰ <span lang="zh-Hant">目錄</span> Chapters</button>')
+    out.append('      <button class="tool-btn toc-btn" id="tocBtn" aria-expanded="false" aria-controls="readerToc">☰ <span lang="zh-Hant">目錄</span> <span class="btn-label">Chapters</span></button>')
     out.append('      <span class="layer-label">Layers</span>')
     out.append('      <button class="chip" data-layer="zh" aria-pressed="true"><span class="dot"></span><span lang="zh-Hant">漢字</span></button>')
     out.append('      <button class="chip" data-layer="py" aria-pressed="true"><span class="dot"></span>Pīnyīn</button>')
     out.append('      <button class="chip" data-layer="en" aria-pressed="true"><span class="dot"></span>English</button>')
     out.append('      <span class="spacer"></span>')
-    out.append('      <button class="tool-btn" id="printBtn">⎙ Print</button>')
+    out.append('      <button class="tool-btn" id="printBtn">⎙ <span class="btn-label">Print</span></button>')
     out.append("    </div>")
     out.append('    <article class="sutra">')
 

@@ -20,7 +20,8 @@
   }
   @media (max-width: 820px) {
     .book-layout { grid-template-columns: 1fr; }
-    .book-aside { order: -1; max-width: 230px; margin: 0 auto; }
+    /* stacked above the article — sticky would serve no purpose here */
+    .book-aside { order: -1; max-width: 230px; margin: 0 auto; position: static; }
   }
   .book-aside { position: sticky; top: calc(var(--header-h) + 2rem); }
   .book-cover {
