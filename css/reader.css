@@ -20,7 +20,7 @@
 
 .reader-shell {
   display: grid;
-  grid-template-columns: 300px minmax(0, 1fr);
+  grid-template-columns: clamp(300px, 23vw, 356px) minmax(0, 1fr);
   max-width: 1400px;
   margin: 0 auto;
   padding-top: var(--header-h);
@@ -41,13 +41,13 @@
   font-family: var(--font-tc);
   color: var(--gold);
   letter-spacing: 0.4em;
-  font-size: 0.95rem;
+  font-size: clamp(0.95rem, 0.9rem + 0.17vw, 1.12rem);
   margin-bottom: 1.6rem;
 }
 .toc-vol {
   font-family: var(--font-tc);
   color: var(--vermillion-bright);
-  font-size: 0.82rem;
+  font-size: clamp(0.82rem, 0.78rem + 0.15vw, 0.98rem);
   letter-spacing: 0.3em;
   margin: 1.4rem 0 0.5rem;
   border-bottom: 1px solid var(--gold-ghost);
@@ -61,8 +61,16 @@
   border-left: 2px solid transparent;
   transition: background .25s ease, border-color .25s ease, color .25s ease;
 }
-.reader-toc nav a .t-zh { font-family: var(--font-tc); display: block; font-size: 1rem; color: var(--cream); }
-.reader-toc nav a .t-en { display: block; font-size: 0.8rem; color: var(--muted); font-style: italic; }
+.reader-toc nav a .t-zh {
+  font-family: var(--font-tc); display: block; color: var(--cream);
+  font-size: clamp(1rem, 0.94rem + 0.22vw, 1.22rem);
+  line-height: 1.5;
+}
+.reader-toc nav a .t-en {
+  display: block; color: var(--muted); font-style: italic;
+  font-size: clamp(0.8rem, 0.76rem + 0.17vw, 0.98rem);
+  line-height: 1.45;
+}
 .reader-toc nav a:hover { background: rgba(217, 178, 95, 0.06); }
 .reader-toc nav a.current {
   border-left-color: var(--gold);
