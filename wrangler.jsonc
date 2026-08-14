@@ -1,0 +1,17 @@
+// Cloudflare Workers — static-asset-only deployment.
+//
+// There is no "main" script on purpose: this site is entirely static, so
+// Cloudflare serves the files in ./dist directly. Only ./dist is uploaded,
+// which is what keeps the source transcripts, extra-content/, scripts/ and
+// docs/ out of the published site (see scripts/build_site.sh).
+{
+  "name": "dragon-king",
+  "compatibility_date": "2026-08-14",
+  "assets": {
+    "directory": "./dist",
+    // serve /about for about.html, and add trailing slashes consistently
+    "html_handling": "auto-trailing-slash",
+    // unknown paths get the site's own 404 page rather than a bare error
+    "not_found_handling": "404-page"
+  }
+}

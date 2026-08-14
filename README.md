@@ -46,18 +46,21 @@ python3 -m http.server 8471
 
 Then open <http://localhost:8471>.
 
-## Deploying (Cloudflare Pages)
+## Deploying (Cloudflare Workers)
 
 The repo holds both the site and its private sources (the original sutra
 HTML, lecture transcripts, `extra-content/`, the generator scripts). Only the
-site is published, because Cloudflare Pages serves **only the build output
-directory**:
+site is published, because only `dist/` is uploaded:
 
-| Cloudflare Pages setting | Value |
+| Cloudflare setting | Value |
 |---|---|
 | Build command | `bash scripts/build_site.sh` |
-| Build output directory | `dist` |
-| Framework preset | None |
+| Deploy command | `npx wrangler deploy` |
+
+`wrangler.jsonc` declares `assets.directory = "./dist"` and no `main` script —
+a static-asset-only Worker, so Cloudflare serves `dist/` directly and uploads
+nothing else. (If you use the older Cloudflare **Pages** flow instead, there is
+no deploy command: set build output directory = `dist`.)
 
 `scripts/build_site.sh` copies the eight pages plus `css/`, `js/`, `assets/`
 and `deploy/_headers` into `dist/`, then **fails the build** if anything

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found — Dragon King Sutra</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .lost {
+    min-height: calc(100svh - var(--header-h));
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: calc(var(--header-h) + 3rem) var(--pad) 5rem;
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 30%, rgba(29, 53, 96, 0.5), transparent 65%),
+      linear-gradient(180deg, #060c17, var(--abyss));
+  }
+  .lost .pearl-lost { width: 96px; margin: 0 auto 2.4rem; filter: drop-shadow(0 0 28px rgba(244, 220, 150, 0.4)); }
+  .lost .code {
+    font-family: var(--font-display);
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 1.4rem;
+  }
+  .lost h1 { font-size: clamp(2rem, 5vw, 3rem); }
+  .lost .zh {
+    font-family: var(--font-tc);
+    color: var(--gold);
+    font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+    letter-spacing: 0.3em;
+    margin: 0.6rem 0 1.8rem;
+  }
+  .lost p { color: var(--cream-dim); max-width: 46ch; margin: 0 auto 2.4rem; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="brand" aria-label="Dragon King Sutra home">
+    <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true">
+      <circle cx="24" cy="24" r="21.5" fill="none" stroke="#8d7440" stroke-width="1" opacity=".6"/>
+      <path d="M24 6 C35 6 42 14 42 24 C42 34 35 41 25 41 C17 41 11 36 11 29 C11 22 16 18 22 18 C27 18 30 21 30 25 C30 28 28 30 25 30"
+            fill="none" stroke="#d9b25f" stroke-width="2" stroke-linecap="round"/>
+      <path d="M24 6 L20 2.5 M24 6 L20 9.5" stroke="#f4dc96" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+      <circle cx="24" cy="25.5" r="3.2" fill="#f4dc96"/>
+    </svg>
+    <span class="brand-name">Dragon King Sutra<span class="tc">佛說海龍王經</span></span>
+  </a>
+  <button class="nav-toggle" aria-expanded="false" aria-label="Menu">☰</button>
+  <nav class="site-nav">
+    <a href="about.html">About</a>
+    <a href="read.html">Read</a>
+    <a href="treasure-vase-yoga.html">Practice</a>
+    <a href="his-holiness-living-buddha-lian-sheng.html">Living Buddha Lian Sheng</a>
+    <a href="contact.html">Contact</a>
+    <a href="refuge.html" class="nav-cta">Take Refuge</a>
+  </nav>
+</header>
+
+<main class="lost">
+  <div>
+    <svg class="pearl-lost" viewBox="0 0 100 100" aria-hidden="true">
+      <defs>
+        <radialGradient id="p404" cx="38%" cy="32%">
+          <stop offset="0%" stop-color="#fffdf4"/><stop offset="45%" stop-color="#f4dc96"/><stop offset="100%" stop-color="#b3893f"/>
+        </radialGradient>
+      </defs>
+      <circle cx="50" cy="52" r="34" fill="none" stroke="#8d7440" stroke-width="1" opacity=".55"/>
+      <circle cx="50" cy="52" r="22" fill="url(#p404)" stroke="#f4dc96"/>
+      <path d="M50 6 C43 20 45 30 50 38 C55 30 57 20 50 6 Z" fill="#d9b25f" opacity=".85"/>
+    </svg>
+    <span class="code">404 · Not Found</span>
+    <h1>This page has slipped beneath the waves</h1>
+    <p class="zh" lang="zh-Hant">此頁不存在</p>
+    <p>The page you were looking for is not here. Perhaps it was moved, or the link that brought you was incomplete.</p>
+    <div class="btn-row" style="justify-content:center">
+      <a class="btn btn-solid" href="index.html">Return Home</a>
+      <a class="btn" href="read.html">Read the Sutra</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-crest" aria-hidden="true">
+    <svg viewBox="0 0 100 100" fill="none">
+      <circle cx="50" cy="54" r="18" fill="none" stroke="#d9b25f" stroke-width="1.6"/>
+      <path d="M50 20 C44 30 45 38 50 44 C55 38 56 30 50 20 Z" fill="#d9b25f"/>
+      <path d="M30 34 C32 42 37 47 44 49 M70 34 C68 42 63 47 56 49" stroke="#8d7440" stroke-width="1.4"/>
+      <circle cx="50" cy="54" r="26" stroke="#8d7440" stroke-width="0.8" opacity=".5"/>
+    </svg>
+  </div>
+  <div class="footer-bottom" style="border-top:none">
+    <span class="tc" lang="zh-Hant">南無海龍王菩薩</span>
+    <span>May all beings share in the merit of this offering of the Dharma</span>
+    <span class="mantra-line">Om Guru Lian Sheng Siddhi Hum · <span lang="zh-Hant">嗡咕嚕蓮生悉地吽</span></span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
