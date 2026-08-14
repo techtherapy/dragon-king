@@ -331,10 +331,10 @@ BUDDHA_SVG = f"""
   <path class="b-ray" d="M0 64 L0 396 M-44 70 L-62 380 M44 70 L62 380"/>
   <!-- halo glow -->
   <g transform="translate(0 -92)"><circle class="b-halo" r="128"/></g>
+  <!-- mandorla (egg aureole) + head nimbus: inscribe themselves -->
+  <path class="b-aura b-aura-m" d="M0 -196 C42 -192 76 -158 80 -104 C84 -50 52 0 0 4 C-52 0 -84 -50 -80 -104 C-76 -158 -42 -192 0 -196 Z"/>
+  <circle class="b-aura b-aura-n" cx="0" cy="-132" r="39"/>
   <g class="b-in">
-    <!-- mandorla (egg aureole) + head nimbus -->
-    <path class="b-aura" d="M0 -196 C42 -192 76 -158 80 -104 C84 -50 52 0 0 4 C-52 0 -84 -50 -80 -104 C-76 -158 -42 -192 0 -196 Z"/>
-    <circle class="b-aura" cx="0" cy="-132" r="39"/>
     <!-- torso: compact seated proportions -->
     <path class="b-solid" d="M-8 -110
       C-20 -108 -29 -103 -33 -96
@@ -502,10 +502,23 @@ dragon_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="330 -290 1260 
   .b-hair {{ fill:url(#buddhaGrad); stroke:var(--gb); stroke-width:1.3; stroke-linejoin:round; }}
   .b-petal {{ fill:url(#maneGrad); stroke:var(--gb); stroke-width:1.3; stroke-linejoin:round; }}
   .b-aura {{ fill:url(#discGrad); stroke:var(--g); stroke-width:1.7; opacity:.95; }}
-  .b-halo {{ fill:url(#haloGrad); animation:pulse 8s ease-in-out infinite alternate; }}
-  .b-beam {{ fill:url(#beamGrad); animation:breathe 7s ease-in-out infinite alternate; }}
-  .b-ray {{ fill:none; stroke:url(#beamGrad); stroke-width:1.4; animation:breathe 7s ease-in-out -3s infinite alternate; }}
-  .b-in {{ opacity:0; animation:fadeIn 1.8s ease .15s forwards; }}
+  .b-halo {{ fill:url(#haloGrad); opacity:0; transform:scale(.5);
+    animation:bloom 1.4s ease-out forwards, pulse 8s ease-in-out 1.4s infinite alternate; }}
+  .b-aura-m {{ stroke-dasharray:620; stroke-dashoffset:620;
+    animation:drawAura 1.7s cubic-bezier(.45,0,.25,1) .25s forwards; }}
+  .b-aura-n {{ stroke-dasharray:250; stroke-dashoffset:250;
+    animation:drawAura 1.1s cubic-bezier(.45,0,.25,1) 1s forwards; }}
+  .b-in {{ opacity:0; transform-box:fill-box; transform-origin:50% 88%;
+    animation:manifest 1.7s cubic-bezier(.2,.6,.25,1) 1.15s forwards; }}
+  .b-beam {{ fill:url(#beamGrad); opacity:0; transform:scaleY(0);
+    transform-box:fill-box; transform-origin:50% 0%;
+    animation:beamPour 1.5s cubic-bezier(.3,0,.2,1) 2.6s forwards, breathe 7s ease-in-out 4.1s infinite alternate; }}
+  .b-ray {{ fill:none; stroke:url(#beamGrad); stroke-width:1.4; opacity:0;
+    animation:fadeIn 1.2s ease 3.1s forwards, breathe 8s ease-in-out 4.6s infinite alternate; }}
+  @keyframes bloom {{ to {{ opacity:.55; transform:scale(.94); }} }}
+  @keyframes drawAura {{ to {{ stroke-dashoffset:0; }} }}
+  @keyframes manifest {{ from {{ opacity:0; transform:scale(.92) translateY(7px); }} to {{ opacity:1; transform:none; }} }}
+  @keyframes beamPour {{ to {{ opacity:1; transform:scaleY(1); }} }}
   @keyframes breathe {{ from {{ opacity:.65; }} to {{ opacity:1; }} }}
   .cline {{ fill:none; stroke:var(--g); stroke-width:2; stroke-linecap:round; }}
   .cloud {{ opacity:.38; }}
@@ -545,8 +558,10 @@ dragon_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="330 -290 1260 
   @media (prefers-reduced-motion: reduce) {{
     .pearl-halo,.pearl-halo2,.pearl-flames,.cloud-a,.cloud-b,.dust,.dragon,
     .head-inner,.whisker,.spikes,.frond,.detail,.leg,.head,.body-fill,
-    .b-halo,.b-beam,.b-ray,.b-in {{ animation:none; }}
-    .b-in {{ opacity:1; }}
+    .b-halo,.b-beam,.b-ray,.b-in,.b-aura-m,.b-aura-n {{ animation:none; }}
+    .b-aura-m,.b-aura-n {{ stroke-dasharray:none; }}
+    .b-in,.b-beam,.b-ray {{ opacity:1; transform:none; }}
+    .b-halo {{ opacity:.75; transform:none; }}
     .body-fill {{ stroke-dasharray:none; fill-opacity:1; }}
     .spikes,.frond,.detail,.leg,.head {{ opacity:1; }}
   }}
