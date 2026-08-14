@@ -334,7 +334,7 @@ BUDDHA_SVG = f"""
   <g class="b-in">
     <!-- mandorla (egg aureole) + head nimbus -->
     <path class="b-aura" d="M0 -196 C42 -192 76 -158 80 -104 C84 -50 52 0 0 4 C-52 0 -84 -50 -80 -104 C-76 -158 -42 -192 0 -196 Z"/>
-    <circle class="b-aura" cx="0" cy="-130" r="35"/>
+    <circle class="b-aura" cx="0" cy="-132" r="39"/>
     <!-- torso: compact seated proportions -->
     <path class="b-solid" d="M-8 -110
       C-20 -108 -29 -103 -33 -96
@@ -397,19 +397,33 @@ BUDDHA_SVG = f"""
       C56 14 54 6 50 -2
       C20 4 -20 4 -50 -2 Z"/>
     <path class="b-line" d="M-31 0 C-33 8 -33 17 -31 25 M-11 2 C-12 10 -12 19 -11 27 M11 2 C12 10 12 19 11 27 M31 0 C33 8 33 17 31 25"/>
-    <!-- head: seated low, chin just above the collar -->
+    <!-- head: solid gold hair over the face, round topknot, long ears -->
     <g transform="translate(0 5.5)">
-    <path class="b-solid" d="M-18 -136 C-18 -148 -9.5 -155 0 -155 C9.5 -155 18 -148 18 -136 C18 -125 10.5 -117 0 -117 C-10.5 -117 -18 -125 -18 -136 Z"/>
-    <path class="b-line" d="M-16 -142 C-7 -146 7 -146 16 -142"/>
-    <path class="b-solid" d="M-7 -153 C-7 -160 -4 -163 0 -170 C4 -163 7 -160 7 -153 C4 -155 -4 -155 -7 -153 Z"/>
-    <!-- ears -->
-    <path class="b-solid" d="M18 -138 C22 -139 23 -134 22 -128 C21 -121 19 -117 17 -117 C15.5 -119 16.5 -128 18 -138 Z"/>
-    <path class="b-solid" d="M-18 -138 C-22 -139 -23 -134 -22 -128 C-21 -121 -19 -117 -17 -117 C-15.5 -119 -16.5 -128 -18 -138 Z"/>
     <!-- face -->
-    <path class="b-line" d="M-8.5 -138 C-5.5 -140 -2.5 -140 -1 -138.5 L-1 -132 M8.5 -138 C5.5 -140 2.5 -140 1 -138.5 M-1.5 -131 C-0.5 -130.5 0.5 -130.5 1.5 -131"/>
-    <path class="b-line" d="M-9 -135 C-7 -133.5 -4.5 -133.5 -3 -135 M9 -135 C7 -133.5 4.5 -133.5 3 -135"/>
-    <circle class="b-dot" cx="0" cy="-141.5" r="1.1"/>
-    <path class="b-line" d="M-3 -125.5 C-1.5 -124 1.5 -124 3 -125.5"/>
+    <path class="b-solid" d="M-19 -138 C-19 -152 -10 -160 0 -160 C10 -160 19 -152 19 -138 C19 -126 11 -117 0 -117 C-11 -117 -19 -126 -19 -138 Z"/>
+    <!-- ears, under the hair -->
+    <path class="b-solid" d="M19 -144 C24 -146 26 -138 25 -130 C24 -121 21 -115 17.5 -116 C16 -118 17 -131 19 -144 Z"/>
+    <path class="b-solid" d="M-19 -144 C-24 -146 -26 -138 -25 -130 C-24 -121 -21 -115 -17.5 -116 C-16 -118 -17 -131 -19 -144 Z"/>
+    <!-- hair: gold mass with scalloped hairline -->
+    <path class="b-hair" d="M-19.5 -145
+      C-22 -157 -12 -167 0 -167
+      C12 -167 22 -157 19.5 -145
+      C20.5 -142 20 -139 18.5 -138
+      C19 -142 18 -145 16 -146
+      C14 -150 11 -147 8.5 -149
+      C5.5 -151 3.5 -147 0 -148
+      C-3.5 -147 -5.5 -151 -8.5 -149
+      C-11 -147 -14 -150 -16 -146
+      C-18 -145 -19 -142 -18.5 -138
+      C-20 -139 -20.5 -142 -19.5 -145 Z"/>
+    <!-- round topknot -->
+    <circle class="b-hair" cx="0" cy="-169" r="7.5"/>
+    <!-- face: urna, closed eyes, nose with nostrils, full lips -->
+    <circle class="b-dot" cx="0" cy="-143.5" r="1.2"/>
+    <path class="b-line" d="M-11 -137 C-8.5 -134 -4.5 -134 -2.5 -136.5 M11 -137 C8.5 -134 4.5 -134 2.5 -136.5"/>
+    <path class="b-line" d="M-1.6 -138.5 L-1.6 -133 M1.6 -138.5 L1.6 -133 M-1.6 -133 C-3 -132 -3.6 -130.5 -2.4 -130 M1.6 -133 C3 -132 3.6 -130.5 2.4 -130"/>
+    <path class="b-line" d="M-4.5 -125 C-2.5 -126.6 -1 -126 0 -125 C1 -126 2.5 -126.6 4.5 -125"/>
+    <path class="b-line" d="M-3.5 -122 C-1.5 -120.6 1.5 -120.6 3.5 -122"/>
     </g>
     <!-- lotus throne: curled petal row on a base rim -->
     {b_petals}
@@ -485,6 +499,7 @@ dragon_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="330 -290 1260 
   .b-solid {{ fill:#0e1c34; stroke:var(--gb); stroke-width:1.5; stroke-linejoin:round; }}
   .b-dot {{ fill:var(--gb); }}
   .b-neck {{ fill:#0e1c34; }}
+  .b-hair {{ fill:url(#buddhaGrad); stroke:var(--gb); stroke-width:1.3; stroke-linejoin:round; }}
   .b-petal {{ fill:url(#maneGrad); stroke:var(--gb); stroke-width:1.3; stroke-linejoin:round; }}
   .b-aura {{ fill:url(#discGrad); stroke:var(--g); stroke-width:1.7; opacity:.95; }}
   .b-halo {{ fill:url(#haloGrad); animation:pulse 8s ease-in-out infinite alternate; }}
