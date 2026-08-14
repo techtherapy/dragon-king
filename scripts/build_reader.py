@@ -228,13 +228,21 @@ CHROME_FOOT = """
     <div>
       <h4>Related Sites</h4>
       <ul>
-        <li><a href="https://truebuddhasutra.org" rel="noopener">True Buddha Sutra</a></li>
-        <li><a href="https://vajrasutra.org" rel="noopener">Vajra Sutra</a></li>
+        <li><a href="https://amitabhasutra.org" rel="noopener">Amitabha Sutra</a></li>
         <li><a href="https://highkingsutra.org" rel="noopener">High King Sutra</a></li>
         <li><a href="https://surangamasutra.org" rel="noopener">Surangama Sutra</a></li>
-        <li><a href="https://amitabhasutra.org" rel="noopener">Amitabha Sutra</a></li>
+        <li><a href="https://truebuddhasutra.org" rel="noopener">True Buddha Sutra</a></li>
+        <li><a href="https://vajrasutra.org" rel="noopener">Vajra Sutra</a></li>
+        <li><a href="https://emperorliangrepentance.org" rel="noopener">Emperor Liang Repentance</a></li>
         <li><a href="https://drashilhamo.org" rel="noopener">Drashi Lhamo</a></li>
         <li><a href="https://vlotus.org" rel="noopener">VLotus 蓮花飄香</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Online Teachings</h4>
+      <ul>
+        <li><a href="https://www.youtube.com/@tbsseattle.orgenglishstrea3035" rel="noopener">Saturday Live Streams</a></li>
+        <li><a href="https://www.youtube.com/@RainbowTemple-English" rel="noopener">Sunday Live Streams</a></li>
       </ul>
     </div>
     <div>

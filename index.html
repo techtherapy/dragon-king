@@ -218,6 +218,31 @@
     overflow: hidden;
   }
   .cta-band .pearl-mini { width: 92px; margin: 0 auto 2rem; filter: drop-shadow(0 0 26px rgba(244, 220, 150, 0.45)); }
+  /* from-the-writings feature */
+  .book-feature {
+    display: grid;
+    grid-template-columns: 250px minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+  @media (max-width: 820px) {
+    .book-feature { grid-template-columns: 1fr; }
+    .book-feature-cover { max-width: 220px; margin: 0 auto; }
+  }
+  .book-feature-cover { margin: 0; }
+  .book-feature-cover a {
+    display: block;
+    border: 1px solid var(--gold-faint);
+    padding: 8px;
+    background: rgba(15, 31, 56, 0.4);
+    transition: transform .4s ease, border-color .4s ease, box-shadow .4s ease;
+  }
+  .book-feature-cover a:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold);
+    box-shadow: 0 18px 44px rgba(3, 7, 14, 0.6);
+  }
+  .book-feature-cover img { width: 100%; display: block; }
 </style>
 </head>
 <body>
@@ -381,8 +406,39 @@
   </div>
 </section>
 
-<!-- ============ CHAPTERS ============ -->
+<!-- ============ FROM THE WRITINGS ============ -->
 <section class="section">
+  <div class="wrap">
+    <div class="book-feature">
+      <figure class="book-feature-cover reveal">
+        <a href="treasure-vase-wishes.html" aria-label="Read Wishes in the Dragon King Treasure Vase Practice">
+          <img src="assets/book-146-cover.jpg" alt="Cover of Book 146, A Solitary Bird in the Void, by Living Buddha Lian Sheng" loading="lazy">
+        </a>
+      </figure>
+      <div>
+        <p class="eyebrow reveal">From the Writings · 文集</p>
+        <h2 class="section-title reveal" style="font-size:clamp(1.8rem,3.8vw,2.7rem)">Wishes in the Dragon King Treasure Vase Practice<span class="tc" lang="zh-Hant">龍王寶瓶的祈願</span></h2>
+        <p class="lede reveal" style="margin-top:1.4rem">“Grandmaster, when you cast the Dragon King Treasure Vase, what do you pray for?”</p>
+        <div class="prose reveal" style="margin-top:1.2rem">
+          <p class="en" style="font-style:normal;color:var(--muted)">A young disciple's question turns back on the one who asked it. From that exchange His Holiness draws out the deeper sequence of the practice — fulfil wishes, give freely, want nothing, become a Buddha — and the reason desire is allowed to lead the way at all.</p>
+        </div>
+        <div class="colophon-line reveal">
+          <span class="seal small" aria-hidden="true" lang="zh-Hant">文</span>
+          <div>
+            <div class="tc" lang="zh-Hans">第146冊《虛空中的孤鳥》第32章</div>
+            <div class="en">Book 146, <em>A Solitary Bird in the Void</em> — Chapter 32</div>
+          </div>
+        </div>
+        <div class="btn-row reveal" style="margin-top:2rem">
+          <a class="btn" href="treasure-vase-wishes.html">Read the Article</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHAPTERS ============ -->
+<section class="section section-deep">
   <div class="wrap">
     <p class="eyebrow center reveal">Four Volumes · Twenty Chapters</p>
     <h2 class="section-title center reveal">Enter the Dragon Palace<span class="tc" lang="zh-Hant">目錄</span></h2>
@@ -479,13 +535,21 @@
     <div>
       <h4>Related Sites</h4>
       <ul>
-        <li><a href="https://truebuddhasutra.org" rel="noopener">True Buddha Sutra</a></li>
-        <li><a href="https://vajrasutra.org" rel="noopener">Vajra Sutra</a></li>
+        <li><a href="https://amitabhasutra.org" rel="noopener">Amitabha Sutra</a></li>
         <li><a href="https://highkingsutra.org" rel="noopener">High King Sutra</a></li>
         <li><a href="https://surangamasutra.org" rel="noopener">Surangama Sutra</a></li>
-        <li><a href="https://amitabhasutra.org" rel="noopener">Amitabha Sutra</a></li>
+        <li><a href="https://truebuddhasutra.org" rel="noopener">True Buddha Sutra</a></li>
+        <li><a href="https://vajrasutra.org" rel="noopener">Vajra Sutra</a></li>
+        <li><a href="https://emperorliangrepentance.org" rel="noopener">Emperor Liang Repentance</a></li>
         <li><a href="https://drashilhamo.org" rel="noopener">Drashi Lhamo</a></li>
         <li><a href="https://vlotus.org" rel="noopener">VLotus 蓮花飄香</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Online Teachings</h4>
+      <ul>
+        <li><a href="https://www.youtube.com/@tbsseattle.orgenglishstrea3035" rel="noopener">Saturday Live Streams</a></li>
+        <li><a href="https://www.youtube.com/@RainbowTemple-English" rel="noopener">Sunday Live Streams</a></li>
       </ul>
     </div>
     <div>
