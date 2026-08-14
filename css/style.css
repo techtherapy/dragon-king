@@ -54,8 +54,10 @@ body {
   background: var(--abyss);
   color: var(--cream);
   font-family: var(--font-body);
-  font-size: 1.125rem;
-  line-height: 1.7;
+  /* EB Garamond has a small x-height, so a flat 18px reads small on a large
+     screen. Fluid: 18px on phones (unchanged), ~21px from 1280px up. */
+  font-size: clamp(1.125rem, 1.02rem + 0.42vw, 1.32rem);
+  line-height: 1.72;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -280,7 +282,7 @@ body::after {
   font-weight: 500;
 }
 .lede {
-  font-size: clamp(1.15rem, 2vw, 1.32rem);
+  font-size: clamp(1.15rem, 1.02rem + 0.62vw, 1.5rem);
   color: var(--cream);
   max-width: var(--measure);
 }
@@ -413,7 +415,7 @@ body::after {
   display: block;
   margin-bottom: 1rem;
 }
-.card p { color: var(--muted); font-size: 1.02rem; margin: 0; }
+.card p { color: var(--muted); font-size: clamp(1.02rem, 0.96rem + 0.2vw, 1.12rem); margin: 0; }
 .card a.more {
   display: inline-block;
   margin-top: 1.2rem;

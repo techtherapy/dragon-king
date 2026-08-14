@@ -175,7 +175,7 @@
     max-width: 17ch;
     margin-bottom: 1.4rem;
   }
-  .hero-copy .lede { font-size: clamp(1.05rem, 1.7vw, 1.22rem); color: var(--cream-dim); max-width: 46ch; }
+  .hero-copy .lede { font-size: clamp(1.05rem, 0.98rem + 0.42vw, 1.35rem); color: var(--cream-dim); max-width: 46ch; }
   .hero-copy .btn-row { margin-top: 2.4rem; }
   .hero-art { position: relative; }
   .hero-art img.dragon {
@@ -337,6 +337,18 @@
     overflow: hidden;
   }
   .cta-band .pearl-mini { width: 92px; margin: 0 auto 2rem; filter: drop-shadow(0 0 26px rgba(244, 220, 150, 0.45)); }
+  /* the practice section's vase illustration */
+  .practice-split { grid-template-columns: 1fr minmax(0, 0.72fr); }
+  @media (max-width: 880px) { .practice-split { grid-template-columns: 1fr; } }
+  .vase-figure { margin: 0; text-align: center; }
+  .vase-figure img {
+    width: min(100%, 330px);
+    margin: 0 auto;
+    filter: drop-shadow(0 18px 46px rgba(3, 7, 14, 0.65));
+    transition: transform .5s ease;
+  }
+  .vase-figure a:hover img { transform: translateY(-6px); }
+
   /* from-the-writings feature */
   .book-feature {
     display: grid;
@@ -486,13 +498,6 @@
         <p>The Eight Classes of Heavenly and Dragon Beings stand closest to the human realm. Reciting this sutra, the Deva, Dragon, Asura and Garuda classes all extend their protection, and prayers meet a swift response.</p>
         <a class="more" href="about.html#reminder">Learn more →</a>
       </article>
-      <article class="card reveal">
-        <span class="glyph" aria-hidden="true" lang="zh-Hant">瓶</span>
-        <h3>The Treasure Vase Yoga</h3>
-        <span class="tc-sub" lang="zh-Hant">龍王寶瓶法</span>
-        <p>A rare practice taught by Grandmaster Lu in 1990: the sealed vase becomes the Dragon, the Dragon becomes the Five Buddhas, and the vase — cast into the sea — carries the practitioner's wish to the Dragon King.</p>
-        <a class="more" href="treasure-vase-yoga.html">Enter the practice →</a>
-      </article>
     </div>
   </div>
 </section>
@@ -523,6 +528,28 @@
         <li class="reveal"><span class="zh-tag" lang="zh-Hant">障礙消除</span><p>Obstacles dissolve as the Eight Classes are harmonised — the sutra soothes the unseen world that surrounds the human realm.</p></li>
         <li class="reveal"><span class="zh-tag" lang="zh-Hant">明心見性</span><p>Beyond blessings, the sutra opens the cultivator to the true meaning of realising the mind and seeing one's original nature.</p></li>
       </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE PRACTICE (separate from the sutra) ============ -->
+<section class="section section-deep">
+  <div class="wrap">
+    <div class="split practice-split">
+      <div class="reveal">
+        <p class="eyebrow">A Related Practice · 龍王寶瓶法</p>
+        <h2 class="section-title">The Dragon King Treasure Vase Yoga<span class="tc" lang="zh-Hant">龍王寶瓶之瑜伽</span></h2>
+        <p class="lede" style="margin-top:1.4rem">A rare practice taught by Grandmaster Lu in 1990: the sealed vase becomes the Dragon, the Dragon becomes the Five Buddhas, and the vase — cast into the sea — carries the practitioner's wish to the Dragon King.</p>
+        <p class="muted" style="margin-top:1.2rem">This yoga is not part of the sutra. It is a Vajrayana practice directed to the Dragon King, and it requires <a href="refuge.html">refuge</a> and the empowerment for the practice before it may be performed.</p>
+        <div class="btn-row" style="margin-top:2rem">
+          <a class="btn" href="treasure-vase-yoga.html">Enter the Practice</a>
+        </div>
+      </div>
+      <figure class="vase-figure reveal">
+        <a href="treasure-vase-yoga.html" aria-label="The Dragon King Treasure Vase Yoga">
+          <img src="assets/vase-vision.svg" alt="The visualization of the practice: from the sealed treasure vase a dragon rises and transforms into the Five Dhyani Buddhas, whose light pours back down upon the vase" loading="lazy">
+        </a>
+      </figure>
     </div>
   </div>
 </section>
