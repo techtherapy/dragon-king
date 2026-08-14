@@ -91,13 +91,23 @@
   .hero-layer.clouds-far { z-index: 0; background-image: url("assets/clouds-far.svg"); background-size: 1250px auto; }
   .hero-layer.clouds-near { z-index: 1; background-image: url("assets/clouds-near.svg"); background-size: 1450px auto; background-position: 55% 30%; }
   .hero-inner { position: relative; z-index: 2; }
+  /* deep-sea fade: hides sky layers behind the wave band */
+  .hero::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: min(360px, 36%);
+    background: linear-gradient(180deg, transparent, var(--abyss) 78%);
+    z-index: 1;
+    pointer-events: none;
+  }
   .hero-waves {
     position: absolute;
     left: 0; right: 0; bottom: -6px;
     pointer-events: none;
     z-index: 3;
   }
-  .hero-waves img { width: 100%; height: clamp(110px, 16vw, 210px); object-fit: cover; object-position: top; }
+  .hero-waves img { width: 100%; height: clamp(110px, 16vw, 210px); }
   .hero-waves::after {
     content: "";
     position: absolute;
