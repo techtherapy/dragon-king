@@ -200,13 +200,17 @@ body::after {
   /* while the panel is open, nothing behind it needs painting */
   body.nav-open { overflow: hidden; }
   .site-nav.open { will-change: transform; }
-  /* The header sets backdrop-filter, which makes it the containing block for
-     its fixed-position children — so this panel is positioned against the
-     header box (top:100% = just below it), not the viewport, and its height
-     is stated explicitly rather than derived from top/bottom. */
+  /* Positioned so it lands just under the header EITHER WAY — whether the
+     header is the containing block for fixed children (it is whenever it has
+     a backdrop-filter) or the viewport is. Because the header sits at the top
+     of the viewport, `top: var(--header-h)` resolves to the same place in
+     both cases, while `top: 100%` did not: it followed the containing block's
+     height and dropped the whole panel below the fold once the filter was
+     removed for performance. Height is stated explicitly, never derived from
+     top/bottom, for the same reason. */
   .site-nav {
     position: fixed;
-    top: 100%;
+    top: var(--header-h);
     left: 0;
     right: 0;
     height: calc(100vh - var(--header-h));
