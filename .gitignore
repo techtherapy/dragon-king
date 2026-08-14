@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+
+# build output (assembled by scripts/build_site.sh, deployed by Cloudflare Pages)
+dist/
+
+# python
+__pycache__/
+*.pyc

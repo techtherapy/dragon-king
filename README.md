@@ -44,8 +44,37 @@ python3 scripts/build_practice.py
 python3 -m http.server 8471
 ```
 
-Then open <http://localhost:8471>. The site is fully static — deploy the
-repo root to any static host (GitHub Pages, Netlify, Cloudflare Pages).
+Then open <http://localhost:8471>.
+
+## Deploying (Cloudflare Pages)
+
+The repo holds both the site and its private sources (the original sutra
+HTML, lecture transcripts, `extra-content/`, the generator scripts). Only the
+site is published, because Cloudflare Pages serves **only the build output
+directory**:
+
+| Cloudflare Pages setting | Value |
+|---|---|
+| Build command | `bash scripts/build_site.sh` |
+| Build output directory | `dist` |
+| Framework preset | None |
+
+`scripts/build_site.sh` copies the eight pages plus `css/`, `js/`, `assets/`
+and `deploy/_headers` into `dist/`, then **fails the build** if anything
+private (the source sutra HTML, `info.txt`, `extra-content/`, `scripts/`,
+`docs/`) ever appears in the output. `dist/` is gitignored.
+
+Build it locally exactly as Cloudflare does:
+
+```bash
+bash scripts/build_site.sh
+cd dist && python3 -m http.server 8479
+```
+
+Note that a *public* GitHub repo still exposes the private sources on GitHub
+itself, even though they are never served from the site's domain. To keep them
+off the internet entirely, make the repo private — Cloudflare Pages deploys
+from private repos just as well.
 
 ## Design spec
 
