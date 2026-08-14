@@ -334,7 +334,7 @@ BUDDHA_SVG = f"""
   <g class="b-in">
     <!-- mandorla (egg aureole) + head nimbus -->
     <path class="b-aura" d="M0 -196 C42 -192 76 -158 80 -104 C84 -50 52 0 0 4 C-52 0 -84 -50 -80 -104 C-76 -158 -42 -192 0 -196 Z"/>
-    <circle class="b-aura" cx="0" cy="-136" r="35"/>
+    <circle class="b-aura" cx="0" cy="-130" r="35"/>
     <!-- torso: compact seated proportions -->
     <path class="b-solid" d="M-8 -110
       C-20 -108 -29 -103 -33 -96
@@ -349,9 +349,9 @@ BUDDHA_SVG = f"""
       C40 -75 38 -86 33 -96
       C29 -103 20 -108 8 -110
       C3 -111 -3 -111 -8 -110 Z"/>
-    <!-- neck: filled column joining head to chest, stroked sides only -->
-    <path class="b-neck" d="M-9 -124 L-9 -105 L9 -105 L9 -124 Z"/>
-    <path class="b-line" d="M-9 -120 C-9 -114 -8.5 -110 -8 -106 M9 -120 C9 -114 8.5 -110 8 -106"/>
+    <!-- neck: barely visible — a sliver between chin and collar -->
+    <path class="b-neck" d="M-9 -114 L-9 -104 L9 -104 L9 -114 Z"/>
+    <path class="b-line" d="M-8.5 -111 L-8 -107 M8.5 -111 L8 -107"/>
     <!-- robe edges across the chest -->
     <path class="b-line" d="M-15 -104 C-6 -96 6 -96 15 -104"/>
     <path class="b-line" d="M-13 -99 C-5 -92 5 -92 13 -99"/>
@@ -397,10 +397,11 @@ BUDDHA_SVG = f"""
       C56 14 54 6 50 -2
       C20 4 -20 4 -50 -2 Z"/>
     <path class="b-line" d="M-31 0 C-33 8 -33 17 -31 25 M-11 2 C-12 10 -12 19 -11 27 M11 2 C12 10 12 19 11 27 M31 0 C33 8 33 17 31 25"/>
-    <!-- head -->
+    <!-- head: seated low, chin just above the collar -->
+    <g transform="translate(0 5.5)">
     <path class="b-solid" d="M-18 -136 C-18 -148 -9.5 -155 0 -155 C9.5 -155 18 -148 18 -136 C18 -125 10.5 -117 0 -117 C-10.5 -117 -18 -125 -18 -136 Z"/>
     <path class="b-line" d="M-16 -142 C-7 -146 7 -146 16 -142"/>
-    <path class="b-solid" d="M-7 -153 C-7 -161 7 -161 7 -153 C4 -155 -4 -155 -7 -153 Z"/>
+    <path class="b-solid" d="M-7 -153 C-7 -160 -4 -163 0 -170 C4 -163 7 -160 7 -153 C4 -155 -4 -155 -7 -153 Z"/>
     <!-- ears -->
     <path class="b-solid" d="M18 -138 C22 -139 23 -134 22 -128 C21 -121 19 -117 17 -117 C15.5 -119 16.5 -128 18 -138 Z"/>
     <path class="b-solid" d="M-18 -138 C-22 -139 -23 -134 -22 -128 C-21 -121 -19 -117 -17 -117 C-15.5 -119 -16.5 -128 -18 -138 Z"/>
@@ -409,6 +410,7 @@ BUDDHA_SVG = f"""
     <path class="b-line" d="M-9 -135 C-7 -133.5 -4.5 -133.5 -3 -135 M9 -135 C7 -133.5 4.5 -133.5 3 -135"/>
     <circle class="b-dot" cx="0" cy="-141.5" r="1.1"/>
     <path class="b-line" d="M-3 -125.5 C-1.5 -124 1.5 -124 3 -125.5"/>
+    </g>
     <!-- lotus throne: curled petal row on a base rim -->
     {b_petals}
     <path class="b-line" d="M-72 46 C-38 54 38 54 72 46"/>
