@@ -92,6 +92,13 @@ def build():
     padding-top: 1.4em;
     border-top: 1px solid var(--gold-ghost);
   }}
+  .page-hero .credit {{
+    display: block;
+    margin-top: 0.6rem;
+    font-size: 0.88em;
+    font-style: italic;
+    color: var(--muted);
+  }}
   .article {{ max-width: var(--measure); }}
   .article p {{ margin: 0 0 1.25em; color: var(--cream-dim); }}
   .notice {{
@@ -144,7 +151,7 @@ def build():
   <div class="wrap">
     <p class="eyebrow center reveal">Practice · 龍王寶瓶法</p>
     <h1 class="reveal">The Dragon King Treasure Vase Yoga<span class="tc-title" lang="zh-Hant">龍王寶瓶之瑜伽</span></h1>
-    <p class="lede reveal">A teaching by Grand Master Lu — Hong Kong, February 4, 1990. Translated by Janny Chow.</p>
+    <p class="lede reveal">A teaching by Grand Master Lu — Hong Kong, February 4, 1990.<span class="credit">Translated by Janny Chow.</span></p>
   </div>
 </section>
 
