@@ -22,7 +22,8 @@ SVG line-art in the style of a sutra frontispiece.
 ## Regenerating generated files
 
 ```bash
-# Hero dragon + wave band artwork (assets/dragon-hero.svg, assets/waves.svg)
+# Hero artwork: dragon + Buddha (dragon-hero.svg), waves (waves.svg),
+# and parallax sky layers (sky-stars.svg, clouds-far.svg, clouds-near.svg)
 python3 scripts/generate_dragon.py
 
 # Reader page (read.html) from the source sutra HTML

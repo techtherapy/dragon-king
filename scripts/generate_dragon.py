@@ -442,15 +442,6 @@ CLOUD_DEF = """
 </g>
 """
 
-# ---- gold dust -----------------------------------------------------------
-random.seed(7)
-dust = ""
-for _ in range(30):
-    dx = random.uniform(370, 1550)
-    dy = random.uniform(-260, 940)
-    r = random.choice((1.1, 1.5, 2.0, 2.6))
-    cls = random.choice(("d1", "d2", "d3"))
-    dust += f'<circle class="dust {cls}" cx="{fmt(dx)}" cy="{fmt(dy)}" r="{r}" style="animation-delay:{random.uniform(0, 6):.1f}s"/>'
 
 # ----------------------------------------------------------------------
 # assemble dragon-hero.svg
@@ -520,14 +511,6 @@ dragon_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="330 -290 1260 
   @keyframes manifest {{ from {{ opacity:0; transform:scale(.92) translateY(7px); }} to {{ opacity:1; transform:none; }} }}
   @keyframes beamPour {{ to {{ opacity:1; transform:scaleY(1); }} }}
   @keyframes breathe {{ from {{ opacity:.65; }} to {{ opacity:1; }} }}
-  .cline {{ fill:none; stroke:var(--g); stroke-width:2; stroke-linecap:round; }}
-  .cloud {{ opacity:.38; }}
-  .cloud-a {{ animation:drift 26s ease-in-out infinite alternate; }}
-  .cloud-b {{ animation:drift 34s ease-in-out infinite alternate-reverse; }}
-  .dust {{ fill:var(--gb); }}
-  .d1 {{ animation:twinkle 4s ease-in-out infinite alternate; }}
-  .d2 {{ animation:twinkle 6s ease-in-out infinite alternate-reverse; }}
-  .d3 {{ animation:twinkle 5s ease-in-out infinite alternate; opacity:.5; }}
   /* ---- entrance: the dragon draws itself in gold ink ---- */
   .body-fill {{
     stroke-dasharray:{BODY_LEN:.0f}; stroke-dashoffset:{BODY_LEN:.0f}; fill-opacity:0;
@@ -553,10 +536,8 @@ dragon_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="330 -290 1260 
   @keyframes whisk {{ from {{ transform:rotate(-2.4deg); }} to {{ transform:rotate(2.8deg); }} }}
   @keyframes pulse {{ from {{ opacity:.55; transform:scale(.94); }} to {{ opacity:1; transform:scale(1.05); }} }}
   @keyframes flick {{ from {{ transform:rotate(-3deg) scale(.98); }} to {{ transform:rotate(3deg) scale(1.03); }} }}
-  @keyframes drift {{ from {{ transform:translateX(-22px); }} to {{ transform:translateX(22px); }} }}
-  @keyframes twinkle {{ from {{ opacity:.12; }} to {{ opacity:.95; }} }}
   @media (prefers-reduced-motion: reduce) {{
-    .pearl-halo,.pearl-halo2,.pearl-flames,.cloud-a,.cloud-b,.dust,.dragon,
+    .pearl-halo,.pearl-halo2,.pearl-flames,.dragon,
     .head-inner,.whisker,.spikes,.frond,.detail,.leg,.head,.body-fill,
     .b-halo,.b-beam,.b-ray,.b-in,.b-aura-m,.b-aura-n {{ animation:none; }}
     .b-aura-m,.b-aura-n {{ stroke-dasharray:none; }}
@@ -624,19 +605,7 @@ dragon_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="330 -290 1260 
     <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#d9b25f" flood-opacity=".28"/>
   </filter>
   <clipPath id="bodyClip"><path d="{body_d}"/></clipPath>
-  {CLOUD_DEF}
 </defs>
-
-<!-- gold dust field -->
-<g>{dust}</g>
-
-<!-- drifting auspicious clouds -->
-<g transform="translate(470 160) scale(1.45)"><use href="#cloud" class="cloud cloud-a"/></g>
-<g transform="translate(600 -140) scale(0.85)"><use href="#cloud" class="cloud cloud-b"/></g>
-<g transform="translate(1105 -175) scale(1.0)"><use href="#cloud" class="cloud cloud-a"/></g>
-<g transform="translate(1230 895) scale(1.8)"><use href="#cloud" class="cloud cloud-b"/></g>
-<g transform="translate(1445 330) scale(1.0)"><use href="#cloud" class="cloud cloud-a"/></g>
-<g transform="translate(470 820) scale(1.15)"><use href="#cloud" class="cloud cloud-b"/></g>
 
 {BUDDHA_SVG}
 
@@ -739,6 +708,77 @@ waves_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 260" p
 """
 waves_svg += "</svg>\n"
 (ASSETS / "waves.svg").write_text(waves_svg, encoding="utf-8")
+
+
+# ----------------------------------------------------------------------
+# parallax sky layers — stars and clouds as separate files so the page
+# can move them at different scroll rates
+# ----------------------------------------------------------------------
+random.seed(11)
+stars = ""
+for _ in range(46):
+    sx, sy = random.uniform(20, 1580), random.uniform(20, 880)
+    r = random.choice((1.0, 1.3, 1.7, 2.2))
+    cls = random.choice(("d1", "d2", "d3"))
+    stars += f'<circle class="dust {cls}" cx="{fmt(sx)}" cy="{fmt(sy)}" r="{r}" style="animation-delay:{random.uniform(0, 6):.1f}s"/>'
+for _ in range(7):
+    sx, sy = random.uniform(60, 1540), random.uniform(40, 860)
+    s = random.uniform(3.5, 6)
+    cls = random.choice(("d1", "d2"))
+    stars += (f'<path class="spark {cls}" style="animation-delay:{random.uniform(0, 5):.1f}s" '
+              f'd="M{fmt(sx)} {fmt(sy - s)} L{fmt(sx + s * 0.28)} {fmt(sy - s * 0.28)} L{fmt(sx + s)} {fmt(sy)} '
+              f'L{fmt(sx + s * 0.28)} {fmt(sy + s * 0.28)} L{fmt(sx)} {fmt(sy + s)} L{fmt(sx - s * 0.28)} {fmt(sy + s * 0.28)} '
+              f'L{fmt(sx - s)} {fmt(sy)} L{fmt(sx - s * 0.28)} {fmt(sy - s * 0.28)} Z"/>')
+
+SKY_STYLE = """
+  .dust { fill:#f4dc96; }
+  .spark { fill:#d9b25f; opacity:.6; }
+  .d1 { animation:twinkle 4s ease-in-out infinite alternate; }
+  .d2 { animation:twinkle 6s ease-in-out infinite alternate-reverse; }
+  .d3 { animation:twinkle 5s ease-in-out infinite alternate; opacity:.5; }
+  @keyframes twinkle { from { opacity:.1; } to { opacity:.95; } }
+  @media (prefers-reduced-motion: reduce) { .d1,.d2,.d3 { animation:none; opacity:.6; } }
+"""
+sky_svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" '
+           f'preserveAspectRatio="xMidYMid slice" aria-hidden="true">'
+           f'<style>{SKY_STYLE}</style>{stars}</svg>')
+(ASSETS / "sky-stars.svg").write_text(sky_svg, encoding="utf-8")
+
+
+def cloud_layer(name, clouds, opacity, stroke_w):
+    body = "".join(
+        f'<g transform="translate({x} {y}) scale({s})">'
+        f'<use href="#cloud" class="cloud {anim}"/></g>'
+        for x, y, s, anim in clouds)
+    style = f"""
+  .cline {{ fill:none; stroke:#d9b25f; stroke-width:{stroke_w}; stroke-linecap:round; }}
+  .cloud {{ opacity:{opacity}; }}
+  .cloud-a {{ animation:drift 30s ease-in-out infinite alternate; }}
+  .cloud-b {{ animation:drift 42s ease-in-out infinite alternate-reverse; }}
+  @keyframes drift {{ from {{ transform:translateX(-26px); }} to {{ transform:translateX(26px); }} }}
+  @media (prefers-reduced-motion: reduce) {{ .cloud-a,.cloud-b {{ animation:none; }} }}
+"""
+    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" '
+           f'preserveAspectRatio="xMidYMid slice" aria-hidden="true">'
+           f'<style>{style}</style><defs>{CLOUD_DEF}</defs>{body}</svg>')
+    (ASSETS / name).write_text(svg, encoding="utf-8")
+
+
+cloud_layer("clouds-far.svg", [
+    (250, 190, 0.85, "cloud-a"), (1330, 150, 0.7, "cloud-b"),
+    (1430, 480, 0.8, "cloud-a"), (180, 620, 0.75, "cloud-b"),
+    (700, 90, 0.6, "cloud-a"), (940, 320, 0.55, "cloud-b"),
+    (620, 560, 0.65, "cloud-a"), (1080, 790, 0.9, "cloud-b"),
+    (820, 850, 0.6, "cloud-a"),
+], opacity=0.22, stroke_w=2)
+
+cloud_layer("clouds-near.svg", [
+    (330, 200, 1.7, "cloud-b"), (1300, 690, 2.0, "cloud-a"),
+    (1150, 170, 1.4, "cloud-b"), (560, 810, 1.6, "cloud-a"),
+    (760, 430, 1.1, "cloud-b"),
+], opacity=0.3, stroke_w=1.6)
+
+print(f"sky-stars.svg: {len(sky_svg) / 1024:.0f} KB")
 
 print(f"dragon-hero.svg: {len(dragon_svg) / 1024:.0f} KB, spine samples={N}")
 print(f"waves.svg: {len(waves_svg) / 1024:.0f} KB")
