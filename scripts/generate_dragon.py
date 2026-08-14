@@ -325,34 +325,68 @@ BUDDHA_SVG = f"""
   <!-- halo glow -->
   <g transform="translate(0 -95)"><circle class="b-halo" r="150"/></g>
   <g class="b-in">
-    <!-- aureole + head nimbus rings -->
-    <circle class="b-ring" cx="0" cy="-92" r="118" opacity=".22"/>
-    <circle class="b-ring" cx="0" cy="-150" r="42" opacity=".5"/>
-    <circle class="b-ring" cx="0" cy="-150" r="52" opacity=".25"/>
-    <!-- seated figure: pure silhouette, no features -->
-    <circle class="b-fig" cx="0" cy="-182" r="9"/>
-    <circle class="b-fig" cx="0" cy="-152" r="27"/>
-    <path class="b-fig" d="M-17 -136
-      C-34 -132 -46 -126 -52 -116
-      C-50 -95 -44 -75 -42 -58
-      C-40 -52 -36 -48 -30 -44
-      C-52 -38 -76 -26 -88 -12
-      C-94 -4 -94 6 -88 12
-      C-62 20 -24 22 0 22
-      C24 22 62 20 88 12
-      C94 6 94 -4 88 -12
-      C76 -26 52 -38 30 -44
-      C36 -48 40 -52 42 -58
-      C44 -75 50 -95 52 -116
-      C46 -126 34 -132 17 -136
-      C6 -139 -6 -139 -17 -136 Z"/>
-    <!-- lotus seat -->
-    <path class="b-petal" d="M0 21 C-13 25 -19 35 -14 44 L14 44 C19 35 13 25 0 21 Z"/>
-    <path class="b-petal" d="M-38 23 C-50 27 -56 36 -51 44 L-25 44 C-23 34 -28 26 -38 23 Z"/>
-    <path class="b-petal" d="M38 23 C50 27 56 36 51 44 L25 44 C23 34 28 26 38 23 Z"/>
-    <path class="b-petal" d="M-72 27 C-84 31 -89 39 -83 45 L-58 45 C-57 37 -62 30 -72 27 Z"/>
-    <path class="b-petal" d="M72 27 C84 31 89 39 83 45 L58 45 C57 37 62 30 72 27 Z"/>
-    <path class="b-base" d="M-97 46 C-50 58 50 58 97 46 C68 68 -68 68 -97 46 Z"/>
+    <!-- moon disc -->
+    <circle class="b-disc" cx="0" cy="-92" r="112"/>
+    <!-- sparkle stars around the disc -->
+    <path class="b-star" d="M-128 -168 l4 8 8 3 -8 3 -4 8 -4 -8 -8 -3 8 -3 Z"/>
+    <path class="b-star" d="M132 -140 l3.5 7 7 2.5 -7 2.5 -3.5 7 -3.5 -7 -7 -2.5 7 -2.5 Z"/>
+    <path class="b-star" d="M-146 -60 l3 6 6 2 -6 2 -3 6 -3 -6 -6 -2 6 -2 Z"/>
+    <path class="b-star" d="M148 -52 l3 6 6 2 -6 2 -3 6 -3 -6 -6 -2 6 -2 Z"/>
+    <path class="b-star" d="M-102 -196 l2.5 5 5 1.5 -5 1.5 -2.5 5 -2.5 -5 -5 -1.5 5 -1.5 Z"/>
+    <path class="b-star" d="M104 -198 l2.5 5 5 1.5 -5 1.5 -2.5 5 -2.5 -5 -5 -1.5 5 -1.5 Z"/>
+    <!-- ==== figure (fine line art, reference style) ==== -->
+    <!-- torso: shoulders, hanging sleeves, wide lap (one masked shape) -->
+    <path class="b-solid" d="M-10 -121
+      C-24 -119 -36 -114 -42 -105
+      C-49 -94 -52 -80 -51 -66
+      C-50 -52 -46 -42 -39 -36
+      C-56 -30 -66 -21 -68 -10
+      C-68 -3 -60 1 -46 3
+      C-20 6 20 6 46 3
+      C60 1 68 -3 68 -10
+      C66 -21 56 -30 39 -36
+      C46 -42 50 -52 51 -66
+      C52 -80 49 -94 42 -105
+      C36 -114 24 -119 10 -121
+      C3 -122 -3 -122 -10 -121 Z"/>
+    <!-- neck + collar -->
+    <path class="b-line" d="M-9 -126 C-6 -121 6 -121 9 -126"/>
+    <!-- robe V collar -->
+    <path class="b-line" d="M-19 -111 C-9 -101 9 -101 19 -111"/>
+    <path class="b-line" d="M-49 -70 C-47 -55 -43 -44 -37 -38 M49 -70 C47 -55 43 -44 37 -38"/>
+    <path class="b-line" d="M-34 -20 C-18 -14 18 -14 34 -20"/>
+    <path class="b-line" d="M-48 -26 C-42 -21 -36 -19 -30 -18 M48 -26 C42 -21 36 -19 30 -18"/>
+    <!-- right forearm raised in vitarka mudra; left arm resting to the lap -->
+    <path class="b-line" d="M42 -56 C38 -66 33 -74 28 -79 M-42 -54 C-34 -46 -22 -40 -10 -38"/>
+    <!-- right hand: palm out, thumb and index joined in a circle -->
+    <path class="b-solid" d="M20 -80 C16 -86 18 -94 25 -97 C31 -99 36 -95 36 -88 C36 -81 30 -76 24 -77 C22 -77.5 21 -78.5 20 -80 Z"/>
+    <circle class="b-line" cx="21.5" cy="-81.5" r="3.2"/>
+    <path class="b-line" d="M27 -97 L27 -90 M31 -96 L31 -89"/>
+    <!-- left hand resting palm-up on the lap -->
+    <path class="b-solid" d="M-12 -37 C-10 -42 -2 -43 3 -40 C6 -38 6 -35 3 -33 C-3 -31 -10 -32 -12 -37 Z"/>
+    <path class="b-line" d="M-6 -41 L-6 -34 M-1 -41 L-1 -34"/>
+    <!-- crossed legs: fold arcs -->
+    <path class="b-line" d="M-26 -10 C-12 -5 12 -5 26 -10 M-40 -16 C-30 -10 -18 -8 -8 -8"/>
+    <!-- head: face, ears, hair, ushnisha -->
+    <path class="b-solid" d="M-23 -148 C-23 -164 -12 -173 0 -173 C12 -173 23 -164 23 -148 C23 -134 13 -123 0 -123 C-13 -123 -23 -134 -23 -148 Z"/>
+    <path class="b-line" d="M-20 -156 C-9 -161 -3 -159.5 0 -157.5 C3 -159.5 9 -161 20 -156"/>
+    <path class="b-solid" d="M-10 -171 C-10 -181 10 -181 10 -171 C6 -174 -6 -174 -10 -171 Z"/>
+    <path class="b-line" d="M0 -186 C-2.5 -183 -2.5 -180.5 0 -179 C2.5 -180.5 2.5 -183 0 -186 Z"/>
+    <!-- ears with long lobes -->
+    <path class="b-solid" d="M23 -152 C28 -153 29 -147 28 -140 C27 -131 25 -126 22 -126 C20 -128 21 -140 23 -152 Z"/>
+    <path class="b-solid" d="M-23 -152 C-28 -153 -29 -147 -28 -140 C-27 -131 -25 -126 -22 -126 C-20 -128 -21 -140 -23 -152 Z"/>
+    <!-- face: brows into nose, lowered eyes, urna, smile -->
+    <path class="b-line" d="M-11 -150 C-7 -153 -3 -153 -1.5 -151 L-1.5 -141 C-2.5 -139.5 -1 -139 0 -139 C1 -139 2.5 -139.5 1.5 -141 L1.5 -151 C3 -153 7 -153 11 -150"/>
+    <path class="b-line" d="M-12 -146 C-9 -143.5 -5 -143.5 -3 -146 M12 -146 C9 -143.5 5 -143.5 3 -146"/>
+    <circle class="b-dot" cx="0" cy="-154" r="1.3"/>
+    <path class="b-line" d="M-4 -132 C-2 -130 2 -130 4 -132"/>
+    <!-- lotus throne: two rows of big rounded petals -->
+    <path class="b-petal" d="M-52 4 C-62 6 -68 14 -66 24 C-58 28 -46 26 -40 18 C-42 10 -46 5 -52 4 Z"/>
+    <path class="b-petal" d="M52 4 C62 6 68 14 66 24 C58 28 46 26 40 18 C42 10 46 5 52 4 Z"/>
+    <path class="b-petal" d="M-27 7 C-38 10 -43 20 -40 30 C-30 33 -19 30 -14 21 C-17 12 -21 7 -27 7 Z"/>
+    <path class="b-petal" d="M27 7 C38 10 43 20 40 30 C30 33 19 30 14 21 C17 12 21 7 27 7 Z"/>
+    <path class="b-petal" d="M0 8 C-9 10 -14 19 -12 30 C-4 34 4 34 12 30 C14 19 9 10 0 8 Z"/>
+    <path class="b-line" d="M-70 26 C-40 34 40 34 70 26" opacity=".5"/>
   </g>
 </g>
 """
@@ -385,7 +419,7 @@ scales_d = "".join(scales)
 fronds_d = "".join(tail_fronds)
 
 dragon_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="330 -290 1260 1280" role="img"
-     aria-label="Beneath a radiant silhouette of the Buddha seated on a lotus, a golden dragon coils around a flaming pearl — drawn in the style of a classical sutra frontispiece">
+     aria-label="Beneath a serene line-drawn Buddha seated on a lotus within a moon disc, a golden dragon coils around a flaming pearl — drawn in the style of a classical sutra frontispiece">
 <style>
   :root {{ --g:#d9b25f; --gb:#f4dc96; --gd:#8d7440; --body:#101f39; --body2:#16294a; }}
   .body-fill {{ fill:url(#bodyGrad); stroke:var(--g); stroke-width:2.6; stroke-linejoin:round; }}
@@ -419,10 +453,12 @@ dragon_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="330 -290 1260 
   .pearl-swirl {{ fill:rgba(141,116,64,.55); }}
   .flame {{ fill:url(#flameGrad); stroke:var(--gb); stroke-width:1; opacity:.9; }}
   .pearl-flames {{ transform-origin:0 0; animation:flick 9s ease-in-out infinite alternate; }}
-  .b-fig {{ fill:url(#buddhaGrad); stroke:var(--gb); stroke-width:1.3; stroke-linejoin:round; }}
-  .b-petal {{ fill:url(#maneGrad); stroke:var(--g); stroke-width:1.2; }}
-  .b-base {{ fill:#12233f; stroke:var(--g); stroke-width:1.3; }}
-  .b-ring {{ fill:none; stroke:var(--gb); stroke-width:1.2; }}
+  .b-line {{ fill:none; stroke:var(--gb); stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }}
+  .b-solid {{ fill:#0e1c34; stroke:var(--gb); stroke-width:1.5; stroke-linejoin:round; }}
+  .b-dot {{ fill:var(--gb); }}
+  .b-petal {{ fill:url(#maneGrad); stroke:var(--gb); stroke-width:1.3; stroke-linejoin:round; }}
+  .b-disc {{ fill:url(#discGrad); stroke:var(--g); stroke-width:1.2; opacity:.9; }}
+  .b-star {{ fill:none; stroke:var(--g); stroke-width:1; opacity:.5; }}
   .b-halo {{ fill:url(#haloGrad); animation:pulse 8s ease-in-out infinite alternate; }}
   .b-beam {{ fill:url(#beamGrad); animation:breathe 7s ease-in-out infinite alternate; }}
   .b-ray {{ fill:none; stroke:url(#beamGrad); stroke-width:1.4; animation:breathe 7s ease-in-out -3s infinite alternate; }}
@@ -513,6 +549,11 @@ dragon_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="330 -290 1260 
     <stop offset="70%" stop-color="#d9b25f"/>
     <stop offset="100%" stop-color="#b3893f"/>
   </linearGradient>
+  <radialGradient id="discGrad">
+    <stop offset="0%" stop-color="#f4dc96" stop-opacity=".10"/>
+    <stop offset="75%" stop-color="#d9b25f" stop-opacity=".04"/>
+    <stop offset="100%" stop-color="#d9b25f" stop-opacity="0"/>
+  </radialGradient>
   <linearGradient id="beamGrad" x1="0" y1="0" x2="0" y2="1">
     <stop offset="0%" stop-color="#f4dc96" stop-opacity=".30"/>
     <stop offset="70%" stop-color="#f4dc96" stop-opacity=".08"/>
