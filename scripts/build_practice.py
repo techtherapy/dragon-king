@@ -45,6 +45,8 @@ def paragraphs(path, skip):
         if not t:
             continue
         t = t.replace("Gastrodia(Rl0)", "Gastrodia")
+        # house style: one word, as used everywhere else on the site
+        t = t.replace("Grand Master", "Grandmaster")
         if t in HEADINGS:
             out.append(("h", t))
         else:
@@ -78,7 +80,7 @@ def build():
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Dragon King Treasure Vase Yoga — Dragon King Sutra</title>
-<meta name="description" content="The Dragon King Treasure Vase Yoga (龍王寶瓶法), taught by Grand Master Lu in Hong Kong, 1990 — the preparation of the treasure vase, the mudra, mantra and visualization, and the casting of the vase into the sea.">
+<meta name="description" content="The Dragon King Treasure Vase Yoga (龍王寶瓶法), taught by Grandmaster Lu in Hong Kong, 1990 — the preparation of the treasure vase, the mudra, mantra and visualization, and the casting of the vase into the sea.">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -151,7 +153,7 @@ def build():
   <div class="wrap">
     <p class="eyebrow center reveal">Practice · 龍王寶瓶法</p>
     <h1 class="reveal">The Dragon King Treasure Vase Yoga<span class="tc-title" lang="zh-Hant">龍王寶瓶之瑜伽</span></h1>
-    <p class="lede reveal">A teaching by Grand Master Lu — Hong Kong, February 4, 1990.<span class="credit">Translated by Janny Chow.</span></p>
+    <p class="lede reveal">A teaching by Grandmaster Lu — Hong Kong, February 4, 1990.<span class="credit">Translated by Janny Chow.</span></p>
   </div>
 </section>
 
