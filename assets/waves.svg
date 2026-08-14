@@ -9,6 +9,9 @@
   .bob-front { animation:bobY 7s ease-in-out -3.5s infinite alternate-reverse; }
   @keyframes roll { from { transform:translateX(0); } to { transform:translateX(-1600px); } }
   @keyframes bobY { from { transform:translateY(-4px); } to { transform:translateY(4px); } }
+  @media (max-width: 700px) {
+    .roll-back,.roll-front,.bob-back,.bob-front { animation:none; }
+  }
   @media (prefers-reduced-motion: reduce) {
     .roll-back,.roll-front,.bob-back,.bob-front { animation:none; }
   }

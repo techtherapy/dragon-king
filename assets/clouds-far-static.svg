@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" aria-hidden="true"><style>
+  .cline { fill:none; stroke:#d9b25f; stroke-width:2; stroke-linecap:round; }
+  .cloud { opacity:0.22; }
+</style><defs>
+<g id="cloud">
+  <path class="cline" d="M0 0 C-4 -18 8 -32 26 -32 C44 -32 54 -18 50 -2 C62 -10 78 -6 82 6 C86 16 78 26 66 26 L-38 26 C-52 26 -58 14 -52 4 C-47 -4 -36 -6 -28 0 C-24 -8 -12 -10 0 0 Z"/>
+  <path class="cline" d="M14 -6 C10 -16 18 -24 27 -22 C34 -21 38 -14 35 -8"/>
+  <path class="cline" d="M-64 26 L-96 26 M92 26 L118 26 M-70 36 L20 36 M40 36 L86 36"/>
+</g>
+</defs><g transform="translate(260 170) scale(0.8)"><use href="#cloud" class="cloud cloud-a"/></g><g transform="translate(1150 130) scale(0.65)"><use href="#cloud" class="cloud cloud-b"/></g><g transform="translate(700 330) scale(0.55)"><use href="#cloud" class="cloud cloud-a"/></g><g transform="translate(240 610) scale(0.7)"><use href="#cloud" class="cloud cloud-b"/></g><g transform="translate(1180 560) scale(0.85)"><use href="#cloud" class="cloud cloud-a"/></g><g transform="translate(720 690) scale(0.6)"><use href="#cloud" class="cloud cloud-b"/></g></svg>

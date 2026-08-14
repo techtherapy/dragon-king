@@ -89,6 +89,19 @@
   @keyframes whisk { from { transform:rotate(-2.4deg); } to { transform:rotate(2.8deg); } }
   @keyframes pulse { from { opacity:.55; transform:scale(.94); } to { opacity:1; transform:scale(1.05); } }
   @keyframes flick { from { transform:rotate(-3deg) scale(.98); } to { transform:rotate(3deg) scale(1.03); } }
+  /* Media queries here match the IMAGE's own width, not the viewport: ~335px
+     on a phone, but 620-880px on tablet and desktop. Hence 470px — it catches
+     phones only. Drops the ambient loops and the SVG filter, and keeps every
+     entrance animation, whose forwards-fill is what makes parts visible. */
+  @media (max-width: 470px) {
+    .dragon { animation:none; filter:none; }
+    .head-inner, .whisker, .dust, .pearl-flames,
+    .pearl-halo, .pearl-halo2, .cloud-a, .cloud-b { animation:none; }
+    .b-halo { animation:bloom 1.4s ease-out forwards; }
+    .b-beam { animation:beamPour 1.5s cubic-bezier(.3,0,.2,1) 2.6s forwards; }
+    .b-ray { animation:fadeIn 1.2s ease 3.1s forwards; }
+    .hg-halo { animation:heartIn .9s ease 2.2s forwards; }
+  }
   @media (prefers-reduced-motion: reduce) {
     .pearl-halo,.pearl-halo2,.pearl-flames,.dragon,
     .head-inner,.whisker,.spikes,.frond,.detail,.leg,.head,.body-fill,

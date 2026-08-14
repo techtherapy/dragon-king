@@ -189,6 +189,17 @@ body::after {
 }
 @media (max-width: 1080px) {
   .nav-toggle { display: block; }
+  /* backdrop-filter forces the header to re-blur every frame that anything
+     behind it changes. Solid background instead — visually near-identical at
+     this opacity, and far cheaper on older mobile GPUs. */
+  .site-header {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: linear-gradient(rgba(7, 14, 26, 0.97), rgba(8, 16, 30, 0.94));
+  }
+  /* while the panel is open, nothing behind it needs painting */
+  body.nav-open { overflow: hidden; }
+  .site-nav.open { will-change: transform; }
   /* The header sets backdrop-filter, which makes it the containing block for
      its fixed-position children — so this panel is positioned against the
      header box (top:100% = just below it), not the viewport, and its height

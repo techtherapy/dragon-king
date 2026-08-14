@@ -244,6 +244,22 @@
   @media (prefers-reduced-motion: reduce) {
     .hero .rise, .hero-art { opacity: 1; transform: none; animation: none; }
   }
+  /* With the menu open the hero is completely covered, so take it out of the
+     paint path entirely: five animated SVGs stop costing anything, which is
+     what made the panel stutter on older Android devices. */
+  body.nav-open .hero-layer,
+  body.nav-open .hero-art,
+  body.nav-open .hero-waves,
+  body.nav-open .hero-scroll-hint { visibility: hidden; }
+
+  /* Phones and tablets get animation-free sky tiles: the animated versions
+     twinkle 30 stars and drift 10 clouds per tile, each repainting the tile. */
+  @media (max-width: 1080px) {
+    .hero-layer.stars { background-image: url("assets/sky-stars-static.svg"); }
+    .hero-layer.clouds-far { background-image: url("assets/clouds-far-static.svg"); }
+    .hero-layer.clouds-near { background-image: url("assets/clouds-near-static.svg"); }
+  }
+
   @media (max-width: 980px) {
     .hero { padding-bottom: 7rem; }
     .hero-inner { grid-template-columns: 1fr; gap: 0; }

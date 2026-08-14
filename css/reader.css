@@ -246,6 +246,11 @@ body.hide-en .sutra-title .t3, body.hide-en .seclabel .s3 { display: none; }
 /* ---------- responsive ---------- */
 @media (max-width: 1080px) {
   .reader-shell { grid-template-columns: 1fr; }
+  .reader-tools {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(7, 14, 26, 0.97);
+  }
   .reader-toc {
     position: fixed;
     inset: var(--header-h) auto 0 0;

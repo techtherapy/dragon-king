@@ -551,6 +551,19 @@ dragon_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="330 -290 1260 
   @keyframes whisk {{ from {{ transform:rotate(-2.4deg); }} to {{ transform:rotate(2.8deg); }} }}
   @keyframes pulse {{ from {{ opacity:.55; transform:scale(.94); }} to {{ opacity:1; transform:scale(1.05); }} }}
   @keyframes flick {{ from {{ transform:rotate(-3deg) scale(.98); }} to {{ transform:rotate(3deg) scale(1.03); }} }}
+  /* Media queries here match the IMAGE's own width, not the viewport: ~335px
+     on a phone, but 620-880px on tablet and desktop. Hence 470px — it catches
+     phones only. Drops the ambient loops and the SVG filter, and keeps every
+     entrance animation, whose forwards-fill is what makes parts visible. */
+  @media (max-width: 470px) {{
+    .dragon {{ animation:none; filter:none; }}
+    .head-inner, .whisker, .dust, .pearl-flames,
+    .pearl-halo, .pearl-halo2, .cloud-a, .cloud-b {{ animation:none; }}
+    .b-halo {{ animation:bloom 1.4s ease-out forwards; }}
+    .b-beam {{ animation:beamPour 1.5s cubic-bezier(.3,0,.2,1) 2.6s forwards; }}
+    .b-ray {{ animation:fadeIn 1.2s ease 3.1s forwards; }}
+    .hg-halo {{ animation:heartIn .9s ease 2.2s forwards; }}
+  }}
   @media (prefers-reduced-motion: reduce) {{
     .pearl-halo,.pearl-halo2,.pearl-flames,.dragon,
     .head-inner,.whisker,.spikes,.frond,.detail,.leg,.head,.body-fill,
@@ -709,6 +722,9 @@ waves_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 260" p
   .bob-front {{ animation:bobY 7s ease-in-out -3.5s infinite alternate-reverse; }}
   @keyframes roll {{ from {{ transform:translateX(0); }} to {{ transform:translateX(-1600px); }} }}
   @keyframes bobY {{ from {{ transform:translateY(-4px); }} to {{ transform:translateY(4px); }} }}
+  @media (max-width: 700px) {{
+    .roll-back,.roll-front,.bob-back,.bob-front {{ animation:none; }}
+  }}
   @media (prefers-reduced-motion: reduce) {{
     .roll-back,.roll-front,.bob-back,.bob-front {{ animation:none; }}
   }}
@@ -761,6 +777,15 @@ sky_svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" '
            f'aria-hidden="true"><style>{SKY_STYLE}</style>{stars}</svg>')
 (ASSETS / "sky-stars.svg").write_text(sky_svg, encoding="utf-8")
 
+# animation-free twin, used on phones/tablets (see index.html)
+SKY_STYLE_STATIC = """
+  .dust { fill:#f4dc96; opacity:.55; }
+  .spark { fill:#d9b25f; opacity:.5; }
+"""
+sky_static = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" '
+              f'aria-hidden="true"><style>{SKY_STYLE_STATIC}</style>{stars}</svg>')
+(ASSETS / "sky-stars-static.svg").write_text(sky_static, encoding="utf-8")
+
 
 def cloud_layer(name, clouds, opacity, stroke_w):
     body = "".join(
@@ -778,6 +803,15 @@ def cloud_layer(name, clouds, opacity, stroke_w):
     svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" '
            f'aria-hidden="true"><style>{style}</style><defs>{CLOUD_DEF}</defs>{body}</svg>')
     (ASSETS / name).write_text(svg, encoding="utf-8")
+
+    # animation-free twin for phones/tablets
+    style_static = f"""
+  .cline {{ fill:none; stroke:#d9b25f; stroke-width:{stroke_w}; stroke-linecap:round; }}
+  .cloud {{ opacity:{opacity}; }}
+"""
+    svg_static = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" '
+                  f'aria-hidden="true"><style>{style_static}</style><defs>{CLOUD_DEF}</defs>{body}</svg>')
+    (ASSETS / name.replace(".svg", "-static.svg")).write_text(svg_static, encoding="utf-8")
 
 
 # cloud extents are roughly ±160×scale wide; keep centres clear of tile edges
