@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 486" role="img" aria-label="Cutaway of the prepared treasure vase: five medicinal herbs layered as the five chakras from root to crown, sealed with a copper coin and tied with five coloured cloths">
+<style>
+  .ln { fill:none; stroke:#d9b25f; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+  .ln-bright { fill:none; stroke:#f4dc96; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+  .ln-thin { fill:none; stroke:#d9b25f; stroke-width:1.2; stroke-linecap:round; opacity:.75; }
+  .ln-faint { fill:none; stroke:#8d7440; stroke-width:1; opacity:.55; }
+  .fill-ink { fill:url(#skin); stroke:#f4dc96; stroke-width:2; stroke-linejoin:round; }
+  .label { font-family:"Cormorant Garamond",Georgia,serif; fill:#c9bfa6; font-size:15px; }
+  .label-zh { font-family:"LXGW WenKai TC","Kaiti TC",serif; fill:#d9b25f; font-size:16px; letter-spacing:.12em; }
+  .cap { font-family:"Cormorant Garamond",Georgia,serif; fill:#d9b25f; font-size:14px;
+          letter-spacing:.28em; text-transform:uppercase; }
+</style>
+<defs>
+  <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#1c3358"/><stop offset="100%" stop-color="#101f39"/>
+  </linearGradient>
+  <linearGradient id="vaseBody" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#1d3560"/><stop offset="60%" stop-color="#132443"/>
+    <stop offset="100%" stop-color="#0d1930"/>
+  </linearGradient>
+  <radialGradient id="glow">
+    <stop offset="0%" stop-color="#f4dc96" stop-opacity=".34"/>
+    <stop offset="60%" stop-color="#d9b25f" stop-opacity=".10"/>
+    <stop offset="100%" stop-color="#d9b25f" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="coin" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#f4dc96"/><stop offset="100%" stop-color="#a8814a"/>
+  </linearGradient>
+</defs>
+
+<circle cx="260" cy="300" r="228" fill="url(#glow)"/>
+
+<!-- the vase -->
+<path d="M232 150 L232 132 C232 126 288 126 288 132 L288 150 C288 158 300 164 300 172 L300 196 C346 214 372 262 372 322 C372 396 330 446 260 446 C190 446 148 396 148 322 C148 262 174 214 220 196 L220 172 C220 164 232 158 232 150 Z" fill="url(#vaseBody)" stroke="#f4dc96" stroke-width="2.4" stroke-linejoin="round"/>
+<path class="ln-thin" d="M220 196 C244 188 276 188 300 196"/>
+<path class="ln-thin" d="M232 150 C248 145 272 145 288 150"/>
+
+<!-- herb layers -->
+<rect x="164" y="214" width="192" height="40" rx="4" fill="#c9bfa6" opacity=".17"/><path class="ln-thin" d="M162 254 L358 254"/><circle cx="182" cy="228" r="3.1" fill="#c9bfa6" opacity=".62"/><circle cx="208" cy="235" r="3.1" fill="#c9bfa6" opacity=".62"/><circle cx="234" cy="228" r="3.1" fill="#c9bfa6" opacity=".62"/><circle cx="260" cy="235" r="3.1" fill="#c9bfa6" opacity=".62"/><circle cx="286" cy="228" r="3.1" fill="#c9bfa6" opacity=".62"/><circle cx="312" cy="235" r="3.1" fill="#c9bfa6" opacity=".62"/><circle cx="338" cy="228" r="3.1" fill="#c9bfa6" opacity=".62"/><rect x="164" y="260" width="192" height="36" rx="4" fill="#e8e0cc" opacity=".17"/><path class="ln-thin" d="M162 296 L358 296"/><circle cx="191" cy="274" r="3.1" fill="#e8e0cc" opacity=".62"/><circle cx="217" cy="281" r="3.1" fill="#e8e0cc" opacity=".62"/><circle cx="243" cy="274" r="3.1" fill="#e8e0cc" opacity=".62"/><circle cx="269" cy="281" r="3.1" fill="#e8e0cc" opacity=".62"/><circle cx="295" cy="274" r="3.1" fill="#e8e0cc" opacity=".62"/><circle cx="321" cy="281" r="3.1" fill="#e8e0cc" opacity=".62"/><circle cx="347" cy="274" r="3.1" fill="#e8e0cc" opacity=".62"/><rect x="164" y="302" width="192" height="36" rx="4" fill="#c96f5a" opacity=".17"/><path class="ln-thin" d="M162 338 L358 338"/><circle cx="182" cy="316" r="3.1" fill="#c96f5a" opacity=".62"/><circle cx="208" cy="323" r="3.1" fill="#c96f5a" opacity=".62"/><circle cx="234" cy="316" r="3.1" fill="#c96f5a" opacity=".62"/><circle cx="260" cy="323" r="3.1" fill="#c96f5a" opacity=".62"/><circle cx="286" cy="316" r="3.1" fill="#c96f5a" opacity=".62"/><circle cx="312" cy="323" r="3.1" fill="#c96f5a" opacity=".62"/><circle cx="338" cy="316" r="3.1" fill="#c96f5a" opacity=".62"/><rect x="164" y="344" width="192" height="36" rx="4" fill="#c9a15f" opacity=".17"/><path class="ln-thin" d="M162 380 L358 380"/><circle cx="191" cy="358" r="3.1" fill="#c9a15f" opacity=".62"/><circle cx="217" cy="365" r="3.1" fill="#c9a15f" opacity=".62"/><circle cx="243" cy="358" r="3.1" fill="#c9a15f" opacity=".62"/><circle cx="269" cy="365" r="3.1" fill="#c9a15f" opacity=".62"/><circle cx="295" cy="358" r="3.1" fill="#c9a15f" opacity=".62"/><circle cx="321" cy="365" r="3.1" fill="#c9a15f" opacity=".62"/><circle cx="347" cy="358" r="3.1" fill="#c9a15f" opacity=".62"/><rect x="164" y="386" width="192" height="36" rx="4" fill="#5d6b86" opacity=".17"/><path class="ln-thin" d="M162 422 L358 422"/><circle cx="182" cy="400" r="3.1" fill="#5d6b86" opacity=".62"/><circle cx="208" cy="407" r="3.1" fill="#5d6b86" opacity=".62"/><circle cx="234" cy="400" r="3.1" fill="#5d6b86" opacity=".62"/><circle cx="260" cy="407" r="3.1" fill="#5d6b86" opacity=".62"/><circle cx="286" cy="400" r="3.1" fill="#5d6b86" opacity=".62"/><circle cx="312" cy="407" r="3.1" fill="#5d6b86" opacity=".62"/><circle cx="338" cy="400" r="3.1" fill="#5d6b86" opacity=".62"/>
+
+<!-- copper coin sealing the mouth -->
+<g transform="translate(260 132)">
+  <ellipse cx="0" cy="0" rx="30" ry="9" fill="url(#coin)" stroke="#f4dc96" stroke-width="1.4"/>
+  <rect x="-5" y="-3" width="10" height="6" fill="#0e1c34" stroke="#f4dc96" stroke-width="1"/>
+</g>
+
+<!-- five coloured cloths tied at the neck -->
+<g transform="translate(260 150) rotate(-34)"><path d="M-9 0 C-15 26 -10 54 4 72 C13 52 11 24 8 0 Z" fill="#b8452f" opacity=".85" stroke="#0e1c34" stroke-width="1"/></g><g transform="translate(260 150) rotate(-17)"><path d="M-9 0 C-15 26 -10 54 4 72 C13 52 11 24 8 0 Z" fill="#5b8c5a" opacity=".85" stroke="#0e1c34" stroke-width="1"/></g><g transform="translate(260 150) rotate(0)"><path d="M-9 0 C-15 26 -10 54 4 72 C13 52 11 24 8 0 Z" fill="#4a6fa5" opacity=".85" stroke="#0e1c34" stroke-width="1"/></g><g transform="translate(260 150) rotate(17)"><path d="M-9 0 C-15 26 -10 54 4 72 C13 52 11 24 8 0 Z" fill="#e8e0cc" opacity=".85" stroke="#0e1c34" stroke-width="1"/></g><g transform="translate(260 150) rotate(34)"><path d="M-9 0 C-15 26 -10 54 4 72 C13 52 11 24 8 0 Z" fill="#d9b25f" opacity=".85" stroke="#0e1c34" stroke-width="1"/></g>
+<path class="ln-bright" d="M228 152 C244 162 276 162 292 152"/>
+
+<!-- leaders and labels -->
+<path class="ln-faint" d="M358 234 L430 234"/><circle cx="430" cy="234" r="2.6" fill="#d9b25f"/><path class="ln-faint" d="M358 278 L430 278"/><circle cx="430" cy="278" r="2.6" fill="#d9b25f"/><path class="ln-faint" d="M358 320 L430 320"/><circle cx="430" cy="320" r="2.6" fill="#d9b25f"/><path class="ln-faint" d="M358 362 L430 362"/><circle cx="430" cy="362" r="2.6" fill="#d9b25f"/><path class="ln-faint" d="M358 404 L430 404"/><circle cx="430" cy="404" r="2.6" fill="#d9b25f"/>
+<text class="label-zh" x="442" y="231">頂輪</text><text class="label" x="442" y="249">Crown · Gastrodia</text><text class="label-zh" x="442" y="275">喉輪</text><text class="label" x="442" y="293">Throat · Milk Vetch</text><text class="label-zh" x="442" y="317">心輪</text><text class="label" x="442" y="335">Heart · Angelica</text><text class="label-zh" x="442" y="359">臍輪</text><text class="label" x="442" y="377">Navel · Atractylodes</text><text class="label-zh" x="442" y="401">海底輪</text><text class="label" x="442" y="419">Root · Fleece-flower</text>
+
+
+</svg>

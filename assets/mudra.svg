@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 430" role="img" aria-label="The mudra of the Dragon King Yoga: the index and middle fingers of both hands crossed to form the lattice of the character 井">
+<style>
+  .ln { fill:none; stroke:#d9b25f; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+  .ln-bright { fill:none; stroke:#f4dc96; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+  .ln-thin { fill:none; stroke:#d9b25f; stroke-width:1.2; stroke-linecap:round; opacity:.75; }
+  .ln-faint { fill:none; stroke:#8d7440; stroke-width:1; opacity:.55; }
+  .fill-ink { fill:url(#skin); stroke:#f4dc96; stroke-width:2; stroke-linejoin:round; }
+  .label { font-family:"Cormorant Garamond",Georgia,serif; fill:#c9bfa6; font-size:15px; }
+  .label-zh { font-family:"LXGW WenKai TC","Kaiti TC",serif; fill:#d9b25f; font-size:16px; letter-spacing:.12em; }
+  .cap { font-family:"Cormorant Garamond",Georgia,serif; fill:#d9b25f; font-size:14px;
+          letter-spacing:.28em; text-transform:uppercase; }
+</style>
+<defs>
+  <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#1c3358"/><stop offset="100%" stop-color="#101f39"/>
+  </linearGradient>
+  <linearGradient id="vaseBody" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#1d3560"/><stop offset="60%" stop-color="#132443"/>
+    <stop offset="100%" stop-color="#0d1930"/>
+  </linearGradient>
+  <radialGradient id="glow">
+    <stop offset="0%" stop-color="#f4dc96" stop-opacity=".34"/>
+    <stop offset="60%" stop-color="#d9b25f" stop-opacity=".10"/>
+    <stop offset="100%" stop-color="#d9b25f" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="coin" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#f4dc96"/><stop offset="100%" stop-color="#a8814a"/>
+  </linearGradient>
+</defs>
+
+<circle cx="290" cy="208" r="188" fill="url(#glow)"/>
+
+<!-- the character the hands imitate -->
+<g opacity=".11">
+  <path class="ln" stroke-width="11" d="M236 90 L216 330 M340 90 L320 330 M118 176 L470 150 M118 252 L470 226"/>
+</g>
+
+<!-- LEFT HAND: wrist in from the edge, palm, two fingers laid across -->
+<g>
+  <path class="fill-ink" d="M18 196 L96 190 C118 188 132 202 132 224 L132 264
+       C132 286 118 300 96 298 L18 292 C10 291 6 286 6 278 L6 210 C6 202 10 197 18 196 Z"/>
+  <path class="ln-thin" d="M40 196 L40 292 M64 236 C84 230 106 230 124 236"/>
+</g>
+
+<!-- RIGHT HAND: wrist up from below, palm, two fingers rising -->
+<g>
+  <path class="fill-ink" d="M292 424 L292 350 C292 328 306 314 328 314 L368 314
+       C390 314 404 328 402 350 L402 424 C402 428 398 430 392 430 L302 430
+       C296 430 292 428 292 424 Z"/>
+  <path class="ln-thin" d="M292 400 L402 400 M334 352 C328 372 328 392 334 408"/>
+</g>
+
+  <path class="fill-ink" d="M319.7 315.0 L274.3 93.7 Q259.3 81.9 249.7 98.3 L288.3 321.0 Z"/>
+  <path class="ln-thin" d="M300.7 240.4 Q288.4 235.6 278.7 244.6"/>
+  <path class="ln-thin" d="M286.5 169.5 Q275.1 165.1 266.1 173.4"/>
+  <path class="ln-thin" d="M273.6 112.9 Q262.3 97.8 257.4 116.0"/>
+  <path class="fill-ink" d="M371.8 315.3 L330.3 93.9 Q315.6 81.8 305.7 98.1 L340.2 320.7 Z"/>
+  <path class="ln-thin" d="M354.1 240.6 Q341.9 235.6 332.0 244.4"/>
+  <path class="ln-thin" d="M341.2 169.7 Q329.8 165.1 320.7 173.2"/>
+  <path class="ln-thin" d="M329.3 113.1 Q318.3 97.8 313.0 115.9"/>
+  <path class="fill-ink" d="M151.8 229.9 L459.4 192.4 Q472.3 178.4 456.6 167.6 L148.2 198.1 Z"/>
+  <path class="ln-thin" d="M255.9 213.6 Q261.7 201.7 253.5 191.3"/>
+  <path class="ln-thin" d="M354.4 201.9 Q359.7 190.8 352.1 181.2"/>
+  <path class="ln-thin" d="M440.3 190.3 Q456.1 180.2 438.5 173.9"/>
+  <path class="fill-ink" d="M151.7 283.9 L459.3 248.4 Q472.3 234.5 456.7 223.6 L148.3 252.1 Z"/>
+  <path class="ln-thin" d="M255.9 268.3 Q261.7 256.4 253.6 246.0"/>
+  <path class="ln-thin" d="M354.4 257.2 Q359.7 246.2 352.2 236.5"/>
+  <path class="ln-thin" d="M440.2 246.1 Q456.1 236.2 438.5 229.7"/>
+
+<!-- where the four fingers cross -->
+<circle cx="245" cy="197" r="5" fill="#f4dc96"/>
+<circle cx="301" cy="191" r="5" fill="#f4dc96"/>
+<circle cx="254" cy="253" r="5" fill="#f4dc96"/>
+<circle cx="310" cy="247" r="5" fill="#f4dc96"/>
+
+<text class="label-zh" x="506" y="118" font-size="44" text-anchor="middle">井</text>
+<text class="label" x="506" y="142" text-anchor="middle" font-size="13">jǐng</text>
+
+</svg>

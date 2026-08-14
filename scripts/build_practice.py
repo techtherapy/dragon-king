@@ -62,13 +62,55 @@ def paragraphs(path, skip):
     return out
 
 
-def render(items):
+# Illustrations, each placed after the paragraph that introduces it. The key
+# is a distinctive phrase from the transcript; a missing key is an error, so a
+# reworded transcript can never silently drop a figure.
+FIGURES = [
+    ("The middle and index fingers of both hands cross", "mudra.svg",
+     "手印 · The mudra: the index and middle fingers of both hands cross to form 井",
+     "compact"),
+    ("Together, these five herbs represent the body of the Dragon", "vase-preparation.svg",
+     "寶瓶 · The five herbs are layered as the five chakras, sealed with a copper coin "
+     "and tied with five coloured cloths",
+     "tall"),
+    ("throw this vase up in the air and let it drop into the ocean", "casting-the-vase.svg",
+     "抛瓶入海 · Casting the empowered vase into the sea",
+     "wide"),
+]
+
+VIEWBOX = re.compile(r'viewBox="0 0 ([\d.]+) ([\d.]+)"')
+
+
+def intrinsic(src):
+    """Width/height from the SVG's own viewBox. Without these attributes the
+    img has no intrinsic size, so its box is zero-high until the file loads —
+    which stalls loading="lazy" and shifts the layout when it finally does."""
+    m = VIEWBOX.search((ROOT / "assets" / src).read_text(encoding="utf-8"))
+    assert m, f"no viewBox in {src}"
+    return int(float(m.group(1))), int(float(m.group(2)))
+
+
+def figure_html(src, caption, size):
+    w, h = intrinsic(src)
+    return (f'      <figure class="inline-figure {size} reveal">\n'
+            f'        <img src="assets/{src}" width="{w}" height="{h}"'
+            f' alt="{caption.split(chr(183), 1)[-1].strip()}" loading="lazy">\n'
+            f'        <figcaption>{caption}</figcaption>\n'
+            f'      </figure>')
+
+
+def render(items, figures_used=None):
     frags = []
     for kind, text in items:
         if kind == "h":
             frags.append(f'      <h2 class="article-sub reveal">{text}</h2>')
         else:
             frags.append(f'      <p class="reveal">{text}</p>')
+            for key, src, caption, size in FIGURES:
+                if key in text:
+                    frags.append(figure_html(src, caption, size))
+                    if figures_used is not None:
+                        figures_used.add(key)
     return "\n".join(frags)
 
 
@@ -81,6 +123,12 @@ def build():
     kind, last = part2[-1]
     if last.endswith("the Bodhisattva"):
         part2[-1] = (kind, last + '&hellip; <span class="muted">[the recorded transcript ends here]</span>')
+
+    used = set()
+    part1_html, part2_html = render(part1, used), render(part2, used)
+    missing = [k for k, *_ in FIGURES if k not in used]
+    if missing:
+        raise SystemExit("figure anchor not found in the transcript: " + "; ".join(missing))
 
     page = f"""<!DOCTYPE html>
 <html lang="en" class="no-js">
@@ -123,6 +171,30 @@ def build():
   .notice .seal {{ flex: none; }}
   .notice h3 {{ margin-bottom: 0.4rem; font-size: 1.25rem; }}
   .notice p {{ margin: 0; color: var(--cream-dim); }}
+  /* illustrations anchored beside the passage they explain */
+  .inline-figure {{
+    margin: 2.8rem auto;
+    text-align: center;
+    padding: 1.4rem 1.2rem 1.1rem;
+    border: 1px solid var(--gold-ghost);
+    background: linear-gradient(170deg, rgba(22, 41, 74, 0.34), rgba(13, 25, 48, 0.2));
+  }}
+  .inline-figure img {{ margin: 0 auto; height: auto; }}
+  .inline-figure.compact img {{ width: min(100%, 400px); }}
+  .inline-figure.tall img {{ width: min(100%, 340px); }}
+  .inline-figure.wide img {{ width: min(100%, 520px); }}
+  .inline-figure figcaption {{
+    margin-top: 1rem;
+    color: var(--muted);
+    font-style: italic;
+    font-size: 0.95rem;
+    max-width: 46ch;
+    margin-inline: auto;
+  }}
+  @media (min-width: 1100px) {{
+    /* let the figures breathe into the margin beside the measure */
+    .inline-figure {{ margin-inline: -3.5rem; }}
+  }}
   .vision-figure {{ margin: 3rem auto; max-width: 460px; text-align: center; }}
   .vision-figure img {{ width: 100%; filter: drop-shadow(0 18px 50px rgba(3, 7, 14, 0.7)); }}
   .vision-figure figcaption {{ margin-top: 1.1rem; color: var(--muted); font-style: italic; font-size: 0.95rem; }}
@@ -193,7 +265,7 @@ def build():
   <div class="wrap">
     <p class="eyebrow reveal">Part One · The Teaching</p>
     <article class="article">
-{render(part1)}
+{part1_html}
     </article>
   </div>
 </section>
@@ -202,7 +274,7 @@ def build():
   <div class="wrap">
     <p class="eyebrow reveal">Part Two · The Sadhana</p>
     <article class="article">
-{render(part2)}
+{part2_html}
     </article>
   </div>
 </section>
