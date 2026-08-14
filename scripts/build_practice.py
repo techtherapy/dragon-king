@@ -171,7 +171,9 @@ def build():
   .notice .seal {{ flex: none; }}
   .notice h3 {{ margin-bottom: 0.4rem; font-size: 1.25rem; }}
   .notice p {{ margin: 0; color: var(--cream-dim); }}
-  /* illustrations anchored beside the passage they explain */
+  /* Illustrations anchored to the passage they explain: inline in the column
+     on a phone, out in the right-hand margin on a wide screen. Either way
+     they carry .reveal, so they fade in as the reader arrives at them. */
   .inline-figure {{
     margin: 2.8rem auto;
     text-align: center;
@@ -180,9 +182,9 @@ def build():
     background: linear-gradient(170deg, rgba(22, 41, 74, 0.34), rgba(13, 25, 48, 0.2));
   }}
   .inline-figure img {{ margin: 0 auto; height: auto; }}
-  .inline-figure.compact img {{ width: min(100%, 400px); }}
-  .inline-figure.tall img {{ width: min(100%, 340px); }}
-  .inline-figure.wide img {{ width: min(100%, 520px); }}
+  .inline-figure.compact img {{ width: min(100%, 330px); }}
+  .inline-figure.tall img {{ width: min(100%, 290px); }}
+  .inline-figure.wide img {{ width: min(100%, 440px); }}
   .inline-figure figcaption {{
     margin-top: 1rem;
     color: var(--muted);
@@ -191,9 +193,24 @@ def build():
     max-width: 46ch;
     margin-inline: auto;
   }}
-  @media (min-width: 1100px) {{
-    /* let the figures breathe into the margin beside the measure */
-    .inline-figure {{ margin-inline: -3.5rem; }}
+  @media (min-width: 1120px) {{
+    /* Float the figure out into the gutter. The negative right margin cancels
+       the float's own width, so the line boxes beside it are not shortened
+       and the prose keeps its full measure instead of wrapping round it. */
+    .inline-figure {{
+      --fig: clamp(248px, 24vw, 320px);
+      float: right;
+      clear: right;
+      width: var(--fig);
+      margin: -2.5rem 0 2.2rem 2.4rem;
+      margin-right: calc(-1 * (var(--fig) + 2.6rem));
+      padding: 1.1rem 1rem 0.9rem;
+    }}
+    .inline-figure img,
+    .inline-figure.compact img,
+    .inline-figure.tall img,
+    .inline-figure.wide img {{ width: 100%; }}
+    .inline-figure figcaption {{ font-size: 0.86rem; max-width: none; margin-top: 0.8rem; }}
   }}
   .vision-figure {{ margin: 3rem auto; max-width: 460px; text-align: center; }}
   .vision-figure img {{ width: 100%; filter: drop-shadow(0 18px 50px rgba(3, 7, 14, 0.7)); }}

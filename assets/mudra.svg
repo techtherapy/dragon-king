@@ -1,22 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 430" role="img" aria-label="The mudra of the Dragon King Yoga: the index and middle fingers of both hands crossed to form the lattice of the character 井">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 470" role="img" aria-label="The mudra of the Dragon King Yoga: the index and middle fingers of both hands crossed to form the lattice of the character 井">
 <style>
   .ln { fill:none; stroke:#d9b25f; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
   .ln-bright { fill:none; stroke:#f4dc96; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
-  .ln-thin { fill:none; stroke:#d9b25f; stroke-width:1.2; stroke-linecap:round; opacity:.75; }
-  .ln-faint { fill:none; stroke:#8d7440; stroke-width:1; opacity:.55; }
-  .fill-ink { fill:url(#skin); stroke:#f4dc96; stroke-width:2; stroke-linejoin:round; }
+  .ln-thin { fill:none; stroke:#d9b25f; stroke-width:1.3; stroke-linecap:round;
+              stroke-linejoin:round; opacity:.8; }
+  .ln-faint { fill:none; stroke:#8d7440; stroke-width:1; opacity:.6; }
+  .skin { fill:url(#skin); stroke:#f4dc96; stroke-width:2.1; stroke-linejoin:round;
+           stroke-linecap:round; }
+  .gild { fill:url(#gild); stroke:#f4dc96; stroke-width:1.8; stroke-linejoin:round; }
   .label { font-family:"Cormorant Garamond",Georgia,serif; fill:#c9bfa6; font-size:15px; }
-  .label-zh { font-family:"LXGW WenKai TC","Kaiti TC",serif; fill:#d9b25f; font-size:16px; letter-spacing:.12em; }
-  .cap { font-family:"Cormorant Garamond",Georgia,serif; fill:#d9b25f; font-size:14px;
-          letter-spacing:.28em; text-transform:uppercase; }
+  .label-zh { font-family:"LXGW WenKai TC","Kaiti TC",serif; fill:#d9b25f; font-size:20px;
+               letter-spacing:.1em; }
 </style>
 <defs>
-  <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%" stop-color="#1c3358"/><stop offset="100%" stop-color="#101f39"/>
+  <!-- barely above the page ground, so the hands read as line-art while still
+       being opaque enough to occlude the fingers passing beneath them -->
+  <linearGradient id="skin" x1="0" y1="0" x2="0.4" y2="1">
+    <stop offset="0%" stop-color="#122340"/><stop offset="100%" stop-color="#0b1729"/>
   </linearGradient>
   <linearGradient id="vaseBody" x1="0" y1="0" x2="1" y2="1">
     <stop offset="0%" stop-color="#1d3560"/><stop offset="60%" stop-color="#132443"/>
     <stop offset="100%" stop-color="#0d1930"/>
+  </linearGradient>
+  <linearGradient id="gild" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#d9b25f" stop-opacity=".30"/>
+    <stop offset="55%" stop-color="#d9b25f" stop-opacity=".14"/>
+    <stop offset="100%" stop-color="#d9b25f" stop-opacity=".26"/>
   </linearGradient>
   <radialGradient id="glow">
     <stop offset="0%" stop-color="#f4dc96" stop-opacity=".34"/>
@@ -28,52 +37,15 @@
   </linearGradient>
 </defs>
 
-<circle cx="290" cy="208" r="188" fill="url(#glow)"/>
+<circle cx="220" cy="238" r="206" fill="url(#glow)"/>
 
-<!-- the character the hands imitate -->
-<g opacity=".11">
-  <path class="ln" stroke-width="11" d="M236 90 L216 330 M340 90 L320 330 M118 176 L470 150 M118 252 L470 226"/>
-</g>
+<!-- RIGHT HAND — the left hand mirrored; its fingers pass beneath -->
+<g transform="translate(440 0) scale(-1 1)"><path class="skin" d="M-6 392 C24 366 62 330 96 302 C110 293 118 289 127 290 C168 236 220 174 268 116 C276 106 292 114 288 132 C258 172 222 216 196 253 C200 258 204 262 208 266 C240 236 288 194 321 157 C331 147 347 157 339 175 C302 216 240 282 188 334 C200 349 195 367 176 375 C185 389 172 405 149 407 C116 411 82 417 54 433 C36 443 24 459 20 470 L-6 470 Z"/><path class="ln-thin" d="M268.7 147.9 Q260.5 146.3 257.0 138.8 Q268.6 122.0 277.6 124.5 Q282.2 132.6 268.7 147.9 Z"/><path class="ln-thin" d="M163.4 290.0 Q158.5 276.4 144.2 274.8"/><path class="ln-thin" d="M203.9 236.4 Q199.5 224.1 186.5 222.8"/><path class="ln-thin" d="M244.4 182.9 Q240.4 171.9 228.8 170.7"/><path class="ln-thin" d="M317.9 188.7 Q310.1 186.1 307.4 178.2 Q320.9 162.9 329.6 166.4 Q333.2 175.1 317.9 188.7 Z"/><path class="ln-thin" d="M196.5 317.7 Q193.2 303.7 179.1 300.5"/><path class="ln-thin" d="M243.1 269.2 Q240.1 256.5 227.3 253.6"/><path class="ln-thin" d="M289.6 220.7 Q287.0 209.3 275.6 206.7"/><path class="ln-thin" d="M188 334 C164 343 141 359 131 377 C123 393 133 406 152 403"/><path class="ln-thin" d="M176 375 C158 381 143 392 136 403"/><path class="ln-thin" d="M30 389 C64 393 98 401 122 412 C137 419 138 433 120 436"/><path class="ln-thin" d="M4 400 C26 388 42 372 52 352"/><path class="ln-thin" opacity=".5" d="M96 302 C88 322 76 340 60 354"/><path class="ln-thin" opacity=".5" d="M127 292 C122 316 112 338 96 356"/><path class="ln-faint" d="M-2 424 C16 418 30 408 40 396"/></g>
 
-<!-- LEFT HAND: wrist in from the edge, palm, two fingers laid across -->
-<g>
-  <path class="fill-ink" d="M18 196 L96 190 C118 188 132 202 132 224 L132 264
-       C132 286 118 300 96 298 L18 292 C10 291 6 286 6 278 L6 210 C6 202 10 197 18 196 Z"/>
-  <path class="ln-thin" d="M40 196 L40 292 M64 236 C84 230 106 230 124 236"/>
-</g>
+<!-- LEFT HAND — laid across the right -->
+<g><path class="skin" d="M-6 392 C24 366 62 330 96 302 C110 293 118 289 127 290 C168 236 220 174 268 116 C276 106 292 114 288 132 C258 172 222 216 196 253 C200 258 204 262 208 266 C240 236 288 194 321 157 C331 147 347 157 339 175 C302 216 240 282 188 334 C200 349 195 367 176 375 C185 389 172 405 149 407 C116 411 82 417 54 433 C36 443 24 459 20 470 L-6 470 Z"/><path class="ln-thin" d="M268.7 147.9 Q260.5 146.3 257.0 138.8 Q268.6 122.0 277.6 124.5 Q282.2 132.6 268.7 147.9 Z"/><path class="ln-thin" d="M163.4 290.0 Q158.5 276.4 144.2 274.8"/><path class="ln-thin" d="M203.9 236.4 Q199.5 224.1 186.5 222.8"/><path class="ln-thin" d="M244.4 182.9 Q240.4 171.9 228.8 170.7"/><path class="ln-thin" d="M317.9 188.7 Q310.1 186.1 307.4 178.2 Q320.9 162.9 329.6 166.4 Q333.2 175.1 317.9 188.7 Z"/><path class="ln-thin" d="M196.5 317.7 Q193.2 303.7 179.1 300.5"/><path class="ln-thin" d="M243.1 269.2 Q240.1 256.5 227.3 253.6"/><path class="ln-thin" d="M289.6 220.7 Q287.0 209.3 275.6 206.7"/><path class="ln-thin" d="M188 334 C164 343 141 359 131 377 C123 393 133 406 152 403"/><path class="ln-thin" d="M176 375 C158 381 143 392 136 403"/><path class="ln-thin" d="M30 389 C64 393 98 401 122 412 C137 419 138 433 120 436"/><path class="ln-thin" d="M4 400 C26 388 42 372 52 352"/><path class="ln-thin" opacity=".5" d="M96 302 C88 322 76 340 60 354"/><path class="ln-thin" opacity=".5" d="M127 292 C122 316 112 338 96 356"/><path class="ln-faint" d="M-2 424 C16 418 30 408 40 396"/></g>
 
-<!-- RIGHT HAND: wrist up from below, palm, two fingers rising -->
-<g>
-  <path class="fill-ink" d="M292 424 L292 350 C292 328 306 314 328 314 L368 314
-       C390 314 404 328 402 350 L402 424 C402 428 398 430 392 430 L302 430
-       C296 430 292 428 292 424 Z"/>
-  <path class="ln-thin" d="M292 400 L402 400 M334 352 C328 372 328 392 334 408"/>
-</g>
-
-  <path class="fill-ink" d="M319.7 315.0 L274.3 93.7 Q259.3 81.9 249.7 98.3 L288.3 321.0 Z"/>
-  <path class="ln-thin" d="M300.7 240.4 Q288.4 235.6 278.7 244.6"/>
-  <path class="ln-thin" d="M286.5 169.5 Q275.1 165.1 266.1 173.4"/>
-  <path class="ln-thin" d="M273.6 112.9 Q262.3 97.8 257.4 116.0"/>
-  <path class="fill-ink" d="M371.8 315.3 L330.3 93.9 Q315.6 81.8 305.7 98.1 L340.2 320.7 Z"/>
-  <path class="ln-thin" d="M354.1 240.6 Q341.9 235.6 332.0 244.4"/>
-  <path class="ln-thin" d="M341.2 169.7 Q329.8 165.1 320.7 173.2"/>
-  <path class="ln-thin" d="M329.3 113.1 Q318.3 97.8 313.0 115.9"/>
-  <path class="fill-ink" d="M151.8 229.9 L459.4 192.4 Q472.3 178.4 456.6 167.6 L148.2 198.1 Z"/>
-  <path class="ln-thin" d="M255.9 213.6 Q261.7 201.7 253.5 191.3"/>
-  <path class="ln-thin" d="M354.4 201.9 Q359.7 190.8 352.1 181.2"/>
-  <path class="ln-thin" d="M440.3 190.3 Q456.1 180.2 438.5 173.9"/>
-  <path class="fill-ink" d="M151.7 283.9 L459.3 248.4 Q472.3 234.5 456.7 223.6 L148.3 252.1 Z"/>
-  <path class="ln-thin" d="M255.9 268.3 Q261.7 256.4 253.6 246.0"/>
-  <path class="ln-thin" d="M354.4 257.2 Q359.7 246.2 352.2 236.5"/>
-  <path class="ln-thin" d="M440.2 246.1 Q456.1 236.2 438.5 229.7"/>
-
-<!-- where the four fingers cross -->
-<circle cx="245" cy="197" r="5" fill="#f4dc96"/>
-<circle cx="301" cy="191" r="5" fill="#f4dc96"/>
-<circle cx="254" cy="253" r="5" fill="#f4dc96"/>
-<circle cx="310" cy="247" r="5" fill="#f4dc96"/>
-
-<text class="label-zh" x="506" y="118" font-size="44" text-anchor="middle">井</text>
-<text class="label" x="506" y="142" text-anchor="middle" font-size="13">jǐng</text>
+<text class="label-zh" x="220" y="428" font-size="40" text-anchor="middle">井</text>
+<text class="label" x="220" y="450" text-anchor="middle" font-size="14">jǐng</text>
 
 </svg>
