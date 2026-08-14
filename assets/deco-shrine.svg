@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" role="presentation" aria-hidden="true">
+<style>
+  .ln { fill:none; stroke:#d9b25f; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+  .ln-bright { fill:none; stroke:#f4dc96; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+  .ln-thin { fill:none; stroke:#d9b25f; stroke-width:1.3; stroke-linecap:round;
+              stroke-linejoin:round; opacity:.8; }
+  .ln-faint { fill:none; stroke:#8d7440; stroke-width:1; opacity:.6; }
+  .skin { fill:url(#skin); stroke:#f4dc96; stroke-width:2.1; stroke-linejoin:round;
+           stroke-linecap:round; }
+  .gild { fill:url(#gild); stroke:#f4dc96; stroke-width:1.8; stroke-linejoin:round; }
+  .label { font-family:"Cormorant Garamond",Georgia,serif; fill:#c9bfa6; font-size:15px; }
+  .label-zh { font-family:"LXGW WenKai TC","Kaiti TC",serif; fill:#d9b25f; font-size:20px;
+               letter-spacing:.1em; }
+</style>
+<defs>
+  <!-- barely above the page ground, so the hands read as line-art while still
+       being opaque enough to occlude the fingers passing beneath them -->
+  <linearGradient id="skin" x1="0" y1="0" x2="0.4" y2="1">
+    <stop offset="0%" stop-color="#122340"/><stop offset="100%" stop-color="#0b1729"/>
+  </linearGradient>
+  <linearGradient id="vaseBody" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#1d3560"/><stop offset="60%" stop-color="#132443"/>
+    <stop offset="100%" stop-color="#0d1930"/>
+  </linearGradient>
+  <linearGradient id="gild" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#d9b25f" stop-opacity=".30"/>
+    <stop offset="55%" stop-color="#d9b25f" stop-opacity=".14"/>
+    <stop offset="100%" stop-color="#d9b25f" stop-opacity=".26"/>
+  </linearGradient>
+  <linearGradient id="coin" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#f4dc96"/><stop offset="100%" stop-color="#a8814a"/>
+  </linearGradient>
+</defs>
+
+<g transform="translate(200 44) scale(0.148)">
+<ellipse cx="0" cy="745" rx="196" ry="178" fill="url(#vaseBody)" stroke="#f4dc96" stroke-width="14.86"/>
+<path class="gild" d="M0 8 C42 62 96 122 112 174 C124 214 106 248 74 260 C40 273 -40 273 -74 260 C-106 248 -124 214 -112 174 C-96 122 -42 62 0 8 Z" stroke-width="12.84"/>
+<path class="gild" d="M-122 328 C-118 284 -84 256 -48 252 L48 252 C84 256 118 284 122 328 Z" stroke-width="12.84"/>
+<path class="gild" d="M-162 344 C-152 396 -124 444 -94 474 L94 474 C124 444 152 396 162 344 Z" stroke-width="12.84"/>
+<path class="gild" d="M-106 476 L106 476 L106 520 L-106 520 Z" stroke-width="12.84"/>
+<path class="gild" d="M-192 578 C-188 544 -152 522 -106 519 L106 519 C152 522 188 544 192 578 Z" stroke-width="12.84"/>
+<path class="gild" d="M-124 902 C-120 936 -100 960 -72 968 L72 968 C100 960 120 936 124 902 Z" stroke-width="12.84"/>
+<path class="gild" d="M-74 962 C-100 984 -140 996 -176 1006 L176 1006 C140 996 100 984 74 962 Z" stroke-width="12.84"/>
+<path d="M0 132 C16 152 22 172 14 186 C8 196 -8 196 -14 186 C-22 172 -16 152 0 132 Z" fill="#b8452f" opacity=".8" stroke="#f4dc96" stroke-width="1.2"/><path d="M-44 150 C-30 168 -26 186 -34 198 C-40 207 -54 207 -60 198 C-68 186 -58 168 -44 150 Z" fill="#3f5f96" opacity=".8" stroke="#f4dc96" stroke-width="1.2"/><path d="M44 150 C58 168 62 186 54 198 C48 207 34 207 28 198 C20 186 30 168 44 150 Z" fill="#3f5f96" opacity=".8" stroke="#f4dc96" stroke-width="1.2"/>
+<path class="ln-thin" d="M-74 326 C-70 296 -54 268 -34 254 M-26 328 C-24 298 -16 272 -8 254 M26 328 C24 298 16 272 8 254 M74 326 C70 296 54 268 34 254 M-108 348 C-102 392 -84 436 -62 470 M-54 350 C-52 394 -44 436 -32 472 M54 350 C52 394 44 436 32 472 M108 348 C102 392 84 436 62 470 M-124 574 C-122 550 -114 532 -100 520 M-58 576 C-58 552 -54 534 -46 520 M58 576 C58 552 54 534 46 520 M124 574 C122 550 114 532 100 520 M-70 906 C-68 932 -60 954 -46 966 M-16 908 C-16 934 -12 956 -6 968 M16 908 C16 934 12 956 6 968 M70 906 C68 932 60 954 46 966 M-40 976 C-58 990 -88 1000 -116 1006 M40 976 C58 990 88 1000 116 1006" stroke-width="8.78"/>
+<path class="ln-faint" stroke-width="8.11" d="M-106 476 L106 476"/>
+<path class="ln-faint" stroke-width="8.11" d="M-106 520 L106 520"/>
+<path class="ln-faint" stroke-width="8.11" d="M-192 578 L192 578"/>
+<path class="ln-faint" stroke-width="8.11" d="M-124 902 L124 902"/>
+</g>
+
+<!-- incense to either side -->
+<path class="ln-faint" d="M104 178.888 C97 158.888 111 140.888 104 120.888 C98 104.888 109 90.888 104 76.888"/><path class="ln-thin" d="M104 190.888 L104 178.888"/><circle cx="104" cy="177.888" r="1.8" fill="#f4dc96"/><path class="ln-faint" d="M296 178.888 C289 158.888 303 140.888 296 120.888 C290 104.888 301 90.888 296 76.888"/><path class="ln-thin" d="M296 190.888 L296 178.888"/><circle cx="296" cy="177.888" r="1.8" fill="#f4dc96"/>
+
+<!-- the shrine table -->
+<path class="ln-bright" d="M56 193 L344 193"/>
+<path class="ln" d="M64 201 L336 201 M84 201 L84 233
+     M316 201 L316 233"/>
+<path class="ln-thin" d="M84 219 L316 219"/>
+<!-- the valance hanging from the table edge -->
+<path class="ln-faint" d="M120 201 C124 213 136 213 140 201
+     M180 201 C184 213 196 213 200 201
+     M240 201 C244 213 256 213 260 201"/>
+
+</svg>

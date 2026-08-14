@@ -27,17 +27,10 @@
     <stop offset="55%" stop-color="#d9b25f" stop-opacity=".14"/>
     <stop offset="100%" stop-color="#d9b25f" stop-opacity=".26"/>
   </linearGradient>
-  <radialGradient id="glow">
-    <stop offset="0%" stop-color="#f4dc96" stop-opacity=".34"/>
-    <stop offset="60%" stop-color="#d9b25f" stop-opacity=".10"/>
-    <stop offset="100%" stop-color="#d9b25f" stop-opacity="0"/>
-  </radialGradient>
   <linearGradient id="coin" x1="0" y1="0" x2="0" y2="1">
     <stop offset="0%" stop-color="#f4dc96"/><stop offset="100%" stop-color="#a8814a"/>
   </linearGradient>
 </defs>
-
-<circle cx="118" cy="320" r="250" fill="url(#glow)"/>
 
 <g transform="translate(118 26) scale(0.556)">
 <ellipse cx="0" cy="745" rx="196" ry="178" fill="url(#vaseBody)" stroke="#f4dc96" stroke-width="3.96"/>

@@ -47,6 +47,7 @@ def paragraphs(path, skip):
         t = t.replace("Gastrodia(Rl0)", "Gastrodia")
         # house style: one word, as used everywhere else on the site
         t = t.replace("Grand Master", "Grandmaster")
+        t = t.replace("Shakyamuni", "Sakyamuni")
         # house style: lowercase the generic "dharma"/"buddhahood",
         # keeping names such as "Dharma Protectors" and "Buddha Dharma"
         for _a, _b in (("to teach the Dharma", "to teach the dharma"),
@@ -78,6 +79,16 @@ FIGURES = [
      "wide"),
 ]
 
+# Decorations, placed the same way: after the paragraph whose phrase they
+# illustrate. Purely ornamental — no caption, hidden from screen readers.
+DECOS = [
+    ("just like a mirror, without any waves", "deco-dragon-beneath.svg"),
+    ("a staircase was fashioned out of water", "deco-water-stairs.svg"),
+    ("before the statues of the-Buddhas and Bodhisattvas on our shrine",
+     "deco-shrine.svg"),
+    ("For money and rain, just the five kinds of herbs will do", "deco-jewel-rain.svg"),
+]
+
 VIEWBOX = re.compile(r'viewBox="0 0 ([\d.]+) ([\d.]+)"')
 
 
@@ -99,16 +110,36 @@ def figure_html(src, caption, size):
             f'      </figure>')
 
 
+def deco_html(src):
+    w, h = intrinsic(src)
+    return (f'      <div class="deco-figure reveal" aria-hidden="true">\n'
+            f'        <img src="assets/{src}" width="{w}" height="{h}" alt="" loading="lazy">\n'
+            f'      </div>')
+
+
+def rule_html():
+    w, h = intrinsic("deco-cloud-rule.svg")
+    return (f'      <div class="h-rule reveal" aria-hidden="true">'
+            f'<img src="assets/deco-cloud-rule.svg" width="{w}" height="{h}" alt="" '
+            f'loading="lazy"></div>')
+
+
 def render(items, figures_used=None):
     frags = []
     for kind, text in items:
         if kind == "h":
+            frags.append(rule_html())
             frags.append(f'      <h2 class="article-sub reveal">{text}</h2>')
         else:
             frags.append(f'      <p class="reveal">{text}</p>')
             for key, src, caption, size in FIGURES:
                 if key in text:
                     frags.append(figure_html(src, caption, size))
+                    if figures_used is not None:
+                        figures_used.add(key)
+            for key, src in DECOS:
+                if key in text:
+                    frags.append(deco_html(src))
                     if figures_used is not None:
                         figures_used.add(key)
     return "\n".join(frags)
@@ -126,7 +157,7 @@ def build():
 
     used = set()
     part1_html, part2_html = render(part1, used), render(part2, used)
-    missing = [k for k, *_ in FIGURES if k not in used]
+    missing = [k for k, *_ in FIGURES + DECOS if k not in used]
     if missing:
         raise SystemExit("figure anchor not found in the transcript: " + "; ".join(missing))
 
@@ -146,10 +177,11 @@ def build():
 <style>
   .article-sub {{
     font-size: clamp(1.4rem, 2.8vw, 1.9rem);
-    margin: 2.6em 0 0.8em;
-    padding-top: 1.4em;
-    border-top: 1px solid var(--gold-ghost);
+    margin: 0.3em 0 0.8em;   /* the cloud rule above carries the spacing */
   }}
+  /* auspicious-cloud rule above each section heading */
+  .h-rule {{ clear: right; margin: 3.4em 0 1.1em; }}
+  .h-rule img {{ width: min(64%, 300px); height: auto; opacity: 0.8; display: block; }}
   .page-hero .credit {{
     display: block;
     margin-top: 0.6rem;
@@ -158,6 +190,8 @@ def build():
     color: var(--muted);
   }}
   .article {{ max-width: var(--measure); }}
+  /* a floated figure on the last paragraph must not escape the article */
+  .article::after {{ content: ""; display: block; clear: both; }}
   .article p {{ margin: 0 0 1.25em; color: var(--cream-dim); }}
   .notice {{
     border: 1px solid rgba(217, 92, 66, 0.45);
@@ -173,13 +207,13 @@ def build():
   .notice p {{ margin: 0; color: var(--cream-dim); }}
   /* Illustrations anchored to the passage they explain: inline in the column
      on a phone, out in the right-hand margin on a wide screen. Either way
-     they carry .reveal, so they fade in as the reader arrives at them. */
+     they carry .reveal, so they fade in as the reader arrives at them.
+     No fill and no shading — the drawings sit directly on the page. */
   .inline-figure {{
     margin: 2.8rem auto;
     text-align: center;
     padding: 1.4rem 1.2rem 1.1rem;
     border: 1px solid var(--gold-ghost);
-    background: linear-gradient(170deg, rgba(22, 41, 74, 0.34), rgba(13, 25, 48, 0.2));
   }}
   .inline-figure img {{ margin: 0 auto; height: auto; }}
   .inline-figure.compact img {{ width: min(100%, 330px); }}
@@ -193,23 +227,29 @@ def build():
     max-width: 46ch;
     margin-inline: auto;
   }}
+  /* frameless decorations, anchored the same way */
+  .deco-figure {{ margin: 2.6rem auto; text-align: center; }}
+  .deco-figure img {{ width: min(100%, 360px); height: auto; margin: 0 auto; opacity: 0.92; }}
   @media (min-width: 1120px) {{
-    /* Float the figure out into the gutter. The negative right margin cancels
-       the float's own width, so the line boxes beside it are not shortened
-       and the prose keeps its full measure instead of wrapping round it. */
-    .inline-figure {{
+    /* Float figures and decorations out into the gutter. The negative right
+       margin cancels the float's own width, so the line boxes beside it are
+       not shortened and the prose keeps its full measure instead of wrapping
+       round it. */
+    .inline-figure,
+    .deco-figure {{
       --fig: clamp(248px, 24vw, 320px);
       float: right;
       clear: right;
       width: var(--fig);
       margin: -2.5rem 0 2.2rem 2.4rem;
       margin-right: calc(-1 * (var(--fig) + 2.6rem));
-      padding: 1.1rem 1rem 0.9rem;
     }}
+    .inline-figure {{ padding: 1.1rem 1rem 0.9rem; }}
     .inline-figure img,
     .inline-figure.compact img,
     .inline-figure.tall img,
-    .inline-figure.wide img {{ width: 100%; }}
+    .inline-figure.wide img,
+    .deco-figure img {{ width: 100%; }}
     .inline-figure figcaption {{ font-size: 0.86rem; max-width: none; margin-top: 0.8rem; }}
   }}
   .vision-figure {{ margin: 3rem auto; max-width: 460px; text-align: center; }}

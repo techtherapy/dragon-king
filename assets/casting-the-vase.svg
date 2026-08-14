@@ -27,17 +27,10 @@
     <stop offset="55%" stop-color="#d9b25f" stop-opacity=".14"/>
     <stop offset="100%" stop-color="#d9b25f" stop-opacity=".26"/>
   </linearGradient>
-  <radialGradient id="glow">
-    <stop offset="0%" stop-color="#f4dc96" stop-opacity=".34"/>
-    <stop offset="60%" stop-color="#d9b25f" stop-opacity=".10"/>
-    <stop offset="100%" stop-color="#d9b25f" stop-opacity="0"/>
-  </radialGradient>
   <linearGradient id="coin" x1="0" y1="0" x2="0" y2="1">
     <stop offset="0%" stop-color="#f4dc96"/><stop offset="100%" stop-color="#a8814a"/>
   </linearGradient>
 </defs>
-
-<circle cx="230" cy="140" r="192" fill="url(#glow)"/>
 
 <!-- flight path -->
 <path class="ln-faint" stroke-dasharray="5 9" d="M78 216 C158 80 318 66 400 228"/>

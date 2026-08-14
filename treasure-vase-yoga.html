@@ -98,10 +98,11 @@
 <style>
   .article-sub {
     font-size: clamp(1.4rem, 2.8vw, 1.9rem);
-    margin: 2.6em 0 0.8em;
-    padding-top: 1.4em;
-    border-top: 1px solid var(--gold-ghost);
+    margin: 0.3em 0 0.8em;   /* the cloud rule above carries the spacing */
   }
+  /* auspicious-cloud rule above each section heading */
+  .h-rule { clear: right; margin: 3.4em 0 1.1em; }
+  .h-rule img { width: min(64%, 300px); height: auto; opacity: 0.8; display: block; }
   .page-hero .credit {
     display: block;
     margin-top: 0.6rem;
@@ -110,6 +111,8 @@
     color: var(--muted);
   }
   .article { max-width: var(--measure); }
+  /* a floated figure on the last paragraph must not escape the article */
+  .article::after { content: ""; display: block; clear: both; }
   .article p { margin: 0 0 1.25em; color: var(--cream-dim); }
   .notice {
     border: 1px solid rgba(217, 92, 66, 0.45);
@@ -125,13 +128,13 @@
   .notice p { margin: 0; color: var(--cream-dim); }
   /* Illustrations anchored to the passage they explain: inline in the column
      on a phone, out in the right-hand margin on a wide screen. Either way
-     they carry .reveal, so they fade in as the reader arrives at them. */
+     they carry .reveal, so they fade in as the reader arrives at them.
+     No fill and no shading — the drawings sit directly on the page. */
   .inline-figure {
     margin: 2.8rem auto;
     text-align: center;
     padding: 1.4rem 1.2rem 1.1rem;
     border: 1px solid var(--gold-ghost);
-    background: linear-gradient(170deg, rgba(22, 41, 74, 0.34), rgba(13, 25, 48, 0.2));
   }
   .inline-figure img { margin: 0 auto; height: auto; }
   .inline-figure.compact img { width: min(100%, 330px); }
@@ -145,23 +148,29 @@
     max-width: 46ch;
     margin-inline: auto;
   }
+  /* frameless decorations, anchored the same way */
+  .deco-figure { margin: 2.6rem auto; text-align: center; }
+  .deco-figure img { width: min(100%, 360px); height: auto; margin: 0 auto; opacity: 0.92; }
   @media (min-width: 1120px) {
-    /* Float the figure out into the gutter. The negative right margin cancels
-       the float's own width, so the line boxes beside it are not shortened
-       and the prose keeps its full measure instead of wrapping round it. */
-    .inline-figure {
+    /* Float figures and decorations out into the gutter. The negative right
+       margin cancels the float's own width, so the line boxes beside it are
+       not shortened and the prose keeps its full measure instead of wrapping
+       round it. */
+    .inline-figure,
+    .deco-figure {
       --fig: clamp(248px, 24vw, 320px);
       float: right;
       clear: right;
       width: var(--fig);
       margin: -2.5rem 0 2.2rem 2.4rem;
       margin-right: calc(-1 * (var(--fig) + 2.6rem));
-      padding: 1.1rem 1rem 0.9rem;
     }
+    .inline-figure { padding: 1.1rem 1rem 0.9rem; }
     .inline-figure img,
     .inline-figure.compact img,
     .inline-figure.tall img,
-    .inline-figure.wide img { width: 100%; }
+    .inline-figure.wide img,
+    .deco-figure img { width: 100%; }
     .inline-figure figcaption { font-size: 0.86rem; max-width: none; margin-top: 0.8rem; }
   }
   .vision-figure { margin: 3rem auto; max-width: 460px; text-align: center; }
@@ -254,16 +263,20 @@
   <div class="wrap">
     <p class="eyebrow reveal">Part One · The Teaching</p>
     <article class="article">
+      <div class="h-rule reveal" aria-hidden="true"><img src="assets/deco-cloud-rule.svg" width="420" height="46" alt="" loading="lazy"></div>
       <h2 class="article-sub reveal">The Cause of the Dragon King Yoga</h2>
       <p class="reveal">Good evening, everyone! Since just a few days ago we celebrated the Chinese New Year, I would like to wish everyone here Kung Hei Fat Choi! (applause)</p>
       <p class="reveal">We are all happy to hear the words Fat Choi (making money)! I am so happy to have the opportunity to greet everyone here tonight, as I so rarely get the chance to do so. I am very excited to see everyone so enthusiastic.</p>
       <p class="reveal">Since the Chinese New Year occurred so recently, I thought it would be appropriate to discuss and teach the Dragon King Yoga today. Actually, the teaching of this Dragon King Yoga was requested by the Dragon King himself. Through me, He wants everyone to know that such a yoga exists because, up till now, it has not been transmitted by anyone. Or, if it has, I have not heard of it.</p>
-      <p class="reveal">We know that in Buddhist scriptures there are many references to the Dragon King because, when Buddha Shakyamuni delivered his teachings, Devas, Dragons, and other members of the Eight Supernatural Beings often came to listen and give support. Our ceremony here today is also supported by the Devas, Dragons, and the rest of the Eight Supernatural Beings.</p>
+      <p class="reveal">We know that in Buddhist scriptures there are many references to the Dragon King because, when Buddha Sakyamuni delivered his teachings, Devas, Dragons, and other members of the Eight Supernatural Beings often came to listen and give support. Our ceremony here today is also supported by the Devas, Dragons, and the rest of the Eight Supernatural Beings.</p>
       <p class="reveal">Please do not be alarmed when I tell you that there are fifteen Dragons up in the space before us today.</p>
       <p class="reveal">Not sixteen, not fourteen, but exactly fifteen Dragons. Fifteen Dragons are here today to support our ceremony.</p>
       <p class="reveal">Many Buddhas and Bodhisattvas are also here today. We can see Amitabha, Bodhisattva Kuan Yin, the Four Celestial Kings, the Dharma Protectors Vajrapani and Kuan-ti, and numerous other Buddhas and Bodhisattvas.</p>
       <p class="reveal">One of the Buddhas present is the Venerable Dragon King Buddha, he being one of the 35 Buddhas mentioned in the Repentance Article. The Venerable Dragon King Buddha, a very great buddha, has descended to us today with fifteen other Dragon Kings because they found out that I am going to talk about the Dragon King Yoga today.</p>
       <p class="reveal">In my next book, the 86th one, called The Flying Illumination of Lights and Shadows, I will write about how the Dragon King has come to entreat me to talk about this Yoga. To the north of Seattle in the United States is an island called Kometal Island. This island is in the Pacific Ocean. One day, several students and I were in a park on the island, admiring the ocean view. Master Always-wise and Master Always-kind were also there. It was dusk and the ocean was very calm, just like a mirror, without any waves on its surface.</p>
+      <div class="deco-figure reveal" aria-hidden="true">
+        <img src="assets/deco-dragon-beneath.svg" width="440" height="200" alt="" loading="lazy">
+      </div>
       <p class="reveal">All of a sudden, the water in the middle of the Pacific Ocean started swirling up! This turbulence is kind of like the bubbling of boiling water in the middle of the hot pot when we are having a hot pot dinner. It sounded like this, "Buh, huh, buy."</p>
       <p class="reveal">All the students there saw and heard this strange scene and sound. At that time, I was murmuring a mantra.</p>
       <p class="reveal">Oh yes, one of the students there at the time is also present with us today, Miss Fong-cheng. She is probably sitting among the audience right now.</p>
@@ -275,13 +288,18 @@
       <p class="reveal">The Dragon King then continued, "How can we let Jambhala overwork himself? In the skies, Jambhala is the greatest Wealth Deity but, in the ocean, the Dragon King is the greatest God of Wealth! Jambhala is just too busy while I do nothing!"</p>
       <p class="reveal">Do you know what this Dragon King then said? He told me that he had so much leisure that he spent his time just grabbing seaweeds and sea lions, while swimming and rollicking in the ocean because no one asked him for anything.</p>
       <p class="reveal">Perhaps, you wonder, after hearing all this, whether I am truly on such good terms with the Dragon King? While it is true that the Dragon King and I are on very good terms, still, I am not the Dragon King's son-in-law (laughter). In Taiwan, there is a folk saying: when someone commits suicide by jumping into the ocean, one becomes the son-in-law of the Dragon King. Well, I am not the Dragon King's son-in-law, but I am very fond of swimming in the ocean. When I was a boy, my favorite place to swim was the Hsitzu Bay at Kaohsiung Harbor in Taiwan. I would dive to the bottom of the bay to look for things to bring up to the surface. At that time, I didn't swim to the Dragon King's Palace and had not yet made the acquaintance of the Dragon King.</p>
+      <div class="h-rule reveal" aria-hidden="true"><img src="assets/deco-cloud-rule.svg" width="420" height="46" alt="" loading="lazy"></div>
       <h2 class="article-sub reveal">The Third Person to go to the Dragon King's Palace</h2>
-      <p class="reveal">It was much later, after I started my cultivation practice, when I was actually able to visit the Dragon King's Palace during my meditation. According to the Buddhist scriptures, two people have visited the Dragon King's Palace. The first one was the founder of our Buddhist religion, Buddha Shakyamuni, who went there to teach the dharma.</p>
-      <p class="reveal">At that time Buddha Shakyamuni did not use an oxygen tank or put on a diving suit. What happened was that the Dragon King invited Buddha Shakyamuni to go to the Dragon King Palace to give teachings, so a staircase was fashioned out of water which led all the way into the Palace. On this staircase, Buddha Shakyamuni and his attendants, together with a few arahats, walked all the way into the Dragon King's Palace.</p>
+      <p class="reveal">It was much later, after I started my cultivation practice, when I was actually able to visit the Dragon King's Palace during my meditation. According to the Buddhist scriptures, two people have visited the Dragon King's Palace. The first one was the founder of our Buddhist religion, Buddha Sakyamuni, who went there to teach the dharma.</p>
+      <p class="reveal">At that time Buddha Sakyamuni did not use an oxygen tank or put on a diving suit. What happened was that the Dragon King invited Buddha Sakyamuni to go to the Dragon King Palace to give teachings, so a staircase was fashioned out of water which led all the way into the Palace. On this staircase, Buddha Sakyamuni and his attendants, together with a few arahats, walked all the way into the Dragon King's Palace.</p>
+      <div class="deco-figure reveal" aria-hidden="true">
+        <img src="assets/deco-water-stairs.svg" width="400" height="290" alt="" loading="lazy">
+      </div>
       <p class="reveal">The second person who went to the Dragon King's Palace was Bodhisattva Nagarjuna. Of course Bodhisattva Nagarjuna could visit the Dragon King's Palace because he belonged to the family of the Dragons.</p>
       <p class="reveal">Well, we are also members of the Dragon family because we are the "Descendants of the Dragons" (laughter). [Editor's note: "Descendants of the Dragons" is a popular Chinese song.]</p>
       <p class="reveal">Our Master Always-wise loves to sing this song. Maybe he can sing for us next time when we have a Karaoke (sing-along). With practice, he's getting better and better with this song, though we enjoyed it more before, when he used to sing out of tune (laughter).</p>
-      <p class="reveal">Buddha Shakyamuni went to the Dragon King's Palace to deliver the teachings, and Bodhisattva Nagarjuna went there to read the sutra. I could not say that I am the first person who has gone to the Dragon King's Palace, but my visit there in my meditation would have made me at least the third person to have visited there, after Buddha Shakyamuni and Bodhisattva Nagarjuna (audience applauds). The volumes of Buddhist sutra in the Dragon King's Palace are as vast as the ocean. According to my knowledge, it is four times as much as the Buddhist Canon in the human world! Since I have read all the Buddha sutra in the Dragon King's Palace, the amount of Buddha Dharma I know is therefore four times as much as the dharma currently existing in the human world. If there is someone in this world now who calls himself a Buddha, then I am the Buddha of Buddhas (audience applauds).</p>
+      <p class="reveal">Buddha Sakyamuni went to the Dragon King's Palace to deliver the teachings, and Bodhisattva Nagarjuna went there to read the sutra. I could not say that I am the first person who has gone to the Dragon King's Palace, but my visit there in my meditation would have made me at least the third person to have visited there, after Buddha Sakyamuni and Bodhisattva Nagarjuna (audience applauds). The volumes of Buddhist sutra in the Dragon King's Palace are as vast as the ocean. According to my knowledge, it is four times as much as the Buddhist Canon in the human world! Since I have read all the Buddha sutra in the Dragon King's Palace, the amount of Buddha Dharma I know is therefore four times as much as the dharma currently existing in the human world. If there is someone in this world now who calls himself a Buddha, then I am the Buddha of Buddhas (audience applauds).</p>
+      <div class="h-rule reveal" aria-hidden="true"><img src="assets/deco-cloud-rule.svg" width="420" height="46" alt="" loading="lazy"></div>
       <h2 class="article-sub reveal">The Secrets of Making a Wish with the Dragon King Yoga</h2>
       <p class="reveal">Now this Dragon King Yoga is useful for more than just asking for rain. In the past, many eminent monks, such as the Reverend Monk Hsu Yuen (Empty Cloud), knew the methods to ask for rain. Even in Tantra, there are yogas for such purpose. If you all learn this Dragon King Yoga, you can all become great dharma masters because, when you ask for rain, there will surely be rain, for as long as the Dragons come and make a somersault, then it will rain! However, this Dragon King Yoga is not merely for asking for rain; it can also bring you fortune since the Dragon King is a wealthy king of the ocean. Jambhala is the greatest wealth deity in the sky, and Dragon King is the greatest wealth god in the ocean. Very few people know of this secret. Today I am telling everyone, so you all have another way of making more money (audience applauds).</p>
       <p class="reveal">I am sure that after this dharma teaching, all the Dragon King vases in Hong Kong will be sold out! You see, in order to cultivate this yoga, one needs to offer a Dragon King vase to the Dragon King. A wish may be asked and that wish will be fulfilled. Now I am going to talk about the secrets of these Dragon King treasure vases and the secret of making the wish. As you know, sometimes when we ask something from the Buddhas and Bodhisattvas, our wishes are not always fulfilled. However, a wish made to the Dragon King will definitely be fulfilled. There is a secret method of how to realize a wish. Everyone here tonight will know of this secret, while those not present will not. You have to keep this a secret (laughter); otherwise, if too many people hear of it, then the Dragon King will be so inundated with requests that he won't be able to handle them (laughter).</p>
@@ -295,6 +313,7 @@
     <p class="eyebrow reveal">Part Two · The Sadhana</p>
     <article class="article">
       <p class="reveal">This vase that I am holding is called the Dragon King treasure vase. When you offer this vase to the Dragon King, according to the method that I will outline, he will receive it. When he accepts your present, he is obliged to give you back something in return. Our gift to him may not cost much, still he will reciprocate with much more. When we make a wish to a deity through Tantric magic, we have to offer the deity a present. When you offer him a present, he will definitely give you back something in return.</p>
+      <div class="h-rule reveal" aria-hidden="true"><img src="assets/deco-cloud-rule.svg" width="420" height="46" alt="" loading="lazy"></div>
       <h2 class="article-sub reveal">How To Prepare The Dragon King Treasure Vase</h2>
       <p class="reveal">First we need to make some preparations. We are going to put five different kinds of medicinal herbs in this vase.</p>
       <p class="reveal">The first kind is Tuber of Fleece-flower, which is black in color. Grind this herb into powder and place it at the bottom of the vase. This represents the Ocean Bottom Chakra. This is the first chakra.</p>
@@ -309,6 +328,10 @@
       </figure>
       <p class="reveal">Next we have to prepare five pieces of colored cloths: red, green, blue, white, and yellow. Fold these and tie them neatly on top of the seal of the treasure vase. These five colored cloths represent the Five Dhyani Buddhas, while the five herbs represent the body of the Dragon.</p>
       <p class="reveal">Now you might wonder what kind of material should the treasure vase be made of? Well, if you are generous, you can use a vase made of gold, I have no objection to that; but then you might as well give that to me (laughter), and buy another gold one for the Dragon King. If you can't afford a gold one, then get a silver one. The vase I have here was purchased by Master Lian-han. It is silver. (Grandmaster Lu then asked Master Lian-han the cost of it, and Master Lian-han replied that it cost one hundred Hong Kong dollars.) One hundred Hong Kong dollars seems fairly affordable. One hundred dollars in exchange for a billion dollars, that will be a bargain! We can use a vase made out of gold, silver, or even copper; but not porcelain, since porcelain is breakable. After purchasing the silver vase, and filling it up with the five kinds of herbs, and decorating it beautifully with the five colored cloths-the order of the cloths are red, green, blue, white, and yellow in descending order, then we must place the finished vase before the statues of the-Buddhas and Bodhisattvas on our shrine.</p>
+      <div class="deco-figure reveal" aria-hidden="true">
+        <img src="assets/deco-shrine.svg" width="400" height="250" alt="" loading="lazy">
+      </div>
+      <div class="h-rule reveal" aria-hidden="true"><img src="assets/deco-cloud-rule.svg" width="420" height="46" alt="" loading="lazy"></div>
       <h2 class="article-sub reveal">The Procedure For The Dragon King Yoga</h2>
       <p class="reveal">Next you need to practice the yoga. First follow our True Buddha group practice procedures: The Four Refuges, Mandala Offering, Invocation, Armour Protection, Recitation of The Four Vows, then the Mudra. The Mudra for the Dragon King Yoga is one of the secrets. Look closely, it is like this ( # ). The Mudra sort of looks like the Chinese character for "well (#)". The middle and index fingers of both hands cross to form the " # ".</p>
       <figure class="inline-figure compact reveal">
@@ -327,6 +350,7 @@
       </figure>
       <p class="reveal">If the vase is made of gold, rent a boat and find someone whom you know quite well to row you out to the middle of the ocean. Of course don't row all the way to the high seas (audience laughs), let's say just a little bit away from the shore, then make your wish and drop the treasure vase into the sea. If your vase is made of silver, then you don't have to go through all that trouble, and you don't have to tell me either, since I would not swim for it even if you paid me a hundred dollars (laughter).</p>
       <p class="reveal">After seven days of meditation and visualization, this treasure vase will be empowered. As soon as you throw it, the Dragon King will receive the message. He will be so happy to catch the vase that he will fulfill your wish.</p>
+      <div class="h-rule reveal" aria-hidden="true"><img src="assets/deco-cloud-rule.svg" width="420" height="46" alt="" loading="lazy"></div>
       <h2 class="article-sub reveal">The Results of The Dragon King Yoga</h2>
       <p class="reveal">Do you have any questions so far regarding this Dragon King Yoga?</p>
       <p class="reveal">(Master Richard Yan asked if there would be any dedication of merit at the end of the yoga.)</p>
@@ -339,6 +363,9 @@
       <p class="reveal">I am aware of the situation in which many men and women are unable to find a marriage partner. When I was with the surveyor team in the army, one of my colleagues wrote to his girl friend every day, sending her letters by registered express mail. His girl friend also wrote to him every day. So, every day he would set aside a fixed time to wait for the mailman. It was very easy for us to tell whether he had any mail that day or not. If he received a letter, he would be shouting and jumping, and working zealously. If there was no letter, he would tilt his head to one side, lean against the wall, and be unable to work.</p>
       <p class="reveal">I have had such experiences before, but mine were never so serious, because I was not as single-minded as they in love affairs. I was more like Jesus and Dr. Sun-yat-sun, practicing universal love (audience laughs).</p>
       <p class="reveal">So, if you know how to place the flower powder, you will receive marriage when you seek marriage. For money and rain, just the five kinds of herbs will do. Our Dragon King Yoga is really a secret, as I think you have not heard of it before. The Dragon King is very happy that I am giving this teaching today. Fifteen Dragon Kings, the Venerable Dragon King Buddha, Amitabha, Bodhisattva Kuan Yin, the Bodhisattva&hellip; <span class="muted">[the recorded transcript ends here]</span></p>
+      <div class="deco-figure reveal" aria-hidden="true">
+        <img src="assets/deco-jewel-rain.svg" width="400" height="230" alt="" loading="lazy">
+      </div>
     </article>
   </div>
 </section>

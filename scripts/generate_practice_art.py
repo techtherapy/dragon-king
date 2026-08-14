@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate the Treasure Vase Yoga illustrations.
 
-Three figures, each anchored to a passage of the teaching by
+Three instructional figures, each anchored to a passage of the teaching by
 scripts/build_practice.py:
 
   mudra.svg            the 井 mudra — index and middle fingers of both
@@ -10,7 +10,16 @@ scripts/build_practice.py:
                        chakras, copper-coin seal, five coloured cloths
   casting-the-vase.svg the finished vase cast into the sea
 
-House style throughout: fine gold line-art on deep indigo (紺紙金泥).
+and five decorative pieces:
+
+  deco-cloud-rule.svg  auspicious-cloud divider drawn above each heading
+  deco-dragon-beneath.svg  the dragon stirring under a mirror-calm sea
+  deco-water-stairs.svg    the staircase of water into the Dragon Palace
+  deco-shrine.svg          the sealed vase placed on the shrine
+  deco-jewel-rain.svg      the rain of jewels and coins into the sea
+
+House style throughout: fine gold line-art on deep indigo (紺紙金泥),
+with no background shading — the drawings sit directly on the page.
 
 These are drawn for a ~340px-wide column on desktop, so the viewBoxes are
 kept small and the labels large relative to them; detail that only reads at
@@ -43,11 +52,6 @@ DEFS = f"""
     <stop offset="55%" stop-color="{GOLD}" stop-opacity=".14"/>
     <stop offset="100%" stop-color="{GOLD}" stop-opacity=".26"/>
   </linearGradient>
-  <radialGradient id="glow">
-    <stop offset="0%" stop-color="{BRIGHT}" stop-opacity=".34"/>
-    <stop offset="60%" stop-color="{GOLD}" stop-opacity=".10"/>
-    <stop offset="100%" stop-color="{GOLD}" stop-opacity="0"/>
-  </radialGradient>
   <linearGradient id="coin" x1="0" y1="0" x2="0" y2="1">
     <stop offset="0%" stop-color="{BRIGHT}"/><stop offset="100%" stop-color="#a8814a"/>
   </linearGradient>
@@ -69,8 +73,10 @@ BASE_CSS = f"""
 
 
 def svg(w, h, body, extra_css="", label=""):
-    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" role="img"'
-            f' aria-label="{label}">\n<style>{BASE_CSS}{extra_css}</style>\n'
+    role = (f' role="img" aria-label="{label}"' if label
+            else ' role="presentation" aria-hidden="true"')
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}"{role}>\n'
+            f'<style>{BASE_CSS}{extra_css}</style>\n'
             f'<defs>{DEFS}</defs>\n{body}\n</svg>\n')
 
 
@@ -179,8 +185,6 @@ def mudra():
             + LEFT_DETAIL)
 
     body = f"""
-<circle cx="220" cy="238" r="206" fill="url(#glow)"/>
-
 <!-- RIGHT HAND — the left hand mirrored; its fingers pass beneath -->
 <g transform="translate({W} 0) scale(-1 1)">{hand}</g>
 
@@ -351,8 +355,6 @@ def vase_preparation():
         for i, (col, _rot) in enumerate(CLOTHS))
 
     body = f"""
-<circle cx="{cx}" cy="320" r="250" fill="url(#glow)"/>
-
 {art}
 
 <!-- what is inside: the five herbs, layered as the five chakras -->
@@ -404,8 +406,6 @@ def casting():
         f'C9 31 8 15 5 0 Z" fill="{col}" opacity=".85"/></g>' for col, rot in CLOTHS)
 
     body = f"""
-<circle cx="230" cy="140" r="192" fill="url(#glow)"/>
-
 <!-- flight path -->
 <path class="ln-faint" stroke-dasharray="5 9" d="{arc}"/>
 
@@ -437,10 +437,209 @@ def casting():
         "into the waves of the sea"))
 
 
+# ----------------------------------------------------------------------
+# decorations — no labels, no framing, they sit directly in the prose
+# ----------------------------------------------------------------------
+def cloud_rule():
+    """An auspicious-cloud divider: a flaming pearl between two runs of
+    diminishing cloud curls. Drawn above each section heading."""
+    W, H = 420, 46
+    half, x = [], 148
+    for s in (15, 11, 8):
+        half.append(f'<path class="ln-thin" d="{curl(x, 27, s, turns=1.55)}"/>')
+        x -= s * 2.9
+    half.append('<path class="ln-faint" d="M160 27 L192 27"/>')
+    half = "".join(half)
+    body = f"""
+<g>{half}</g>
+<g transform="translate({W} 0) scale(-1 1)">{half}</g>
+<circle cx="{W / 2}" cy="27" r="6" class="ln"/>
+<path class="ln-thin" d="M{W / 2 - 4} 16 C{W / 2 - 1} 8 {W / 2 + 5} 9 {W / 2 + 3} 17"/>
+"""
+    return svg(W, H, body, label="")
+
+
+def dragon_beneath():
+    """The dragon stirring beneath a mirror-calm sea: a still waterline,
+    rings of ripples, and the serpentine body passing below."""
+    W, H = 440, 200
+    # the body: a long sine wave, rising toward the ripples at its head end
+    pts = []
+    for i in range(61):
+        t = i / 60
+        x = 26 + t * 296
+        y = 138 - math.sin(t * math.pi * 2.15) * 24 - t * 14
+        pts.append((x, y))
+    spine = "M" + " L".join(f"{x:.1f} {y:.1f}" for x, y in pts)
+    # dorsal fins along the crests
+    fins = []
+    for t in (0.16, 0.24, 0.55, 0.63, 0.71):
+        i = int(t * 60)
+        x, y = pts[i]
+        fins.append(f'<path class="ln-faint" d="M{x:.0f} {y:.0f} L{x + 3:.0f} {y - 9:.0f} '
+                    f'L{x + 8:.0f} {y - 1:.0f}"/>')
+    hx, hy = pts[-1]
+    body = f"""
+<!-- the mirror-calm surface -->
+<path class="ln" d="M10 58 C88 55 182 60 262 57 C334 54 396 58 430 56"/>
+<path class="ln-faint" d="M60 70 L108 70 M330 68 L392 68"/>
+
+<!-- the ripples where he nears the surface -->
+<ellipse cx="{hx + 14:.0f}" cy="60" rx="11" ry="3.2" class="ln-thin" fill="none"/>
+<ellipse cx="{hx + 14:.0f}" cy="61" rx="23" ry="6" class="ln-faint" fill="none"/>
+<ellipse cx="{hx + 14:.0f}" cy="62" rx="37" ry="9" class="ln-faint" fill="none" opacity=".35"/>
+
+<!-- the dragon below -->
+<path class="ln" d="{spine}"/>
+{''.join(fins)}
+<!-- the head, turned up toward the light: brow, muzzle, open jaw -->
+<g class="ln" fill="none">
+  <path d="M{hx:.0f} {hy:.0f} C{hx + 4:.0f} {hy - 10:.0f} {hx + 6:.0f} {hy - 18:.0f} {hx + 12:.0f} {hy - 24:.0f}
+       C{hx + 17:.0f} {hy - 29:.0f} {hx + 24:.0f} {hy - 30:.0f} {hx + 29:.0f} {hy - 27:.0f}"/>
+  <path d="M{hx + 29:.0f} {hy - 27:.0f} C{hx + 27:.0f} {hy - 21:.0f} {hx + 23:.0f} {hy - 17:.0f} {hx + 18:.0f} {hy - 15:.0f}"/>
+  <path d="M{hx + 18:.0f} {hy - 15:.0f} C{hx + 15:.0f} {hy - 11:.0f} {hx + 11:.0f} {hy - 8:.0f} {hx + 6:.0f} {hy - 7:.0f}"/>
+</g>
+<!-- horn swept back, and the whiskers -->
+<path class="ln-thin" d="M{hx + 14:.0f} {hy - 27:.0f} C{hx + 9:.0f} {hy - 34:.0f} {hx + 2:.0f} {hy - 38:.0f} {hx - 6:.0f} {hy - 38:.0f}"/>
+<path class="ln-thin" d="{curl(hx + 34, hy - 32, 6, turns=1.35)}"/>
+<path class="ln-thin" d="{curl(hx + 33, hy - 13, 5, turns=1.35)}"/>
+<circle cx="{hx + 17:.0f}" cy="{hy - 23:.0f}" r="1.9" fill="{BRIGHT}"/>
+<!-- the pearl he watches, just under the ripples -->
+<circle cx="{hx + 14:.0f}" cy="74" r="3.4" class="ln-thin" fill="none"/>
+<circle cx="{hx + 14:.0f}" cy="74" r="1.2" fill="{BRIGHT}"/>
+<!-- the tail fluke -->
+<path class="ln-thin" d="M26 138 L13 129 M26 138 L14 147"/>
+"""
+    return svg(W, H, body, label="")
+
+
+def water_stairs():
+    """The staircase fashioned out of water, leading down from the waves
+    into the gate of the Dragon King's Palace."""
+    W, H = 400, 290
+    # steps descending from the surface at the left to the gate at lower right
+    d, x, y = [], 46, 76
+    for _ in range(7):
+        d.append(f'M{x} {y} L{x + 30} {y} L{x + 30} {y + 24}')
+        x, y = x + 30, y + 24
+    steps = f'<path class="ln" d="{" ".join(d)}"/>'
+    # each tread ripples — it is made of water
+    ripple = "".join(f'<path class="ln-faint" d="M{46 + i * 30 + 5} {76 + i * 24 + 5} '
+                     f'C{46 + i * 30 + 12} {76 + i * 24 + 2} {46 + i * 30 + 19} {76 + i * 24 + 8} '
+                     f'{46 + i * 30 + 25} {76 + i * 24 + 5}"/>' for i in range(7))
+    waves = "".join(curl(x, 62 + (5 if i % 2 else 0), 24 + (i % 2) * 6)
+                    for i, x in enumerate(range(-6, 410, 68)))
+    gx, gy = 298, 250   # centre of the gate, at its threshold
+    body = f"""
+<!-- the surface of the sea -->
+<path class="ln-faint" d="{waves}"/>
+
+<!-- the staircase of water -->
+{steps}
+{ripple}
+
+<!-- the palace gate: two upswept roofs over a pillared doorway -->
+<g>
+  <!-- upper roof, its eaves curling skyward -->
+  <path class="ln-bright" d="M{gx - 40} {gy - 92} C{gx - 44} {gy - 86} {gx - 50} {gy - 82} {gx - 56} {gy - 81}
+       C{gx - 44} {gy - 102} {gx - 20} {gy - 112} {gx} {gy - 112}
+       C{gx + 20} {gy - 112} {gx + 44} {gy - 102} {gx + 56} {gy - 81}
+       C{gx + 50} {gy - 82} {gx + 44} {gy - 86} {gx + 40} {gy - 92} Z"/>
+  <!-- lower roof, wider -->
+  <path class="ln" d="M{gx - 52} {gy - 62} C{gx - 57} {gy - 55} {gx - 64} {gy - 50} {gx - 72} {gy - 49}
+       C{gx - 60} {gy - 68} {gx - 30} {gy - 77} {gx} {gy - 77}
+       C{gx + 30} {gy - 77} {gx + 60} {gy - 68} {gx + 72} {gy - 49}
+       C{gx + 64} {gy - 50} {gx + 57} {gy - 55} {gx + 52} {gy - 62} Z"/>
+  <!-- the storey between the roofs -->
+  <path class="ln-thin" d="M{gx - 34} {gy - 92} L{gx - 34} {gy - 77} M{gx + 34} {gy - 92} L{gx + 34} {gy - 77}"/>
+  <!-- pillars and threshold -->
+  <path class="ln" d="M{gx - 42} {gy - 49} L{gx - 42} {gy} M{gx + 42} {gy - 49} L{gx + 42} {gy}
+       M{gx - 52} {gy} L{gx + 52} {gy}"/>
+  <path class="ln-thin" d="M{gx - 14} {gy - 49} L{gx - 14} {gy} M{gx + 14} {gy - 49} L{gx + 14} {gy}"/>
+  <!-- the doorway, glowing faintly -->
+  <path class="ln-thin" d="M{gx - 14} {gy - 12} C{gx - 8} {gy - 20} {gx + 8} {gy - 20} {gx + 14} {gy - 12}"/>
+  <!-- the pearl at the ridge -->
+  <circle cx="{gx}" cy="{gy - 120}" r="4.4" class="ln-thin" fill="none"/>
+  <circle cx="{gx}" cy="{gy - 120}" r="1.4" fill="{BRIGHT}"/>
+</g>
+
+<!-- pearls of light along the way down -->
+<circle cx="118" cy="130" r="2" fill="{BRIGHT}" opacity=".7"/>
+<circle cx="188" cy="182" r="2" fill="{BRIGHT}" opacity=".7"/>
+<circle cx="240" cy="226" r="2" fill="{BRIGHT}" opacity=".7"/>
+"""
+    return svg(W, H, body, label="")
+
+
+def shrine_vase():
+    """The finished vase placed on the shrine, a stick of incense curling
+    to either side."""
+    W, H = 400, 250
+    art, geo = vase(cx=200, top=44, s=0.148)
+    ty = geo["bottom"]   # the table top carries the vase
+    smoke = "".join(
+        f'<path class="ln-faint" d="M{x} {ty - 14} C{x - 7} {ty - 34} {x + 7} {ty - 52} {x} {ty - 72} '
+        f'C{x - 6} {ty - 88} {x + 5} {ty - 102} {x} {ty - 116}"/>'
+        f'<path class="ln-thin" d="M{x} {ty - 2} L{x} {ty - 14}"/>'
+        f'<circle cx="{x}" cy="{ty - 15}" r="1.8" fill="{BRIGHT}"/>'
+        for x in (104, 296))
+    body = f"""
+{art}
+
+<!-- incense to either side -->
+{smoke}
+
+<!-- the shrine table -->
+<path class="ln-bright" d="M56 {ty:.0f} L344 {ty:.0f}"/>
+<path class="ln" d="M64 {ty + 8:.0f} L336 {ty + 8:.0f} M84 {ty + 8:.0f} L84 {ty + 40:.0f}
+     M316 {ty + 8:.0f} L316 {ty + 40:.0f}"/>
+<path class="ln-thin" d="M84 {ty + 26:.0f} L316 {ty + 26:.0f}"/>
+<!-- the valance hanging from the table edge -->
+<path class="ln-faint" d="M120 {ty + 8:.0f} C124 {ty + 20:.0f} 136 {ty + 20:.0f} 140 {ty + 8:.0f}
+     M180 {ty + 8:.0f} C184 {ty + 20:.0f} 196 {ty + 20:.0f} 200 {ty + 8:.0f}
+     M240 {ty + 8:.0f} C244 {ty + 20:.0f} 256 {ty + 20:.0f} 260 {ty + 8:.0f}"/>
+"""
+    return svg(W, H, body, label="")
+
+
+def jewel_rain():
+    """For money and rain: a fall of jewels and coins into the waves."""
+    W, H = 400, 230
+    drops = [(60, 40, 9), (132, 96, 7), (196, 30, 11), (262, 84, 8), (330, 48, 9),
+             (96, 140, 6), (298, 138, 7)]
+    jewels = "".join(
+        f'<path class="ln-thin" d="M{x} {y - s * 1.6:.0f} C{x + s} {y - s * 0.4:.0f} {x + s} {y + s * 0.7:.0f} {x} {y + s:.0f} '
+        f'C{x - s} {y + s * 0.7:.0f} {x - s} {y - s * 0.4:.0f} {x} {y - s * 1.6:.0f} Z"/>'
+        f'<circle cx="{x}" cy="{y - s * 1.9:.0f}" r="1.4" fill="{BRIGHT}"/>'
+        for x, y, s in drops)
+    coins = "".join(
+        f'<g transform="translate({x} {y}) rotate({r})">'
+        f'<circle r="10" class="ln-thin" fill="none"/>'
+        f'<rect x="-3.4" y="-3.4" width="6.8" height="6.8" class="ln-faint" fill="none"/></g>'
+        for x, y, r in ((160, 58, 12), (232, 128, -16), (356, 108, 8), (48, 112, -10)))
+    rain = "".join(f'<path class="ln-faint" opacity=".4" d="M{x} {y} L{x - 3} {y + 22}"/>'
+                   for x, y in ((84, 62), (118, 30), (176, 104), (214, 52), (250, 22),
+                                (288, 76), (318, 20), (352, 60), (140, 150), (270, 160)))
+    waves = "".join(curl(x, 208 + (6 if i % 2 else 0), 30 + (i % 3) * 6)
+                    for i, x in enumerate(range(-8, 412, 66)))
+    body = f"""
+{rain}
+{jewels}
+{coins}
+<path class="ln" d="{waves}"/>
+"""
+    return svg(W, H, body, label="")
+
+
 if __name__ == "__main__":
     for name, maker in (("mudra.svg", mudra),
                         ("vase-preparation.svg", vase_preparation),
-                        ("casting-the-vase.svg", casting)):
+                        ("casting-the-vase.svg", casting),
+                        ("deco-cloud-rule.svg", cloud_rule),
+                        ("deco-dragon-beneath.svg", dragon_beneath),
+                        ("deco-water-stairs.svg", water_stairs),
+                        ("deco-shrine.svg", shrine_vase),
+                        ("deco-jewel-rain.svg", jewel_rain)):
         out = maker()
         (ASSETS / name).write_text(out, encoding="utf-8")
         print(f"  {name}: {len(out) / 1024:.1f} KB")

@@ -27,17 +27,10 @@
     <stop offset="55%" stop-color="#d9b25f" stop-opacity=".14"/>
     <stop offset="100%" stop-color="#d9b25f" stop-opacity=".26"/>
   </linearGradient>
-  <radialGradient id="glow">
-    <stop offset="0%" stop-color="#f4dc96" stop-opacity=".34"/>
-    <stop offset="60%" stop-color="#d9b25f" stop-opacity=".10"/>
-    <stop offset="100%" stop-color="#d9b25f" stop-opacity="0"/>
-  </radialGradient>
   <linearGradient id="coin" x1="0" y1="0" x2="0" y2="1">
     <stop offset="0%" stop-color="#f4dc96"/><stop offset="100%" stop-color="#a8814a"/>
   </linearGradient>
 </defs>
-
-<circle cx="220" cy="238" r="206" fill="url(#glow)"/>
 
 <!-- RIGHT HAND — the left hand mirrored; its fingers pass beneath -->
 <g transform="translate(440 0) scale(-1 1)"><path class="skin" d="M-6 392 C24 366 62 330 96 302 C110 293 118 289 127 290 C168 236 220 174 268 116 C276 106 292 114 288 132 C258 172 222 216 196 253 C200 258 204 262 208 266 C240 236 288 194 321 157 C331 147 347 157 339 175 C302 216 240 282 188 334 C200 349 195 367 176 375 C185 389 172 405 149 407 C116 411 82 417 54 433 C36 443 24 459 20 470 L-6 470 Z"/><path class="ln-thin" d="M268.7 147.9 Q260.5 146.3 257.0 138.8 Q268.6 122.0 277.6 124.5 Q282.2 132.6 268.7 147.9 Z"/><path class="ln-thin" d="M163.4 290.0 Q158.5 276.4 144.2 274.8"/><path class="ln-thin" d="M203.9 236.4 Q199.5 224.1 186.5 222.8"/><path class="ln-thin" d="M244.4 182.9 Q240.4 171.9 228.8 170.7"/><path class="ln-thin" d="M317.9 188.7 Q310.1 186.1 307.4 178.2 Q320.9 162.9 329.6 166.4 Q333.2 175.1 317.9 188.7 Z"/><path class="ln-thin" d="M196.5 317.7 Q193.2 303.7 179.1 300.5"/><path class="ln-thin" d="M243.1 269.2 Q240.1 256.5 227.3 253.6"/><path class="ln-thin" d="M289.6 220.7 Q287.0 209.3 275.6 206.7"/><path class="ln-thin" d="M188 334 C164 343 141 359 131 377 C123 393 133 406 152 403"/><path class="ln-thin" d="M176 375 C158 381 143 392 136 403"/><path class="ln-thin" d="M30 389 C64 393 98 401 122 412 C137 419 138 433 120 436"/><path class="ln-thin" d="M4 400 C26 388 42 372 52 352"/><path class="ln-thin" opacity=".5" d="M96 302 C88 322 76 340 60 354"/><path class="ln-thin" opacity=".5" d="M127 292 C122 316 112 338 96 356"/><path class="ln-faint" d="M-2 424 C16 418 30 408 40 396"/></g>
