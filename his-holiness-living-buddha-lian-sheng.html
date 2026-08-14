@@ -13,6 +13,52 @@
 <link rel="stylesheet" href="css/style.css">
 <style>
   .lotus-crest { width: 120px; margin: 0 auto 1.8rem; filter: drop-shadow(0 0 24px rgba(217,178,95,.35)); }
+  /* root guru portrait */
+  .guru-portrait {
+    position: relative;
+    width: min(340px, 72vw);
+    margin: 0 auto 2rem;
+    display: grid;
+    place-items: end center;
+  }
+  .guru-portrait::before,
+  .guru-portrait::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+  /* radiance behind the figure */
+  .guru-portrait::before {
+    top: -6%;
+    width: 118%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, rgba(244,220,150,.28) 0%, rgba(217,178,95,.12) 38%, transparent 68%);
+    animation: guruGlow 9s ease-in-out infinite alternate;
+  }
+  /* halo ring behind the crown */
+  .guru-portrait::after {
+    top: 1%;
+    width: 62%;
+    aspect-ratio: 1;
+    border: 1px solid var(--gold-faint);
+    box-shadow: inset 0 0 40px rgba(244,220,150,.12);
+  }
+  .guru-portrait img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    filter: drop-shadow(0 18px 44px rgba(3,7,14,.75));
+    animation: guruRise 1.6s cubic-bezier(.2,.65,.3,1) both;
+  }
+  @keyframes guruGlow { from { opacity: .6; transform: translateX(-50%) scale(.95); } to { opacity: 1; transform: translateX(-50%) scale(1.03); } }
+  @keyframes guruRise { from { opacity: 0; transform: translateY(18px) scale(.97); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .guru-portrait::before { animation: none; opacity: .85; }
+    .guru-portrait img { animation: none; }
+  }
   .fact-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -65,14 +111,9 @@
 
 <section class="page-hero">
   <div class="wrap">
-    <svg class="lotus-crest reveal" viewBox="0 0 120 80" fill="none" aria-hidden="true">
-      <path d="M60 12 C52 28 52 44 60 58 C68 44 68 28 60 12 Z" fill="#d9b25f" opacity=".9"/>
-      <path d="M38 24 C40 40 48 52 60 58 C58 42 50 30 38 24 Z" fill="#b3893f" opacity=".8"/>
-      <path d="M82 24 C80 40 72 52 60 58 C62 42 70 30 82 24 Z" fill="#b3893f" opacity=".8"/>
-      <path d="M20 40 C28 52 42 60 60 60 C50 48 36 40 20 40 Z" fill="#8d7440" opacity=".75"/>
-      <path d="M100 40 C92 52 78 60 60 60 C70 48 84 40 100 40 Z" fill="#8d7440" opacity=".75"/>
-      <path d="M26 64 C48 58 72 58 94 64 C72 74 48 74 26 64 Z" fill="#d9b25f" opacity=".5"/>
-    </svg>
+    <div class="guru-portrait">
+      <img src="assets/grandmaster.png" width="515" height="700" alt="His Holiness Living Buddha Lian Sheng in ceremonial robes and the five-Buddha crown, palms joined in greeting" fetchpriority="high">
+    </div>
     <p class="eyebrow center reveal">Root Guru · 根本上師</p>
     <h1 class="reveal">His Holiness Living Buddha Lian Sheng<span class="tc-title" lang="zh-Hant">蓮生活佛&#x3000;盧勝彥</span></h1>
     <p class="lede reveal">Grandmaster Sheng-Yen Lu — founder of the True Buddha School, author of over three hundred books, and the root guru through whose blessing this sutra is taught and shared.</p>

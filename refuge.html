@@ -45,6 +45,39 @@
     background: rgba(15,31,56,.5);
   }
   .rite-steps li strong { color: var(--cream); }
+  .merit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+    gap: 1rem;
+    margin-top: 2.4rem;
+  }
+  .merit {
+    border: 1px solid var(--gold-ghost);
+    background: linear-gradient(165deg, rgba(22,41,74,.42), rgba(13,25,48,.28));
+    padding: 1.5rem 1.4rem;
+  }
+  .merit .tc {
+    display: block;
+    color: var(--gold);
+    font-size: 1.05rem;
+    letter-spacing: 0.22em;
+    margin-bottom: 0.5rem;
+  }
+  .merit h3 { font-size: 1.18rem; margin-bottom: 0.4rem; }
+  .merit p { margin: 0; color: var(--muted); font-size: 0.98rem; }
+  .after-list { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; gap: 1.1rem; }
+  .after-list li {
+    display: flex; gap: 1.1rem; align-items: baseline;
+    border-bottom: 1px solid var(--gold-ghost); padding-bottom: 1.1rem;
+    color: var(--cream-dim);
+  }
+  .after-list .mark {
+    flex: none; width: 11px; height: 11px; margin-top: .45rem;
+    transform: rotate(45deg);
+    border: 1.5px solid var(--gold);
+    box-shadow: 0 0 10px rgba(217,178,95,.35);
+  }
+  .after-list strong { color: var(--cream); }
 </style>
 </head>
 <body>
@@ -77,7 +110,7 @@
   <div class="wrap">
     <p class="eyebrow center reveal">Enter the Stream · 皈依</p>
     <h1 class="reveal">Take Refuge<span class="tc-title" lang="zh-Hant">皈依真佛宗</span></h1>
-    <p class="lede reveal">Taking refuge is a commitment to spiritual cultivation — an aspiration to live a nobler and more meaningful life. Through refuge in the root guru, His Holiness Living Buddha Lian Sheng, one receives the lineage empowerment that opens the gate of Vajrayana practice.</p>
+    <p class="lede reveal">Taking refuge is a commitment to spiritual cultivation — an aspiration to live a nobler and more meaningful life. Through refuge in the root guru, His Holiness Living Buddha Lian Sheng, one enters the lineage and receives the empowerment that opens the gate of Vajrayana practice.</p>
   </div>
 </section>
 
@@ -89,13 +122,58 @@
     </div>
     <div class="prose reveal">
       <p>In the True Buddha School, taking refuge means entrusting oneself to the Triple Jewels — the Buddha, the Dharma and the Sangha — through the root guru who embodies them. It is the doorway to the school's practices, from the Fourfold Refuge onward, and the beginning of an actual path of cultivation rather than admiration from afar.</p>
-      <p>Refuge is open to everyone. It is conferred on a donation basis with no set fee, so that no one is ever turned away.</p>
+      <p>His Holiness Living Buddha Lian Sheng, who holds the dharma title <em>Great Blessing Vajra</em>, is the Root Guru of the True Buddha School. In Vajrayana Buddhism the <strong>lineage transmission</strong> is indispensable: the blessing of the whole lineage flows through the root guru to the disciple, and without that connection the teachings cannot take root and practice does not bear fruit. Taking refuge establishes precisely this connection — the guru becomes the wellspring from which every subsequent empowerment, teaching and blessing reaches you.</p>
+      <p>Refuge is open to everyone, without distinction of race, nationality, gender or former religion. It is conferred on a donation basis with no set fee, so that no one is ever turned away.</p>
     </div>
     <div class="mantra-box reveal">
       <p class="eyebrow center" style="margin-bottom:1.6rem">The Fourfold Refuge · 四皈依</p>
       <p class="zh" lang="zh-Hant">南摩古魯貝&#x3000;南摩不打耶<br>南摩達摩耶&#x3000;南摩僧伽耶</p>
-      <p class="roman">Namo Gurubhya · Namo Buddhaya · Namo Dharmaya · Namo Sanghaya</p>
+      <p class="roman">Namo Guru bei, Namo Buddha ya,<br>Namo Dharma ya, Namo Sangha ya</p>
       <p class="en">I take refuge in the Guru, the Buddha, the Dharma, and the Sangha.</p>
+    </div>
+  </div>
+</section>
+
+<section class="flow-section">
+  <div class="wrap">
+    <div class="num-heading reveal">
+      <span class="num" lang="zh-Hant">功德</span>
+      <h2>The merits of taking refuge <span class="tc-sub" lang="zh-Hant">皈依的功德</span></h2>
+    </div>
+    <div class="prose reveal">
+      <p>Having taken refuge, the disciple begins the Root Guru Practice — the foundation of every other practice in the school. Those who cultivate it sincerely are said to receive both worldly and spiritual blessings.</p>
+    </div>
+    <div class="merit-grid">
+      <div class="merit reveal">
+        <span class="tc" lang="zh-Hant">健康長壽</span>
+        <h3>Health and long life</h3>
+        <p>Body and mind are steadied by the guru's blessing, and obstacles to wellbeing are cleared.</p>
+      </div>
+      <div class="merit reveal">
+        <span class="tc" lang="zh-Hant">家庭和睦</span>
+        <h3>A harmonious family</h3>
+        <p>Discord softens; the household becomes a place where cultivation is possible.</p>
+      </div>
+      <div class="merit reveal">
+        <span class="tc" lang="zh-Hant">財富智慧</span>
+        <h3>Fortune and wisdom</h3>
+        <p>Sufficiency in worldly affairs, and the clear discernment that turns it toward the Dharma.</p>
+      </div>
+      <div class="merit reveal">
+        <span class="tc" lang="zh-Hant">三十六善神</span>
+        <h3>Thirty-six guardians</h3>
+        <p>The <em>Sutra of Consecration</em> teaches that thirty-six good spirits are appointed to guard one who takes refuge in the Triple Jewels.</p>
+      </div>
+      <div class="merit reveal">
+        <span class="tc" lang="zh-Hant">諸天護持</span>
+        <h3>Protection of the devas</h3>
+        <p>As practice deepens, the protection extends further — the heavens and the Dharma protectors keep watch over the practitioner.</p>
+      </div>
+      <div class="merit reveal">
+        <span class="tc" lang="zh-Hant">解脫成就</span>
+        <h3>The path to liberation</h3>
+        <p>Beyond every blessing, refuge sets the direction: awakening in this life and Buddhahood at its end.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -109,7 +187,7 @@
     <p class="prose reveal">For refuge at a distance, perform this brief ceremony:</p>
     <ol class="rite-steps reveal">
       <li><strong>Choose the day.</strong> At 7:00 a.m. local time on the first or fifteenth day of any lunar month.</li>
-      <li><strong>Face the rising sun.</strong> With palms joined, recite the Fourfold Refuge mantra three times: <em>“Namo Gurubhya, Namo Buddhaya, Namo Dharmaya, Namo Sanghaya. Seeking the guidance of Living Buddha Lian Sheng, I take refuge in the True Buddha.”</em></li>
+      <li><strong>Face the rising sun.</strong> With palms joined, recite the Fourfold Refuge mantra three times: <em>“Namo Guru bei, Namo Buddha ya, Namo Dharma ya, Namo Sangha ya. Seeking the guidance of Living Buddha Lian Sheng, I am taking refuge in the True Buddha.”</em></li>
       <li><strong>Prostrate three times.</strong> The rite itself is complete — then register by one of the methods below, and His Holiness will perform the remote empowerment.</li>
     </ol>
   </div>
@@ -124,14 +202,14 @@
     <div class="method-grid">
       <div class="info-panel method reveal" style="margin:1.1rem 0 0">
         <span class="step-num">Online</span>
-        <h3>Through the official site</h3>
-        <p class="muted">Complete the online refuge form on the True Buddha School Net. A refuge certificate and guidance for beginning practice are sent to you afterwards.</p>
-        <a class="more" href="https://en.tbsn.org/" rel="noopener">Visit TBSN.org →</a>
+        <h3>Through the official form</h3>
+        <p class="muted">Perform the rite above, then complete the refuge form on the True Buddha School administrative site. His Holiness performs the remote empowerment, and a refuge certificate with guidance for beginning practice follows by mail.</p>
+        <a class="more" href="https://truebuddhaschool.org/formrefuge" rel="noopener">Open the refuge form →</a>
       </div>
       <div class="info-panel method reveal" style="margin:1.1rem 0 0">
         <span class="step-num">By Letter</span>
         <h3>Write to the Foundation</h3>
-        <p class="muted">After performing the rite, send your name, address and age — with any offering you wish to make — to:</p>
+        <p class="muted">After performing the rite, send your name, address and age — together with any offering you wish to make, entirely voluntary — to:</p>
         <address class="address-block" style="margin-top:1rem">
           True Buddha Foundation<br>
           17102 NE 40th Ct.<br>
@@ -141,9 +219,27 @@
       <div class="info-panel method reveal" style="margin:1.1rem 0 0">
         <span class="step-num">In Person</span>
         <h3>At a True Buddha temple</h3>
-        <p class="muted">Attend a ceremony at Ling Shen Ching Tze Temple in Redmond, Washington — or visit any True Buddha temple or chapter worldwide, where an authorised master can confer the refuge empowerment.</p>
+        <p class="muted">Attend the Saturday evening group practice at Ling Shen Ching Tze Temple in Redmond, Washington — the school's mother temple — or visit any True Buddha temple or chapter worldwide, where an authorised acharya can confer the refuge empowerment in person.</p>
         <a class="more" href="https://en.tbsn.org/" rel="noopener">Find a temple →</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="flow-section">
+  <div class="wrap">
+    <div class="num-heading reveal">
+      <span class="num" lang="zh-Hant">之後</span>
+      <h2>What follows <span class="tc-sub" lang="zh-Hant">皈依之後</span></h2>
+    </div>
+    <ul class="after-list">
+      <li class="reveal"><span class="mark" aria-hidden="true"></span><span><strong>The remote empowerment.</strong> Wherever you are in the world, His Holiness bestows the refuge empowerment — the moment the lineage connection is made.</span></li>
+      <li class="reveal"><span class="mark" aria-hidden="true"></span><span><strong>Your certificate and guidance.</strong> A refuge certificate arrives by mail, together with instructions for beginning daily practice.</span></li>
+      <li class="reveal"><span class="mark" aria-hidden="true"></span><span><strong>The Root Guru Practice.</strong> Begin with the Fourfold Refuge and the Root Guru Practice; from this foundation the higher yogas of the school open in turn, each with its own empowerment.</span></li>
+      <li class="reveal"><span class="mark" aria-hidden="true"></span><span><strong>A sangha to practise with.</strong> Local temples and chapters hold group practice and ceremonies, and teachings are streamed for those who live far from any temple.</span></li>
+    </ul>
+    <div class="prose reveal" style="margin-top:2.4rem">
+      <p class="muted">Practices such as the <a href="treasure-vase-yoga.html">Dragon King Treasure Vase Yoga</a> require both refuge and the specific empowerment for that practice, which is requested from His Holiness or an authorised master after taking refuge.</p>
     </div>
   </div>
 </section>
