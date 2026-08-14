@@ -123,12 +123,17 @@
     gap: clamp(2rem, 5vw, 4rem);
     align-items: start;
   }
+  /* Sticky only in the two-column layout. Scoped to min-width so it cannot
+     be re-applied by source order once the columns stack — otherwise the
+     cover pins itself over the article text while scrolling. */
+  @media (min-width: 821px) {
+    .book-aside { position: sticky; top: calc(var(--header-h) + 2rem); }
+  }
   @media (max-width: 820px) {
     .book-layout { grid-template-columns: 1fr; }
-    /* stacked above the article — sticky would serve no purpose here */
-    .book-aside { order: -1; max-width: 230px; margin: 0 auto; position: static; }
+    /* stacked above the article — it must scroll away with the page */
+    .book-aside { order: -1; max-width: 230px; margin: 0 auto; }
   }
-  .book-aside { position: sticky; top: calc(var(--header-h) + 2rem); }
   .book-cover {
     border: 1px solid var(--gold-faint);
     padding: 8px;

@@ -328,11 +328,13 @@
     gap: clamp(2rem, 5vw, 4rem);
     align-items: center;
   }
+  /* base first, so the stacked-layout override below is not undone by
+     source order (media queries carry no extra specificity) */
+  .book-feature-cover { margin: 0; }
   @media (max-width: 820px) {
     .book-feature { grid-template-columns: 1fr; }
     .book-feature-cover { max-width: 220px; margin: 0 auto; }
   }
-  .book-feature-cover { margin: 0; }
   .book-feature-cover a {
     display: block;
     border: 1px solid var(--gold-faint);
