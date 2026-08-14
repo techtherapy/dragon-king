@@ -252,8 +252,9 @@ for t_pos in (0.53, 0.78):
                  f'<path d="{LEG}" class="limb"/>{claw_d}</g>')
 
 # ---- hand-authored head (local coords, facing -x, neck joint at ~(46,0)) --
-HEAD = f"""
-<g class="head" transform="translate({fmt(hx)} {fmt(hy)}) rotate({fmt(head_angle)}) scale(1.32)"><g class="head-inner">
+def head_group(x, y, angle, scale):
+    return f"""
+<g class="head" transform="translate({fmt(x)} {fmt(y)}) rotate({fmt(angle)}) scale({scale})"><g class="head-inner">
   <!-- mane locks sweeping back over the neck -->
   <path class="mane" d="M30 -28 C64 -60 100 -72 138 -66 C106 -50 88 -36 80 -18 C76 -22 50 -26 30 -28 Z"/>
   <path class="mane" d="M36 -18 C78 -34 116 -32 146 -14 C112 -12 90 -4 78 10 C72 0 52 -12 36 -18 Z"/>
@@ -293,6 +294,9 @@ HEAD = f"""
   <path class="mane mane2" d="M-46 36 C-54 46 -56 58 -50 68 C-48 58 -43 50 -36 46 Z"/>
 </g></g>
 """
+
+
+HEAD = head_group(hx, hy, head_angle, 1.32)
 
 # ---- flaming pearl -------------------------------------------------------
 px, py = PEARL
@@ -787,6 +791,220 @@ cloud_layer("clouds-near.svg", [
     (330, 240, 1.25, "cloud-b"), (1080, 620, 1.45, "cloud-a"),
     (1090, 180, 1.0, "cloud-b"), (420, 660, 1.1, "cloud-a"),
 ], opacity=0.3, stroke_w=1.6)
+
+
+# ----------------------------------------------------------------------
+# vase-vision.svg — the Treasure Vase visualization: the vase transforms
+# into a dragon rising to become the Five Dhyani Buddhas (after the
+# practice image supplied by the site owner)
+# ----------------------------------------------------------------------
+V_SPINE = [
+    (360, 688), (322, 636), (398, 566), (312, 478), (398, 398),
+    (330, 330), (376, 274), (358, 238),
+]
+v_raw = catmull_rom(V_SPINE, 40)
+v_pts = resample(v_raw, 3.0)
+VN = len(v_pts)
+v_tans, v_norms = tangents_normals(v_pts)
+
+
+def v_width(t):
+    w_tail, w_mid, w_neck = 2.0, 14.5, 11.5
+    if t < 0.4:
+        return w_tail + (w_mid - w_tail) * smoothstep(0.0, 0.4, t)
+    if t < 0.85:
+        return w_mid
+    return w_mid + (w_neck - w_mid) * smoothstep(0.85, 1.0, t)
+
+
+v_ws = [v_width(i / (VN - 1)) for i in range(VN)]
+v_outer = [(v_pts[i][0] + v_norms[i][0] * v_ws[i], v_pts[i][1] + v_norms[i][1] * v_ws[i]) for i in range(VN)]
+v_inner = [(v_pts[i][0] - v_norms[i][0] * v_ws[i], v_pts[i][1] - v_norms[i][1] * v_ws[i]) for i in range(VN)]
+v_body = poly_path(v_outer + v_inner[::-1], close=True)
+
+v_spikes, v_plates = [], []
+arc = 0.0
+next_at = 16.0
+sn = 0
+for i in range(1, VN - 4):
+    arc += math.hypot(v_pts[i][0] - v_pts[i - 1][0], v_pts[i][1] - v_pts[i - 1][1])
+    t = i / (VN - 1)
+    if arc >= next_at and 0.06 < t < 0.94:
+        w = v_ws[i]
+        nx, ny = v_norms[i]
+        tx, ty = v_tans[i]
+        h = (w * 0.6 + 2.5) * (0.85 + 0.25 * abs(math.sin(sn * 0.6)))
+        bl = (v_pts[i][0] + nx * (w - 0.5) - tx * 3.5, v_pts[i][1] + ny * (w - 0.5) - ty * 3.5)
+        br = (v_pts[i][0] + nx * (w - 0.5) + tx * 3.5, v_pts[i][1] + ny * (w - 0.5) + ty * 3.5)
+        tip = (v_pts[i][0] + nx * (w + h) - tx * (4 + w * 0.3), v_pts[i][1] + ny * (w + h) - ty * (4 + w * 0.3))
+        v_spikes.append(f"M{fmt(bl[0])} {fmt(bl[1])}L{fmt(tip[0])} {fmt(tip[1])}L{fmt(br[0])} {fmt(br[1])}Z")
+        next_at = arc + 13
+        sn += 1
+arc = 0.0
+next_at = 9.0
+for i in range(1, VN):
+    arc += math.hypot(v_pts[i][0] - v_pts[i - 1][0], v_pts[i][1] - v_pts[i - 1][1])
+    t = i / (VN - 1)
+    if arc >= next_at and 0.12 < t < 0.97:
+        w = v_ws[i]
+        nx, ny = v_norms[i]
+        tx, ty = v_tans[i]
+        a = (v_pts[i][0] - nx * w * 0.92, v_pts[i][1] - ny * w * 0.92)
+        b = (v_pts[i][0] - nx * w * 0.25, v_pts[i][1] - ny * w * 0.25)
+        c = ((a[0] + b[0]) / 2 - tx * w * 0.25, (a[1] + b[1]) / 2 - ty * w * 0.25)
+        v_plates.append(f"M{fmt(a[0])} {fmt(a[1])}Q{fmt(c[0])} {fmt(c[1])} {fmt(b[0])} {fmt(b[1])}")
+        next_at = arc + 8.5
+
+vhx, vhy = v_pts[-1]
+vhd = v_tans[-1]
+v_head_angle = math.degrees(math.atan2(vhd[1], vhd[0])) - 180
+V_HEAD = head_group(vhx, vhy, v_head_angle, 0.62)
+
+# tail fronds at the vase mouth
+vtx, vty = v_pts[0]
+vtd = v_tans[0]
+v_fronds = []
+for ang, ln in ((-40, 30), (0, 40), (36, 28)):
+    a = math.radians(ang)
+    dx = -(vtd[0] * math.cos(a) - vtd[1] * math.sin(a))
+    dy = -(vtd[0] * math.sin(a) + vtd[1] * math.cos(a))
+    tip = (vtx + dx * ln, vty + dy * ln)
+    side = (-dy, dx)
+    c1 = (vtx + dx * ln * 0.45 + side[0] * 7, vty + dy * ln * 0.45 + side[1] * 7)
+    c2 = (vtx + dx * ln * 0.5 - side[0] * 6, vty + dy * ln * 0.5 - side[1] * 6)
+    v_fronds.append(f"M{fmt(vtx)} {fmt(vty)}Q{fmt(c1[0])} {fmt(c1[1])} {fmt(tip[0])} {fmt(tip[1])}"
+                    f"Q{fmt(c2[0])} {fmt(c2[1])} {fmt(vtx)} {fmt(vty)}Z")
+
+# five dhyani buddhas across the top
+buddhas = ""
+for bx, s in ((100, 0.92), (230, 1.0), (360, 1.14), (490, 1.0), (620, 0.92)):
+    buddhas += f"""
+  <g transform="translate({bx} 118) scale({s})">
+    <circle class="db-halo" r="46"/>
+    <circle class="db-ring" r="40"/>
+    <circle class="db-fig" cx="0" cy="-27" r="3.4"/>
+    <circle class="db-fig" cx="0" cy="-18" r="8.5"/>
+    <path class="db-fig" d="M-8 -9 C-13 -6 -16 0 -16 6 C-20 9 -22 13 -21 16 C-8 20 8 20 21 16 C22 13 20 9 16 6 C16 0 13 -6 8 -9 C3 -11 -3 -11 -8 -9 Z"/>
+    <path class="db-line" d="M-13 8 C-7 11 7 11 13 8"/>
+    <path class="db-line" d="M-23 21 C-10 25 10 25 23 21"/>
+  </g>"""
+
+# beams from each buddha converging on the vase — tapered light
+beams = "".join(
+    f'<path class="vb-beam" d="M{bx - 5} 168 L338 668 L382 668 L{bx + 5} 168 Z"/>'
+    for bx in (100, 230, 360, 490, 620))
+
+# five-coloured cloths tied at the seal
+ribbons = ""
+for i, (col, rot) in enumerate((("#c0392b", -32), ("#5b8c5a", -16), ("#4a6fa5", 0),
+                                ("#e8e0cc", 16), ("#d9b25f", 32))):
+    ribbons += (f'<g transform="translate(360 676) rotate({rot})">'
+                f'<path d="M-4 0 C-7 -13 -4 -26 3 -34 C7 -26 6 -13 4 0 Z" fill="{col}" opacity=".85" '
+                f'stroke="#0e1c34" stroke-width=".8"/></g>')
+
+vase_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 960" role="img"
+     aria-label="The Dragon King Treasure Vase visualization: from the sealed vase a dragon rises and transforms into the Five Dhyani Buddhas, who shine light back upon the vase">
+<style>
+  :root {{ --g:#d9b25f; --gb:#f4dc96; --gd:#8d7440; }}
+  .body-fill {{ fill:url(#vBodyGrad); stroke:var(--g); stroke-width:1.8; stroke-linejoin:round; }}
+  .spike {{ fill:url(#vSpikeGrad); stroke:var(--g); stroke-width:.8; }}
+  .plate {{ fill:none; stroke:var(--g); stroke-width:1; opacity:.7; }}
+  .frond {{ fill:url(#vSpikeGrad); stroke:var(--g); stroke-width:.9; }}
+  .mane {{ fill:url(#vManeGrad); stroke:var(--g); stroke-width:1.1; }}
+  .mane2 {{ opacity:.75; }}
+  .horn {{ fill:#0c1830; stroke:var(--gb); stroke-width:1.4; stroke-linejoin:round; }}
+  .horn2 {{ opacity:.6; }}
+  .skull {{ fill:url(#vHeadGrad); stroke:var(--gb); stroke-width:1.8; stroke-linejoin:round; }}
+  .line {{ fill:none; stroke:var(--gb); stroke-width:1.3; stroke-linecap:round; }}
+  .tooth {{ fill:var(--gb); }}
+  .tongue {{ fill:#8d5a3a; opacity:.9; }}
+  .eye-white {{ fill:#f7ecd2; stroke:var(--g); stroke-width:.8; }}
+  .eye-iris {{ fill:#f4dc96; }}
+  .eye-pupil {{ fill:#2a1c08; }}
+  .eye-glint {{ fill:#fff; }}
+  .whisker {{ fill:none; stroke:var(--gb); stroke-width:1.4; stroke-linecap:round; }}
+  .vase-line {{ fill:none; stroke:var(--g); stroke-width:1.6; stroke-linecap:round; }}
+  .vase-solid {{ fill:url(#vVaseGrad); stroke:var(--gb); stroke-width:1.8; stroke-linejoin:round; }}
+  .vase-band {{ fill:none; stroke:var(--g); stroke-width:1.1; opacity:.75; }}
+  .coin {{ fill:url(#vManeGrad); stroke:var(--gb); stroke-width:1.2; }}
+  .db-halo {{ fill:url(#vHaloGrad); animation:vpulse 8s ease-in-out infinite alternate; }}
+  .db-ring {{ fill:none; stroke:var(--g); stroke-width:1.1; opacity:.5; }}
+  .db-fig {{ fill:#13233f; stroke:var(--gb); stroke-width:1.2; stroke-linejoin:round; }}
+  .db-line {{ fill:none; stroke:var(--g); stroke-width:1.1; opacity:.8; }}
+  .vb-beam {{ fill:url(#vBeamGrad); opacity:.16; animation:vbreathe 7s ease-in-out infinite alternate; }}
+  .vase-glow {{ fill:url(#vHaloGrad); animation:vpulse 6.5s ease-in-out infinite alternate-reverse; }}
+  .dragon {{ animation:vbob 12s ease-in-out infinite alternate; }}
+  .head-inner {{ transform-box:fill-box; transform-origin:82% 34%; animation:vnod 9s ease-in-out infinite alternate; }}
+  .whisker {{ transform-box:fill-box; transform-origin:96% 12%; animation:vwhisk 6.5s ease-in-out infinite alternate; }}
+  .whisker.w2 {{ animation-duration:8s; animation-delay:-2.5s; }}
+  @keyframes vpulse {{ from {{ opacity:.5; transform:scale(.95); }} to {{ opacity:1; transform:scale(1.04); }} }}
+  @keyframes vbreathe {{ from {{ opacity:.11; }} to {{ opacity:.24; }} }}
+  @keyframes vbob {{ from {{ transform:translateY(-5px); }} to {{ transform:translateY(4px); }} }}
+  @keyframes vnod {{ from {{ transform:rotate(-1.3deg); }} to {{ transform:rotate(1.9deg); }} }}
+  @keyframes vwhisk {{ from {{ transform:rotate(-2.4deg); }} to {{ transform:rotate(2.8deg); }} }}
+  @media (prefers-reduced-motion: reduce) {{
+    .db-halo,.vb-beam,.vase-glow,.dragon,.head-inner,.whisker {{ animation:none; }}
+  }}
+</style>
+<defs>
+  <radialGradient id="vHaloGrad">
+    <stop offset="0%" stop-color="#f4dc96" stop-opacity=".45"/>
+    <stop offset="55%" stop-color="#d9b25f" stop-opacity=".12"/>
+    <stop offset="100%" stop-color="#d9b25f" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="vBeamGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#f4dc96" stop-opacity=".75"/>
+    <stop offset="100%" stop-color="#f4dc96" stop-opacity=".12"/>
+  </linearGradient>
+  <linearGradient id="vBodyGrad" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#1a2f56"/><stop offset="55%" stop-color="#101f39"/>
+    <stop offset="100%" stop-color="#0c1830"/>
+  </linearGradient>
+  <linearGradient id="vHeadGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#2a4470"/><stop offset="100%" stop-color="#16294a"/>
+  </linearGradient>
+  <linearGradient id="vManeGrad" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#d9b25f" stop-opacity=".85"/>
+    <stop offset="100%" stop-color="#8d7440" stop-opacity=".3"/>
+  </linearGradient>
+  <linearGradient id="vSpikeGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#f4dc96" stop-opacity=".8"/>
+    <stop offset="100%" stop-color="#8d7440" stop-opacity=".35"/>
+  </linearGradient>
+  <linearGradient id="vVaseGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#1d3560"/><stop offset="100%" stop-color="#0e1c34"/>
+  </linearGradient>
+</defs>
+
+{buddhas}
+{beams}
+
+<g class="dragon">
+  <path class="spike" d="{''.join(v_spikes)}"/>
+  <path class="frond" d="{''.join(v_fronds)}"/>
+  <path class="body-fill" d="{v_body}"/>
+  <path class="plate" d="{''.join(v_plates)}"/>
+  {V_HEAD}
+</g>
+
+<!-- the treasure vase -->
+<circle class="vase-glow" cx="360" cy="810" r="150"/>
+<g>
+  {ribbons}
+  <circle class="coin" cx="360" cy="681" r="15"/>
+  <rect x="355.5" y="677.5" width="9" height="9" fill="#0e1c34" stroke="#f4dc96" stroke-width=".9"/>
+  <path class="vase-solid" d="M322 690 C322 683 398 683 398 690 L392 706 C380 712 340 712 328 706 Z"/>
+  <path class="vase-solid" d="M334 706 L332 744 L388 744 L386 706 C372 711 348 711 334 706 Z"/>
+  <path class="vase-solid" d="M332 744 C296 756 276 790 280 826 C284 864 314 892 352 897 L368 897 C406 892 436 864 440 826 C444 790 424 756 388 744 Z"/>
+  <path class="vase-solid" d="M338 897 L334 916 L386 916 L382 897 Z"/>
+  <path class="vase-line" d="M322 922 C346 928 374 928 398 922"/>
+  <path class="vase-band" d="M336 726 L384 726 M298 776 C322 768 398 768 422 776 M296 848 C330 860 390 860 424 848"/>
+  <path class="vase-band" d="M360 790 C374 790 383 800 381 811 C379 820 371 825 363 824 C370 821 374 815 372 808 C370 801 363 797 357 800 C352 802 350 808 352 813 C348 806 350 796 360 790 Z"/>
+  <path class="vase-band" d="M306 832 C314 824 324 824 330 830 C336 824 346 824 352 830 M368 830 C374 824 384 824 390 830 C396 824 406 824 414 832"/>
+</g>
+</svg>
+"""
+(ASSETS / "vase-vision.svg").write_text(vase_svg, encoding="utf-8")
 
 print(f"sky-stars.svg: {len(sky_svg) / 1024:.0f} KB")
 

@@ -483,6 +483,9 @@ html.no-js .reveal { opacity: 1; transform: none; }
   font-size: 0.92rem;
 }
 .footer-bottom .tc { color: var(--gold-dim); letter-spacing: 0.4em; display: block; margin-bottom: 0.5rem; }
+.footer-bottom > span { display: block; }
+.footer-bottom .mantra-line { margin-top: 0.5rem; font-family: var(--font-display); font-style: italic; color: var(--gold); }
+.footer-bottom .mantra-line [lang] { font-style: normal; font-family: var(--font-tc); letter-spacing: 0.2em; }
 
 /* ============================================================
    CONTENT BLOCKS (about / bio / refuge pages)

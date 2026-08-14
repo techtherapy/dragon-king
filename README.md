@@ -17,6 +17,8 @@ SVG line-art in the style of a sutra frontispiece.
 | `about.html` | About the sutra + full bilingual study reflection |
 | `his-holiness-living-buddha-lian-sheng.html` | Biography of the root guru |
 | `refuge.html` | How to take refuge (rite + three registration methods) |
+| `treasure-vase-yoga.html` | **Generated** — the Dragon King Treasure Vase Yoga teaching (built by `scripts/build_practice.py` from `extra-content/`), with the vase-vision illustration |
+| `treasure-vase-wishes.html` | Book 146 ch. 32 — Wishes in the Treasure Vase Practice (bilingual, with book cover) |
 | `contact.html` | True Buddha School contact points |
 
 ## Regenerating generated files
@@ -28,6 +30,9 @@ python3 scripts/generate_dragon.py
 
 # Reader page (read.html) from the source sutra HTML
 python3 scripts/build_reader.py
+
+# Treasure Vase Yoga page from the transcripts in extra-content/
+python3 scripts/build_practice.py
 ```
 
 `read.html` is built from `Dragon king sutra hailongwang_complete.html`

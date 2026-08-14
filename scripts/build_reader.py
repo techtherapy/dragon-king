@@ -167,6 +167,7 @@ CHROME_HEAD = """<!DOCTYPE html>
   <nav class="site-nav">
     <a href="about.html">About</a>
     <a href="read.html" aria-current="page">Read</a>
+    <a href="treasure-vase-yoga.html">Practice</a>
     <a href="his-holiness-living-buddha-lian-sheng.html">Living Buddha Lian Sheng</a>
     <a href="contact.html">Contact</a>
     <a href="refuge.html" class="nav-cta">Take Refuge</a>
@@ -200,6 +201,13 @@ CHROME_FOOT = """
         <li><a href="read.html">Read the Sutra</a></li>
         <li><a href="about.html#reflection">Study Reflection</a></li>
         <li><a href="read.html?print">Print the Sutra</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Teachings</h4>
+      <ul>
+        <li><a href="treasure-vase-yoga.html">Treasure Vase Yoga</a></li>
+        <li><a href="treasure-vase-wishes.html">Wishes in the Treasure Vase</a></li>
       </ul>
     </div>
     <div>
@@ -250,7 +258,8 @@ CHROME_FOOT = """
   
   <div class="footer-bottom">
     <span class="tc" lang="zh-Hant">南無海龍王菩薩</span>
-    <span>May all beings share in the merit of this offering of the Dharma · 嗡咕嚕蓮生悉地吽</span>
+    <span>May all beings share in the merit of this offering of the Dharma</span>
+    <span class="mantra-line">Om Guru Lian Sheng Siddhi Hum · <span lang="zh-Hant">嗡咕嚕蓮生悉地吽</span></span>
   </div>
 </footer>
 
