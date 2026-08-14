@@ -711,19 +711,19 @@ waves_svg += "</svg>\n"
 
 
 # ----------------------------------------------------------------------
-# parallax sky layers — stars and clouds as separate files so the page
-# can move them at different scroll rates
+# parallax sky layers — fixed-size repeating tiles (constant scale on any
+# viewport; tiling means no layer edges can ever be exposed)
 # ----------------------------------------------------------------------
 random.seed(11)
 stars = ""
-for _ in range(46):
-    sx, sy = random.uniform(20, 1580), random.uniform(20, 880)
+for _ in range(26):
+    sx, sy = random.uniform(20, 1180), random.uniform(20, 655)
     r = random.choice((1.0, 1.3, 1.7, 2.2))
     cls = random.choice(("d1", "d2", "d3"))
     stars += f'<circle class="dust {cls}" cx="{fmt(sx)}" cy="{fmt(sy)}" r="{r}" style="animation-delay:{random.uniform(0, 6):.1f}s"/>'
-for _ in range(7):
-    sx, sy = random.uniform(60, 1540), random.uniform(40, 860)
-    s = random.uniform(3.5, 6)
+for _ in range(4):
+    sx, sy = random.uniform(60, 1140), random.uniform(40, 635)
+    s = random.uniform(3.5, 5.5)
     cls = random.choice(("d1", "d2"))
     stars += (f'<path class="spark {cls}" style="animation-delay:{random.uniform(0, 5):.1f}s" '
               f'd="M{fmt(sx)} {fmt(sy - s)} L{fmt(sx + s * 0.28)} {fmt(sy - s * 0.28)} L{fmt(sx + s)} {fmt(sy)} '
@@ -739,9 +739,8 @@ SKY_STYLE = """
   @keyframes twinkle { from { opacity:.1; } to { opacity:.95; } }
   @media (prefers-reduced-motion: reduce) { .d1,.d2,.d3 { animation:none; opacity:.6; } }
 """
-sky_svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" '
-           f'preserveAspectRatio="xMidYMid slice" aria-hidden="true">'
-           f'<style>{SKY_STYLE}</style>{stars}</svg>')
+sky_svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" '
+           f'aria-hidden="true"><style>{SKY_STYLE}</style>{stars}</svg>')
 (ASSETS / "sky-stars.svg").write_text(sky_svg, encoding="utf-8")
 
 
@@ -758,24 +757,21 @@ def cloud_layer(name, clouds, opacity, stroke_w):
   @keyframes drift {{ from {{ transform:translateX(-26px); }} to {{ transform:translateX(26px); }} }}
   @media (prefers-reduced-motion: reduce) {{ .cloud-a,.cloud-b {{ animation:none; }} }}
 """
-    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" '
-           f'preserveAspectRatio="xMidYMid slice" aria-hidden="true">'
-           f'<style>{style}</style><defs>{CLOUD_DEF}</defs>{body}</svg>')
+    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" '
+           f'aria-hidden="true"><style>{style}</style><defs>{CLOUD_DEF}</defs>{body}</svg>')
     (ASSETS / name).write_text(svg, encoding="utf-8")
 
 
+# cloud extents are roughly ±160×scale wide; keep centres clear of tile edges
 cloud_layer("clouds-far.svg", [
-    (250, 190, 0.85, "cloud-a"), (1330, 150, 0.7, "cloud-b"),
-    (1430, 480, 0.8, "cloud-a"), (180, 620, 0.75, "cloud-b"),
-    (700, 90, 0.6, "cloud-a"), (940, 320, 0.55, "cloud-b"),
-    (620, 560, 0.65, "cloud-a"), (1080, 790, 0.9, "cloud-b"),
-    (820, 850, 0.6, "cloud-a"),
+    (260, 170, 0.8, "cloud-a"), (1150, 130, 0.65, "cloud-b"),
+    (700, 330, 0.55, "cloud-a"), (240, 610, 0.7, "cloud-b"),
+    (1180, 560, 0.85, "cloud-a"), (720, 690, 0.6, "cloud-b"),
 ], opacity=0.22, stroke_w=2)
 
 cloud_layer("clouds-near.svg", [
-    (330, 200, 1.7, "cloud-b"), (1300, 690, 2.0, "cloud-a"),
-    (1150, 170, 1.4, "cloud-b"), (560, 810, 1.6, "cloud-a"),
-    (760, 430, 1.1, "cloud-b"),
+    (330, 240, 1.25, "cloud-b"), (1080, 620, 1.45, "cloud-a"),
+    (1090, 180, 1.0, "cloud-b"), (420, 660, 1.1, "cloud-a"),
 ], opacity=0.3, stroke_w=1.6)
 
 print(f"sky-stars.svg: {len(sky_svg) / 1024:.0f} KB")

@@ -23,7 +23,7 @@
     background:
       radial-gradient(ellipse 75% 65% at 68% 42%, rgba(29, 53, 96, 0.55), transparent 62%),
       radial-gradient(ellipse 55% 45% at 20% 80%, rgba(18, 35, 64, 0.5), transparent 65%),
-      linear-gradient(180deg, #060c17 0%, var(--abyss) 45%, #0a1424 100%);
+      linear-gradient(180deg, #060c17 0%, var(--abyss) 45%, var(--abyss) 100%);
   }
   .hero-inner {
     display: grid;
@@ -80,17 +80,16 @@
     margin: -4% auto 0 -6%;
     filter: drop-shadow(0 24px 70px rgba(3, 7, 14, 0.8));
   }
-  /* parallax sky layers */
+  /* parallax sky layers — fixed-size repeating tiles */
   .hero-layer {
     position: absolute;
-    left: 0; right: 0; top: -24%; bottom: -12%;
+    left: 0; right: 0; top: -25%; bottom: -15%;
     pointer-events: none;
-    overflow: hidden;
+    background-repeat: repeat;
   }
-  .hero-layer img { width: 100%; height: 100%; object-fit: cover; }
-  .hero-layer.stars { z-index: 0; }
-  .hero-layer.clouds-far { z-index: 0; }
-  .hero-layer.clouds-near { z-index: 1; }
+  .hero-layer.stars { z-index: 0; background-image: url("assets/sky-stars.svg"); background-size: 1200px auto; }
+  .hero-layer.clouds-far { z-index: 0; background-image: url("assets/clouds-far.svg"); background-size: 1250px auto; }
+  .hero-layer.clouds-near { z-index: 1; background-image: url("assets/clouds-near.svg"); background-size: 1450px auto; background-position: 55% 30%; }
   .hero-inner { position: relative; z-index: 2; }
   .hero-waves {
     position: absolute;
@@ -238,9 +237,9 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero">
-  <div class="hero-layer stars" data-parallax="0.2" aria-hidden="true"><img src="assets/sky-stars.svg" alt=""></div>
-  <div class="hero-layer clouds-far" data-parallax="0.12" aria-hidden="true"><img src="assets/clouds-far.svg" alt=""></div>
-  <div class="hero-layer clouds-near" data-parallax="-0.09" aria-hidden="true"><img src="assets/clouds-near.svg" alt=""></div>
+  <div class="hero-layer stars" data-parallax="0.2" aria-hidden="true"></div>
+  <div class="hero-layer clouds-far" data-parallax="0.12" aria-hidden="true"></div>
+  <div class="hero-layer clouds-near" data-parallax="-0.09" aria-hidden="true"></div>
   <div class="wrap hero-inner">
     <div>
       <div class="hero-title-block">
