@@ -207,6 +207,48 @@
   }
   .glance .g .v { color: var(--cream); font-size: 1.05rem; }
   .glance .g .v.tc { font-size: 1.6rem; color: var(--gold-bright); }
+  /* section list at the top of the teaching */
+  .page-toc {
+    margin: 1.1rem 0 0;
+    border: 1px solid var(--gold-ghost);
+    padding: 1.6rem 1.6rem 1.4rem;
+  }
+  .page-toc .toc-h {
+    font-family: var(--font-display);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    color: var(--gold);
+    margin: 0 0 1.1rem;
+  }
+  .toc-cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem 2.4rem;
+  }
+  .page-toc .toc-part {
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-style: italic;
+    margin: 0 0 0.5rem;
+  }
+  .page-toc ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: toc;
+  }
+  .page-toc li { counter-increment: toc; margin: 0 0 0.45rem; line-height: 1.45; }
+  .page-toc li::before {
+    content: counter(toc) ".";
+    color: var(--gold-dim);
+    margin-right: 0.55rem;
+    font-family: var(--font-display);
+  }
+  .page-toc a { color: var(--cream-dim); border-bottom: 1px solid transparent; }
+  .page-toc a:hover { color: var(--gold-bright); border-bottom-color: var(--gold-ghost); }
+  /* anchored headings must clear the fixed header when jumped to */
+  .article-sub { scroll-margin-top: calc(var(--header-h) + 1.2rem); }
 </style>
 </head>
 <body>
@@ -255,7 +297,7 @@
     </div>
 
     <figure class="vision-figure reveal">
-      <img src="assets/vase-vision.svg" alt="The visualization of the practice: from the sealed treasure vase a dragon rises and transforms into the Five Dhyani Buddhas, whose light pours back down upon the vase" loading="lazy">
+      <img src="assets/vase-vision.svg" width="720" height="960" alt="The visualization of the practice: from the sealed treasure vase a dragon rises and transforms into the Five Dhyani Buddhas, whose light pours back down upon the vase" loading="lazy">
       <figcaption lang="zh-Hant">寶瓶化龍，龍化五佛，五佛放光加持寶瓶<br><span lang="en" style="font-style:italic">The vase becomes the Dragon King;<br>the Dragon King becomes the Five Buddhas;<br>their light blesses the vase.</span></figcaption>
     </figure>
 
@@ -265,6 +307,11 @@
       <div class="g"><span class="k">Practice</span><span class="v">seven complete sessions</span></div>
       <div class="g"><span class="k">Completion</span><span class="v">the vase is cast<br>into the sea</span></div>
     </div>
+
+    <nav class="page-toc reveal" aria-label="Sections of this teaching">
+      <p class="toc-h">On this page</p>
+      <div class="toc-cols"><div><p class="toc-part">Part One · The Teaching</p><ol><li><a href="#the-cause-of-the-dragon-king-yoga">The Cause of the Dragon King Yoga</a></li><li><a href="#the-third-person-to-go-to-the-dragon-king-s-palace">The Third Person to go to the Dragon King's Palace</a></li><li><a href="#the-secrets-of-making-a-wish-with-the-dragon-king-yoga">The Secrets of Making a Wish with the Dragon King Yoga</a></li></ol></div><div><p class="toc-part">Part Two · The Sadhana</p><ol><li><a href="#how-to-prepare-the-dragon-king-treasure-vase">How To Prepare The Dragon King Treasure Vase</a></li><li><a href="#the-procedure-for-the-dragon-king-yoga">The Procedure For The Dragon King Yoga</a></li><li><a href="#the-results-of-the-dragon-king-yoga">The Results of The Dragon King Yoga</a></li></ol></div></div>
+    </nav>
   </div>
 </section>
 
@@ -273,7 +320,7 @@
     <p class="eyebrow reveal">Part One · The Teaching</p>
     <article class="article">
       <div class="h-rule reveal" aria-hidden="true"><img src="assets/deco-cloud-rule.svg" width="420" height="46" alt="" loading="lazy"></div>
-      <h2 class="article-sub reveal">The Cause of the Dragon King Yoga</h2>
+      <h2 class="article-sub reveal" id="the-cause-of-the-dragon-king-yoga">The Cause of the Dragon King Yoga</h2>
       <p class="reveal">Good evening, everyone! Since just a few days ago we celebrated the Chinese New Year, I would like to wish everyone here Kung Hei Fat Choi! (applause)</p>
       <p class="reveal">We are all happy to hear the words Fat Choi (making money)! I am so happy to have the opportunity to greet everyone here tonight, as I so rarely get the chance to do so. I am very excited to see everyone so enthusiastic.</p>
       <p class="reveal">Since the Chinese New Year occurred so recently, I thought it would be appropriate to discuss and teach the Dragon King Yoga today. Actually, the teaching of this Dragon King Yoga was requested by the Dragon King himself. Through me, He wants everyone to know that such a yoga exists because, up till now, it has not been transmitted by anyone. Or, if it has, I have not heard of it.</p>
@@ -298,7 +345,7 @@
       <p class="reveal">Do you know what this Dragon King then said? He told me that he had so much leisure that he spent his time just grabbing seaweeds and sea lions, while swimming and rollicking in the ocean because no one asked him for anything.</p>
       <p class="reveal">Perhaps, you wonder, after hearing all this, whether I am truly on such good terms with the Dragon King? While it is true that the Dragon King and I are on very good terms, still, I am not the Dragon King's son-in-law (laughter). In Taiwan, there is a folk saying: when someone commits suicide by jumping into the ocean, one becomes the son-in-law of the Dragon King. Well, I am not the Dragon King's son-in-law, but I am very fond of swimming in the ocean. When I was a boy, my favorite place to swim was the Hsitzu Bay at Kaohsiung Harbor in Taiwan. I would dive to the bottom of the bay to look for things to bring up to the surface. At that time, I didn't swim to the Dragon King's Palace and had not yet made the acquaintance of the Dragon King.</p>
       <div class="h-rule reveal" aria-hidden="true"><img src="assets/deco-cloud-rule.svg" width="420" height="46" alt="" loading="lazy"></div>
-      <h2 class="article-sub reveal">The Third Person to go to the Dragon King's Palace</h2>
+      <h2 class="article-sub reveal" id="the-third-person-to-go-to-the-dragon-king-s-palace">The Third Person to go to the Dragon King's Palace</h2>
       <p class="reveal">It was much later, after I started my cultivation practice, when I was actually able to visit the Dragon King's Palace during my meditation. According to the Buddhist scriptures, two people have visited the Dragon King's Palace. The first one was the founder of our Buddhist religion, Buddha Sakyamuni, who went there to teach the dharma.</p>
       <p class="reveal">At that time Buddha Sakyamuni did not use an oxygen tank or put on a diving suit. What happened was that the Dragon King invited Buddha Sakyamuni to go to the Dragon King Palace to give teachings, so a staircase was fashioned out of water which led all the way into the Palace. On this staircase, Buddha Sakyamuni and his attendants, together with a few arahats, walked all the way into the Dragon King's Palace.</p>
       <div class="deco-figure reveal" aria-hidden="true">
@@ -309,7 +356,7 @@
       <p class="reveal">Our Master Always-wise loves to sing this song. Maybe he can sing for us next time when we have a Karaoke (sing-along). With practice, he's getting better and better with this song, though we enjoyed it more before, when he used to sing out of tune (laughter).</p>
       <p class="reveal">Buddha Sakyamuni went to the Dragon King's Palace to deliver the teachings, and Bodhisattva Nagarjuna went there to read the sutra. I could not say that I am the first person who has gone to the Dragon King's Palace, but my visit there in my meditation would have made me at least the third person to have visited there, after Buddha Sakyamuni and Bodhisattva Nagarjuna (audience applauds). The volumes of Buddhist sutra in the Dragon King's Palace are as vast as the ocean. According to my knowledge, it is four times as much as the Buddhist Canon in the human world! Since I have read all the Buddha sutra in the Dragon King's Palace, the amount of buddhadharma I know is therefore four times as much as the dharma currently existing in the human world. If there is someone in this world now who calls himself a Buddha, then I am the Buddha of Buddhas (audience applauds).</p>
       <div class="h-rule reveal" aria-hidden="true"><img src="assets/deco-cloud-rule.svg" width="420" height="46" alt="" loading="lazy"></div>
-      <h2 class="article-sub reveal">The Secrets of Making a Wish with the Dragon King Yoga</h2>
+      <h2 class="article-sub reveal" id="the-secrets-of-making-a-wish-with-the-dragon-king-yoga">The Secrets of Making a Wish with the Dragon King Yoga</h2>
       <p class="reveal">Now this Dragon King Yoga is useful for more than just asking for rain. In the past, many eminent monks, such as the Reverend Monk Hsu Yuen (Empty Cloud), knew the methods to ask for rain. Even in Tantra, there are yogas for such purpose. If you all learn this Dragon King Yoga, you can all become great dharma masters because, when you ask for rain, there will surely be rain, for as long as the Dragons come and make a somersault, then it will rain! However, this Dragon King Yoga is not merely for asking for rain; it can also bring you fortune since the Dragon King is a wealthy king of the ocean. Jambhala is the greatest wealth deity in the sky, and Dragon King is the greatest wealth god in the ocean. Very few people know of this secret. Today I am telling everyone, so you all have another way of making more money (audience applauds).</p>
       <p class="reveal">I am sure that after this dharma teaching, all the Dragon King vases in Hong Kong will be sold out! You see, in order to cultivate this yoga, one needs to offer a Dragon King vase to the Dragon King. A wish may be asked and that wish will be fulfilled. Now I am going to talk about the secrets of these Dragon King treasure vases and the secret of making the wish. As you know, sometimes when we ask something from the Buddhas and Bodhisattvas, our wishes are not always fulfilled. However, a wish made to the Dragon King will definitely be fulfilled. There is a secret method of how to realize a wish. Everyone here tonight will know of this secret, while those not present will not. You have to keep this a secret (laughter); otherwise, if too many people hear of it, then the Dragon King will be so inundated with requests that he won't be able to handle them (laughter).</p>
       <p class="reveal">The fewer people who know of this secret, the faster the Dragon King will be able to fulfill the wish.</p>
@@ -323,7 +370,7 @@
     <article class="article">
       <p class="reveal">This vase that I am holding is called the Dragon King treasure vase. When you offer this vase to the Dragon King, according to the method that I will outline, he will receive it. When he accepts your present, he is obliged to give you back something in return. Our gift to him may not cost much, still he will reciprocate with much more. When we make a wish to a deity through Tantric magic, we have to offer the deity a present. When you offer him a present, he will definitely give you back something in return.</p>
       <div class="h-rule reveal" aria-hidden="true"><img src="assets/deco-cloud-rule.svg" width="420" height="46" alt="" loading="lazy"></div>
-      <h2 class="article-sub reveal">How To Prepare The Dragon King Treasure Vase</h2>
+      <h2 class="article-sub reveal" id="how-to-prepare-the-dragon-king-treasure-vase">How To Prepare The Dragon King Treasure Vase</h2>
       <p class="reveal">First we need to make some preparations. We are going to put five different kinds of medicinal herbs in this vase.</p>
       <p class="reveal">The first kind is Tuber of Fleece-flower, which is black in color. Grind this herb into powder and place it at the bottom of the vase. This represents the Ocean Bottom Chakra. This is the first chakra.</p>
       <p class="reveal">The next kind of herb is called Macrocephala Atractylodes A. Lancea. This herb's natural shape is like a stomach which is connected to the intestines. Grind this into powder and place it inside the vase as the second level, representing the Naval Chakra.</p>
@@ -341,7 +388,7 @@
         <img src="assets/deco-shrine.svg" width="400" height="250" alt="" loading="lazy">
       </div>
       <div class="h-rule reveal" aria-hidden="true"><img src="assets/deco-cloud-rule.svg" width="420" height="46" alt="" loading="lazy"></div>
-      <h2 class="article-sub reveal">The Procedure For The Dragon King Yoga</h2>
+      <h2 class="article-sub reveal" id="the-procedure-for-the-dragon-king-yoga">The Procedure For The Dragon King Yoga</h2>
       <p class="reveal">Next you need to practice the yoga. First follow our True Buddha group practice procedures: The Four Refuges, Mandala Offering, Invocation, Armour Protection, Recitation of The Four Vows, then the Mudra. The Mudra for the Dragon King Yoga is one of the secrets. Look closely, it is like this ( # ). The Mudra sort of looks like the Chinese character for "well (#)". The middle and index fingers of both hands cross to form the " # ".</p>
       <figure class="inline-figure compact reveal">
         <img src="assets/mudra.svg" width="1000" height="1000" alt="The mudra: the index and middle fingers of both hands cross to form 井" loading="lazy">
@@ -360,7 +407,7 @@
       <p class="reveal">If the vase is made of gold, rent a boat and find someone whom you know quite well to row you out to the middle of the ocean. Of course don't row all the way to the high seas (audience laughs), let's say just a little bit away from the shore, then make your wish and drop the treasure vase into the sea. If your vase is made of silver, then you don't have to go through all that trouble, and you don't have to tell me either, since I would not swim for it even if you paid me a hundred dollars (laughter).</p>
       <p class="reveal">After seven days of meditation and visualization, this treasure vase will be empowered. As soon as you throw it, the Dragon King will receive the message. He will be so happy to catch the vase that he will fulfill your wish.</p>
       <div class="h-rule reveal" aria-hidden="true"><img src="assets/deco-cloud-rule.svg" width="420" height="46" alt="" loading="lazy"></div>
-      <h2 class="article-sub reveal">The Results of The Dragon King Yoga</h2>
+      <h2 class="article-sub reveal" id="the-results-of-the-dragon-king-yoga">The Results of The Dragon King Yoga</h2>
       <p class="reveal">Do you have any questions so far regarding this Dragon King Yoga?</p>
       <p class="reveal">(Master Richard Yan asked if there would be any dedication of merit at the end of the yoga.)</p>
       <p class="reveal">Your wish would be the dedication of merit; that is, you will tell the Dragon King how much you have spent on the treasure vase, and that you hope that he will truly empower the vase and become a Buddha himself. It doesn't matter how much you have spent, just as long as his return to you is much greater (laughter).</p>

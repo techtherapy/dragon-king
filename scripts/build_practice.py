@@ -155,6 +155,7 @@ UI = {
         "g_practice": "Practice", "g_practice_v": "seven complete sessions",
         "g_complete": "Completion", "g_complete_v": "the vase is cast<br>into the sea",
         "part1": "Part One · The Teaching", "part2": "Part Two · The Sadhana",
+        "toc_h": "On this page", "toc_aria": "Sections of this teaching",
         "closing": "First use desire to draw them in; then lead them into the wisdom of the Buddha.",
         "btn_refuge": "Take Refuge", "btn_wishes": "Wishes in the Treasure Vase",
         "ends": '&hellip; <span class="muted">[the recorded transcript ends here]</span>',
@@ -185,6 +186,7 @@ UI = {
         "g_practice": "Práctica", "g_practice_v": "siete sesiones completas",
         "g_complete": "Culminación", "g_complete_v": "el jarrón se arroja<br>al mar",
         "part1": "Primera parte · La enseñanza", "part2": "Segunda parte · La sadhana",
+        "toc_h": "En esta página", "toc_aria": "Secciones de esta enseñanza",
         "closing": "Primero atráelos con el deseo; luego condúcelos a la sabiduría del Buda.",
         "btn_refuge": "Tomar Refugio", "btn_wishes": "Deseos en el Jarrón del Tesoro",
         "ends": '&hellip; <span class="muted">[aquí termina la transcripción grabada]</span>',
@@ -227,6 +229,32 @@ def rule_html():
             f'loading="lazy"></div>')
 
 
+def slugify(text):
+    return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
+
+
+def heading_slugs(items):
+    """Anchor id per heading INDEX, derived from the ENGLISH heading so the
+    two languages share the same ids — a link to #the-procedure-for-the-
+    dragon-king-yoga lands on the right section in either language."""
+    return {i: slugify(text) for i, (kind, text) in enumerate(items) if kind == "h"}
+
+
+def contents_html(ui, parts):
+    """The section list at the top of the page. Built from the rendered
+    headings themselves, so it cannot list a section that is not there."""
+    cols = []
+    for label, items, slugs in parts:
+        links = "".join(
+            f'<li><a href="#{slugs[i]}">{text}</a></li>'
+            for i, (kind, text) in enumerate(items) if kind == "h")
+        cols.append(f'<div><p class="toc-part">{label}</p><ol>{links}</ol></div>')
+    return (f'    <nav class="page-toc reveal" aria-label="{ui["toc_aria"]}">\n'
+            f'      <p class="toc-h">{ui["toc_h"]}</p>\n'
+            f'      <div class="toc-cols">{"".join(cols)}</div>\n'
+            f'    </nav>')
+
+
 def plan_anchors(items, used=None):
     """Which paragraph each figure/decoration follows, by INDEX.
 
@@ -250,12 +278,12 @@ def plan_anchors(items, used=None):
     return plan
 
 
-def render(items, plan, captions):
+def render(items, plan, captions, slugs):
     frags = []
     for i, (kind, text) in enumerate(items):
         if kind == "h":
             frags.append(rule_html())
-            frags.append(f'      <h2 class="article-sub reveal">{text}</h2>')
+            frags.append(f'      <h2 class="article-sub reveal" id="{slugs[i]}">{text}</h2>')
         else:
             frags.append(f'      <p class="reveal">{text}</p>')
             for what, src, size in plan.get(i, []):
@@ -286,6 +314,7 @@ def build():
     # anchors are matched on the English text; both pages reuse the positions
     used = set()
     plan1, plan2 = plan_anchors(part1, used), plan_anchors(part2, used)
+    slugs1, slugs2 = heading_slugs(part1), heading_slugs(part2)
     missing = [k for k, *_ in FIGURES + DECOS if k not in used]
     if missing:
         raise SystemExit("figure anchor not found in the transcript: " + "; ".join(missing))
@@ -302,16 +331,17 @@ def build():
         kind, last = p2[-1]
         if not last.rstrip().endswith(">"):
             p2 = p2[:-1] + [(kind, last + ui["ends"])]
-        page = render_page(ui, header, footer,
-                           render(p1, plan1, CAPTIONS[lang]),
-                           render(p2, plan2, CAPTIONS[lang]))
+        toc = contents_html(ui, [(ui["part1"], p1, slugs1), (ui["part2"], p2, slugs2)])
+        page = render_page(ui, header, footer, toc,
+                           render(p1, plan1, CAPTIONS[lang], slugs1),
+                           render(p2, plan2, CAPTIONS[lang], slugs2))
         out = OUT if lang == "en" else OUT_ES
         out.parent.mkdir(exist_ok=True)
         out.write_text(page, encoding="utf-8")
         print(f"{out.relative_to(ROOT)} written: {len(page) / 1024:.0f} KB")
 
 
-def render_page(ui, header, footer, part1_html, part2_html):
+def render_page(ui, header, footer, toc, part1_html, part2_html):
 
     page = f"""<!DOCTYPE html>
 <html lang="{ui['lang']}" class="no-js">
@@ -434,6 +464,48 @@ def render_page(ui, header, footer, part1_html, part2_html):
   }}
   .glance .g .v {{ color: var(--cream); font-size: 1.05rem; }}
   .glance .g .v.tc {{ font-size: 1.6rem; color: var(--gold-bright); }}
+  /* section list at the top of the teaching */
+  .page-toc {{
+    margin: 1.1rem 0 0;
+    border: 1px solid var(--gold-ghost);
+    padding: 1.6rem 1.6rem 1.4rem;
+  }}
+  .page-toc .toc-h {{
+    font-family: var(--font-display);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    color: var(--gold);
+    margin: 0 0 1.1rem;
+  }}
+  .toc-cols {{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem 2.4rem;
+  }}
+  .page-toc .toc-part {{
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-style: italic;
+    margin: 0 0 0.5rem;
+  }}
+  .page-toc ol {{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: toc;
+  }}
+  .page-toc li {{ counter-increment: toc; margin: 0 0 0.45rem; line-height: 1.45; }}
+  .page-toc li::before {{
+    content: counter(toc) ".";
+    color: var(--gold-dim);
+    margin-right: 0.55rem;
+    font-family: var(--font-display);
+  }}
+  .page-toc a {{ color: var(--cream-dim); border-bottom: 1px solid transparent; }}
+  .page-toc a:hover {{ color: var(--gold-bright); border-bottom-color: var(--gold-ghost); }}
+  /* anchored headings must clear the fixed header when jumped to */
+  .article-sub {{ scroll-margin-top: calc(var(--header-h) + 1.2rem); }}
 </style>
 </head>
 <body>
@@ -461,7 +533,7 @@ def render_page(ui, header, footer, part1_html, part2_html):
     </div>
 
     <figure class="vision-figure reveal">
-      <img src="{ASSETS}vase-vision.svg" alt="{ui['vision_alt']}" loading="lazy">
+      <img src="{ASSETS}vase-vision.svg" width="720" height="960" alt="{ui['vision_alt']}" loading="lazy">
       <figcaption lang="zh-Hant">寶瓶化龍，龍化五佛，五佛放光加持寶瓶<br><span lang="{ui['lang']}" style="font-style:italic">{ui['vision_cap']}</span></figcaption>
     </figure>
 
@@ -471,6 +543,8 @@ def render_page(ui, header, footer, part1_html, part2_html):
       <div class="g"><span class="k">{ui['g_practice']}</span><span class="v">{ui['g_practice_v']}</span></div>
       <div class="g"><span class="k">{ui['g_complete']}</span><span class="v">{ui['g_complete_v']}</span></div>
     </div>
+
+{toc}
   </div>
 </section>
 

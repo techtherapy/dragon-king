@@ -207,6 +207,48 @@
   }
   .glance .g .v { color: var(--cream); font-size: 1.05rem; }
   .glance .g .v.tc { font-size: 1.6rem; color: var(--gold-bright); }
+  /* section list at the top of the teaching */
+  .page-toc {
+    margin: 1.1rem 0 0;
+    border: 1px solid var(--gold-ghost);
+    padding: 1.6rem 1.6rem 1.4rem;
+  }
+  .page-toc .toc-h {
+    font-family: var(--font-display);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    color: var(--gold);
+    margin: 0 0 1.1rem;
+  }
+  .toc-cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem 2.4rem;
+  }
+  .page-toc .toc-part {
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-style: italic;
+    margin: 0 0 0.5rem;
+  }
+  .page-toc ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: toc;
+  }
+  .page-toc li { counter-increment: toc; margin: 0 0 0.45rem; line-height: 1.45; }
+  .page-toc li::before {
+    content: counter(toc) ".";
+    color: var(--gold-dim);
+    margin-right: 0.55rem;
+    font-family: var(--font-display);
+  }
+  .page-toc a { color: var(--cream-dim); border-bottom: 1px solid transparent; }
+  .page-toc a:hover { color: var(--gold-bright); border-bottom-color: var(--gold-ghost); }
+  /* anchored headings must clear the fixed header when jumped to */
+  .article-sub { scroll-margin-top: calc(var(--header-h) + 1.2rem); }
 </style>
 </head>
 <body>
@@ -255,7 +297,7 @@
     </div>
 
     <figure class="vision-figure reveal">
-      <img src="/assets/vase-vision.svg" alt="La visualización de la práctica: del jarrón del tesoro sellado se eleva un dragón que se transforma en los Cinco Budas Dhyani, cuya luz desciende de nuevo sobre el jarrón" loading="lazy">
+      <img src="/assets/vase-vision.svg" width="720" height="960" alt="La visualización de la práctica: del jarrón del tesoro sellado se eleva un dragón que se transforma en los Cinco Budas Dhyani, cuya luz desciende de nuevo sobre el jarrón" loading="lazy">
       <figcaption lang="zh-Hant">寶瓶化龍，龍化五佛，五佛放光加持寶瓶<br><span lang="es" style="font-style:italic">El jarrón se vuelve el Rey Dragón;<br>el Rey Dragón se vuelve los Cinco Budas;<br>su luz bendice el jarrón.</span></figcaption>
     </figure>
 
@@ -265,6 +307,11 @@
       <div class="g"><span class="k">Práctica</span><span class="v">siete sesiones completas</span></div>
       <div class="g"><span class="k">Culminación</span><span class="v">el jarrón se arroja<br>al mar</span></div>
     </div>
+
+    <nav class="page-toc reveal" aria-label="Secciones de esta enseñanza">
+      <p class="toc-h">En esta página</p>
+      <div class="toc-cols"><div><p class="toc-part">Primera parte · La enseñanza</p><ol><li><a href="#the-cause-of-the-dragon-king-yoga">El origen del Yoga del Rey Dragón</a></li><li><a href="#the-third-person-to-go-to-the-dragon-king-s-palace">La tercera persona en ir al Palacio del Rey Dragón</a></li><li><a href="#the-secrets-of-making-a-wish-with-the-dragon-king-yoga">Los secretos para pedir un deseo con el Yoga del Rey Dragón</a></li></ol></div><div><p class="toc-part">Segunda parte · La sadhana</p><ol><li><a href="#how-to-prepare-the-dragon-king-treasure-vase">Cómo preparar el jarrón del tesoro del Rey Dragón</a></li><li><a href="#the-procedure-for-the-dragon-king-yoga">El procedimiento del Yoga del Rey Dragón</a></li><li><a href="#the-results-of-the-dragon-king-yoga">Los resultados del Yoga del Rey Dragón</a></li></ol></div></div>
+    </nav>
   </div>
 </section>
 
@@ -273,7 +320,7 @@
     <p class="eyebrow reveal">Primera parte · La enseñanza</p>
     <article class="article">
       <div class="h-rule reveal" aria-hidden="true"><img src="/assets/deco-cloud-rule.svg" width="420" height="46" alt="" loading="lazy"></div>
-      <h2 class="article-sub reveal">El origen del Yoga del Rey Dragón</h2>
+      <h2 class="article-sub reveal" id="the-cause-of-the-dragon-king-yoga">El origen del Yoga del Rey Dragón</h2>
       <p class="reveal">¡Buenas noches a todos! Como hace apenas unos días celebramos el Año Nuevo chino, quisiera desearles a todos los que están aquí: ¡Kung Hei Fat Choi! (aplausos)</p>
       <p class="reveal">¡A todos nos alegra oír las palabras Fat Choi (hacer dinero)! Estoy muy contento de tener la oportunidad de saludarlos esta noche, porque muy pocas veces tengo la ocasión de hacerlo. Me emociona mucho verlos a todos tan entusiasmados.</p>
       <p class="reveal">Como el Año Nuevo chino fue hace tan poco, pensé que sería apropiado hablar hoy del Yoga del Rey Dragón y enseñarlo. En realidad, la transmisión de este Yoga del Rey Dragón la pidió el propio Rey Dragón. A través de mí, Él quiere que todos sepan que existe un yoga así porque, hasta ahora, nadie lo ha transmitido. O, si alguien lo ha hecho, yo no me he enterado.</p>
@@ -298,7 +345,7 @@
       <p class="reveal">¿Saben lo que me dijo después este Rey Dragón? Me contó que tenía tanto tiempo libre que se lo pasaba agarrando algas y leones marinos, nadando y retozando en el océano, porque nadie le pedía nada.</p>
       <p class="reveal">Tal vez, después de oír todo esto, se pregunten si de verdad me llevo tan bien con el Rey Dragón. Si bien es cierto que el Rey Dragón y yo nos llevamos muy bien, aun así no soy el yerno del Rey Dragón (risas). En Taiwán hay un dicho popular: cuando alguien se suicida lanzándose al mar, se convierte en el yerno del Rey Dragón. Pues bien, yo no soy el yerno del Rey Dragón, pero me encanta nadar en el mar. Cuando era niño, mi lugar favorito para nadar era la bahía de Hsitzu, en el puerto de Kaohsiung, en Taiwán. Me sumergía hasta el fondo de la bahía para buscar cosas y sacarlas a la superficie. En aquel entonces no nadaba hasta el Palacio del Rey Dragón y todavía no conocía al Rey Dragón.</p>
       <div class="h-rule reveal" aria-hidden="true"><img src="/assets/deco-cloud-rule.svg" width="420" height="46" alt="" loading="lazy"></div>
-      <h2 class="article-sub reveal">La tercera persona en ir al Palacio del Rey Dragón</h2>
+      <h2 class="article-sub reveal" id="the-third-person-to-go-to-the-dragon-king-s-palace">La tercera persona en ir al Palacio del Rey Dragón</h2>
       <p class="reveal">Fue mucho después, cuando ya había empezado mi práctica de cultivo, cuando realmente pude visitar el Palacio del Rey Dragón durante mi meditación. Según las escrituras budistas, dos personas han visitado el Palacio del Rey Dragón. La primera fue el fundador de nuestra religión budista, el Buda Sakyamuni, que fue allí a enseñar el dharma.</p>
       <p class="reveal">En aquel entonces, el Buda Sakyamuni no usó un tanque de oxígeno ni se puso un traje de buceo. Lo que pasó fue que el Rey Dragón invitó al Buda Sakyamuni a ir al Palacio del Rey Dragón a dar enseñanzas, así que se formó con agua una escalera que llevaba directo hasta el interior del Palacio. Por esa escalera, el Buda Sakyamuni y sus asistentes, junto con unos cuantos arahats, caminaron hasta el interior del Palacio del Rey Dragón.</p>
       <div class="deco-figure reveal" aria-hidden="true">
@@ -309,7 +356,7 @@
       <p class="reveal">A nuestro Maestro Siempre-Sabio le encanta cantar esa canción. Tal vez pueda cantárnosla la próxima vez que hagamos karaoke. Con la práctica, cada vez le sale mejor, aunque la disfrutábamos más antes, cuando la cantaba desafinado (risas).</p>
       <p class="reveal">El Buda Sakyamuni fue al Palacio del Rey Dragón a impartir las enseñanzas, y el Bodhisattva Nagarjuna fue allí a leer los sutras. No podría decir que soy la primera persona que ha ido al Palacio del Rey Dragón, pero mi visita allí durante la meditación me convertiría al menos en la tercera persona en haberlo visitado, después del Buda Sakyamuni y del Bodhisattva Nagarjuna (el público aplaude). Los volúmenes de sutras budistas que hay en el Palacio del Rey Dragón son tan vastos como el océano. Según lo que yo sé, ¡son cuatro veces más que todo el Canon Budista del mundo humano! Como he leído todos los sutras del Buda que hay en el Palacio del Rey Dragón, la cantidad de budadharma que conozco es, por lo tanto, cuatro veces mayor que el dharma que existe actualmente en el mundo humano. Si hay alguien en este mundo que se llame a sí mismo un buda, entonces yo soy el Buda de los Budas (el público aplaude).</p>
       <div class="h-rule reveal" aria-hidden="true"><img src="/assets/deco-cloud-rule.svg" width="420" height="46" alt="" loading="lazy"></div>
-      <h2 class="article-sub reveal">Los secretos para pedir un deseo con el Yoga del Rey Dragón</h2>
+      <h2 class="article-sub reveal" id="the-secrets-of-making-a-wish-with-the-dragon-king-yoga">Los secretos para pedir un deseo con el Yoga del Rey Dragón</h2>
       <p class="reveal">Ahora bien, este Yoga del Rey Dragón sirve para mucho más que solo pedir lluvia. En el pasado, muchos monjes eminentes, como el Reverendo Monje Hsu Yuen (Nube Vacía), conocían los métodos para pedir lluvia. Incluso en el Tantra hay yogas con ese propósito. Si todos ustedes aprenden este Yoga del Rey Dragón, todos pueden llegar a ser grandes maestros del dharma porque, cuando pidan lluvia, seguro que lloverá: ¡basta con que los dragones vengan y den una voltereta para que llueva! Sin embargo, este Yoga del Rey Dragón no es solo para pedir lluvia; también puede traerles fortuna, ya que el Rey Dragón es un rey rico del océano. Jambhala es la mayor deidad de la riqueza en el cielo, y el Rey Dragón es el mayor dios de la riqueza en el océano. Muy poca gente conoce este secreto. Hoy se lo cuento a todos, así que ya tienen otra manera de ganar más dinero (el público aplaude).</p>
       <p class="reveal">Estoy seguro de que, después de esta enseñanza del dharma, ¡se van a agotar todos los jarrones del Rey Dragón en Hong Kong! Verán, para cultivar este yoga uno necesita ofrecerle un jarrón del Rey Dragón al Rey Dragón. Se puede pedir un deseo y ese deseo se cumplirá. Ahora voy a hablar de los secretos de estos jarrones del tesoro del Rey Dragón y del secreto de cómo pedir el deseo. Como saben, a veces, cuando les pedimos algo a los budas y bodhisattvas, nuestros deseos no siempre se cumplen. Sin embargo, un deseo pedido al Rey Dragón sin duda se cumplirá. Hay un método secreto para hacer realidad un deseo. Todos los que están aquí esta noche van a conocer este secreto, mientras que los que no están presentes no lo sabrán. Tienen que guardarlo en secreto (risas); si no, si se entera demasiada gente, el Rey Dragón se verá tan inundado de peticiones que no va a poder con todas (risas).</p>
       <p class="reveal">Cuanta menos gente conozca este secreto, más rápido podrá el Rey Dragón cumplir el deseo.</p>
@@ -323,7 +370,7 @@
     <article class="article">
       <p class="reveal">Este jarrón que sostengo en la mano se llama el jarrón del tesoro del Rey Dragón. Cuando le ofrezcan este jarrón al Rey Dragón, según el método que voy a explicarles, él lo recibirá. Y cuando acepta su regalo, queda obligado a devolverles algo a cambio. Puede que nuestro obsequio no cueste mucho, y aun así él corresponderá con muchísimo más. Cuando le pedimos un deseo a una deidad por medio de la magia tántrica, tenemos que ofrecerle un regalo. Y cuando le ofrecen un regalo, sin falta les dará algo a cambio.</p>
       <div class="h-rule reveal" aria-hidden="true"><img src="/assets/deco-cloud-rule.svg" width="420" height="46" alt="" loading="lazy"></div>
-      <h2 class="article-sub reveal">Cómo preparar el jarrón del tesoro del Rey Dragón</h2>
+      <h2 class="article-sub reveal" id="how-to-prepare-the-dragon-king-treasure-vase">Cómo preparar el jarrón del tesoro del Rey Dragón</h2>
       <p class="reveal">Primero hay que hacer algunos preparativos. Vamos a poner cinco clases distintas de hierbas medicinales dentro de este jarrón.</p>
       <p class="reveal">La primera clase es el tubérculo de Poligono multiflor, que es de color negro. Muelan esta hierba hasta hacerla polvo y colóquenla en el fondo del jarrón. Esto representa el chakra de la base. Ese es el primer chakra.</p>
       <p class="reveal">La siguiente clase de hierba se llama Atractylodes macrocephala A. lancea. La forma natural de esta hierba es como un estómago conectado con los intestinos. Muélanla hasta hacerla polvo y colóquenla dentro del jarrón como segunda capa, representando el chakra del ombligo.</p>
@@ -341,7 +388,7 @@
         <img src="/assets/deco-shrine.svg" width="400" height="250" alt="" loading="lazy">
       </div>
       <div class="h-rule reveal" aria-hidden="true"><img src="/assets/deco-cloud-rule.svg" width="420" height="46" alt="" loading="lazy"></div>
-      <h2 class="article-sub reveal">El procedimiento del Yoga del Rey Dragón</h2>
+      <h2 class="article-sub reveal" id="the-procedure-for-the-dragon-king-yoga">El procedimiento del Yoga del Rey Dragón</h2>
       <p class="reveal">Enseguida hay que practicar el yoga. Primero sigan los procedimientos de nuestra práctica grupal del Buda Verdadero: los Cuatro Refugios, la Ofrenda del Mandala, la Invocación, la Protección de la Armadura, la recitación de los Cuatro Votos, y después el mudra. El mudra del Yoga del Rey Dragón es uno de los secretos. Miren bien, es así ( # ). El mudra se parece un poco al carácter chino de "pozo (#)". Los dedos medio e índice de ambas manos se cruzan para formar el " # ".</p>
       <figure class="inline-figure compact reveal">
         <img src="/assets/mudra.svg" width="1000" height="1000" alt="El mudra: los dedos índice y medio de ambas manos se cruzan formando 井" loading="lazy">
@@ -360,7 +407,7 @@
       <p class="reveal">Si el jarrón es de oro, renten una lancha y busquen a alguien de mucha confianza que los lleve remando hasta la mitad del mar. Claro que no remen hasta alta mar (el público ríe); digamos que nada más un poquito lejos de la orilla, y ahí piden su deseo y dejan caer el jarrón del tesoro al mar. Si su jarrón es de plata, entonces no tienen que pasar por toda esa molestia, y tampoco hace falta que me avisen, porque yo no nadaría por él ni aunque me pagaran cien dólares (risas).</p>
       <p class="reveal">Después de siete días de meditación y visualización, este jarrón del tesoro quedará investido de poder. En cuanto lo lancen, el Rey Dragón recibirá el mensaje. Se pondrá tan contento de atrapar el jarrón que les cumplirá su deseo.</p>
       <div class="h-rule reveal" aria-hidden="true"><img src="/assets/deco-cloud-rule.svg" width="420" height="46" alt="" loading="lazy"></div>
-      <h2 class="article-sub reveal">Los resultados del Yoga del Rey Dragón</h2>
+      <h2 class="article-sub reveal" id="the-results-of-the-dragon-king-yoga">Los resultados del Yoga del Rey Dragón</h2>
       <p class="reveal">¿Tienen alguna pregunta hasta aquí sobre este Yoga del Rey Dragón?</p>
       <p class="reveal">(El Maestro Richard Yan preguntó si habría alguna dedicación de méritos al final del yoga.)</p>
       <p class="reveal">Su deseo sería la dedicación de méritos; es decir, le van a decir al Rey Dragón cuánto gastaron en el jarrón del tesoro, y que esperan que él de verdad le dé poder al jarrón y que él mismo llegue a ser un buda. No importa cuánto hayan gastado, con tal de que lo que él les devuelva sea mucho mayor (risas).</p>
