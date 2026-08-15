@@ -328,7 +328,7 @@ CHROME_ES = [
     ('<a href="treasure-vase-yoga.html">Practice</a>',
      '<a href="/es/treasure-vase-yoga.html">Práctica</a>'),
     ('<a href="his-holiness-living-buddha-lian-sheng.html">Living Buddha Lian Sheng</a>',
-     '<a href="/es/his-holiness-living-buddha-lian-sheng.html">Living Buddha Lian Sheng</a>'),
+     '<a href="/es/his-holiness-living-buddha-lian-sheng.html">Buda Viviente Lian Sheng</a>'),
     ('<a href="contact.html">Contact</a>', '<a href="/es/contact.html">Contacto</a>'),
     ('<a href="/es/read.html" class="lang-switch" hreflang="es" lang="es">Español</a>',
      '<a href="/read.html" class="lang-switch" hreflang="en" lang="en">English</a>'),
