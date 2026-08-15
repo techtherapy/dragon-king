@@ -181,7 +181,6 @@
   .hero-art img.dragon {
     width: min(122%, 880px);
     margin: -4% auto 0 -6%;
-    filter: drop-shadow(0 24px 70px rgba(3, 7, 14, 0.8));
   }
   /* parallax sky layers — fixed-size repeating tiles */
   .hero-layer {
@@ -344,10 +343,18 @@
   .vase-figure img {
     width: min(100%, 330px);
     margin: 0 auto;
-    filter: drop-shadow(0 18px 46px rgba(3, 7, 14, 0.65));
     transition: transform .5s ease;
   }
   .vase-figure a:hover img { transform: translateY(-6px); }
+  /* A CSS filter makes the browser rasterise the SVG into a bitmap layer,
+     and phones rasterise that layer at CSS resolution — which is why the
+     line-art went soft on 2-3x mobile screens. These shadows are all but
+     invisible on the dark ground, so only desktop pays for them; phones
+     render the vectors directly, sharp at native resolution. */
+  @media (min-width: 981px) {
+    .hero-art img.dragon { filter: drop-shadow(0 24px 70px rgba(3, 7, 14, 0.8)); }
+    .vase-figure img { filter: drop-shadow(0 18px 46px rgba(3, 7, 14, 0.65)); }
+  }
 
   /* from-the-writings feature */
   .book-feature {
