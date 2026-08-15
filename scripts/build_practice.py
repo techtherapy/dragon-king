@@ -146,7 +146,8 @@ UI = {
                      'authorised True Buddha School master. Until then, please read for inspiration only.'),
         "vision_alt": ("The visualization of the practice: from the sealed treasure vase a dragon rises "
                        "and transforms into the Five Dhyani Buddhas, whose light pours back down upon the vase"),
-        "vision_cap": "The vase becomes the Dragon King; the Dragon King becomes the Five Buddhas; their light blesses the vase.",
+        "vision_cap": ("The vase becomes the Dragon King;<br>the Dragon King becomes the Five "
+                       "Buddhas;<br>their light blesses the vase."),
         "g_mudra": "Mudra", "g_mudra_v": "middle and index fingers of both hands crossed",
         "g_mantra": "Mantra",
         "g_recite": "Recitation", "g_recite_v": "108 times,<br>seven consecutive days",
@@ -174,8 +175,8 @@ UI = {
                      'solo para inspiración.'),
         "vision_alt": ("La visualización de la práctica: del jarrón del tesoro sellado se eleva un dragón "
                        "que se transforma en los Cinco Budas Dhyani, cuya luz desciende de nuevo sobre el jarrón"),
-        "vision_cap": ("El jarrón se vuelve el Rey Dragón; el Rey Dragón se vuelve los Cinco "
-                       "Budas; su luz bendice el jarrón."),
+        "vision_cap": ("El jarrón se vuelve el Rey Dragón;<br>el Rey Dragón se vuelve los Cinco "
+                       "Budas;<br>su luz bendice el jarrón."),
         "g_mudra": "Mudra", "g_mudra_v": "los dedos medio e índice de ambas manos cruzados",
         "g_mantra": "Mantra",
         "g_recite": "Recitación", "g_recite_v": "108 veces,<br>siete días seguidos",
