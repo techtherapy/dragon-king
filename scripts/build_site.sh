@@ -16,7 +16,10 @@ OUT="dist"
 # the source text the reader is generated FROM — never published
 SOURCE_HTML="Dragon king sutra hailongwang_complete.html"
 
-# refresh canonical/OG/JSON-LD tags, sitemap.xml and robots.txt
+# the Spanish pages must stay structurally identical to their English twins
+python3 scripts/check_es_parity.py
+
+# refresh canonical/OG/JSON-LD tags, sitemap.xml and robots.txt (both languages)
 python3 scripts/add_seo.py
 
 rm -rf "$OUT"
@@ -27,6 +30,13 @@ shopt -s nullglob
 for f in *.html; do
   [[ "$f" == "$SOURCE_HTML" ]] && continue
   cp "$f" "$OUT/"
+  echo "  page    $f"
+done
+
+# --- Spanish twins ---
+mkdir -p "$OUT/es"
+for f in es/*.html; do
+  cp "$f" "$OUT/es/"
   echo "  page    $f"
 done
 
@@ -45,7 +55,7 @@ cp deploy/_headers "$OUT/_headers"
 echo "  config  _headers"
 
 # --- guard: nothing private may reach the output ---
-for forbidden in "$SOURCE_HTML" info.txt extra-content scripts docs; do
+for forbidden in "$SOURCE_HTML" info.txt extra-content scripts docs translations; do
   if [[ -e "$OUT/$forbidden" ]]; then
     echo "BUILD FAILED: '$forbidden' must not be published" >&2
     exit 1

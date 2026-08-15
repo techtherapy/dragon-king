@@ -2,7 +2,14 @@
 (function () {
   /* --- language layer toggles (persisted) --- */
   var LAYERS = ['zh', 'py', 'en', 'es'];
-  var DEFAULT_ON = { zh: true, py: true, en: true, es: false };
+  /* The two readers are separate pages with opposite defaults, so they keep
+     separate preferences — otherwise turning Spanish off on /es/read would
+     silently turn it off on /read too, and vice versa. */
+  var PAGE_LANG = document.documentElement.lang === 'es' ? 'es' : 'en';
+  var DEFAULT_ON = PAGE_LANG === 'es'
+    ? { zh: true, py: true, en: false, es: true }
+    : { zh: true, py: true, en: true, es: false };
+  var STORE = 'dks-' + PAGE_LANG + '-show-';
   var chips = document.querySelectorAll('.chip[data-layer]');
 
   function applyLayer(layer, on) {
@@ -14,7 +21,7 @@
 
   LAYERS.forEach(function (layer) {
     var stored = null;
-    try { stored = localStorage.getItem('dks-show-' + layer); } catch (e) { /* private mode */ }
+    try { stored = localStorage.getItem(STORE + layer); } catch (e) { /* private mode */ }
     applyLayer(layer, stored === null ? DEFAULT_ON[layer] : stored === '1');
   });
 
@@ -25,9 +32,9 @@
       var visible = LAYERS.filter(function (l) {
         return l === layer ? on : document.body.classList.contains('hide-' + l) === false;
       });
-      if (!visible.length) return; // never hide all three
+      if (!visible.length) return; // never hide every layer
       applyLayer(layer, on);
-      try { localStorage.setItem('dks-show-' + layer, on ? '1' : '0'); } catch (e) { /* ignore */ }
+      try { localStorage.setItem(STORE + layer, on ? '1' : '0'); } catch (e) { /* ignore */ }
     });
   });
 

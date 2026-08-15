@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "Dragon king sutra hailongwang_complete.html"
 ES_DIR = ROOT / "translations" / "es"
 OUT = ROOT / "read.html"
+OUT_ES = ROOT / "es" / "read.html"
 
 LEAF = re.compile(r'<div class="(hanzi|pinyin|english)">(.*)</div>\s*$')
 STYLED = re.compile(r'<div style="[^"]*">(.*)</div>\s*$')
@@ -198,6 +199,7 @@ CHROME_HEAD = """<!DOCTYPE html>
     <a href="treasure-vase-yoga.html">Practice</a>
     <a href="his-holiness-living-buddha-lian-sheng.html">Living Buddha Lian Sheng</a>
     <a href="contact.html">Contact</a>
+    <a href="/es/read.html" class="lang-switch" hreflang="es" lang="es">Español</a>
     <a href="refuge.html" class="nav-cta">Take Refuge</a>
   </nav>
 </header>
@@ -301,6 +303,95 @@ CHROME_FOOT = """
 """
 
 
+# ----------------------------------------------------------------------
+# Spanish chrome. The English chrome above is the single source of layout;
+# the Spanish page is the same markup with these strings swapped, links
+# pointed at the /es/ twins and asset paths made root-absolute (the page
+# sits one directory down). Keeping one chrome means the two readers can
+# never drift structurally.
+# ----------------------------------------------------------------------
+CHROME_ES = [
+    # head
+    ("<html lang=\"en\"", "<html lang=\"es\""),
+    ("<title>Read the Sutra — Dragon King Sutra 佛說海龍王經</title>",
+     "<title>Leer el Sutra — Dragon King Sutra 佛說海龍王經</title>"),
+    ("The complete Sutra Spoken by the Buddha on the Sea Dragon King in Traditional "
+     "Chinese, pinyin, English and Spanish — four volumes, twenty chapters.",
+     "El Sutra Pronunciado por el Buda sobre el Rey Dragón del Mar completo, en chino "
+     "tradicional, pinyin, inglés y español — cuatro volúmenes, veinte capítulos."),
+    # body: Spanish reader hides the English layer by default
+    ('<body class="reader-page hide-es">', '<body class="reader-page hide-en">'),
+    # nav
+    ('<a href="about.html">About</a>', '<a href="/es/about.html">Acerca de</a>'),
+    ('<a href="read.html" aria-current="page">Read</a>',
+     '<a href="/es/read.html" aria-current="page">Leer</a>'),
+    ('<a href="treasure-vase-yoga.html">Practice</a>',
+     '<a href="/es/treasure-vase-yoga.html">Práctica</a>'),
+    ('<a href="his-holiness-living-buddha-lian-sheng.html">Living Buddha Lian Sheng</a>',
+     '<a href="/es/his-holiness-living-buddha-lian-sheng.html">Living Buddha Lian Sheng</a>'),
+    ('<a href="contact.html">Contact</a>', '<a href="/es/contact.html">Contacto</a>'),
+    ('<a href="/es/read.html" class="lang-switch" hreflang="es" lang="es">Español</a>',
+     '<a href="/read.html" class="lang-switch" hreflang="en" lang="en">English</a>'),
+    ('<a href="refuge.html" class="nav-cta">Take Refuge</a>',
+     '<a href="/es/refuge.html" class="nav-cta">Tomar Refugio</a>'),
+    ('aria-label="Menu"', 'aria-label="Menú"'),
+    ('aria-label="Dragon King Sutra home"', 'aria-label="Dragon King Sutra inicio"'),
+    ('<a href="index.html" class="brand"', '<a href="/es/index.html" class="brand"'),
+    # reader furniture
+    ('aria-label="Back to top">☸', 'aria-label="Volver arriba">☸'),
+    ('aria-label="Chapters"', 'aria-label="Capítulos"'),
+    ("目錄 · CONTENTS", "目錄 · CONTENIDO"),
+    ('<span class="btn-label">Chapters</span>', '<span class="btn-label">Capítulos</span>'),
+    ('<span class="btn-label">Print</span>', '<span class="btn-label">Imprimir</span>'),
+    ("<span class=\"layer-label\">Layers</span>", "<span class=\"layer-label\">Capas</span>"),
+    # footer
+    ("<h4>The Sutra</h4>", "<h4>El Sutra</h4>"),
+    ("<h4>Teachings</h4>", "<h4>Enseñanzas</h4>"),
+    ("<h4>About</h4>", "<h4>Acerca de</h4>"),
+    ("<h4>Temple Websites</h4>", "<h4>Sitios de templos</h4>"),
+    ("<h4>Related Sites</h4>", "<h4>Sitios relacionados</h4>"),
+    ("<h4>Online Teachings</h4>", "<h4>Enseñanzas en línea</h4>"),
+    ('<a href="about.html">About the Sutra</a>',
+     '<a href="/es/about.html">Acerca del Sutra</a>'),
+    ('<a href="read.html">Read the Sutra</a>', '<a href="/es/read.html">Leer el Sutra</a>'),
+    ('<a href="about.html#reflection">Study Reflection</a>',
+     '<a href="/es/about.html#reflection">Reflexión de estudio</a>'),
+    ('<a href="read.html?print">Print the Sutra</a>',
+     '<a href="/es/read.html?print">Imprimir el Sutra</a>'),
+    ('<a href="treasure-vase-yoga.html">Treasure Vase Yoga</a>',
+     '<a href="/es/treasure-vase-yoga.html">El Yoga del Jarrón del Tesoro</a>'),
+    ('<a href="treasure-vase-wishes.html">Wishes in the Treasure Vase</a>',
+     '<a href="/es/treasure-vase-wishes.html">Deseos en el Jarrón del Tesoro</a>'),
+    ('<a href="his-holiness-living-buddha-lian-sheng.html">H.H. Living Buddha Lian Sheng</a>',
+     '<a href="/es/his-holiness-living-buddha-lian-sheng.html">S.S. el Buda Viviente Lian Sheng</a>'),
+    ('<a href="refuge.html">Take Refuge</a>', '<a href="/es/refuge.html">Tomar Refugio</a>'),
+    ('<a href="contact.html">Contact Us</a>', '<a href="/es/contact.html">Contáctanos</a>'),
+    (">Seattle Leizang Temple<", ">Templo Leizang de Seattle<"),
+    (">Rainbow Temple<", ">Templo del Arcoíris<"),
+    (">Saturday Live Streams<", ">Transmisiones en vivo del sábado<"),
+    (">Sunday Live Streams<", ">Transmisiones en vivo del domingo<"),
+    (">Official Page<", ">Página oficial<"),
+    (">Discussion Group<", ">Grupo de discusión<"),
+    ("May all beings share in the merit of this offering of the dharma",
+     "Que todos los seres compartan el mérito de esta ofrenda del dharma"),
+    # assets live at the root; this page is one level down
+    ('href="css/', 'href="/css/'),
+    ('src="js/', 'src="/js/'),
+    ('href="assets/', 'href="/assets/'),
+    ('src="assets/', 'src="/assets/'),
+]
+
+
+def to_spanish(html):
+    """The English reader markup, localized. Every replacement must fire —
+    a silent miss would leave English in the Spanish page."""
+    for src, dst in CHROME_ES:
+        if src not in html:
+            raise SystemExit(f"Spanish chrome: pattern not found -> {src[:70]}")
+        html = html.replace(src, dst)
+    return html
+
+
 def short_en(label_en):
     """'Volume 1, Chapter One: Practice' -> 'Practice'"""
     return label_en.split(":", 1)[-1].strip() if ":" in label_en else label_en
@@ -388,6 +479,11 @@ def build():
     html = "\n".join(out)
     OUT.write_text(html, encoding="utf-8")
     print(f"read.html written: {len(html) / 1024:.0f} KB, {len(chapters)} chapters, {n_prows} verses")
+
+    es = to_spanish(html)
+    OUT_ES.parent.mkdir(exist_ok=True)
+    OUT_ES.write_text(es, encoding="utf-8")
+    print(f"es/read.html written: {len(es) / 1024:.0f} KB")
 
 
 if __name__ == "__main__":

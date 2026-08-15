@@ -71,4 +71,51 @@
       if (!ticking) { requestAnimationFrame(update); ticking = true; }
     }, { passive: true });
   }
+
+  /* --- offer the Spanish site, once, to Spanish-language browsers ---
+     Never redirects: the reader stays where they landed unless they choose
+     otherwise. Shown only on English pages, only when the browser asks for
+     Spanish, and never again once dismissed or once a language is chosen. */
+  var langLink = document.querySelector('.site-nav .lang-switch');
+  var onSpanishPage = document.documentElement.lang === 'es';
+
+  function remember(key, value) {
+    try { localStorage.setItem(key, value); } catch (e) { /* private mode */ }
+  }
+  function recall(key) {
+    try { return localStorage.getItem(key); } catch (e) { return null; }
+  }
+
+  if (langLink) {
+    // choosing a language is a preference; it also settles the banner
+    langLink.addEventListener('click', function () {
+      remember('dks-lang', onSpanishPage ? 'en' : 'es');
+    });
+  }
+
+  if (!onSpanishPage && langLink) {
+    var wantsSpanish = (navigator.languages || [navigator.language || ''])
+      .some(function (l) { return String(l).toLowerCase().indexOf('es') === 0; });
+    var settled = recall('dks-lang') || recall('dks-lang-dismissed');
+    if (wantsSpanish && !settled) {
+      var bar = document.createElement('div');
+      bar.className = 'lang-banner';
+      bar.setAttribute('lang', 'es');
+      bar.innerHTML = '<span>Este sitio también está disponible en español.</span>' +
+        '<a href="' + langLink.getAttribute('href') + '">Ver en español</a>' +
+        '<button class="close" type="button" aria-label="Cerrar">×</button>';
+      var header = document.querySelector('.site-header');
+      if (header && header.parentNode) {
+        header.parentNode.insertBefore(bar, header.nextSibling);
+        requestAnimationFrame(function () { bar.classList.add('show'); });
+        bar.querySelector('a').addEventListener('click', function () {
+          remember('dks-lang', 'es');
+        });
+        bar.querySelector('.close').addEventListener('click', function () {
+          bar.remove();
+          remember('dks-lang-dismissed', '1');
+        });
+      }
+    }
+  }
 })();

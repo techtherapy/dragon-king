@@ -34,6 +34,17 @@ PAGES = {
 }
 NOINDEX = {"404.html"}
 
+CRUMBS = {
+    "en": {"home": "Home", "read": "Read the Sutra", "about": "About the Sutra",
+           "practice": "Practice", "wishes": "Wishes in the Treasure Vase",
+           "practice_h": "The Dragon King Treasure Vase Yoga",
+           "wishes_h": "Wishes in the Dragon King Treasure Vase Practice"},
+    "es": {"home": "Inicio", "read": "Leer el Sutra", "about": "Acerca del Sutra",
+           "practice": "Práctica", "wishes": "Deseos en el Jarrón del Tesoro",
+           "practice_h": "El Yoga del Jarrón del Tesoro del Rey Dragón",
+           "wishes_h": "Deseos en la práctica del Jarrón del Tesoro del Rey Dragón"},
+}
+
 
 def organization():
     return {
@@ -87,7 +98,7 @@ def book():
     }
 
 
-def article(url, headline, description, author_is_guru=True, image=OG_IMAGE):
+def article(url, headline, description, author_is_guru=True, image=OG_IMAGE, lang="en"):
     node = {
         "@type": "Article",
         "headline": headline,
@@ -95,7 +106,7 @@ def article(url, headline, description, author_is_guru=True, image=OG_IMAGE):
         "image": image,
         "url": url,
         "isPartOf": {"@id": f"{SITE}/#website"},
-        "inLanguage": "en",
+        "inLanguage": lang,
     }
     if author_is_guru:
         node["author"] = person_guru()
@@ -112,34 +123,36 @@ def breadcrumb(*crumbs):
     }
 
 
-def jsonld_for(key, page, url, title, desc):
+def jsonld_for(key, page, url, title, desc, lang="en"):
     """Returns the @graph list for a page."""
     if key == "home":
         return [website(), book(), person_guru()]
+    home = SITE + ("/es/" if lang == "es" else "/")
+    crumb = CRUMBS[lang]
     if key == "book":
         b = book()
         b["description"] = desc
         return [website(), b,
-                breadcrumb(("Home", SITE + "/"), ("Read the Sutra", url))]
+                breadcrumb((crumb["home"], home), (crumb["read"], url))]
     if key == "about":
-        return [article(url, title, desc, author_is_guru=False),
+        return [article(url, title, desc, author_is_guru=False, lang=lang),
                 {"@type": "Book", "@id": f"{SITE}/#sutra"},
-                breadcrumb(("Home", SITE + "/"), ("About the Sutra", url))]
+                breadcrumb((crumb["home"], home), (crumb["about"], url))]
     if key == "practice":
-        a = article(url, "The Dragon King Treasure Vase Yoga", desc)
+        a = article(url, crumb["practice_h"], desc, lang=lang)
         a["about"] = {"@type": "Thing", "name": "Dragon King Treasure Vase Yoga 龍王寶瓶法"}
-        return [a, breadcrumb(("Home", SITE + "/"), ("Practice", url))]
+        return [a, breadcrumb((crumb["home"], home), (crumb["practice"], url))]
     if key == "wishes":
-        a = article(url, "Wishes in the Dragon King Treasure Vase Practice", desc)
+        a = article(url, crumb["wishes_h"], desc, lang=lang)
         a["isPartOf"] = {"@type": "Book", "name": "A Solitary Bird in the Void",
                          "alternateName": "虛空中的孤鳥", "bookEdition": "Book 146",
                          "author": person_guru()}
-        return [a, breadcrumb(("Home", SITE + "/"), ("Wishes in the Treasure Vase", url))]
+        return [a, breadcrumb((crumb["home"], home), (crumb["wishes"], url))]
     if key == "person":
         return [person_guru(),
-                breadcrumb(("Home", SITE + "/"), (GURU, url))]
+                breadcrumb((crumb["home"], home), (GURU, url))]
     return [{"@type": "WebPage", "url": url, "name": title, "description": desc,
-             "isPartOf": {"@id": f"{SITE}/#website"}, "inLanguage": "en"}]
+             "isPartOf": {"@id": f"{SITE}/#website"}, "inLanguage": lang}]
 
 
 def json_dumps(obj, indent=2):
@@ -150,14 +163,16 @@ def json_dumps(obj, indent=2):
     return text.replace("</", "<\\/")
 
 
-def canonical_path(page):
-    """about.html -> /about   (html_handling: auto-trailing-slash serves both)"""
+def canonical_path(page, lang="en"):
+    """about.html -> /about   (html_handling: auto-trailing-slash serves both)
+    The Spanish twin of the same page lives under /es/."""
+    prefix = "" if lang == "en" else "/es"
     if page == "index.html":
-        return "/"
-    return "/" + page[:-len(".html")]
+        return prefix + "/" if prefix else "/"
+    return prefix + "/" + page[:-len(".html")]
 
 
-def build_block(page, title, desc):
+def build_block(page, title, desc, lang="en"):
     if page in NOINDEX:
         return (f'{BEGIN}\n'
                 f'<meta name="robots" content="noindex, follow">\n'
@@ -165,8 +180,10 @@ def build_block(page, title, desc):
                 f'{END}')
 
     og_type, _prio, _freq, key = PAGES[page]
-    url = SITE + canonical_path(page)
-    graph = jsonld_for(key, page, url, title, desc)
+    url = SITE + canonical_path(page, lang)
+    url_en = SITE + canonical_path(page, "en")
+    url_es = SITE + canonical_path(page, "es")
+    graph = jsonld_for(key, page, url, title, desc, lang)
     ld = {"@context": "https://schema.org", "@graph": graph}
 
     t = html.escape(title, quote=True)
@@ -174,6 +191,9 @@ def build_block(page, title, desc):
     lines = [
         BEGIN,
         f'<link rel="canonical" href="{url}">',
+        f'<link rel="alternate" hreflang="en" href="{url_en}">',
+        f'<link rel="alternate" hreflang="es" href="{url_es}">',
+        f'<link rel="alternate" hreflang="x-default" href="{url_en}">',
         '<meta name="robots" content="index, follow, max-image-preview:large">',
         '<meta name="theme-color" content="#070e1a">',
         '',
@@ -186,7 +206,8 @@ def build_block(page, title, desc):
         '<meta property="og:image:height" content="630">',
         f'<meta property="og:image:alt" content="A golden dragon coiled around a flaming pearl beneath a radiant Buddha — {html.escape(SUTRA_TITLE, quote=True)}">',
         '<meta property="og:site_name" content="Dragon King Sutra">',
-        '<meta property="og:locale" content="en_US">',
+        f'<meta property="og:locale" content="{"es_LA" if lang == "es" else "en_US"}">',
+        f'<meta property="og:locale:alternate" content="{"en_US" if lang == "es" else "es_LA"}">',
         '<meta property="og:locale:alternate" content="zh_TW">',
         '',
         '<meta name="twitter:card" content="summary_large_image">',
@@ -204,7 +225,7 @@ TITLE_RE = re.compile(r"<title>(.*?)</title>", re.S)
 DESC_RE = re.compile(r'<meta name="description" content="(.*?)">', re.S)
 
 
-def process(path: Path) -> str:
+def process(path: Path, lang: str = "en") -> str:
     s = path.read_text(encoding="utf-8")
     page = path.name
 
@@ -215,7 +236,7 @@ def process(path: Path) -> str:
     dm = DESC_RE.search(s)
     desc = html.unescape(dm.group(1).strip()) if dm else title
 
-    block = build_block(page, title, desc)
+    block = build_block(page, title, desc, lang)
 
     # replace an existing block, else insert before the icon link (stable anchor)
     if BEGIN in s:
@@ -228,24 +249,31 @@ def process(path: Path) -> str:
         action = "inserted"
 
     path.write_text(s, encoding="utf-8")
-    return f"{page}: {action}"
+    return f"{'es/' if lang == 'es' else ''}{page}: {action}"
 
 
 def sitemap():
     urls = []
     for page, (_t, prio, freq, _k) in PAGES.items():
-        urls.append(
-            "  <url>\n"
-            f"    <loc>{SITE}{canonical_path(page)}</loc>\n"
-            f"    <changefreq>{freq}</changefreq>\n"
-            f"    <priority>{prio}</priority>\n"
-            "  </url>"
-        )
+        en = SITE + canonical_path(page, "en")
+        es = SITE + canonical_path(page, "es")
+        for loc in (en, es):
+            urls.append(
+                "  <url>\n"
+                f"    <loc>{loc}</loc>\n"
+                f'    <xhtml:link rel="alternate" hreflang="en" href="{en}"/>\n'
+                f'    <xhtml:link rel="alternate" hreflang="es" href="{es}"/>\n'
+                f'    <xhtml:link rel="alternate" hreflang="x-default" href="{en}"/>\n'
+                f"    <changefreq>{freq}</changefreq>\n"
+                f"    <priority>{prio}</priority>\n"
+                "  </url>"
+            )
     xml = ('<?xml version="1.0" encoding="UTF-8"?>\n'
-           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'
+           '        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
            + "\n".join(urls) + "\n</urlset>\n")
     (ROOT / "sitemap.xml").write_text(xml, encoding="utf-8")
-    return f"sitemap.xml: {len(PAGES)} urls"
+    return f"sitemap.xml: {len(urls)} urls ({len(PAGES)} pages x 2 languages)"
 
 
 def robots():
@@ -260,5 +288,7 @@ def robots():
 if __name__ == "__main__":
     for page in list(PAGES) + sorted(NOINDEX):
         print(" ", process(ROOT / page))
+    for page in PAGES:
+        print(" ", process(ROOT / "es" / page, lang="es"))
     print(" ", sitemap())
     print(" ", robots())

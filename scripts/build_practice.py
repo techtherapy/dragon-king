@@ -6,13 +6,20 @@ chrome never drifts from the rest of the site.
 Run from the repo root:  python3 scripts/build_practice.py
 """
 import html
+import json
 import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 P1 = ROOT / "extra-content" / "Dragon King Treasure Vase Yoga Part 1.txt"
 P2 = ROOT / "extra-content" / "Dragon King Treasure Vase Yoga Part 2.txt"
+ES_DIR = ROOT / "translations" / "es"
 OUT = ROOT / "treasure-vase-yoga.html"
+OUT_ES = ROOT / "es" / "treasure-vase-yoga.html"
+
+# asset prefix for the page being rendered — "assets/" at the root,
+# "/assets/" for the Spanish page one directory down
+ASSETS = "assets/"
 
 HEADINGS = {
     "The Cause of the Dragon King Yoga",
@@ -24,13 +31,23 @@ HEADINGS = {
 }
 
 
-def chrome():
-    """Header/footer copied from refuge.html, with nav state adjusted."""
-    src = (ROOT / "refuge.html").read_text()
+def chrome(lang="en"):
+    """Header/footer lifted from the refuge page of the same language, with
+    the nav state moved to Practice — so the chrome can never drift."""
+    path = ROOT / "refuge.html" if lang == "en" else ROOT / "es" / "refuge.html"
+    src = path.read_text()
     header = src[src.index('<header class="site-header">'):src.index("</header>") + len("</header>")]
     header = header.replace(' aria-current="page"', "")
-    header = header.replace('<a href="treasure-vase-yoga.html">Practice</a>',
-                            '<a href="treasure-vase-yoga.html" aria-current="page">Practice</a>')
+    if lang == "en":
+        header = header.replace('<a href="treasure-vase-yoga.html">Practice</a>',
+                                '<a href="treasure-vase-yoga.html" aria-current="page">Practice</a>')
+        header = header.replace('href="/es/refuge.html" class="lang-switch"',
+                                'href="/es/treasure-vase-yoga.html" class="lang-switch"')
+    else:
+        header = header.replace('<a href="/es/treasure-vase-yoga.html">Práctica</a>',
+                                '<a href="/es/treasure-vase-yoga.html" aria-current="page">Práctica</a>')
+        header = header.replace('href="/refuge.html" class="lang-switch"',
+                                'href="/treasure-vase-yoga.html" class="lang-switch"')
     footer = src[src.index('<footer class="site-footer">'):src.index("</footer>") + len("</footer>")]
     return header, footer
 
@@ -90,6 +107,85 @@ DECOS = [
     ("For money and rain, just the five kinds of herbs will do", "deco-jewel-rain.svg"),
 ]
 
+# ----------------------------------------------------------------------
+# Everything on the page that is not transcript. One entry per language;
+# the markup below is shared, so the two pages cannot drift structurally.
+# ----------------------------------------------------------------------
+CAPTIONS = {
+    "en": {
+        "mudra.svg": "手印 · The mudra: the index and middle fingers of both hands cross to form 井",
+        "vase-preparation.svg": "寶瓶 · The five herbs are layered as the five chakras, sealed with a "
+                                "copper coin and tied with five coloured cloths",
+        "casting-the-vase.svg": "抛瓶入海 · Casting the empowered vase into the sea",
+    },
+    "es": {
+        "mudra.svg": "手印 · El mudra: los dedos índice y medio de ambas manos se cruzan formando 井",
+        "vase-preparation.svg": "寶瓶 · Las cinco hierbas se disponen en capas como los cinco chakras, "
+                                "selladas con una moneda de cobre y atadas con cinco telas de colores",
+        "casting-the-vase.svg": "抛瓶入海 · El jarrón consagrado es arrojado al mar",
+    },
+}
+
+UI = {
+    "en": {
+        "lang": "en", "assets": "assets/", "root": "",
+        "title": "The Dragon King Treasure Vase Yoga — Dragon King Sutra",
+        "description": "The Dragon King Treasure Vase Yoga (龍王寶瓶法), taught by Grandmaster Lu in "
+                       "Hong Kong, 1990 — the preparation of the treasure vase, the mudra, mantra "
+                       "and visualization, and the casting of the vase into the sea.",
+        "eyebrow": "Practice · 龍王寶瓶法",
+        "h1": "The Dragon King Treasure Vase Yoga",
+        "lede": "A teaching by Grandmaster Lu — Hong Kong, February 4, 1990.",
+        "credit": "Translated by Janny Chow.",
+        "notice_h": "Empowerment is required before practising",
+        "notice_p": ('To perform the Dragon King Treasure Vase Yoga, one must first '
+                     '<a href="refuge.html">take refuge</a> in His Holiness Living Buddha Lian Sheng, '
+                     'and then request the empowerment for this practice from His Holiness or an '
+                     'authorised True Buddha School master. Until then, please read for inspiration only.'),
+        "vision_alt": ("The visualization of the practice: from the sealed treasure vase a dragon rises "
+                       "and transforms into the Five Dhyani Buddhas, whose light pours back down upon the vase"),
+        "vision_cap": "The vase becomes the Dragon; the Dragon becomes the Five Buddhas; their light blesses the vase.",
+        "g_mudra": "Mudra", "g_mudra_v": "middle and index fingers of both hands crossed",
+        "g_mantra": "Mantra",
+        "g_recite": "Recitation", "g_recite_v": "108 times,<br>seven consecutive days",
+        "g_complete": "Completion", "g_complete_v": "the vase is cast<br>into the sea",
+        "part1": "Part One · The Teaching", "part2": "Part Two · The Sadhana",
+        "closing": "First use desire to draw them in; then lead them into the wisdom of the Buddha.",
+        "btn_refuge": "Take Refuge", "btn_wishes": "Wishes in the Treasure Vase",
+        "ends": '&hellip; <span class="muted">[the recorded transcript ends here]</span>',
+    },
+    "es": {
+        "lang": "es", "assets": "/assets/", "root": "/es/",
+        "title": "El Yoga del Jarrón del Tesoro del Rey Dragón — Dragon King Sutra",
+        "description": "El Yoga del Jarrón del Tesoro del Rey Dragón (龍王寶瓶法), enseñado por el Gran "
+                       "Maestro Lu en Hong Kong, 1990 — la preparación del jarrón del tesoro, el mudra, "
+                       "el mantra y la visualización, y el lanzamiento del jarrón al mar.",
+        "eyebrow": "Práctica · 龍王寶瓶法",
+        "h1": "El Yoga del Jarrón del Tesoro del Rey Dragón",
+        "lede": "Una enseñanza del Gran Maestro Lu — Hong Kong, 4 de febrero de 1990.",
+        "credit": "Traducido al inglés por Janny Chow.",
+        "notice_h": "Se requiere la iniciación antes de practicar",
+        "notice_p": ('Para realizar el Yoga del Jarrón del Tesoro del Rey Dragón, primero hay que '
+                     '<a href="/es/refuge.html">tomar refugio</a> en Su Santidad el Buda Viviente Lian '
+                     'Sheng, y luego solicitar la iniciación de esta práctica a Su Santidad o a un '
+                     'maestro autorizado de la True Buddha School. Hasta entonces, esta lectura es '
+                     'solo para inspiración.'),
+        "vision_alt": ("La visualización de la práctica: del jarrón del tesoro sellado se eleva un dragón "
+                       "que se transforma en los Cinco Budas Dhyani, cuya luz desciende de nuevo sobre el jarrón"),
+        "vision_cap": ("El jarrón se vuelve el Dragón; el Dragón se vuelve los Cinco Budas; "
+                       "su luz bendice el jarrón."),
+        "g_mudra": "Mudra", "g_mudra_v": "los dedos medio e índice de ambas manos cruzados",
+        "g_mantra": "Mantra",
+        "g_recite": "Recitación", "g_recite_v": "108 veces,<br>siete días seguidos",
+        "g_complete": "Culminación", "g_complete_v": "el jarrón se arroja<br>al mar",
+        "part1": "Primera parte · La enseñanza", "part2": "Segunda parte · La sadhana",
+        "closing": "Primero atráelos con el deseo; luego condúcelos a la sabiduría del Buda.",
+        "btn_refuge": "Tomar Refugio", "btn_wishes": "Deseos en el Jarrón del Tesoro",
+        "ends": '&hellip; <span class="muted">[aquí termina la transcripción grabada]</span>',
+    },
+}
+
+
 VIEWBOX = re.compile(r'viewBox="0 0 ([\d.]+) ([\d.]+)"')
 
 
@@ -105,7 +201,7 @@ def intrinsic(src):
 def figure_html(src, caption, size):
     w, h = intrinsic(src)
     return (f'      <figure class="inline-figure {size} reveal">\n'
-            f'        <img src="assets/{src}" width="{w}" height="{h}"'
+            f'        <img src="{ASSETS}{src}" width="{w}" height="{h}"'
             f' alt="{caption.split(chr(183), 1)[-1].strip()}" loading="lazy">\n'
             f'        <figcaption>{caption}</figcaption>\n'
             f'      </figure>')
@@ -114,67 +210,116 @@ def figure_html(src, caption, size):
 def deco_html(src):
     w, h = intrinsic(src)
     return (f'      <div class="deco-figure reveal" aria-hidden="true">\n'
-            f'        <img src="assets/{src}" width="{w}" height="{h}" alt="" loading="lazy">\n'
+            f'        <img src="{ASSETS}{src}" width="{w}" height="{h}" alt="" loading="lazy">\n'
             f'      </div>')
 
 
 def rule_html():
     w, h = intrinsic("deco-cloud-rule.svg")
     return (f'      <div class="h-rule reveal" aria-hidden="true">'
-            f'<img src="assets/deco-cloud-rule.svg" width="{w}" height="{h}" alt="" '
+            f'<img src="{ASSETS}deco-cloud-rule.svg" width="{w}" height="{h}" alt="" '
             f'loading="lazy"></div>')
 
 
-def render(items, figures_used=None):
+def plan_anchors(items, used=None):
+    """Which paragraph each figure/decoration follows, by INDEX.
+
+    Anchors are matched against the English text only; the Spanish page then
+    places the same artwork at the same indices. That way a translated
+    paragraph can never fail to match an English phrase."""
+    plan = {}
+    for i, (kind, text) in enumerate(items):
+        if kind != "p":
+            continue
+        for key, src, caption, size in FIGURES:
+            if key in text:
+                plan.setdefault(i, []).append(("fig", src, size))
+                if used is not None:
+                    used.add(key)
+        for key, src in DECOS:
+            if key in text:
+                plan.setdefault(i, []).append(("deco", src, None))
+                if used is not None:
+                    used.add(key)
+    return plan
+
+
+def render(items, plan, captions):
     frags = []
-    for kind, text in items:
+    for i, (kind, text) in enumerate(items):
         if kind == "h":
             frags.append(rule_html())
             frags.append(f'      <h2 class="article-sub reveal">{text}</h2>')
         else:
             frags.append(f'      <p class="reveal">{text}</p>')
-            for key, src, caption, size in FIGURES:
-                if key in text:
-                    frags.append(figure_html(src, caption, size))
-                    if figures_used is not None:
-                        figures_used.add(key)
-            for key, src in DECOS:
-                if key in text:
+            for what, src, size in plan.get(i, []):
+                if what == "fig":
+                    frags.append(figure_html(src, captions[src], size))
+                else:
                     frags.append(deco_html(src))
-                    if figures_used is not None:
-                        figures_used.add(key)
     return "\n".join(frags)
 
 
+def spanish_items(name, english):
+    """The translated transcript, checked item-for-item against the English."""
+    data = json.loads((ES_DIR / f"{name}.json").read_text(encoding="utf-8"))
+    items = [(d["kind"], d["text"]) for d in data["items"]]
+    if len(items) != len(english):
+        raise SystemExit(f"es/{name}.json: {len(items)} items, source has {len(english)}")
+    kinds_es = [k for k, _ in items]
+    kinds_en = [k for k, _ in english]
+    if kinds_es != kinds_en:
+        raise SystemExit(f"es/{name}.json: heading/paragraph sequence differs from the source")
+    return items
+
+
 def build():
-    header, footer = chrome()
     part1 = paragraphs(P1, skip=3)   # title + two byline lines
     part2 = paragraphs(P2, skip=2)   # title + byline
 
-    # the source transcript ends mid-sentence — mark it honestly
-    kind, last = part2[-1]
-    if last.endswith("the Bodhisattva"):
-        part2[-1] = (kind, last + '&hellip; <span class="muted">[the recorded transcript ends here]</span>')
-
+    # anchors are matched on the English text; both pages reuse the positions
     used = set()
-    part1_html, part2_html = render(part1, used), render(part2, used)
+    plan1, plan2 = plan_anchors(part1, used), plan_anchors(part2, used)
     missing = [k for k, *_ in FIGURES + DECOS if k not in used]
     if missing:
         raise SystemExit("figure anchor not found in the transcript: " + "; ".join(missing))
 
+    parts = {"en": (part1, part2), "es": (spanish_items("practice-part1", part1),
+                                          spanish_items("practice-part2", part2))}
+
+    global ASSETS
+    for lang, (p1, p2) in parts.items():
+        ui = UI[lang]
+        ASSETS = ui["assets"]
+        header, footer = chrome(lang)
+        # the source transcript ends mid-sentence — mark it honestly
+        kind, last = p2[-1]
+        if not last.rstrip().endswith(">"):
+            p2 = p2[:-1] + [(kind, last + ui["ends"])]
+        page = render_page(ui, header, footer,
+                           render(p1, plan1, CAPTIONS[lang]),
+                           render(p2, plan2, CAPTIONS[lang]))
+        out = OUT if lang == "en" else OUT_ES
+        out.parent.mkdir(exist_ok=True)
+        out.write_text(page, encoding="utf-8")
+        print(f"{out.relative_to(ROOT)} written: {len(page) / 1024:.0f} KB")
+
+
+def render_page(ui, header, footer, part1_html, part2_html):
+
     page = f"""<!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="{ui['lang']}" class="no-js">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Dragon King Treasure Vase Yoga — Dragon King Sutra</title>
-<meta name="description" content="The Dragon King Treasure Vase Yoga (龍王寶瓶法), taught by Grandmaster Lu in Hong Kong, 1990 — the preparation of the treasure vase, the mudra, mantra and visualization, and the casting of the vase into the sea.">
-<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<title>{ui['title']}</title>
+<meta name="description" content="{ui['description']}">
+<link rel="icon" type="image/svg+xml" href="{ASSETS}favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="{ui['root'] and "/css/" or "css/"}style.css">
 <style>
   .article-sub {{
     font-size: clamp(1.4rem, 2.8vw, 1.9rem);
@@ -286,9 +431,9 @@ def build():
 
 <section class="page-hero">
   <div class="wrap">
-    <p class="eyebrow center reveal">Practice · 龍王寶瓶法</p>
-    <h1 class="reveal">The Dragon King Treasure Vase Yoga<span class="tc-title" lang="zh-Hant">龍王寶瓶之瑜伽</span></h1>
-    <p class="lede reveal">A teaching by Grandmaster Lu — Hong Kong, February 4, 1990.<span class="credit">Translated by Janny Chow.</span></p>
+    <p class="eyebrow center reveal">{ui['eyebrow']}</p>
+    <h1 class="reveal">{ui['h1']}<span class="tc-title" lang="zh-Hant">龍王寶瓶之瑜伽</span></h1>
+    <p class="lede reveal">{ui['lede']}<span class="credit">{ui['credit']}</span></p>
   </div>
 </section>
 
@@ -297,28 +442,28 @@ def build():
     <div class="notice reveal">
       <span class="seal small" aria-hidden="true" lang="zh-Hant">戒</span>
       <div>
-        <h3>Empowerment is required before practising</h3>
-        <p>To perform the Dragon King Treasure Vase Yoga, one must first <a href="refuge.html">take refuge</a> in His Holiness Living Buddha Lian Sheng, and then request the empowerment for this practice from His Holiness or an authorised True Buddha School master. Until then, please read for inspiration only.</p>
+        <h3>{ui['notice_h']}</h3>
+        <p>{ui['notice_p']}</p>
       </div>
     </div>
 
     <figure class="vision-figure reveal">
-      <img src="assets/vase-vision.svg" alt="The visualization of the practice: from the sealed treasure vase a dragon rises and transforms into the Five Dhyani Buddhas, whose light pours back down upon the vase" loading="lazy">
-      <figcaption lang="zh-Hant">寶瓶化龍，龍化五佛，五佛放光加持寶瓶<br><span lang="en" style="font-style:italic">The vase becomes the Dragon; the Dragon becomes the Five Buddhas; their light blesses the vase.</span></figcaption>
+      <img src="{ASSETS}vase-vision.svg" alt="{ui['vision_alt']}" loading="lazy">
+      <figcaption lang="zh-Hant">寶瓶化龍，龍化五佛，五佛放光加持寶瓶<br><span lang="{ui['lang']}" style="font-style:italic">{ui['vision_cap']}</span></figcaption>
     </figure>
 
     <div class="glance reveal">
-      <div class="g"><span class="k">Mudra</span><span class="v tc" lang="zh-Hant">井</span><span class="v" style="display:block;margin-top:.3rem;font-size:.9rem;color:var(--muted)">middle and index fingers of both hands crossed</span></div>
-      <div class="g"><span class="k">Mantra</span><span class="v" style="font-style:italic">Namo Sam-man-doh,<br>moo-toh-nam,<br>wah-ri-la, men</span></div>
-      <div class="g"><span class="k">Recitation</span><span class="v">108 times,<br>seven consecutive days</span></div>
-      <div class="g"><span class="k">Completion</span><span class="v">the vase is cast<br>into the sea</span></div>
+      <div class="g"><span class="k">{ui['g_mudra']}</span><span class="v tc" lang="zh-Hant">井</span><span class="v" style="display:block;margin-top:.3rem;font-size:.9rem;color:var(--muted)">{ui['g_mudra_v']}</span></div>
+      <div class="g"><span class="k">{ui['g_mantra']}</span><span class="v" style="font-style:italic">Namo Sam-man-doh,<br>moo-toh-nam,<br>wah-ri-la, men</span></div>
+      <div class="g"><span class="k">{ui['g_recite']}</span><span class="v">{ui['g_recite_v']}</span></div>
+      <div class="g"><span class="k">{ui['g_complete']}</span><span class="v">{ui['g_complete_v']}</span></div>
     </div>
   </div>
 </section>
 
 <section class="flow-section">
   <div class="wrap">
-    <p class="eyebrow reveal">Part One · The Teaching</p>
+    <p class="eyebrow reveal">{ui['part1']}</p>
     <article class="article">
 {part1_html}
     </article>
@@ -327,7 +472,7 @@ def build():
 
 <section class="flow-section">
   <div class="wrap">
-    <p class="eyebrow reveal">Part Two · The Sadhana</p>
+    <p class="eyebrow reveal">{ui['part2']}</p>
     <article class="article">
 {part2_html}
     </article>
@@ -338,11 +483,11 @@ def build():
   <div class="wrap center">
     <div class="prose reveal" style="margin:0 auto">
       <p class="zh" lang="zh-Hant">先以欲勾之，再令入佛智。</p>
-      <p class="en">First use desire to draw them in; then lead them into the wisdom of the Buddha.</p>
+      <p class="en">{ui['closing']}</p>
     </div>
     <div class="btn-row reveal" style="justify-content:center; margin-top:2.2rem">
-      <a class="btn btn-solid" href="refuge.html">Take Refuge</a>
-      <a class="btn" href="treasure-vase-wishes.html">Wishes in the Treasure Vase</a>
+      <a class="btn btn-solid" href="{ui['root']}refuge.html">{ui['btn_refuge']}</a>
+      <a class="btn" href="{ui['root']}treasure-vase-wishes.html">{ui['btn_wishes']}</a>
     </div>
   </div>
 </section>
@@ -351,12 +496,11 @@ def build():
 
 {footer}
 
-<script src="js/main.js"></script>
+<script src="{ui['root'] and "/js/" or "js/"}main.js"></script>
 </body>
 </html>
 """
-    OUT.write_text(page, encoding="utf-8")
-    print(f"treasure-vase-yoga.html written: {len(page) / 1024:.0f} KB")
+    return page
 
 
 if __name__ == "__main__":
