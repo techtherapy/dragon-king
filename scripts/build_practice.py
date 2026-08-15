@@ -66,7 +66,8 @@ def paragraphs(path, skip):
         t = t.replace("Grand Master", "Grandmaster")
         t = t.replace("Shakyamuni", "Sakyamuni")
         # the mantra as the school transliterates it
-        t = t.replace("wah-ri-la, men", "wah-ri-la, mee")
+        t = t.replace("Sam-man-doh, moo-toh-nam, wah-ri-la, men",
+                      "sam-man-doh, moo-toh-nam, wajila, mee")
         # house style: "buddhadharma" as one word, and lowercase the generic
         # "dharma"/"buddhahood", keeping names such as "Dharma Protectors"
         t = t.replace("Buddha Dharma", "buddhadharma")
@@ -150,6 +151,7 @@ UI = {
                        "Buddhas;<br>their light blesses the vase."),
         "g_mudra": "Mudra", "g_mudra_v": "middle and index fingers of both hands crossed",
         "g_mantra": "Mantra",
+        "g_mantra_v": "Namo sam-man-doh,<br>moo-toh-nam,<br>wajila, mee",
         "g_practice": "Practice", "g_practice_v": "seven complete sessions",
         "g_complete": "Completion", "g_complete_v": "the vase is cast<br>into the sea",
         "part1": "Part One · The Teaching", "part2": "Part Two · The Sadhana",
@@ -179,6 +181,7 @@ UI = {
                        "Budas;<br>su luz bendice el jarrón."),
         "g_mudra": "Mudra", "g_mudra_v": "los dedos medio e índice de ambas manos cruzados",
         "g_mantra": "Mantra",
+        "g_mantra_v": "Namo sam-man-doh,<br>moo-toh-nam,<br>wad-lli-la, mi",
         "g_practice": "Práctica", "g_practice_v": "siete sesiones completas",
         "g_complete": "Culminación", "g_complete_v": "el jarrón se arroja<br>al mar",
         "part1": "Primera parte · La enseñanza", "part2": "Segunda parte · La sadhana",
@@ -457,7 +460,7 @@ def render_page(ui, header, footer, part1_html, part2_html):
 
     <div class="glance reveal">
       <div class="g"><span class="k">{ui['g_mudra']}</span><span class="v tc" lang="zh-Hant">井</span><span class="v" style="display:block;margin-top:.3rem;font-size:.9rem;color:var(--muted)">{ui['g_mudra_v']}</span></div>
-      <div class="g"><span class="k">{ui['g_mantra']}</span><span class="v" style="font-style:italic">Namo Sam-man-doh,<br>moo-toh-nam,<br>wah-ri-la, mee</span></div>
+      <div class="g"><span class="k">{ui['g_mantra']}</span><span class="v" style="font-style:italic">{ui['g_mantra_v']}</span></div>
       <div class="g"><span class="k">{ui['g_practice']}</span><span class="v">{ui['g_practice_v']}</span></div>
       <div class="g"><span class="k">{ui['g_complete']}</span><span class="v">{ui['g_complete_v']}</span></div>
     </div>
