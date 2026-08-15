@@ -374,6 +374,8 @@ CHROME_ES = [
     (">Discussion Group<", ">Grupo de discusión<"),
     ("May all beings share in the merit of this offering of the dharma",
      "Que todos los seres compartan el mérito de esta ofrenda del dharma"),
+    # the mantra transliterated for Spanish phonetics
+    ("Om Guru Lian Sheng Siddhi Hum", "Om Guru Lian Sheng Sidi Jom"),
     # assets live at the root; this page is one level down
     ('href="css/', 'href="/css/'),
     ('src="js/', 'src="/js/'),
