@@ -238,6 +238,7 @@ body.hide-py .prow .pinyin { display: none; }
 body.hide-en .prow .english { display: none; }
 body.hide-py .sutra-title .t2, body.hide-py .seclabel .s2 { display: none; }
 body.hide-en .sutra-title .t3:not(.espanol), body.hide-en .seclabel .s3:not(.espanol) { display: none; }
+body.hide-en .reader-toc .t-en:not(.espanol) { display: none; }
 /* !important outranks structural display rules like .reader-toc nav a .t-en */
 body.hide-es .espanol { display: none !important; }
 
