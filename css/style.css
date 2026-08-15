@@ -54,9 +54,11 @@ body {
   background: var(--abyss);
   color: var(--cream);
   font-family: var(--font-body);
-  /* EB Garamond has a small x-height, so a flat 18px reads small on a large
-     screen. Fluid: 18px on phones (unchanged), ~21px from 1280px up. */
-  font-size: clamp(1.125rem, 1.02rem + 0.42vw, 1.32rem);
+  /* EB Garamond has a small x-height, so it reads small at typical sizes.
+     Fluid: 19.2px on phones, ~21px from 1280px up. Only the floor moves for
+     mobile — the preferred value does not overtake it until about 685px, so
+     desktop is untouched. */
+  font-size: clamp(1.2rem, 1.02rem + 0.42vw, 1.32rem);
   line-height: 1.72;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
