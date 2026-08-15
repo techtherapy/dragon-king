@@ -909,18 +909,21 @@ for ang, ln in ((-40, 30), (0, 40), (36, 28)):
     v_fronds.append(f"M{fmt(vtx)} {fmt(vty)}Q{fmt(c1[0])} {fmt(c1[1])} {fmt(tip[0])} {fmt(tip[1])}"
                     f"Q{fmt(c2[0])} {fmt(c2[1])} {fmt(vtx)} {fmt(vty)}Z")
 
-# five dhyani buddhas across the top
+# five dhyani buddhas across the top; they bloom outward from the centre
+# once the dragon has risen
 buddhas = ""
-for bx, s in ((100, 0.92), (230, 1.0), (360, 1.14), (490, 1.0), (620, 0.92)):
+for i, (bx, s) in enumerate(((100, 0.92), (230, 1.0), (360, 1.14), (490, 1.0), (620, 0.92))):
     buddhas += f"""
   <g transform="translate({bx} 118) scale({s})">
-    <circle class="db-halo" r="46"/>
-    <circle class="db-ring" r="40"/>
-    <circle class="db-fig" cx="0" cy="-27" r="3.4"/>
-    <circle class="db-fig" cx="0" cy="-18" r="8.5"/>
-    <path class="db-fig" d="M-8 -9 C-13 -6 -16 0 -16 6 C-20 9 -22 13 -21 16 C-8 20 8 20 21 16 C22 13 20 9 16 6 C16 0 13 -6 8 -9 C3 -11 -3 -11 -8 -9 Z"/>
-    <path class="db-line" d="M-13 8 C-7 11 7 11 13 8"/>
-    <path class="db-line" d="M-23 21 C-10 25 10 25 23 21"/>
+    <g class="bloom b{i}">
+      <circle class="db-halo" r="46"/>
+      <circle class="db-ring" r="40"/>
+      <circle class="db-fig" cx="0" cy="-27" r="3.4"/>
+      <circle class="db-fig" cx="0" cy="-18" r="8.5"/>
+      <path class="db-fig" d="M-8 -9 C-13 -6 -16 0 -16 6 C-20 9 -22 13 -21 16 C-8 20 8 20 21 16 C22 13 20 9 16 6 C16 0 13 -6 8 -9 C3 -11 -3 -11 -8 -9 Z"/>
+      <path class="db-line" d="M-13 8 C-7 11 7 11 13 8"/>
+      <path class="db-line" d="M-23 21 C-10 25 10 25 23 21"/>
+    </g>
   </g>"""
 
 # beams from each buddha converging on the vase — tapered light
@@ -965,19 +968,40 @@ vase_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 960" rol
   .db-ring {{ fill:none; stroke:var(--g); stroke-width:1.1; opacity:.5; }}
   .db-fig {{ fill:#13233f; stroke:var(--gb); stroke-width:1.2; stroke-linejoin:round; }}
   .db-line {{ fill:none; stroke:var(--g); stroke-width:1.1; opacity:.8; }}
-  .vb-beam {{ fill:url(#vBeamGrad); opacity:.16; animation:vbreathe 7s ease-in-out infinite alternate; }}
+  .vb-beam {{ fill:url(#vBeamGrad); opacity:0;
+              animation:vpour 1.1s ease-out 3.4s forwards,
+                        vbreathe 7s ease-in-out 4.7s infinite alternate; }}
   .vase-glow {{ fill:url(#vHaloGrad); animation:vpulse 6.5s ease-in-out infinite alternate-reverse; }}
+  /* the entrance: the vase appears, the dragon rises out of it, the five
+     buddhas bloom outward from the centre, and their light pours back down */
+  .vase-in {{ opacity:0; animation:vfade .9s ease .1s forwards; }}
+  .dragon-rise {{ opacity:0; transform:translateY(52px);
+                  animation:vrise 1.5s cubic-bezier(.22,.61,.36,1) .6s forwards; }}
+  .bloom {{ opacity:0; transform-box:fill-box; transform-origin:center;
+            animation:vbloom .9s cubic-bezier(.2,.65,.3,1) forwards; }}
+  .b2 {{ animation-delay:1.9s; }}
+  .b1, .b3 {{ animation-delay:2.2s; }}
+  .b0, .b4 {{ animation-delay:2.5s; }}
   .dragon {{ animation:vbob 12s ease-in-out infinite alternate; }}
   .head-inner {{ transform-box:fill-box; transform-origin:82% 34%; animation:vnod 9s ease-in-out infinite alternate; }}
   .whisker {{ transform-box:fill-box; transform-origin:96% 12%; animation:vwhisk 6.5s ease-in-out infinite alternate; }}
   .whisker.w2 {{ animation-duration:8s; animation-delay:-2.5s; }}
   @keyframes vpulse {{ from {{ opacity:.5; transform:scale(.95); }} to {{ opacity:1; transform:scale(1.04); }} }}
   @keyframes vbreathe {{ from {{ opacity:.11; }} to {{ opacity:.24; }} }}
+  @keyframes vfade {{ to {{ opacity:1; }} }}
+  @keyframes vrise {{ to {{ opacity:1; transform:translateY(0); }} }}
+  @keyframes vbloom {{ from {{ opacity:0; transform:scale(.55); }}
+                       to {{ opacity:1; transform:scale(1); }} }}
+  @keyframes vpour {{ to {{ opacity:.11; }} }}
   @keyframes vbob {{ from {{ transform:translateY(-5px); }} to {{ transform:translateY(4px); }} }}
   @keyframes vnod {{ from {{ transform:rotate(-1.3deg); }} to {{ transform:rotate(1.9deg); }} }}
   @keyframes vwhisk {{ from {{ transform:rotate(-2.4deg); }} to {{ transform:rotate(2.8deg); }} }}
   @media (prefers-reduced-motion: reduce) {{
-    .db-halo,.vb-beam,.vase-glow,.dragon,.head-inner,.whisker {{ animation:none; }}
+    .db-halo,.vb-beam,.vase-glow,.dragon,.head-inner,.whisker,
+    .vase-in,.dragon-rise,.bloom {{ animation:none; }}
+    /* entrance classes start invisible — restore them when not animating */
+    .vase-in,.dragon-rise,.bloom {{ opacity:1; transform:none; }}
+    .vb-beam {{ opacity:.16; }}
   }}
 </style>
 <defs>
@@ -1013,6 +1037,7 @@ vase_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 960" rol
 {buddhas}
 {beams}
 
+<g class="dragon-rise">
 <g class="dragon">
   <path class="spike" d="{''.join(v_spikes)}"/>
   <path class="frond" d="{''.join(v_fronds)}"/>
@@ -1020,8 +1045,10 @@ vase_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 960" rol
   <path class="plate" d="{''.join(v_plates)}"/>
   {V_HEAD}
 </g>
+</g>
 
 <!-- the treasure vase -->
+<g class="vase-in">
 <circle class="vase-glow" cx="360" cy="810" r="150"/>
 <g>
   {ribbons}
@@ -1035,6 +1062,7 @@ vase_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 960" rol
   <path class="vase-band" d="M336 726 L384 726 M298 776 C322 768 398 768 422 776 M296 848 C330 860 390 860 424 848"/>
   <path class="vase-band" d="M360 790 C374 790 383 800 381 811 C379 820 371 825 363 824 C370 821 374 815 372 808 C370 801 363 797 357 800 C352 802 350 808 352 813 C348 806 350 796 360 790 Z"/>
   <path class="vase-band" d="M306 832 C314 824 324 824 330 830 C336 824 346 824 352 830 M368 830 C374 824 384 824 390 830 C396 824 406 824 414 832"/>
+</g>
 </g>
 </svg>
 """
