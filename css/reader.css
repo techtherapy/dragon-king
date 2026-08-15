@@ -224,12 +224,21 @@
 }
 .block.center { text-align: center; }
 
+/* the Spanish layer reads like the English one */
+.prow .espanol {
+  font-size: clamp(1.08rem, 1rem + 0.32vw, 1.3rem);
+  color: var(--cream-dim);
+  margin: 0.3rem 0 0;
+  line-height: 1.6;
+}
+
 /* layer visibility */
 body.hide-zh .prow .hanzi { display: none; }
 body.hide-py .prow .pinyin { display: none; }
 body.hide-en .prow .english { display: none; }
 body.hide-py .sutra-title .t2, body.hide-py .seclabel .s2 { display: none; }
-body.hide-en .sutra-title .t3, body.hide-en .seclabel .s3 { display: none; }
+body.hide-en .sutra-title .t3:not(.espanol), body.hide-en .seclabel .s3:not(.espanol) { display: none; }
+body.hide-es .espanol { display: none; }
 
 /* back-to-top pearl */
 .to-top {
@@ -315,7 +324,7 @@ body.hide-en .sutra-title .t3, body.hide-en .seclabel .s3 { display: none; }
   .sutra { max-width: none; padding: 0; }
   .sutra-title .t1, .seclabel .s1, .prow .hanzi { color: #000; text-shadow: none; }
   .prow .pinyin, .sutra-title .t2, .seclabel .s2 { color: #333; }
-  .prow .english, .sutra-title .t3, .seclabel .s3 { color: #000; }
+  .prow .english, .prow .espanol, .sutra-title .t3, .seclabel .s3 { color: #000; }
   .chapter { break-before: page; }
   .prow { break-inside: avoid; }
   .block.verse { border-color: #999; background: none; }

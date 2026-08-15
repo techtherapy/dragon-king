@@ -7,11 +7,13 @@ trilingual text inside the site's reader chrome.
 
 Run from the repo root:  python3 scripts/build_reader.py
 """
+import json
 import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "Dragon king sutra hailongwang_complete.html"
+ES_DIR = ROOT / "translations" / "es"
 OUT = ROOT / "read.html"
 
 LEAF = re.compile(r'<div class="(hanzi|pinyin|english)">(.*)</div>\s*$')
@@ -122,6 +124,30 @@ def parse():
     return title_lines, colophon, chapters
 
 
+def load_spanish(chapters, colophon):
+    """Attach the Spanish layer from translations/es/. The chapter files are
+    verse-aligned to the English; any mismatch is a build error, so a partial
+    or drifted translation can never ship silently."""
+    for i, ch in enumerate(chapters, start=1):
+        data = json.loads((ES_DIR / f"ch{i:02d}.json").read_text(encoding="utf-8"))
+        n_src = sum(len(ps) for _, ps in ch["blocks"])
+        verses = data["verses"]
+        if len(verses) != n_src:
+            raise SystemExit(f"es/ch{i:02d}.json: {len(verses)} verses, source has {n_src}")
+        ch["label_es"] = data["label_es"]
+        k = 0
+        for _, prows in ch["blocks"]:
+            for p in prows:
+                p["espanol"] = verses[k]
+                k += 1
+    common = json.loads((ES_DIR / "common.json").read_text(encoding="utf-8"))
+    if len(common["colophon"]) != len(colophon):
+        raise SystemExit("es/common.json: colophon length mismatch")
+    for p, es in zip(colophon, common["colophon"]):
+        p["espanol"] = es
+    return common["title_t3"]
+
+
 def prow_html(p, indent="        "):
     parts = []
     if "hanzi" in p:
@@ -130,6 +156,8 @@ def prow_html(p, indent="        "):
         parts.append(f'<p class="pinyin" aria-hidden="true">{p["pinyin"]}</p>')
     if "english" in p:
         parts.append(f'<p class="english">{p["english"]}</p>')
+    if "espanol" in p:
+        parts.append(f'<p class="espanol" lang="es">{p["espanol"]}</p>')
     return f'{indent}<div class="prow">' + "".join(parts) + "</div>"
 
 
@@ -139,7 +167,7 @@ CHROME_HEAD = """<!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Read the Sutra — Dragon King Sutra 佛說海龍王經</title>
-<meta name="description" content="The complete Sutra Spoken by the Buddha on the Sea Dragon King in Traditional Chinese, pinyin and English — four volumes, twenty chapters.">
+<meta name="description" content="The complete Sutra Spoken by the Buddha on the Sea Dragon King in Traditional Chinese, pinyin, English and Spanish — four volumes, twenty chapters.">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -148,7 +176,7 @@ CHROME_HEAD = """<!DOCTYPE html>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/reader.css">
 </head>
-<body class="reader-page">
+<body class="reader-page hide-es">
 
 <div class="progress-track" aria-hidden="true"><span class="progress-fill" id="progressFill"></span></div>
 
@@ -282,6 +310,7 @@ def build():
     title_lines, colophon, chapters = parse()
     assert len(chapters) == 20, f"expected 20 chapters, got {len(chapters)}"
     n_prows = sum(len(ps) for c in chapters for _, ps in c["blocks"])
+    title_es = load_spanish(chapters, colophon)
 
     out = [CHROME_HEAD]
 
@@ -309,6 +338,7 @@ def build():
     out.append('      <button class="chip" data-layer="zh" aria-pressed="true"><span class="dot"></span><span lang="zh-Hant">漢字</span></button>')
     out.append('      <button class="chip" data-layer="py" aria-pressed="true"><span class="dot"></span>Pīnyīn</button>')
     out.append('      <button class="chip" data-layer="en" aria-pressed="true"><span class="dot"></span>English</button>')
+    out.append('      <button class="chip" data-layer="es" aria-pressed="false"><span class="dot"></span>Español</button>')
     out.append('      <span class="spacer"></span>')
     out.append('      <button class="tool-btn" id="printBtn">⎙ <span class="btn-label">Print</span></button>')
     out.append("    </div>")
@@ -320,6 +350,7 @@ def build():
     out.append(f'        <h1 class="t1" lang="zh-Hant">{t1}</h1>')
     out.append(f'        <div class="t2" aria-hidden="true">{t2}</div>')
     out.append(f'        <div class="t3">{t3}</div>')
+    out.append(f'        <div class="t3 espanol" lang="es">{title_es}</div>')
     out.append("      </header>")
 
     # colophon
@@ -339,6 +370,7 @@ def build():
         out.append(f'          <h2 class="s1" lang="zh-Hant">{zh}</h2>')
         out.append(f'          <div class="s2" aria-hidden="true">{py}</div>')
         out.append(f'          <div class="s3">{en}</div>')
+        out.append(f'          <div class="s3 espanol" lang="es">{ch["label_es"]}</div>')
         out.append("        </header>")
         for cls, prows in ch["blocks"]:
             classes = "block" + (f" {cls}" if cls else "")

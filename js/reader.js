@@ -1,7 +1,8 @@
 /* Dragon King Sutra — reader behaviour */
 (function () {
   /* --- language layer toggles (persisted) --- */
-  var LAYERS = ['zh', 'py', 'en'];
+  var LAYERS = ['zh', 'py', 'en', 'es'];
+  var DEFAULT_ON = { zh: true, py: true, en: true, es: false };
   var chips = document.querySelectorAll('.chip[data-layer]');
 
   function applyLayer(layer, on) {
@@ -14,7 +15,7 @@
   LAYERS.forEach(function (layer) {
     var stored = null;
     try { stored = localStorage.getItem('dks-show-' + layer); } catch (e) { /* private mode */ }
-    applyLayer(layer, stored === null ? true : stored === '1');
+    applyLayer(layer, stored === null ? DEFAULT_ON[layer] : stored === '1');
   });
 
   chips.forEach(function (chip) {
