@@ -48,8 +48,9 @@ def paragraphs(path, skip):
         # house style: one word, as used everywhere else on the site
         t = t.replace("Grand Master", "Grandmaster")
         t = t.replace("Shakyamuni", "Sakyamuni")
-        # house style: lowercase the generic "dharma"/"buddhahood",
-        # keeping names such as "Dharma Protectors" and "Buddha Dharma"
+        # house style: "buddhadharma" as one word, and lowercase the generic
+        # "dharma"/"buddhahood", keeping names such as "Dharma Protectors"
+        t = t.replace("Buddha Dharma", "buddhadharma")
         for _a, _b in (("to teach the Dharma", "to teach the dharma"),
                        ("as the Dharma currently", "as the dharma currently"),
                        ("great Dharma masters", "great dharma masters"),
