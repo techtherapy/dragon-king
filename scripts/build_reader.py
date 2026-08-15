@@ -22,10 +22,10 @@ BLOCK_OPEN = re.compile(r'<div class="block([^"]*)">\s*$')
 ANCHOR = re.compile(r'<a id="(ch\d+)"></a>\s*$')
 
 VOLUME_OF = {  # chapter number -> volume label
-    **{n: "卷一 · Volume One" for n in range(1, 5)},
-    **{n: "卷二 · Volume Two" for n in range(5, 10)},
-    **{n: "卷三 · Volume Three" for n in range(10, 16)},
-    **{n: "卷四 · Volume Four" for n in range(16, 21)},
+    **{n: "卷一 · Vol. One" for n in range(1, 5)},
+    **{n: "卷二 · Vol. Two" for n in range(5, 10)},
+    **{n: "卷三 · Vol. Three" for n in range(10, 16)},
+    **{n: "卷四 · Vol. Four" for n in range(16, 21)},
 }
 CJK_NUM = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十",
            "十一", "十二", "十三", "十四", "十五", "十六", "十七", "十八", "十九", "二十"]
