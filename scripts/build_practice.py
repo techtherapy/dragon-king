@@ -415,7 +415,14 @@ def render_page(ui, header, footer, part1_html, part2_html):
     background: rgba(15, 31, 56, 0.4);
     padding: 1.3rem 1.2rem;
     text-align: center;
+    display: flex;
+    flex-direction: column;
   }}
+  /* The cards are equal height but hold one to three lines each. Keep the
+     gold labels aligned in a row across the top and centre the value in
+     whatever space is left, so short cards do not sit with a gap beneath. */
+  .glance .g > .k + .v {{ margin-top: auto; }}
+  .glance .g > .v:last-child {{ margin-bottom: auto; }}
   .glance .g .k {{
     font-family: var(--font-display);
     letter-spacing: 0.3em;
