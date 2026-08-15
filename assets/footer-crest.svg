@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="presentation" aria-hidden="true">
+<style>
+  :root { --g:#d9b25f; --gb:#f4dc96; }
+  .body-fill { fill:url(#fcBodyGrad); stroke:var(--g); stroke-width:1; stroke-linejoin:round; }
+  .spike { fill:url(#fcSpikeGrad); stroke:var(--g); stroke-width:.5; }
+  .mane { fill:url(#fcManeGrad); stroke:var(--g); stroke-width:1.1; }
+  .mane2 { opacity:.75; }
+  .horn { fill:#0c1830; stroke:var(--gb); stroke-width:1.4; stroke-linejoin:round; }
+  .horn2 { opacity:.6; }
+  .skull { fill:url(#fcHeadGrad); stroke:var(--gb); stroke-width:1.8; stroke-linejoin:round; }
+  .line { fill:none; stroke:var(--gb); stroke-width:1.3; stroke-linecap:round; }
+  .tooth { fill:var(--gb); }
+  .tongue { fill:#8d5a3a; opacity:.9; }
+  .eye-white { fill:#f7ecd2; stroke:var(--g); stroke-width:.8; }
+  .eye-iris { fill:#f4dc96; }
+  .eye-pupil { fill:#2a1c08; }
+  .eye-glint { fill:#fff; }
+  .whisker { fill:none; stroke:var(--gb); stroke-width:1.4; stroke-linecap:round; }
+</style>
+<defs>
+  <linearGradient id="fcBodyGrad" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#1a2f56"/><stop offset="55%" stop-color="#101f39"/>
+    <stop offset="100%" stop-color="#0c1830"/>
+  </linearGradient>
+  <linearGradient id="fcHeadGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#2a4470"/><stop offset="100%" stop-color="#16294a"/>
+  </linearGradient>
+  <linearGradient id="fcManeGrad" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#d9b25f" stop-opacity=".85"/>
+    <stop offset="100%" stop-color="#8d7440" stop-opacity=".3"/>
+  </linearGradient>
+  <linearGradient id="fcSpikeGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#f4dc96" stop-opacity=".8"/>
+    <stop offset="100%" stop-color="#8d7440" stop-opacity=".35"/>
+  </linearGradient>
+</defs>
+
+<!-- tail fluke -->
+<path d="M26 75 l-6.5 -1.5 M26 75 l-4 5.5"
+      stroke="#d9b25f" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+
+<path class="spike" d="M30.7 82.3L28.5 84.2L33.6 84.8ZM44.3 91.3L43.1 95.1L48.1 92ZM61.1 91.7L62.2 96.4L64.7 90.5ZM75.3 82.7L78.6 86.2L77.8 79.8ZM83 68.1L87.6 69.5L83.7 64.3ZM82.4 51.8L87.1 50.7L81.2 48.2ZM74 38.1L77.5 34.9L71.2 35.6Z"/>
+<path class="body-fill" d="M25.2 75.5L26.2 76.9L27.2 78.4L28.3 79.8L29.5 81.2L30.7 82.5L31.9 83.8L33.3 85L34.7 86.1L36.1 87.2L37.7 88.2L39.3 89.1L40.9 90L42.6 90.7L44.3 91.4L46.1 91.9L48 92.3L49.8 92.7L51.7 92.9L53.6 92.9L55.5 92.9L57.4 92.7L59.3 92.4L61.2 92L63 91.4L64.8 90.7L66.5 89.8L68.2 88.9L69.8 87.9L71.3 86.7L72.8 85.5L74.2 84.3L75.5 82.9L76.8 81.5L77.9 80L79 78.4L79.9 76.8L80.8 75.1L81.6 73.4L82.3 71.7L82.8 69.9L83.3 68.1L83.7 66.2L83.9 64.4L84.1 62.6L84.1 60.7L84 58.9L83.8 57L83.6 55.2L83.2 53.4L82.7 51.6L82.1 49.9L81.4 48.2L80.6 46.5L79.8 44.9L78.8 43.4L77.8 41.9L76.6 40.5L75.4 39.1L74.1 37.8L72.8 36.6L71.4 35.5L69.9 34.5L68.3 33.6L66.7 32.9L65 32.3L63.3 31.8L61.6 31.4L59.9 31.1L58.2 30.8L56.4 30.7L54.7 30.6L53 30.6L52.8 37.4L54.1 37.5L55.4 37.7L56.7 37.9L57.9 38.3L59.1 38.8L60.3 39.4L61.4 40L62.5 40.6L63.6 41.3L64.6 42L65.7 42.7L66.7 43.5L67.6 44.3L68.6 45.2L69.4 46.2L70.2 47.2L71 48.2L71.7 49.3L72.3 50.4L72.9 51.6L73.4 52.8L73.8 54L74.2 55.3L74.5 56.6L74.7 57.9L74.8 59.2L74.9 60.5L74.9 61.8L74.8 63.1L74.6 64.5L74.4 65.8L74.1 67.1L73.7 68.4L73.2 69.6L72.7 70.8L72.1 72.1L71.4 73.2L70.6 74.3L69.8 75.4L68.9 76.5L68 77.5L67 78.4L65.9 79.3L64.8 80.1L63.7 80.9L62.5 81.5L61.2 82.2L60 82.7L58.7 83.3L57.4 83.7L56 84.2L54.6 84.6L53.2 84.9L51.8 85.1L50.3 85.3L48.8 85.4L47.3 85.5L45.8 85.4L44.3 85.3L42.7 85.1L41.2 84.7L39.6 84.3L38.1 83.8L36.6 83.1L35.2 82.4L33.8 81.6L32.4 80.6L31.1 79.6L29.9 78.5L28.8 77.2L27.7 75.9L26.8 74.5Z"/>
+
+<g class="head" transform="translate(52.9 34) rotate(-369) scale(0.21)"><g class="head-inner">
+  <!-- mane locks sweeping back over the neck -->
+  <path class="mane" d="M30 -28 C64 -60 100 -72 138 -66 C106 -50 88 -36 80 -18 C76 -22 50 -26 30 -28 Z"/>
+  <path class="mane" d="M36 -18 C78 -34 116 -32 146 -14 C112 -12 90 -4 78 10 C72 0 52 -12 36 -18 Z"/>
+  <path class="mane" d="M40 -2 C82 -4 116 8 136 32 C104 26 82 28 68 38 C62 24 52 8 40 -2 Z"/>
+  <path class="mane" d="M38 12 C72 22 94 40 102 66 C78 52 60 48 44 50 C42 36 40 24 38 12 Z"/>
+  <path class="mane mane2" d="M34 -34 C56 -66 86 -84 124 -88 C98 -66 84 -50 78 -34 C62 -36 46 -36 34 -34 Z"/>
+  <!-- far horn -->
+  <path class="horn horn2" d="M26 -26 C44 -44 68 -54 96 -56 C100 -56 102 -60 99 -63 C97 -66 93 -66 89 -65 C60 -60 38 -46 20 -30 Z"/>
+  <!-- skull: crown, brow, snout with curled nose, open upper jaw -->
+  <path class="skull" d="M50 -32 C30 -40 12 -40 -2 -34 C-8 -31 -14 -30 -20 -30 C-36 -28 -52 -24 -66 -18 C-76 -14 -84 -16 -88 -22 C-92 -14 -88 -6 -80 -3 C-86 0 -90 4 -88 10 C-80 14 -70 12 -62 6 C-48 10 -34 10 -22 6 L-14 4 C-2 12 12 16 26 14 C40 12 48 2 50 -12 C51 -19 51 -26 50 -32 Z"/>
+  <!-- nose curl spiral -->
+  <path class="line" d="M-80 -4 C-88 -6 -92 -14 -88 -20 C-84 -24 -78 -22 -78 -17 C-78 -13 -82 -12 -84 -15"/>
+  <!-- upper fangs -->
+  <path class="tooth" d="M-70 3 L-64 20 L-56 5 Z"/>
+  <path class="tooth" d="M-46 6 L-42 17 L-35 7 Z"/>
+  <!-- lower jaw, open -->
+  <path class="skull" d="M-10 12 C-28 18 -46 22 -62 30 C-72 35 -78 33 -82 27 C-84 35 -78 42 -68 42 C-52 42 -32 38 -14 30 C-2 34 12 34 22 28 C10 26 0 20 -10 12 Z"/>
+  <path class="tooth" d="M-58 28 L-50 14 L-44 26 Z"/>
+  <!-- tongue curl inside the mouth -->
+  <path class="tongue" d="M-14 16 C-30 18 -44 24 -52 30 C-40 30 -28 27 -18 22 Z"/>
+  <!-- eye -->
+  <path class="eye-white" d="M-4 -22 C4 -30 16 -30 24 -22 C16 -14 4 -14 -4 -22 Z"/>
+  <circle class="eye-iris" cx="10" cy="-22" r="4.6"/>
+  <ellipse class="eye-pupil" cx="10" cy="-22" rx="1.7" ry="4"/>
+  <circle class="eye-glint" cx="12" cy="-24.5" r="1.3"/>
+  <path class="line" d="M-8 -30 C2 -38 20 -38 30 -30"/>
+  <!-- ear -->
+  <path class="mane mane2" d="M22 -30 C32 -42 44 -46 54 -42 C44 -36 36 -30 32 -22 Z"/>
+  <!-- near horn: antler sweeping back with tine -->
+  <path class="horn" d="M12 -32 C30 -52 56 -64 88 -68 C93 -68 95 -72 92 -76 C89 -79 85 -79 81 -78 C50 -72 26 -58 6 -38 Z"/>
+  <path class="horn" d="M50 -60 C56 -74 68 -84 84 -90 C88 -91 91 -88 89 -84 C86 -80 82 -78 78 -74 C70 -68 64 -62 60 -54 Z"/>
+  <!-- whiskers -->
+  <path class="whisker" d="M-76 -8 C-104 -14 -130 -6 -146 16 C-154 28 -150 40 -140 40 C-146 30 -144 22 -132 16 C-116 4 -96 -2 -76 -4"/>
+  <path class="whisker w2" d="M-72 8 C-94 14 -110 28 -118 50 C-122 62 -114 70 -106 66 C-114 58 -113 50 -104 44 C-94 30 -82 18 -68 12"/>
+  <!-- chin beard locks -->
+  <path class="mane" d="M-30 34 C-36 48 -32 62 -20 70 C-22 58 -19 48 -10 42 C-18 40 -25 38 -30 34 Z"/>
+  <path class="mane mane2" d="M-46 36 C-54 46 -56 58 -50 68 C-48 58 -43 50 -36 46 Z"/>
+</g></g>
+
+
+<!-- the flaming pearl -->
+<circle cx="17" cy="17" r="3.6" fill="none" stroke="#d9b25f" stroke-width="1.4"/>
+<circle cx="17" cy="17" r="1.2" fill="#f4dc96"/>
+<path d="M14.5 11.5 C16 8.5 19.5 8.5 20.5 11" fill="none" stroke="#8d7440" stroke-width="1.1"/>
+</svg>

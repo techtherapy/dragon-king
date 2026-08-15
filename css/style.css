@@ -508,7 +508,8 @@ html.no-js .reveal { opacity: 1; transform: none; }
   position: relative;
 }
 .footer-crest { display: flex; justify-content: center; padding: 3rem 0 0; }
-.footer-crest svg { width: 72px; opacity: 0.85; filter: drop-shadow(0 0 10px rgba(217, 178, 95, 0.3)); }
+.footer-crest svg,
+.footer-crest img { width: 84px; height: auto; opacity: 0.85; filter: drop-shadow(0 0 10px rgba(217, 178, 95, 0.3)); }
 .footer-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));

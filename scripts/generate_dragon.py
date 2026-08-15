@@ -1068,6 +1068,110 @@ vase_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 960" rol
 """
 (ASSETS / "vase-vision.svg").write_text(vase_svg, encoding="utf-8")
 
+# ----------------------------------------------------------------------
+# footer-crest.svg — the dragon coiled into a medallion, in profile,
+# regarding the flaming pearl. One shared asset, loaded by the footer of
+# every page, reusing the hero's own head so the crest and the hero are
+# unmistakably the same dragon.
+# ----------------------------------------------------------------------
+FC_CX, FC_CY = 52, 60
+fc_pts, fc_tans = [], []
+FCN = 72
+for _i in range(FCN + 1):
+    _t = _i / FCN
+    _deg = 150 - _t * 238                 # tail lower-left -> over the top
+    _r = 30 - 4 * _t                      # gentle inward taper
+    _a = math.radians(_deg)
+    fc_pts.append((FC_CX + _r * math.cos(_a), FC_CY + _r * math.sin(_a)))
+    fc_tans.append((math.sin(_a), -math.cos(_a)))   # travel direction (deg decreasing)
+
+def _fc_w(t):
+    w_tail, w_mid, w_neck = 0.9, 4.6, 3.4
+    if t < 0.35:
+        return w_tail + (w_mid - w_tail) * smoothstep(0.0, 0.35, t)
+    if t < 0.85:
+        return w_mid
+    return w_mid + (w_neck - w_mid) * smoothstep(0.85, 1.0, t)
+
+fc_outer, fc_inner = [], []
+for _i, ((px, py), (tx, ty)) in enumerate(zip(fc_pts, fc_tans)):
+    nx, ny = -ty, tx
+    w = _fc_w(_i / FCN)
+    fc_outer.append((px + nx * w, py + ny * w))
+    fc_inner.append((px - nx * w, py - ny * w))
+fc_body = poly_path(fc_outer + fc_inner[::-1], close=True)
+
+fc_spikes = []
+for _i in range(6, FCN - 8, 9):
+    px, py = fc_pts[_i]
+    tx, ty = fc_tans[_i]
+    nx, ny = -ty, tx
+    w = _fc_w(_i / FCN)
+    hgt = w * 0.6 + 1.7
+    bl = (px + nx * (w - 0.3) - tx * 1.9, py + ny * (w - 0.3) - ty * 1.9)
+    br = (px + nx * (w - 0.3) + tx * 1.9, py + ny * (w - 0.3) + ty * 1.9)
+    tip = (px + nx * (w + hgt) - tx * 2.4, py + ny * (w + hgt) - ty * 2.4)
+    fc_spikes.append(f"M{fmt(bl[0])} {fmt(bl[1])}L{fmt(tip[0])} {fmt(tip[1])}L{fmt(br[0])} {fmt(br[1])}Z")
+
+fc_hx, fc_hy = fc_pts[-1]
+fc_angle = math.degrees(math.atan2(fc_tans[-1][1], fc_tans[-1][0])) - 180
+fc_angle -= 11          # lift the gaze toward the pearl
+FC_HEAD = head_group(fc_hx, fc_hy, fc_angle, 0.21)
+
+crest_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="presentation" aria-hidden="true">
+<style>
+  :root {{ --g:#d9b25f; --gb:#f4dc96; }}
+  .body-fill {{ fill:url(#fcBodyGrad); stroke:var(--g); stroke-width:1; stroke-linejoin:round; }}
+  .spike {{ fill:url(#fcSpikeGrad); stroke:var(--g); stroke-width:.5; }}
+  .mane {{ fill:url(#fcManeGrad); stroke:var(--g); stroke-width:1.1; }}
+  .mane2 {{ opacity:.75; }}
+  .horn {{ fill:#0c1830; stroke:var(--gb); stroke-width:1.4; stroke-linejoin:round; }}
+  .horn2 {{ opacity:.6; }}
+  .skull {{ fill:url(#fcHeadGrad); stroke:var(--gb); stroke-width:1.8; stroke-linejoin:round; }}
+  .line {{ fill:none; stroke:var(--gb); stroke-width:1.3; stroke-linecap:round; }}
+  .tooth {{ fill:var(--gb); }}
+  .tongue {{ fill:#8d5a3a; opacity:.9; }}
+  .eye-white {{ fill:#f7ecd2; stroke:var(--g); stroke-width:.8; }}
+  .eye-iris {{ fill:#f4dc96; }}
+  .eye-pupil {{ fill:#2a1c08; }}
+  .eye-glint {{ fill:#fff; }}
+  .whisker {{ fill:none; stroke:var(--gb); stroke-width:1.4; stroke-linecap:round; }}
+</style>
+<defs>
+  <linearGradient id="fcBodyGrad" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#1a2f56"/><stop offset="55%" stop-color="#101f39"/>
+    <stop offset="100%" stop-color="#0c1830"/>
+  </linearGradient>
+  <linearGradient id="fcHeadGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#2a4470"/><stop offset="100%" stop-color="#16294a"/>
+  </linearGradient>
+  <linearGradient id="fcManeGrad" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#d9b25f" stop-opacity=".85"/>
+    <stop offset="100%" stop-color="#8d7440" stop-opacity=".3"/>
+  </linearGradient>
+  <linearGradient id="fcSpikeGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#f4dc96" stop-opacity=".8"/>
+    <stop offset="100%" stop-color="#8d7440" stop-opacity=".35"/>
+  </linearGradient>
+</defs>
+
+<!-- tail fluke -->
+<path d="M{fmt(fc_pts[0][0])} {fmt(fc_pts[0][1])} l-6.5 -1.5 M{fmt(fc_pts[0][0])} {fmt(fc_pts[0][1])} l-4 5.5"
+      stroke="#d9b25f" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+
+<path class="spike" d="{''.join(fc_spikes)}"/>
+<path class="body-fill" d="{fc_body}"/>
+{FC_HEAD}
+
+<!-- the flaming pearl -->
+<circle cx="17" cy="17" r="3.6" fill="none" stroke="#d9b25f" stroke-width="1.4"/>
+<circle cx="17" cy="17" r="1.2" fill="#f4dc96"/>
+<path d="M14.5 11.5 C16 8.5 19.5 8.5 20.5 11" fill="none" stroke="#8d7440" stroke-width="1.1"/>
+</svg>
+"""
+(ASSETS / "footer-crest.svg").write_text(crest_svg, encoding="utf-8")
+print(f"footer-crest.svg: {len(crest_svg) / 1024:.1f} KB")
+
 print(f"sky-stars.svg: {len(sky_svg) / 1024:.0f} KB")
 
 print(f"dragon-hero.svg: {len(dragon_svg) / 1024:.0f} KB, spine samples={N}")
