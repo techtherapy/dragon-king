@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
 """Generate the Treasure Vase Yoga illustrations.
 
-Three instructional figures, each anchored to a passage of the teaching by
+Two instructional figures, each anchored to a passage of the teaching by
 scripts/build_practice.py:
 
-  mudra.svg            the 井 mudra — index and middle fingers of both
-                       hands crossed
   vase-preparation.svg cutaway of the sealed vase: five herbs as the five
                        chakras, copper-coin seal, five coloured cloths
   casting-the-vase.svg the finished vase cast into the sea
 
-and five decorative pieces:
+(mudra.svg, the third figure, is traced from the owner's reference
+drawing by scripts/trace_mudra.py) and five decorative pieces:
 
   deco-cloud-rule.svg  auspicious-cloud divider drawn above each heading
   deco-dragon-beneath.svg  the dragon stirring under a mirror-calm sea
@@ -78,125 +77,6 @@ def svg(w, h, body, extra_css="", label=""):
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}"{role}>\n'
             f'<style>{BASE_CSS}{extra_css}</style>\n'
             f'<defs>{DEFS}</defs>\n{body}\n</svg>\n')
-
-
-# ----------------------------------------------------------------------
-# 1. the 井 mudra
-# ----------------------------------------------------------------------
-def finger(x1, y1, x2, y2, w1, w2, bow=0.0):
-    """A tapered finger from base (x1,y1) to tip (x2,y2), with a rounded tip
-    and an optional sideways bow so it doesn't read as a rigid stick."""
-    dx, dy = x2 - x1, y2 - y1
-    L = math.hypot(dx, dy) or 1
-    ux, uy = dx / L, dy / L
-    nx, ny = -uy, ux
-
-    def p(t, w):
-        return (x1 + ux * L * t + nx * w + nx * bow * math.sin(math.pi * t),
-                y1 + uy * L * t + ny * w + ny * bow * math.sin(math.pi * t))
-
-    a, b = p(0, w1), p(0, -w1)
-    ma, mb = p(0.5, w1 * 0.92 + 0.5), p(0.5, -(w1 * 0.92 + 0.5))
-    c, d = p(1, w2), p(1, -w2)
-    tipx, tipy = x2 + ux * w2 * 1.35, y2 + uy * w2 * 1.35
-    return (f'M{a[0]:.1f} {a[1]:.1f} Q{ma[0]:.1f} {ma[1]:.1f} {c[0]:.1f} {c[1]:.1f} '
-            f'Q{tipx:.1f} {tipy:.1f} {d[0]:.1f} {d[1]:.1f} '
-            f'Q{mb[0]:.1f} {mb[1]:.1f} {b[0]:.1f} {b[1]:.1f} Z')
-
-
-def nail(x, y, ux, uy, w):
-    """The nail plate just behind a fingertip: a small rounded quadrilateral."""
-    nx, ny = -uy, ux
-    back = 2.05 * w
-    a = (x - ux * back + nx * w * 0.62, y - uy * back + ny * w * 0.62)
-    b = (x - ux * back - nx * w * 0.62, y - uy * back - ny * w * 0.62)
-    ca = (x - ux * w * 0.35 + nx * w * 0.72, y - uy * w * 0.35 + ny * w * 0.72)
-    cb = (x - ux * w * 0.35 - nx * w * 0.72, y - uy * w * 0.35 - ny * w * 0.72)
-    tip = (x - ux * w * 0.05, y - uy * w * 0.05)
-    return (f'M{a[0]:.1f} {a[1]:.1f} Q{x - ux * back * 1.15:.1f} {y - uy * back * 1.15:.1f} '
-            f'{b[0]:.1f} {b[1]:.1f} Q{cb[0]:.1f} {cb[1]:.1f} {tip[0]:.1f} {tip[1]:.1f} '
-            f'Q{ca[0]:.1f} {ca[1]:.1f} {a[0]:.1f} {a[1]:.1f} Z')
-
-
-def crease(x1, y1, x2, y2, t, w):
-    """A knuckle crease across a finger at position t along it."""
-    ux, uy = x2 - x1, y2 - y1
-    L = math.hypot(ux, uy) or 1
-    ux, uy = ux / L, uy / L
-    nx, ny = -uy, ux
-    px, py = x1 + (x2 - x1) * t, y1 + (y2 - y1) * t
-    return (f'M{px + nx * w * 0.72:.1f} {py + ny * w * 0.72:.1f} '
-            f'Q{px + ux * w * 0.45:.1f} {py + uy * w * 0.45:.1f} '
-            f'{px - nx * w * 0.72:.1f} {py - ny * w * 0.72:.1f}')
-
-
-def joints(axis, tipw, ts=(0.10, 0.40, 0.70)):
-    """Nail plus knuckle creases for a finger described by its axis."""
-    (x1, y1), (x2, y2) = axis
-    L = math.hypot(x2 - x1, y2 - y1) or 1
-    ux, uy = (x2 - x1) / L, (y2 - y1) / L
-    out = [f'<path class="ln-thin" d="{nail(x2, y2, ux, uy, tipw)}"/>']
-    for i, t in enumerate(ts):
-        out.append(f'<path class="ln-thin" d="{crease(x1, y1, x2, y2, t, tipw + 5 - i * 1.6)}"/>')
-    return "".join(out)
-
-
-# The left hand as ONE closed contour: up the back of the hand, out along the
-# index, round the tip, down its far side, through the web, out along the
-# middle finger and home round the folded ring and little fingers. Letting the
-# contour of the hand run *into* the finger is what makes line-art read as
-# anatomy rather than as pipes glued to a mitten.
-#
-# The right hand is this same path mirrored about x = W/2 — two hands really
-# are mirror images, and it guarantees both are drawn equally well.
-LEFT_HAND = (
-    "M-6 392 C24 366 62 330 96 302 C110 293 118 289 127 290 "      # back of the hand
-    "C168 236 220 174 268 116 C276 106 292 114 288 132 "           # index, and its tip
-    "C258 172 222 216 196 253 C200 258 204 262 208 266 "           # down to the web
-    "C240 236 288 194 321 157 C331 147 347 157 339 175 "           # middle, and its tip
-    "C302 216 240 282 188 334 "                                    # back down to the hand
-    "C200 349 195 367 176 375 C185 389 172 405 149 407 "           # the folded knuckles
-    "C116 411 82 417 54 433 C36 443 24 459 20 470 L-6 470 Z")      # heel into the forearm
-
-LEFT_DETAIL = (
-    # the ring and little finger, folded into the palm
-    '<path class="ln-thin" d="M188 334 C164 343 141 359 131 377 C123 393 133 406 152 403"/>'
-    '<path class="ln-thin" d="M176 375 C158 381 143 392 136 403"/>'
-    # the thumb closed over them
-    '<path class="ln-thin" d="M30 389 C64 393 98 401 122 412 C137 419 138 433 120 436"/>'
-    # the tendons over the back of the hand, and the wrist crease
-    '<path class="ln-thin" d="M4 400 C26 388 42 372 52 352"/>'
-    '<path class="ln-thin" opacity=".5" d="M96 302 C88 322 76 340 60 354"/>'
-    '<path class="ln-thin" opacity=".5" d="M127 292 C122 316 112 338 96 356"/>'
-    '<path class="ln-faint" d="M-2 424 C16 418 30 408 40 396"/>')
-
-# axes of the two extended fingers, for the nails and knuckle creases
-LEFT_FINGERS = [(((140, 300), (278, 124)), 12), (((172, 325), (330, 166)), 12)]
-
-
-def mudra():
-    """After the reference drawing: the index and middle finger of each hand
-    cross the other pair, the four together drawing the lattice of 井. The
-    remaining fingers curl into the palm and the thumbs close over them."""
-    W, H = 440, 470
-
-    hand = (f'<path class="skin" d="{LEFT_HAND}"/>'
-            + "".join(joints(a, w) for a, w in LEFT_FINGERS)
-            + LEFT_DETAIL)
-
-    body = f"""
-<!-- RIGHT HAND — the left hand mirrored; its fingers pass beneath -->
-<g transform="translate({W} 0) scale(-1 1)">{hand}</g>
-
-<!-- LEFT HAND — laid across the right -->
-<g>{hand}</g>
-
-<text class="label-zh" x="220" y="428" font-size="40" text-anchor="middle">井</text>
-<text class="label" x="220" y="450" text-anchor="middle" font-size="14">jǐng</text>
-"""
-    return svg(W, H, body, label=(
-        "The mudra of the Dragon King Yoga: the index and middle fingers of both hands "
-        "crossed to form the lattice of the character 井"))
 
 
 # ----------------------------------------------------------------------
@@ -632,8 +512,7 @@ def jewel_rain():
 
 
 if __name__ == "__main__":
-    for name, maker in (("mudra.svg", mudra),
-                        ("vase-preparation.svg", vase_preparation),
+    for name, maker in (("vase-preparation.svg", vase_preparation),
                         ("casting-the-vase.svg", casting),
                         ("deco-cloud-rule.svg", cloud_rule),
                         ("deco-dragon-beneath.svg", dragon_beneath),
