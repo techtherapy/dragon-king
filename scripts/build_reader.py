@@ -326,7 +326,8 @@ def build():
             last_vol = vol
         zh, py, en = ch["label"]
         out.append(f'      <a href="#{ch["id"]}"><span class="t-zh" lang="zh-Hant">{zh}</span>'
-                   f'<span class="t-en">{i} · {short_en(en)}</span></a>')
+                   f'<span class="t-en">{i} · {short_en(en)}</span>'
+                   f'<span class="t-en espanol" lang="es">{i} · {short_en(ch["label_es"])}</span></a>')
     out.append("    </nav>")
     out.append("  </aside>")
 
