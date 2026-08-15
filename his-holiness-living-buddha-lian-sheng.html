@@ -150,6 +150,44 @@
   }
   .fact .l { color: var(--muted); font-size: .95rem; letter-spacing: .06em; display: block; margin-top: .7rem; }
   .fact .tc { color: var(--gold); display: block; font-size: .85rem; margin-top: .2rem; letter-spacing: .25em; }
+  /* the seven phases of his life — photo and story, alternating sides */
+  .phases { margin-top: 1.4rem; }
+  .phase {
+    display: grid;
+    grid-template-columns: minmax(220px, 300px) 1fr;
+    gap: 1.4rem 2.6rem;
+    align-items: center;
+    border-top: 1px solid var(--gold-ghost);
+    padding: 2.8rem 0;
+  }
+  .phase:nth-child(even) { grid-template-columns: 1fr minmax(220px, 300px); }
+  .phase:nth-child(even) .phase-photo { order: 2; }
+  .phase-photo img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--gold-ghost);
+    border-radius: 2px;
+  }
+  .phase .era {
+    font-family: var(--font-display);
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    font-size: .78rem;
+    color: var(--gold);
+  }
+  .phase .era .zh { letter-spacing: .35em; color: var(--gold-bright); margin-left: .9em; }
+  .phase h3 { font-size: clamp(1.35rem, 2.4vw, 1.75rem); margin: .55rem 0 .75rem; }
+  .phase p { color: var(--cream-dim); max-width: 58ch; margin: 0 0 .9em; }
+  .phase p:last-child { margin-bottom: 0; }
+  .phase .word { font-style: italic; color: var(--muted); }
+  .phase-credit { margin-top: 2.2rem; color: var(--muted); font-size: .9rem; font-style: italic; }
+  .phase-credit a { color: var(--gold); }
+  @media (max-width: 780px) {
+    .phase, .phase:nth-child(even) { grid-template-columns: 1fr; padding: 2.2rem 0; }
+    .phase:nth-child(even) .phase-photo { order: 0; }
+    .phase-photo img { max-width: 400px; margin: 0 auto; }
+  }
 </style>
 </head>
 <body>
@@ -196,8 +234,8 @@
       <h2>Early life</h2>
     </div>
     <div class="prose reveal">
-      <p>His Holiness Living Buddha Lian Sheng was born Sheng-Yen Lu in 1945, in Chiayi, Taiwan, into a family that knew real poverty and hardship. He worked his way through a surveying degree and served as an officer, living an outwardly ordinary life — until an afternoon that would change it entirely.</p>
-      <p>At twenty-six, accompanying his mother to a Taoist temple, his divine eye was opened in a sudden and overwhelming spiritual experience: the heavens revealed themselves, and he was shown that he was to cultivate the path and teach. From that day the invisible world never closed to him again.</p>
+      <p>His Holiness Living Buddha Lian Sheng was born Sheng-Yen Lu in 1945, in Chiayi, Taiwan, in the last months of the war, into a family that knew real poverty. As a child he sold popsicles and handmade toffee in the street; as a schoolboy he won a city-wide essay contest, and by his teens he was a published poet — nearly a thousand poems in the newspapers and his first book in print at seventeen. <q>My life must have meaning,</q> he wrote. <q>I live not only for myself.</q></p>
+      <p>He worked his way through a surveying degree and served as an officer, living an outwardly ordinary life — until an afternoon that changed it entirely. At twenty-six, accompanying his mother to a temple in Taichung, his divine eye was opened in a sudden and overwhelming spiritual experience: the heavens revealed themselves, and he was shown that he was to cultivate the path and teach. From that day the invisible world never closed to him again.</p>
     </div>
   </div>
 </section>
@@ -209,36 +247,88 @@
       <h2>Training and lineages</h2>
     </div>
     <div class="prose reveal">
-      <p>What followed were years of intense cultivation across traditions — Christianity in his youth, then Taoism, Zen, Sutrayana and finally Tantrayana Buddhism — studying under accomplished teachers of each. He received empowerments and transmission in all four major lineages of Vajrayana Buddhism: the Nyingma, Sakya, Kagyu and Gelug schools.</p>
+      <p>What followed were years of intense cultivation across traditions — Christianity in his youth, then Taoism, Zen, Sutrayana and finally Tantrayana Buddhism — studying under accomplished teachers of each: three years under the unseen master San-Shan-Jiu-Hou, who gave him the dharma name Lian Sheng; the Taoist and Buddhist training of Master Qingzhen (Venerable Liaoming); and, from 1980, empowerments from His Holiness the 16th Karmapa of the Kagyu school, Master Sakya Zhengkong (Dezhung Rinpoche) of the Sakya, and Guru Thubten Dargye of the Gelug — so that he holds transmission in all four major lineages of Vajrayana Buddhism: Nyingma, Sakya, Kagyu and Gelug.</p>
       <p>Through decades of actual practice he attained realization, and is revered by his students as an emanation of Amitabha Buddha — a Living Buddha who teaches from direct experience of the dharma rather than from books alone.</p>
     </div>
-    <div class="timeline">
-      <div class="timeline-item reveal">
-        <span class="year">1945</span>
-        <h3>Born in Chiayi, Taiwan</h3>
-        <p>A childhood of poverty that would later give his teaching its unsparing compassion for ordinary suffering.</p>
+  </div>
+</section>
+
+<section class="flow-section">
+  <div class="wrap">
+    <div class="num-heading reveal">
+      <span class="num" lang="zh-Hant">生平</span>
+      <h2>Seven phases of a life</h2>
+    </div>
+    <div class="prose reveal">
+      <p>His students trace his life as seven phases — from an ordinary childhood in southern Taiwan to the teaching seat he still occupies every week.</p>
+    </div>
+
+    <div class="phases">
+      <div class="phase reveal">
+        <div class="phase-photo"><img src="assets/life-ordinary.jpg" width="640" height="640" loading="lazy" alt="Sheng-Yen Lu as an infant, held in a relative's arms — a black-and-white photograph from 1940s Taiwan"></div>
+        <div>
+          <span class="era">1945–1968 <span class="zh" lang="zh-Hant">平凡</span></span>
+          <h3>The ordinary years</h3>
+          <p>Born in Chiayi in the last months of the war, he grew up poor — a barefoot boy selling popsicles and toffee in the street — and grew into a gifted young writer: a prize essay in third grade, nearly a thousand published poems, a first book at seventeen.</p>
+        </div>
       </div>
-      <div class="timeline-item reveal">
-        <span class="year">At twenty-six</span>
-        <h3>The opening of the divine eye</h3>
-        <p>A visit to a temple with his mother becomes a revelation; he begins cultivation under his first teachers.</p>
+
+      <div class="phase reveal">
+        <div class="phase-photo"><img src="assets/life-learning.jpg" width="640" height="640" loading="lazy" alt="A temple group photograph from the years of dharma learning in Taiwan"></div>
+        <div>
+          <span class="era">1969–1984 <span class="zh" lang="zh-Hant">學法</span></span>
+          <h3>Learning the dharma</h3>
+          <p>At twenty-six his divine eye was opened at a temple in Taichung. Three years under an unseen teacher gave him the name Lian Sheng and a vow he has never set down: <span class="word">"I will not attain buddhahood until hell is empty."</span> Years of Taoist, Zen and Vajrayana training followed, and in 1982 he moved to Seattle.</p>
+        </div>
       </div>
-      <div class="timeline-item reveal">
-        <span class="year">1982</span>
-        <h3>Moves to Seattle, USA</h3>
-        <p>He settles in Washington State and establishes the seat of what becomes the True Buddha School.</p>
+
+      <div class="phase reveal">
+        <div class="phase-photo"><img src="assets/life-founding.jpg" width="640" height="640" loading="lazy" alt="Disciples gathered before Ling Shen Ching Tze Temple"></div>
+        <div>
+          <span class="era">1985–1988 <span class="zh" lang="zh-Hant">弘法</span></span>
+          <h3>Founding the True Buddha School</h3>
+          <p>Weekly Heart Sutra talks in a Ballard attic grew into a school. In 1985 Ling Shen Ching Tze Temple was consecrated in Redmond — thunder rolled, it is remembered, as the temple plaque was raised — and in 1986 he received tonsure as a monk.</p>
+        </div>
       </div>
-      <div class="timeline-item reveal">
-        <span class="year">1986</span>
-        <h3>Monastic ordination</h3>
-        <p>He is ordained as a monk and founds Ling Shen Ching Tze Temple in Redmond — mother temple of the school.</p>
+
+      <div class="phase reveal">
+        <div class="phase-photo"><img src="assets/life-travel.jpg" width="640" height="640" loading="lazy" alt="Masters seated beneath the banner of a True Buddha School blessing, healing and longevity ceremony"></div>
+        <div>
+          <span class="era">1989–1993 <span class="zh" lang="zh-Hant">雲遊</span></span>
+          <h3>Carrying the teaching across the world</h3>
+          <p>He returned to Taiwan after seven years, and the teaching filled stadiums — Hong Kong, Taiwan, Southeast Asia — with ceremonies remembered for their healings. By forty-eight he had completed his hundredth book, writing as he travelled.</p>
+        </div>
       </div>
-      <div class="timeline-item reveal">
-        <span class="year">Today</span>
-        <h3>A worldwide sangha</h3>
-        <p>Over three hundred temples, chapters and centers across the world; ceremonies that gather tens of thousands; teachings translated into many languages.</p>
+
+      <div class="phase reveal">
+        <div class="phase-photo"><img src="assets/life-seclusion.jpg" width="640" height="640" loading="lazy" alt="The Grandmaster in red robes at an outdoor ceremony during the years of seclusion"></div>
+        <div>
+          <span class="era">1994–2000 <span class="zh" lang="zh-Hant">隱居</span></span>
+          <h3>Withdrawing from the crowd</h3>
+          <p>Announcing his seclusion in Vancouver, he stepped back from the stadiums to teach the inner tantras quietly, and set the school's affairs in order — the True Buddha Foundation was established in 1997. At the end of 2000 he left Seattle for a mountain retreat, taking almost nothing with him. <span class="word">"Retirement is only a change in form — what remains unchanged is my love for all sentient beings."</span></p>
+        </div>
+      </div>
+
+      <div class="phase reveal">
+        <div class="phase-photo"><img src="assets/life-retreat.jpg" width="640" height="640" loading="lazy" alt="A solitary figure in red robes walking a grey shoreline"></div>
+        <div>
+          <span class="era">2001–2006 <span class="zh" lang="zh-Hant">閉關</span></span>
+          <h3>The long retreat</h3>
+          <p>Six years in retreat and seclusion. Through grave illness he kept writing — close to a book a month — and made the sickness itself his practice, realizing, as he put it, that <span class="word">"the body is a prison"</span>, and deepening the realization of emptiness that marks his later teaching.</p>
+        </div>
+      </div>
+
+      <div class="phase reveal">
+        <div class="phase-photo"><img src="assets/life-greatsun.jpg" width="640" height="640" loading="lazy" alt="A devotional image of Living Buddha Lian Sheng, crowned and seated on a lotus within rings of rainbow light"></div>
+        <div>
+          <span class="era">2007–today <span class="zh" lang="zh-Hant">大日再現</span></span>
+          <h3>The great sun reappears</h3>
+          <p>Emerging from retreat, he returned to the teaching seat — the Platform Sutra, the Hevajra commentary, the nine stages of Dzogchen, five years of Lamdre, the Vajra and Vimalakirti Sutras, and nightly deliverance ceremonies through the pandemic years. Since 2025 he has been expounding the Shurangama Sutra — still writing, still teaching, every week.</p>
+        </div>
       </div>
     </div>
+
+    <p class="phase-credit reveal">Chronology and photographs from <a href="https://livingbuddhaliansheng.org/a-hidden-sanctuary-of-the-living-buddha/" target="_blank" rel="noopener">A Hidden Sanctuary of the Living Buddha</a>.</p>
   </div>
 </section>
 
