@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 440" role="img" aria-label="The Sixteenth Karmapa, in his brocade ceremonial crown, hand raised in mudra — the naga of the spring restored beside him, clouds gathering and the first rain beginning to fall">
+<style>
+  .ln { fill:none; stroke:#d9b25f; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+  .ln-bright { fill:none; stroke:#f4dc96; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+  .ln-thin { fill:none; stroke:#d9b25f; stroke-width:1.3; stroke-linecap:round;
+              stroke-linejoin:round; opacity:.8; }
+  .ln-faint { fill:none; stroke:#8d7440; stroke-width:1; opacity:.6; }
+  .skin { fill:url(#skin); stroke:#f4dc96; stroke-width:2.1; stroke-linejoin:round;
+           stroke-linecap:round; }
+  .gild { fill:url(#gild); stroke:#f4dc96; stroke-width:1.8; stroke-linejoin:round; }
+  .label { font-family:"Cormorant Garamond",Georgia,serif; fill:#c9bfa6; font-size:15px; }
+  .label-zh { font-family:"LXGW WenKai TC","Kaiti TC",serif; fill:#d9b25f; font-size:20px;
+               letter-spacing:.1em; }
+
+  .body-fill { fill:url(#naBodyGrad); stroke:#d9b25f; stroke-width:1.6; stroke-linejoin:round; }
+  .spike { fill:url(#naSpikeGrad); stroke:#d9b25f; stroke-width:.7; }
+  .plate { fill:none; stroke:#d9b25f; stroke-width:.9; opacity:.7; }
+  .mane { fill:url(#naManeGrad); stroke:#d9b25f; stroke-width:1; }
+  .mane2 { opacity:.75; }
+  .horn { fill:#0c1830; stroke:#f4dc96; stroke-width:1.3; stroke-linejoin:round; }
+  .horn2 { opacity:.6; }
+  .skull { fill:url(#naHeadGrad); stroke:#f4dc96; stroke-width:1.7; stroke-linejoin:round; }
+  .line { fill:none; stroke:#f4dc96; stroke-width:1.2; stroke-linecap:round; }
+  .tooth { fill:#f4dc96; }
+  .tongue { fill:#8d5a3a; opacity:.9; }
+  .eye-white { fill:#f7ecd2; stroke:#d9b25f; stroke-width:.8; }
+  .eye-iris { fill:#f4dc96; }
+  .eye-pupil { fill:#2a1c08; }
+  .eye-glint { fill:#fff; }
+  .whisker { fill:none; stroke:#f4dc96; stroke-width:1.3; stroke-linecap:round; }
+</style>
+<defs>
+  <!-- barely above the page ground, so the hands read as line-art while still
+       being opaque enough to occlude the fingers passing beneath them -->
+  <linearGradient id="skin" x1="0" y1="0" x2="0.4" y2="1">
+    <stop offset="0%" stop-color="#122340"/><stop offset="100%" stop-color="#0b1729"/>
+  </linearGradient>
+  <linearGradient id="vaseBody" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#1d3560"/><stop offset="60%" stop-color="#132443"/>
+    <stop offset="100%" stop-color="#0d1930"/>
+  </linearGradient>
+  <linearGradient id="gild" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#d9b25f" stop-opacity=".30"/>
+    <stop offset="55%" stop-color="#d9b25f" stop-opacity=".14"/>
+    <stop offset="100%" stop-color="#d9b25f" stop-opacity=".26"/>
+  </linearGradient>
+  <linearGradient id="coin" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#f4dc96"/><stop offset="100%" stop-color="#a8814a"/>
+  </linearGradient>
+</defs>
+
+<defs>
+  <linearGradient id="naBodyGrad" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#1a2f56"/><stop offset="55%" stop-color="#101f39"/>
+    <stop offset="100%" stop-color="#0c1830"/>
+  </linearGradient>
+  <linearGradient id="naHeadGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#2a4470"/><stop offset="100%" stop-color="#16294a"/>
+  </linearGradient>
+  <linearGradient id="naManeGrad" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#d9b25f" stop-opacity=".85"/>
+    <stop offset="100%" stop-color="#8d7440" stop-opacity=".3"/>
+  </linearGradient>
+  <linearGradient id="naSpikeGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#f4dc96" stop-opacity=".8"/>
+    <stop offset="100%" stop-color="#8d7440" stop-opacity=".35"/>
+  </linearGradient>
+</defs>
+<path class="ln-thin" d="M80.1 69.1L80.0 66.9L79.5 64.8L78.9 62.8L77.9 61.1L76.8 59.6L75.6 58.4L74.2 57.3L72.8 56.6L71.4 56.1L69.9 55.8L68.6 55.7L67.3 55.9L66.0 56.2L65.0 56.6L64.0 57.2L63.2 57.9L62.5 58.7L61.9 59.5L61.5 60.3L61.3 61.1L61.2 62.0L61.2 62.8L61.3 63.5L61.5 64.2L61.8 64.8L62.1 65.4L62.6 65.8L63.0 66.2L63.5 66.5L64.0 66.7L64.5 66.8L65.0 66.8L65.4 66.8L65.8 66.7L66.2 66.6L66.6 66.4L66.9 66.2L67.1 65.9L67.3 65.7L67.5 65.4L67.6 65.1L67.7 64.8L67.7 64.5L67.6 64.3L67.6 64.0L67.5 63.8L67.4 63.6L67.2 63.4L67.1 63.3L66.9 63.2L66.7 63.1L66.6 63.1L66.4 63.0L66.3 63.0L66.1 63.0L66.0 63.1L65.8 63.2L65.7 63.2L65.6 63.3L65.6 63.4L65.5 63.5L65.5 63.6L65.4 63.7L65.4 63.8M108.3 55.8L108.2 54.1L107.9 52.6L107.4 51.1L106.7 49.9L105.9 48.8L105.0 47.9L104.0 47.1L103.0 46.6L101.9 46.2L100.9 46.0L99.9 45.9L98.9 46.0L98.0 46.3L97.2 46.6L96.5 47.0L95.9 47.5L95.4 48.1L95.0 48.7L94.7 49.3L94.5 49.9L94.5 50.5L94.5 51.1L94.5 51.6L94.7 52.1L94.9 52.6L95.2 53.0L95.5 53.3L95.8 53.6L96.2 53.8L96.5 54.0L96.9 54.0L97.2 54.1L97.6 54.1L97.9 54.0L98.2 53.9L98.4 53.8L98.7 53.6L98.8 53.4L99.0 53.2L99.1 53.0L99.2 52.8L99.2 52.6L99.2 52.4L99.2 52.2L99.2 52.0L99.1 51.8L99.0 51.7L98.9 51.6L98.8 51.5L98.7 51.4L98.5 51.3L98.4 51.3L98.3 51.3L98.2 51.3L98.1 51.3L98.0 51.3L97.9 51.4L97.8 51.4L97.7 51.5L97.7 51.6L97.6 51.6L97.6 51.7L97.6 51.8L97.6 51.8M136.5 69.1L136.4 67.7L136.1 66.5L135.7 65.3L135.2 64.3L134.5 63.4L133.7 62.6L132.9 62.0L132.1 61.6L131.2 61.3L130.4 61.1L129.5 61.0L128.8 61.1L128.0 61.3L127.4 61.6L126.8 61.9L126.3 62.3L125.9 62.8L125.6 63.3L125.3 63.8L125.2 64.3L125.1 64.8L125.1 65.3L125.2 65.7L125.3 66.1L125.5 66.5L125.7 66.8L125.9 67.1L126.2 67.3L126.5 67.5L126.8 67.6L127.1 67.7L127.4 67.7L127.7 67.7L127.9 67.6L128.1 67.6L128.4 67.4L128.5 67.3L128.7 67.2L128.8 67.0L128.9 66.8L129.0 66.6L129.0 66.5L129.0 66.3L129.0 66.2L128.9 66.0L128.9 65.9L128.8 65.8L128.7 65.7L128.6 65.6L128.5 65.5L128.4 65.5L128.3 65.4L128.2 65.4L128.2 65.4L128.1 65.4L128.0 65.5L127.9 65.5L127.8 65.5L127.8 65.6L127.7 65.6L127.7 65.7L127.7 65.8L127.7 65.8L127.7 65.9M343.2 50.8L343.0 48.7L342.6 46.7L342.0 44.9L341.1 43.3L340.1 41.9L338.9 40.7L337.7 39.8L336.3 39.1L335.0 38.6L333.7 38.4L332.4 38.3L331.2 38.4L330.0 38.7L329.0 39.1L328.1 39.7L327.3 40.3L326.7 41.0L326.2 41.8L325.8 42.5L325.6 43.3L325.5 44.1L325.5 44.8L325.6 45.5L325.8 46.2L326.1 46.8L326.4 47.3L326.8 47.7L327.2 48.0L327.7 48.3L328.1 48.5L328.6 48.6L329.0 48.6L329.5 48.6L329.9 48.5L330.2 48.4L330.5 48.2L330.8 48.0L331.1 47.8L331.3 47.5L331.4 47.3L331.5 47.0L331.5 46.7L331.6 46.5L331.5 46.2L331.5 46.0L331.4 45.8L331.3 45.6L331.1 45.5L331.0 45.3L330.9 45.2L330.7 45.2L330.5 45.1L330.4 45.1L330.2 45.1L330.1 45.1L330.0 45.2L329.8 45.2L329.7 45.3L329.7 45.4L329.6 45.4L329.5 45.5L329.5 45.6L329.5 45.7L329.5 45.8M371.4 61.4L371.3 59.9L371.0 58.5L370.6 57.2L370.0 56.1L369.2 55.1L368.4 54.2L367.5 53.6L366.5 53.1L365.6 52.7L364.6 52.5L363.7 52.5L362.8 52.6L362.0 52.8L361.3 53.1L360.7 53.5L360.1 53.9L359.7 54.4L359.3 55.0L359.0 55.5L358.9 56.1L358.8 56.6L358.8 57.2L358.9 57.7L359.0 58.1L359.2 58.5L359.4 58.9L359.7 59.2L360.0 59.5L360.3 59.6L360.7 59.8L361.0 59.9L361.3 59.9L361.6 59.9L361.9 59.8L362.2 59.7L362.4 59.6L362.6 59.5L362.8 59.3L362.9 59.1L363.0 58.9L363.1 58.7L363.1 58.5L363.1 58.3L363.1 58.2L363.1 58.0L363.0 57.9L362.9 57.7L362.8 57.6L362.7 57.5L362.6 57.5L362.5 57.4L362.4 57.4L362.3 57.4L362.2 57.4L362.1 57.4L362.0 57.4L361.9 57.4L361.8 57.5L361.8 57.5L361.7 57.6L361.7 57.7L361.6 57.7L361.6 57.8L361.6 57.9M405.3 48.1L405.2 46.3L404.8 44.6L404.3 43.1L403.5 41.7L402.7 40.5L401.7 39.5L400.6 38.7L399.4 38.1L398.3 37.7L397.2 37.4L396.1 37.4L395.0 37.5L394.0 37.7L393.2 38.1L392.4 38.6L391.7 39.1L391.2 39.7L390.8 40.4L390.4 41.0L390.2 41.7L390.1 42.4L390.1 43.0L390.2 43.6L390.4 44.2L390.6 44.6L390.9 45.1L391.3 45.4L391.6 45.7L392.0 46.0L392.4 46.1L392.8 46.2L393.2 46.3L393.5 46.3L393.9 46.2L394.2 46.1L394.5 45.9L394.7 45.7L394.9 45.5L395.1 45.3L395.2 45.1L395.3 44.9L395.3 44.6L395.3 44.4L395.3 44.2L395.3 44.0L395.2 43.8L395.1 43.7L395.0 43.5L394.9 43.4L394.7 43.3L394.6 43.3L394.5 43.2L394.3 43.2L394.2 43.2L394.1 43.2L394.0 43.3L393.9 43.3L393.8 43.4L393.7 43.4L393.6 43.5L393.6 43.6L393.6 43.7L393.6 43.8L393.5 43.8M424.5 81.1L424.4 79.7L424.1 78.5L423.7 77.3L423.2 76.3L422.5 75.4L421.7 74.6L420.9 74.0L420.1 73.6L419.2 73.3L418.4 73.1L417.5 73.0L416.8 73.1L416.0 73.3L415.4 73.6L414.8 73.9L414.3 74.3L413.9 74.8L413.6 75.3L413.3 75.8L413.2 76.3L413.1 76.8L413.1 77.3L413.2 77.7L413.3 78.1L413.5 78.5L413.7 78.8L413.9 79.1L414.2 79.3L414.5 79.5L414.8 79.6L415.1 79.7L415.4 79.7L415.7 79.7L415.9 79.6L416.1 79.6L416.4 79.4L416.5 79.3L416.7 79.2L416.8 79.0L416.9 78.8L417.0 78.6L417.0 78.5L417.0 78.3L417.0 78.2L416.9 78.0L416.9 77.9L416.8 77.8L416.7 77.7L416.6 77.6L416.5 77.5L416.4 77.5L416.3 77.4L416.2 77.4L416.2 77.4L416.1 77.4L416.0 77.5L415.9 77.5L415.8 77.5L415.8 77.6L415.7 77.6L415.7 77.7L415.7 77.8L415.7 77.8L415.7 77.9"/>
+<path class="ln-faint" opacity=".6" d="M330 88 l-6 22"/><path class="ln-faint" opacity=".6" d="M356 104 l-6 22"/><path class="ln-faint" opacity=".6" d="M384 84 l-6 22"/><path class="ln-faint" opacity=".6" d="M408 118 l-6 22"/><path class="ln-faint" opacity=".6" d="M342 140 l-6 22"/><path class="ln-faint" opacity=".6" d="M372 160 l-6 22"/><path class="ln-faint" opacity=".6" d="M398 148 l-6 22"/><path class="ln-faint" opacity=".6" d="M424 168 l-6 22"/>
+
+  <path class="gild" d="M168 166 C162 124 152 86 142 62
+       C174 42 242 42 274 62
+       C264 86 254 124 248 166
+       C222 160 194 160 168 166 Z"/>
+  <!-- central panel seams, as in the brocade crown -->
+  <path class="ln-thin" opacity=".6" d="M194 162 C190 120 186 82 182 54
+       M222 162 C226 120 230 82 234 54"/>
+  <!-- side flaps past the ears -->
+  <path class="gild" d="M168 164 C156 178 152 204 156 224
+       L172 220 C167 200 167 180 170 166 Z"/>
+  <path class="gild" d="M248 164 C260 178 264 204 260 224
+       L244 220 C249 200 249 180 246 166 Z"/>
+  <!-- lattice band along the top -->
+  <path class="ln-thin" d="M160 64 L174 52 M174 64 L160 52
+       M194 60 L208 48 M208 60 L194 48
+       M222 60 L236 48 M236 60 L222 48
+       M256 64 L242 52"/>
+  <!-- brow trim -->
+  <path class="ln" d="M168 166 C194 159 222 159 248 166"/>
+
+<circle cx="186.1" cy="118.0" r="4.0" class="ln-thin" fill="none"/><circle cx="180.0" cy="122.4" r="4.0" class="ln-thin" fill="none"/><circle cx="173.9" cy="118.0" r="4.0" class="ln-thin" fill="none"/><circle cx="176.2" cy="110.8" r="4.0" class="ln-thin" fill="none"/><circle cx="183.8" cy="110.8" r="4.0" class="ln-thin" fill="none"/><circle cx="180" cy="116" r="2.6" fill="#d9b25f"/><circle cx="233.3" cy="89.7" r="3.5" class="ln-thin" fill="none"/><circle cx="228.0" cy="93.6" r="3.5" class="ln-thin" fill="none"/><circle cx="222.7" cy="89.7" r="3.5" class="ln-thin" fill="none"/><circle cx="224.7" cy="83.5" r="3.5" class="ln-thin" fill="none"/><circle cx="231.3" cy="83.5" r="3.5" class="ln-thin" fill="none"/><circle cx="228" cy="88" r="2.2" fill="#d9b25f"/><circle cx="244.9" cy="139.6" r="3.2" class="ln-thin" fill="none"/><circle cx="240.0" cy="143.2" r="3.2" class="ln-thin" fill="none"/><circle cx="235.1" cy="139.6" r="3.2" class="ln-thin" fill="none"/><circle cx="236.9" cy="133.8" r="3.2" class="ln-thin" fill="none"/><circle cx="243.1" cy="133.8" r="3.2" class="ln-thin" fill="none"/><circle cx="240" cy="138" r="2.1" fill="#d9b25f"/><circle cx="204.4" cy="145.4" r="2.9" class="ln-thin" fill="none"/><circle cx="200.0" cy="148.6" r="2.9" class="ln-thin" fill="none"/><circle cx="195.6" cy="145.4" r="2.9" class="ln-thin" fill="none"/><circle cx="197.3" cy="140.3" r="2.9" class="ln-thin" fill="none"/><circle cx="202.7" cy="140.3" r="2.9" class="ln-thin" fill="none"/><circle cx="200" cy="144" r="1.8" fill="#d9b25f"/><circle cx="165.4" cy="199.4" r="2.9" class="ln-thin" fill="none"/><circle cx="161.0" cy="202.6" r="2.9" class="ln-thin" fill="none"/><circle cx="156.6" cy="199.4" r="2.9" class="ln-thin" fill="none"/><circle cx="158.3" cy="194.3" r="2.9" class="ln-thin" fill="none"/><circle cx="163.7" cy="194.3" r="2.9" class="ln-thin" fill="none"/><circle cx="161" cy="198" r="1.8" fill="#d9b25f"/><circle cx="259.4" cy="199.4" r="2.9" class="ln-thin" fill="none"/><circle cx="255.0" cy="202.6" r="2.9" class="ln-thin" fill="none"/><circle cx="250.6" cy="199.4" r="2.9" class="ln-thin" fill="none"/><circle cx="252.3" cy="194.3" r="2.9" class="ln-thin" fill="none"/><circle cx="257.7" cy="194.3" r="2.9" class="ln-thin" fill="none"/><circle cx="255" cy="198" r="1.8" fill="#d9b25f"/>
+
+  <path class="skin" d="M172 166 C170 200 182 226 208 228
+       C234 226 246 200 244 166
+       C220 160 196 160 172 166 Z"/>
+  <!-- serene eyes, gentle smile -->
+  <path class="ln-thin" d="M186 188 Q194 193 202 189"/>
+  <path class="ln-thin" d="M214 189 Q222 193 230 188"/>
+  <path class="ln-thin" opacity=".6" d="M205 204 Q208 207 211 204"/>
+  <path class="ln-thin" d="M196 215 Q208 222 220 215"/>
+
+
+  <path class="skin" d="M132 436 C130 286 148 242 180 230
+       L236 230 C268 242 286 286 284 436 Z"/>
+  <!-- inner collar, crossed -->
+  <path class="ln" d="M182 232 L210 268 M234 232 L200 274"/>
+  <!-- the cloak's brocade edges, fur-trimmed -->
+  <path class="ln-thin" d="M164 436 C162 294 170 252 188 236"/>
+  <path class="ln-thin" d="M252 436 C254 294 246 252 228 236"/>
+  <!-- right arm and open palm raised in mudra, apart from the body -->
+  <path class="skin" d="M270 320 C292 308 304 290 306 268 L324 270
+       C320 300 302 324 276 336 Z"/>
+  <path class="skin" d="M304 270 L304 236 C304 232 310 232 310 236 L310 266
+       L312 230 C312 226 318 226 318 230 L318 266
+       L320 232 C320 228 326 228 326 232 L326 268
+       L328 240 C328 236 334 236 334 240 L332 272
+       C330 284 320 290 310 286 C304 283 302 277 304 270 Z"/>
+  <path class="ln-thin" d="M301 252 C296 254 294 260 297 265"/>
+
+
+  <ellipse cx="384" cy="384" rx="52" ry="12" class="ln" fill="none"/>
+  <ellipse cx="384" cy="384" rx="30" ry="7" class="ln-faint" fill="none"/>
+  <path class="skin" d="M376 384 C374 372 377 362 384 356 C389 362 390 373 389 384 Z"/>
+  <ellipse cx="385" cy="351" rx="6.5" ry="7.5" class="skin" transform="rotate(-20 385 351)"/>
+  <circle cx="383" cy="349" r="1.2" fill="#f4dc96"/>
+  <path class="ln-thin" d="M378.1 342.5L378.1 341.9L378.0 341.4L377.9 340.9L377.7 340.4L377.4 340.0L377.1 339.6L376.8 339.3L376.4 339.1L376.1 338.9L375.7 338.7L375.3 338.6L375.0 338.6L374.6 338.6L374.3 338.6L374.0 338.7L373.7 338.8L373.5 339.0L373.3 339.1L373.1 339.3L372.9 339.5L372.8 339.7L372.7 339.9L372.6 340.1L372.6 340.4L372.6 340.6L372.6 340.8L372.6 340.9L372.7 341.1L372.8 341.3L372.9 341.4L373.0 341.5L373.1 341.6L373.2 341.7L373.3 341.8L373.5 341.8L373.6 341.8L373.7 341.8L373.8 341.8L373.9 341.8L374.0 341.8L374.1 341.7L374.2 341.7L374.3 341.6L374.3 341.6L374.4 341.5L374.4 341.4L374.5 341.3L374.5 341.3L374.5 341.2L374.5 341.1L374.5 341.1L374.5 341.0L374.4 340.9L374.4 340.9L374.4 340.8L374.3 340.8L374.3 340.8L374.3 340.8L374.2 340.7L374.2 340.7L374.1 340.7L374.1 340.7L374.0 340.7L374.0 340.7"/>
+  <!-- the blessed medicine given to the spring -->
+  <circle cx="404" cy="376" r="2.2" fill="#f4dc96"/>
+  <circle cx="412" cy="381" r="1.7" fill="#f4dc96" opacity=".7"/>
+
+
+</svg>
