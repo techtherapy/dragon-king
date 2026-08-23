@@ -224,8 +224,8 @@
 }
 .block.center { text-align: center; }
 
-/* the Spanish layer reads like the English one */
-.prow .espanol {
+/* the translated layers read like the English one */
+.prow .espanol, .prow .francais {
   font-size: clamp(1.15rem, 1rem + 0.32vw, 1.3rem);
   color: var(--cream-dim);
   margin: 0.3rem 0 0;
@@ -237,10 +237,14 @@ body.hide-zh .prow .hanzi { display: none; }
 body.hide-py .prow .pinyin { display: none; }
 body.hide-en .prow .english { display: none; }
 body.hide-py .sutra-title .t2, body.hide-py .seclabel .s2 { display: none; }
-body.hide-en .sutra-title .t3:not(.espanol), body.hide-en .seclabel .s3:not(.espanol) { display: none; }
-body.hide-en .reader-toc .t-en:not(.espanol) { display: none; }
+/* The title, chapter label and TOC lines share one class per language, so
+   hiding "English" must spare the translated lines that sit beside it. */
+body.hide-en .sutra-title .t3:not(.espanol):not(.francais),
+body.hide-en .seclabel .s3:not(.espanol):not(.francais) { display: none; }
+body.hide-en .reader-toc .t-en:not(.espanol):not(.francais) { display: none; }
 /* !important outranks structural display rules like .reader-toc nav a .t-en */
 body.hide-es .espanol { display: none !important; }
+body.hide-fr .francais { display: none !important; }
 
 /* back-to-top pearl */
 .to-top {
@@ -326,7 +330,7 @@ body.hide-es .espanol { display: none !important; }
   .sutra { max-width: none; padding: 0; }
   .sutra-title .t1, .seclabel .s1, .prow .hanzi { color: #000; text-shadow: none; }
   .prow .pinyin, .sutra-title .t2, .seclabel .s2 { color: #333; }
-  .prow .english, .prow .espanol, .sutra-title .t3, .seclabel .s3 { color: #000; }
+  .prow .english, .prow .espanol, .prow .francais, .sutra-title .t3, .seclabel .s3 { color: #000; }
   .chapter { break-before: page; }
   .prow { break-inside: avoid; }
   .block.verse { border-color: #999; background: none; }

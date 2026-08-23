@@ -5,6 +5,7 @@
     <loc>https://dragonkingsutra.org/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
@@ -13,6 +14,16 @@
     <loc>https://dragonkingsutra.org/es/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/"/>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://dragonkingsutra.org/fr/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
@@ -21,6 +32,7 @@
     <loc>https://dragonkingsutra.org/read</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/read"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/read"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/read"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/read"/>
     <changefreq>yearly</changefreq>
     <priority>0.9</priority>
@@ -29,6 +41,16 @@
     <loc>https://dragonkingsutra.org/es/read</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/read"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/read"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/read"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/read"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://dragonkingsutra.org/fr/read</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/read"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/read"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/read"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/read"/>
     <changefreq>yearly</changefreq>
     <priority>0.9</priority>
@@ -37,6 +59,7 @@
     <loc>https://dragonkingsutra.org/about</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/about"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/about"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/about"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/about"/>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
@@ -45,6 +68,16 @@
     <loc>https://dragonkingsutra.org/es/about</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/about"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/about"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/about"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dragonkingsutra.org/fr/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/about"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/about"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/about"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/about"/>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
@@ -53,6 +86,7 @@
     <loc>https://dragonkingsutra.org/treasure-vase-yoga</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/treasure-vase-yoga"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/treasure-vase-yoga"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/treasure-vase-yoga"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/treasure-vase-yoga"/>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
@@ -61,6 +95,16 @@
     <loc>https://dragonkingsutra.org/es/treasure-vase-yoga</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/treasure-vase-yoga"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/treasure-vase-yoga"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/treasure-vase-yoga"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/treasure-vase-yoga"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dragonkingsutra.org/fr/treasure-vase-yoga</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/treasure-vase-yoga"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/treasure-vase-yoga"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/treasure-vase-yoga"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/treasure-vase-yoga"/>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
@@ -69,6 +113,7 @@
     <loc>https://dragonkingsutra.org/treasure-vase-wishes</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/treasure-vase-wishes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/treasure-vase-wishes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/treasure-vase-wishes"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/treasure-vase-wishes"/>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
@@ -77,6 +122,16 @@
     <loc>https://dragonkingsutra.org/es/treasure-vase-wishes</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/treasure-vase-wishes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/treasure-vase-wishes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/treasure-vase-wishes"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/treasure-vase-wishes"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://dragonkingsutra.org/fr/treasure-vase-wishes</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/treasure-vase-wishes"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/treasure-vase-wishes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/treasure-vase-wishes"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/treasure-vase-wishes"/>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
@@ -85,6 +140,7 @@
     <loc>https://dragonkingsutra.org/nagas-and-dragon-kings</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/nagas-and-dragon-kings"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/nagas-and-dragon-kings"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/nagas-and-dragon-kings"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/nagas-and-dragon-kings"/>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
@@ -93,6 +149,16 @@
     <loc>https://dragonkingsutra.org/es/nagas-and-dragon-kings</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/nagas-and-dragon-kings"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/nagas-and-dragon-kings"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/nagas-and-dragon-kings"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/nagas-and-dragon-kings"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://dragonkingsutra.org/fr/nagas-and-dragon-kings</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/nagas-and-dragon-kings"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/nagas-and-dragon-kings"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/nagas-and-dragon-kings"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/nagas-and-dragon-kings"/>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
@@ -101,6 +167,7 @@
     <loc>https://dragonkingsutra.org/his-holiness-living-buddha-lian-sheng</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/his-holiness-living-buddha-lian-sheng"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/his-holiness-living-buddha-lian-sheng"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/his-holiness-living-buddha-lian-sheng"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/his-holiness-living-buddha-lian-sheng"/>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
@@ -109,6 +176,16 @@
     <loc>https://dragonkingsutra.org/es/his-holiness-living-buddha-lian-sheng</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/his-holiness-living-buddha-lian-sheng"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/his-holiness-living-buddha-lian-sheng"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/his-holiness-living-buddha-lian-sheng"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/his-holiness-living-buddha-lian-sheng"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://dragonkingsutra.org/fr/his-holiness-living-buddha-lian-sheng</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/his-holiness-living-buddha-lian-sheng"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/his-holiness-living-buddha-lian-sheng"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/his-holiness-living-buddha-lian-sheng"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/his-holiness-living-buddha-lian-sheng"/>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
@@ -117,6 +194,7 @@
     <loc>https://dragonkingsutra.org/refuge</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/refuge"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/refuge"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/refuge"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/refuge"/>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
@@ -125,6 +203,16 @@
     <loc>https://dragonkingsutra.org/es/refuge</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/refuge"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/refuge"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/refuge"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/refuge"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://dragonkingsutra.org/fr/refuge</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/refuge"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/refuge"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/refuge"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/refuge"/>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
@@ -133,6 +221,7 @@
     <loc>https://dragonkingsutra.org/contact</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/contact"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/contact"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/contact"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/contact"/>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
@@ -141,6 +230,16 @@
     <loc>https://dragonkingsutra.org/es/contact</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/contact"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/contact"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/contact"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://dragonkingsutra.org/fr/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/contact"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/contact"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dragonkingsutra.org/fr/contact"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/contact"/>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>

@@ -72,12 +72,19 @@
     }, { passive: true });
   }
 
-  /* --- offer the Spanish site, once, to Spanish-language browsers ---
+  /* --- offer another language, once, to a browser that asks for one ---
      Never redirects: the reader stays where they landed unless they choose
-     otherwise. Shown only on English pages, only when the browser asks for
-     Spanish, and never again once dismissed or once a language is chosen. */
-  var langLink = document.querySelector('.site-nav .lang-switch');
-  var onSpanishPage = document.documentElement.lang === 'es';
+     otherwise. The switcher in the header carries a link to each of the other
+     two languages; if the browser's preferred language is one of them, that
+     one is offered in its own words, and never again once dismissed or once a
+     language has been chosen. */
+  var OFFERS = {
+    en: { text: 'This site is also available in English.', cta: 'View in English', close: 'Close' },
+    es: { text: 'Este sitio también está disponible en español.', cta: 'Ver en español', close: 'Cerrar' },
+    fr: { text: 'Ce site est également disponible en français.', cta: 'Voir en français', close: 'Fermer' }
+  };
+  var switcher = document.querySelector('.site-nav .lang-switch');
+  var altLinks = switcher ? switcher.querySelectorAll('a[hreflang]') : [];
 
   function remember(key, value) {
     try { localStorage.setItem(key, value); } catch (e) { /* private mode */ }
@@ -86,32 +93,44 @@
     try { return localStorage.getItem(key); } catch (e) { return null; }
   }
 
-  if (langLink) {
-    // choosing a language is a preference; it also settles the banner
-    langLink.addEventListener('click', function () {
-      remember('dks-lang', onSpanishPage ? 'en' : 'es');
+  /* choosing a language is a preference; it also settles the banner */
+  Array.prototype.forEach.call(altLinks, function (a) {
+    a.addEventListener('click', function () {
+      remember('dks-lang', a.getAttribute('hreflang'));
     });
-  }
+  });
 
-  if (!onSpanishPage && langLink) {
-    var wantsSpanish = (navigator.languages || [navigator.language || ''])
-      .some(function (l) { return String(l).toLowerCase().indexOf('es') === 0; });
-    var settled = recall('dks-lang') || recall('dks-lang-dismissed');
-    if (wantsSpanish && !settled) {
+  var settled = recall('dks-lang') || recall('dks-lang-dismissed');
+  if (altLinks.length && !settled) {
+    /* the browser's languages in order of preference, most wanted first */
+    var wanted = (navigator.languages || [navigator.language || ''])
+      .map(function (l) { return String(l).toLowerCase().slice(0, 2); });
+    var offer = null;
+    for (var i = 0; i < wanted.length && !offer; i++) {
+      for (var j = 0; j < altLinks.length && !offer; j++) {
+        if (altLinks[j].getAttribute('hreflang') === wanted[i]) offer = altLinks[j];
+      }
+    }
+    var words = offer && OFFERS[offer.getAttribute('hreflang')];
+    if (words) {
+      var lang = offer.getAttribute('hreflang');
       var bar = document.createElement('div');
       bar.className = 'lang-banner';
-      bar.setAttribute('lang', 'es');
-      bar.innerHTML = '<span>Este sitio también está disponible en español.</span>' +
-        '<a href="' + langLink.getAttribute('href') + '">Ver en español</a>' +
-        '<button class="close" type="button" aria-label="Cerrar">×</button>';
-      var header = document.querySelector('.site-header');
-      if (header && header.parentNode) {
-        header.parentNode.insertBefore(bar, header.nextSibling);
+      bar.setAttribute('lang', lang);
+      bar.innerHTML = '<span></span><a></a><button class="close" type="button"></button>';
+      bar.querySelector('span').textContent = words.text;
+      var cta = bar.querySelector('a');
+      cta.textContent = words.cta;
+      cta.setAttribute('href', offer.getAttribute('href'));
+      var closer = bar.querySelector('.close');
+      closer.textContent = '\u00d7';
+      closer.setAttribute('aria-label', words.close);
+      var hdr = document.querySelector('.site-header');
+      if (hdr && hdr.parentNode) {
+        hdr.parentNode.insertBefore(bar, hdr.nextSibling);
         requestAnimationFrame(function () { bar.classList.add('show'); });
-        bar.querySelector('a').addEventListener('click', function () {
-          remember('dks-lang', 'es');
-        });
-        bar.querySelector('.close').addEventListener('click', function () {
+        cta.addEventListener('click', function () { remember('dks-lang', lang); });
+        closer.addEventListener('click', function () {
           bar.remove();
           remember('dks-lang-dismissed', '1');
         });

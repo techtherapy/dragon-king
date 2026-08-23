@@ -13,9 +13,23 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "extra-content" / "Dragon king sutra hailongwang_complete.html"
-ES_DIR = ROOT / "translations" / "es"
 OUT = ROOT / "read.html"
-OUT_ES = ROOT / "es" / "read.html"
+
+# The translated layers, in the order they are stacked under each verse. The
+# CSS class is also the key each verse is stored under, and the chip label is
+# the language's own name for itself — a language always labels itself.
+LAYERS = {
+    "es": {"cls": "espanol", "chip": "Español"},
+    "fr": {"cls": "francais", "chip": "Français"},
+}
+
+
+def layer_dir(lang):
+    return ROOT / "translations" / lang
+
+
+def out_path(lang):
+    return ROOT / lang / "read.html"
 
 LEAF = re.compile(r'<div class="(hanzi|pinyin|english)">(.*)</div>\s*$')
 STYLED = re.compile(r'<div style="[^"]*">(.*)</div>\s*$')
@@ -125,27 +139,30 @@ def parse():
     return title_lines, colophon, chapters
 
 
-def load_spanish(chapters, colophon):
-    """Attach the Spanish layer from translations/es/. The chapter files are
-    verse-aligned to the English; any mismatch is a build error, so a partial
-    or drifted translation can never ship silently."""
+def load_layer(chapters, colophon, lang):
+    """Attach one translated layer from translations/<lang>/. The chapter files
+    are verse-aligned to the English; any mismatch is a build error, so a
+    partial or drifted translation can never ship silently."""
+    cls = LAYERS[lang]["cls"]
+    d = layer_dir(lang)
     for i, ch in enumerate(chapters, start=1):
-        data = json.loads((ES_DIR / f"ch{i:02d}.json").read_text(encoding="utf-8"))
+        data = json.loads((d / f"ch{i:02d}.json").read_text(encoding="utf-8"))
         n_src = sum(len(ps) for _, ps in ch["blocks"])
         verses = data["verses"]
         if len(verses) != n_src:
-            raise SystemExit(f"es/ch{i:02d}.json: {len(verses)} verses, source has {n_src}")
-        ch["label_es"] = data["label_es"]
+            raise SystemExit(
+                f"{lang}/ch{i:02d}.json: {len(verses)} verses, source has {n_src}")
+        ch[f"label_{lang}"] = data[f"label_{lang}"]
         k = 0
         for _, prows in ch["blocks"]:
             for p in prows:
-                p["espanol"] = verses[k]
+                p[cls] = verses[k]
                 k += 1
-    common = json.loads((ES_DIR / "common.json").read_text(encoding="utf-8"))
+    common = json.loads((d / "common.json").read_text(encoding="utf-8"))
     if len(common["colophon"]) != len(colophon):
-        raise SystemExit("es/common.json: colophon length mismatch")
-    for p, es in zip(colophon, common["colophon"]):
-        p["espanol"] = es
+        raise SystemExit(f"{lang}/common.json: colophon length mismatch")
+    for p, line in zip(colophon, common["colophon"]):
+        p[cls] = line
     return common["title_t3"]
 
 
@@ -157,8 +174,10 @@ def prow_html(p, indent="        "):
         parts.append(f'<p class="pinyin" aria-hidden="true">{p["pinyin"]}</p>')
     if "english" in p:
         parts.append(f'<p class="english">{p["english"]}</p>')
-    if "espanol" in p:
-        parts.append(f'<p class="espanol" lang="es">{p["espanol"]}</p>')
+    for lang, layer in LAYERS.items():
+        cls = layer["cls"]
+        if cls in p:
+            parts.append(f'<p class="{cls}" lang="{lang}">{p[cls]}</p>')
     return f'{indent}<div class="prow">' + "".join(parts) + "</div>"
 
 
@@ -168,7 +187,7 @@ CHROME_HEAD = """<!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Read the Sutra — Dragon King Sutra 佛說海龍王經</title>
-<meta name="description" content="The complete Sutra Spoken by the Buddha on the Sea Dragon King in Traditional Chinese, pinyin, English and Spanish — four volumes, twenty chapters.">
+<meta name="description" content="The complete Sutra Spoken by the Buddha on the Sea Dragon King in Traditional Chinese, pinyin, English, Spanish and French — four volumes, twenty chapters.">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -177,7 +196,7 @@ CHROME_HEAD = """<!DOCTYPE html>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/reader.css">
 </head>
-<body class="reader-page hide-es">
+<body class="reader-page hide-es hide-fr">
 
 <div class="progress-track" aria-hidden="true"><span class="progress-fill" id="progressFill"></span></div>
 
@@ -199,7 +218,7 @@ CHROME_HEAD = """<!DOCTYPE html>
     <a href="treasure-vase-yoga.html">Practice</a>
     <a href="his-holiness-living-buddha-lian-sheng.html">Living Buddha Lian Sheng</a>
     <a href="contact.html">Contact</a>
-    <a href="/es/read.html" class="lang-switch" hreflang="es" lang="es">Español</a>
+    <span class="lang-switch"><a href="/es/read.html" hreflang="es" lang="es" aria-label="Español">ES</a><a href="/fr/read.html" hreflang="fr" lang="fr" aria-label="Français">FR</a></span>
     <a href="refuge.html" class="nav-cta">Take Refuge</a>
   </nav>
 </header>
@@ -305,94 +324,177 @@ CHROME_FOOT = """
 
 
 # ----------------------------------------------------------------------
-# Spanish chrome. The English chrome above is the single source of layout;
-# the Spanish page is the same markup with these strings swapped, links
-# pointed at the /es/ twins and asset paths made root-absolute (the page
-# sits one directory down). Keeping one chrome means the two readers can
-# never drift structurally.
+# Translated chrome. The English chrome above is the single source of layout;
+# each translated page is the same markup with these strings swapped, links
+# pointed at that language's twins and asset paths made root-absolute (those
+# pages sit one directory down). One table holds every language, so a pattern
+# can never be translated into one language and forgotten in another.
 # ----------------------------------------------------------------------
-CHROME_ES = [
+CHROME_TR = [
     # head
-    ("<html lang=\"en\"", "<html lang=\"es\""),
+    ('<html lang="en"',
+     {"es": '<html lang="es"', "fr": '<html lang="fr"'}),
     ("<title>Read the Sutra — Dragon King Sutra 佛說海龍王經</title>",
-     "<title>Leer el Sutra — Dragon King Sutra 佛說海龍王經</title>"),
+     {"es": "<title>Leer el Sutra — Dragon King Sutra 佛說海龍王經</title>",
+      "fr": "<title>Lire le Soutra — Dragon King Sutra 佛說海龍王經</title>"}),
     ("The complete Sutra Spoken by the Buddha on the Sea Dragon King in Traditional "
-     "Chinese, pinyin, English and Spanish — four volumes, twenty chapters.",
-     "El Sutra Pronunciado por el Buda sobre el Rey Dragón del Mar completo, en chino "
-     "tradicional, pinyin, inglés y español — cuatro volúmenes, veinte capítulos."),
-    # body: Spanish reader hides the English layer by default
-    ('<body class="reader-page hide-es">', '<body class="reader-page hide-en">'),
+     "Chinese, pinyin, English, Spanish and French — four volumes, twenty chapters.",
+     {"es": "El Sutra Pronunciado por el Buda sobre el Rey Dragón del Mar completo, en chino "
+            "tradicional, pinyin, inglés, español y francés — cuatro volúmenes, veinte capítulos.",
+      "fr": "Le Soutra prononcé par le Bouddha sur le Roi Dragon de la Mer en entier, en "
+            "chinois traditionnel, pinyin, anglais, espagnol et français — quatre volumes, "
+            "vingt chapitres."}),
+    # body: each reader hides the two layers that are not its own
+    ('<body class="reader-page hide-es hide-fr">',
+     {"es": '<body class="reader-page hide-en hide-fr">',
+      "fr": '<body class="reader-page hide-en hide-es">'}),
     # nav
-    ('<a href="about.html">About</a>', '<a href="/es/about.html">Acerca de</a>'),
+    ('<a href="about.html">About</a>',
+     {"es": '<a href="/es/about.html">Acerca de</a>',
+      "fr": '<a href="/fr/about.html">À propos</a>'}),
     ('<a href="read.html" aria-current="page">Read</a>',
-     '<a href="/es/read.html" aria-current="page">Leer</a>'),
+     {"es": '<a href="/es/read.html" aria-current="page">Leer</a>',
+      "fr": '<a href="/fr/read.html" aria-current="page">Lire</a>'}),
     ('<a href="treasure-vase-yoga.html">Practice</a>',
-     '<a href="/es/treasure-vase-yoga.html">Práctica</a>'),
+     {"es": '<a href="/es/treasure-vase-yoga.html">Práctica</a>',
+      "fr": '<a href="/fr/treasure-vase-yoga.html">Pratique</a>'}),
     ('<a href="his-holiness-living-buddha-lian-sheng.html">Living Buddha Lian Sheng</a>',
-     '<a href="/es/his-holiness-living-buddha-lian-sheng.html">Buda Viviente Lian Sheng</a>'),
-    ('<a href="contact.html">Contact</a>', '<a href="/es/contact.html">Contacto</a>'),
-    ('<a href="/es/read.html" class="lang-switch" hreflang="es" lang="es">Español</a>',
-     '<a href="/read.html" class="lang-switch" hreflang="en" lang="en">English</a>'),
+     {"es": '<a href="/es/his-holiness-living-buddha-lian-sheng.html">Buda Viviente Lian Sheng</a>',
+      "fr": '<a href="/fr/his-holiness-living-buddha-lian-sheng.html">Bouddha Vivant Lian Sheng</a>'}),
+    ('<a href="contact.html">Contact</a>',
+     {"es": '<a href="/es/contact.html">Contacto</a>',
+      "fr": '<a href="/fr/contact.html">Contact</a>'}),
+    ('<span class="lang-switch">'
+     '<a href="/es/read.html" hreflang="es" lang="es" aria-label="Español">ES</a>'
+     '<a href="/fr/read.html" hreflang="fr" lang="fr" aria-label="Français">FR</a>'
+     '</span>',
+     {"es": '<span class="lang-switch">'
+            '<a href="/read.html" hreflang="en" lang="en" aria-label="English">EN</a>'
+            '<a href="/fr/read.html" hreflang="fr" lang="fr" aria-label="Français">FR</a>'
+            '</span>',
+      "fr": '<span class="lang-switch">'
+            '<a href="/read.html" hreflang="en" lang="en" aria-label="English">EN</a>'
+            '<a href="/es/read.html" hreflang="es" lang="es" aria-label="Español">ES</a>'
+            '</span>'}),
     ('<a href="refuge.html" class="nav-cta">Take Refuge</a>',
-     '<a href="/es/refuge.html" class="nav-cta">Tomar Refugio</a>'),
-    ('aria-label="Menu"', 'aria-label="Menú"'),
-    ('aria-label="Dragon King Sutra home"', 'aria-label="Dragon King Sutra inicio"'),
-    ('<a href="index.html" class="brand"', '<a href="/es/index.html" class="brand"'),
+     {"es": '<a href="/es/refuge.html" class="nav-cta">Tomar Refugio</a>',
+      "fr": '<a href="/fr/refuge.html" class="nav-cta">Prendre refuge</a>'}),
+    ('aria-label="Menu"', {"es": 'aria-label="Menú"', "fr": 'aria-label="Menu"'}),
+    ('aria-label="Dragon King Sutra home"',
+     {"es": 'aria-label="Dragon King Sutra inicio"',
+      "fr": 'aria-label="Dragon King Sutra accueil"'}),
+    ('<a href="index.html" class="brand"',
+     {"es": '<a href="/es/index.html" class="brand"',
+      "fr": '<a href="/fr/index.html" class="brand"'}),
     # reader furniture
-    ('aria-label="Back to top">☸', 'aria-label="Volver arriba">☸'),
-    ('aria-label="Chapters"', 'aria-label="Capítulos"'),
-    ("目錄 · CONTENTS", "目錄 · CONTENIDO"),
-    ('<span class="btn-label">Chapters</span>', '<span class="btn-label">Capítulos</span>'),
-    ('<span class="btn-label">Print</span>', '<span class="btn-label">Imprimir</span>'),
-    ("<span class=\"layer-label\">Layers</span>", "<span class=\"layer-label\">Capas</span>"),
+    ('aria-label="Back to top">☸',
+     {"es": 'aria-label="Volver arriba">☸', "fr": 'aria-label="Retour en haut">☸'}),
+    ('aria-label="Chapters"',
+     {"es": 'aria-label="Capítulos"', "fr": 'aria-label="Chapitres"'}),
+    ("目錄 · CONTENTS", {"es": "目錄 · CONTENIDO", "fr": "目錄 · SOMMAIRE"}),
+    ('<span class="btn-label">Chapters</span>',
+     {"es": '<span class="btn-label">Capítulos</span>',
+      "fr": '<span class="btn-label">Chapitres</span>'}),
+    ('<span class="btn-label">Print</span>',
+     {"es": '<span class="btn-label">Imprimir</span>',
+      "fr": '<span class="btn-label">Imprimer</span>'}),
+    ('<span class="layer-label">Layers</span>',
+     {"es": '<span class="layer-label">Capas</span>',
+      "fr": '<span class="layer-label">Couches</span>'}),
+    # Each reader opens with its own language lit. Without this the chips are
+    # painted from the English defaults and flicker when reader.js corrects
+    # them, which is the one thing on the page a reader is watching.
+    ('data-layer="en" aria-pressed="true"',
+     {"es": 'data-layer="en" aria-pressed="false"',
+      "fr": 'data-layer="en" aria-pressed="false"'}),
+    ('data-layer="es" aria-pressed="false"',
+     {"es": 'data-layer="es" aria-pressed="true"',
+      "fr": 'data-layer="es" aria-pressed="false"'}),
+    ('data-layer="fr" aria-pressed="false"',
+     {"es": 'data-layer="fr" aria-pressed="false"',
+      "fr": 'data-layer="fr" aria-pressed="true"'}),
     # footer
-    ("<h4>The Sutra</h4>", "<h4>El Sutra</h4>"),
-    ("<h4>Teachings</h4>", "<h4>Enseñanzas</h4>"),
-    ("<h4>About</h4>", "<h4>Acerca de</h4>"),
-    ("<h4>Temple Websites</h4>", "<h4>Sitios de templos</h4>"),
-    ("<h4>Related Sites</h4>", "<h4>Sitios relacionados</h4>"),
-    ("<h4>Online Teachings</h4>", "<h4>Enseñanzas en línea</h4>"),
+    ("<h4>The Sutra</h4>", {"es": "<h4>El Sutra</h4>", "fr": "<h4>Le Soutra</h4>"}),
+    ("<h4>Teachings</h4>", {"es": "<h4>Enseñanzas</h4>", "fr": "<h4>Enseignements</h4>"}),
+    ("<h4>About</h4>", {"es": "<h4>Acerca de</h4>", "fr": "<h4>À propos</h4>"}),
+    ("<h4>Temple Websites</h4>",
+     {"es": "<h4>Sitios de templos</h4>", "fr": "<h4>Sites des temples</h4>"}),
+    ("<h4>Related Sites</h4>",
+     {"es": "<h4>Sitios relacionados</h4>", "fr": "<h4>Sites associés</h4>"}),
+    ("<h4>Online Teachings</h4>",
+     {"es": "<h4>Enseñanzas en línea</h4>", "fr": "<h4>Enseignements en ligne</h4>"}),
     ('<a href="about.html">About the Sutra</a>',
-     '<a href="/es/about.html">Acerca del Sutra</a>'),
+     {"es": '<a href="/es/about.html">Acerca del Sutra</a>',
+      "fr": '<a href="/fr/about.html">À propos du Soutra</a>'}),
     ('<a href="nagas-and-dragon-kings.html">Nagas &amp; Dragon Kings</a>',
-     '<a href="/es/nagas-and-dragon-kings.html">Nagas y Reyes Dragones</a>'),
-    ('<a href="read.html">Read the Sutra</a>', '<a href="/es/read.html">Leer el Sutra</a>'),
+     {"es": '<a href="/es/nagas-and-dragon-kings.html">Nagas y Reyes Dragones</a>',
+      "fr": '<a href="/fr/nagas-and-dragon-kings.html">Nagas et Rois Dragons</a>'}),
+    ('<a href="read.html">Read the Sutra</a>',
+     {"es": '<a href="/es/read.html">Leer el Sutra</a>',
+      "fr": '<a href="/fr/read.html">Lire le Soutra</a>'}),
     ('<a href="about.html#reflection">Study Reflection</a>',
-     '<a href="/es/about.html#reflection">Reflexión de estudio</a>'),
+     {"es": '<a href="/es/about.html#reflection">Reflexión de estudio</a>',
+      "fr": '<a href="/fr/about.html#reflection">Réflexion d\'étude</a>'}),
     ('<a href="read.html?print">Print the Sutra</a>',
-     '<a href="/es/read.html?print">Imprimir el Sutra</a>'),
+     {"es": '<a href="/es/read.html?print">Imprimir el Sutra</a>',
+      "fr": '<a href="/fr/read.html?print">Imprimer le Soutra</a>'}),
     ('<a href="treasure-vase-yoga.html">Treasure Vase Yoga</a>',
-     '<a href="/es/treasure-vase-yoga.html">El Yoga del Jarrón del Tesoro</a>'),
+     {"es": '<a href="/es/treasure-vase-yoga.html">El Yoga del Jarrón del Tesoro</a>',
+      "fr": '<a href="/fr/treasure-vase-yoga.html">Le Yoga du Vase du Trésor</a>'}),
     ('<a href="treasure-vase-wishes.html">Wishes in the Treasure Vase</a>',
-     '<a href="/es/treasure-vase-wishes.html">Deseos en el Jarrón del Tesoro</a>'),
+     {"es": '<a href="/es/treasure-vase-wishes.html">Deseos en el Jarrón del Tesoro</a>',
+      "fr": '<a href="/fr/treasure-vase-wishes.html">Les souhaits dans le Vase du Trésor</a>'}),
     ('<a href="his-holiness-living-buddha-lian-sheng.html">H.H. Living Buddha Lian Sheng</a>',
-     '<a href="/es/his-holiness-living-buddha-lian-sheng.html">S.S. el Buda Viviente Lian Sheng</a>'),
-    ('<a href="refuge.html">Take Refuge</a>', '<a href="/es/refuge.html">Tomar Refugio</a>'),
-    ('<a href="contact.html">Contact Us</a>', '<a href="/es/contact.html">Contáctanos</a>'),
-    (">Seattle Leizang Temple<", ">Templo Leizang de Seattle<"),
-    (">Rainbow Temple<", ">Templo del Arcoíris<"),
-    (">Saturday Live Streams<", ">Transmisiones en vivo del sábado<"),
-    (">Sunday Live Streams<", ">Transmisiones en vivo del domingo<"),
-    (">Official Page<", ">Página oficial<"),
-    (">Discussion Group<", ">Grupo de discusión<"),
+     {"es": '<a href="/es/his-holiness-living-buddha-lian-sheng.html">S.S. el Buda Viviente Lian Sheng</a>',
+      "fr": '<a href="/fr/his-holiness-living-buddha-lian-sheng.html">S.S. le Bouddha Vivant Lian Sheng</a>'}),
+    ('<a href="refuge.html">Take Refuge</a>',
+     {"es": '<a href="/es/refuge.html">Tomar Refugio</a>',
+      "fr": '<a href="/fr/refuge.html">Prendre refuge</a>'}),
+    ('<a href="contact.html">Contact Us</a>',
+     {"es": '<a href="/es/contact.html">Contáctanos</a>',
+      "fr": '<a href="/fr/contact.html">Nous contacter</a>'}),
+    (">Seattle Leizang Temple<",
+     {"es": ">Templo Leizang de Seattle<", "fr": ">Temple Leizang de Seattle<"}),
+    (">Rainbow Temple<",
+     {"es": ">Templo del Arcoíris<", "fr": ">Temple de l\'Arc-en-ciel<"}),
+    (">Saturday Live Streams<",
+     {"es": ">Transmisiones en vivo del sábado<", "fr": ">Diffusions en direct du samedi<"}),
+    (">Sunday Live Streams<",
+     {"es": ">Transmisiones en vivo del domingo<", "fr": ">Diffusions en direct du dimanche<"}),
+    (">Official Page<", {"es": ">Página oficial<", "fr": ">Page officielle<"}),
+    (">Discussion Group<", {"es": ">Grupo de discusión<", "fr": ">Groupe de discussion<"}),
     ("May all beings share in the merit of this offering of the dharma",
-     "Que todos los seres compartan el mérito de esta ofrenda del dharma"),
-    # the mantra transliterated for Spanish phonetics
-    ("Om Guru Lian Sheng Siddhi Hum", "Om Guru Lian Sheng Sidi Jom"),
-    # assets live at the root; this page is one level down
-    ('href="css/', 'href="/css/'),
-    ('src="js/', 'src="/js/'),
-    ('href="assets/', 'href="/assets/'),
-    ('src="assets/', 'src="/assets/'),
+     {"es": "Que todos los seres compartan el mérito de esta ofrenda del dharma",
+      "fr": "Que tous les êtres partagent le mérite de cette offrande du dharma"}),
+    # the mantra transliterated for each language's phonetics
+    ("Om Guru Lian Sheng Siddhi Hum",
+     {"es": "Om Guru Lian Sheng Sidi Jom", "fr": "Om Gourou Lian Sheng Siddhi Houm"}),
+    # assets live at the root; these pages are one level down
+    ('href="css/', {"es": 'href="/css/', "fr": 'href="/css/'}),
+    ('src="js/', {"es": 'src="/js/', "fr": 'src="/js/'}),
+    ('href="assets/', {"es": 'href="/assets/', "fr": 'href="/assets/'}),
+    ('src="assets/', {"es": 'src="/assets/', "fr": 'src="/assets/'}),
 ]
 
+# Pivot to one list per language, refusing at import time to ship a table that
+# has a hole in it — the parity check reads CHROME to confirm every language
+# the reader knows about has chrome behind it.
+CHROME = {lang: [] for lang in LAYERS}
+for _src, _by_lang in CHROME_TR:
+    _missing = set(LAYERS) - set(_by_lang)
+    if _missing:
+        raise SystemExit(
+            f"build_reader: chrome pattern {_src[:60]!r} has no {sorted(_missing)}")
+    for _lang, _text in _by_lang.items():
+        CHROME[_lang].append((_src, _text))
 
-def to_spanish(html):
+
+def to_lang(html, lang):
     """The English reader markup, localized. Every replacement must fire —
-    a silent miss would leave English in the Spanish page."""
-    for src, dst in CHROME_ES:
+    a silent miss would leave English in a translated page."""
+    for src, dst in CHROME[lang]:
         if src not in html:
-            raise SystemExit(f"Spanish chrome: pattern not found -> {src[:70]}")
+            raise SystemExit(f"{lang} chrome: pattern not found -> {src[:70]}")
         html = html.replace(src, dst)
     return html
 
@@ -406,7 +508,7 @@ def build():
     title_lines, colophon, chapters = parse()
     assert len(chapters) == 20, f"expected 20 chapters, got {len(chapters)}"
     n_prows = sum(len(ps) for c in chapters for _, ps in c["blocks"])
-    title_es = load_spanish(chapters, colophon)
+    titles = {lang: load_layer(chapters, colophon, lang) for lang in LAYERS}
 
     out = [CHROME_HEAD]
 
@@ -421,9 +523,12 @@ def build():
             out.append(f'      <div class="toc-vol" lang="zh-Hant">{vol}</div>')
             last_vol = vol
         zh, py, en = ch["label"]
+        tr = "".join(
+            f'<span class="t-en {layer["cls"]}" lang="{lang}">'
+            f'{i} · {short_en(ch[f"label_{lang}"])}</span>'
+            for lang, layer in LAYERS.items())
         out.append(f'      <a href="#{ch["id"]}"><span class="t-zh" lang="zh-Hant">{zh}</span>'
-                   f'<span class="t-en">{i} · {short_en(en)}</span>'
-                   f'<span class="t-en espanol" lang="es">{i} · {short_en(ch["label_es"])}</span></a>')
+                   f'<span class="t-en">{i} · {short_en(en)}</span>{tr}</a>')
     out.append("    </nav>")
     out.append("  </aside>")
 
@@ -436,6 +541,7 @@ def build():
     out.append('      <button class="chip" data-layer="py" aria-pressed="true"><span class="dot"></span>Pīnyīn</button>')
     out.append('      <button class="chip" data-layer="en" aria-pressed="true"><span class="dot"></span>English</button>')
     out.append('      <button class="chip" data-layer="es" aria-pressed="false"><span class="dot"></span>Español</button>')
+    out.append('      <button class="chip" data-layer="fr" aria-pressed="false"><span class="dot"></span>Français</button>')
     out.append('      <span class="spacer"></span>')
     out.append('      <button class="tool-btn" id="printBtn">⎙ <span class="btn-label">Print</span></button>')
     out.append("    </div>")
@@ -447,7 +553,8 @@ def build():
     out.append(f'        <h1 class="t1" lang="zh-Hant">{t1}</h1>')
     out.append(f'        <div class="t2" aria-hidden="true">{t2}</div>')
     out.append(f'        <div class="t3">{t3}</div>')
-    out.append(f'        <div class="t3 espanol" lang="es">{title_es}</div>')
+    for lang, layer in LAYERS.items():
+        out.append(f'        <div class="t3 {layer["cls"]}" lang="{lang}">{titles[lang]}</div>')
     out.append("      </header>")
 
     # colophon
@@ -467,7 +574,9 @@ def build():
         out.append(f'          <h2 class="s1" lang="zh-Hant">{zh}</h2>')
         out.append(f'          <div class="s2" aria-hidden="true">{py}</div>')
         out.append(f'          <div class="s3">{en}</div>')
-        out.append(f'          <div class="s3 espanol" lang="es">{ch["label_es"]}</div>')
+        for lang, layer in LAYERS.items():
+            out.append(f'          <div class="s3 {layer["cls"]}" lang="{lang}">'
+                       f'{ch[f"label_{lang}"]}</div>')
         out.append("        </header>")
         for cls, prows in ch["blocks"]:
             classes = "block" + (f" {cls}" if cls else "")
@@ -485,10 +594,12 @@ def build():
     OUT.write_text(html, encoding="utf-8")
     print(f"read.html written: {len(html) / 1024:.0f} KB, {len(chapters)} chapters, {n_prows} verses")
 
-    es = to_spanish(html)
-    OUT_ES.parent.mkdir(exist_ok=True)
-    OUT_ES.write_text(es, encoding="utf-8")
-    print(f"es/read.html written: {len(es) / 1024:.0f} KB")
+    for lang in LAYERS:
+        page = to_lang(html, lang)
+        dest = out_path(lang)
+        dest.parent.mkdir(exist_ok=True)
+        dest.write_text(page, encoding="utf-8")
+        print(f"{dest.relative_to(ROOT)} written: {len(page) / 1024:.0f} KB")
 
 
 if __name__ == "__main__":

@@ -21,6 +21,12 @@ END = "<!-- SEO:end -->"
 SUTRA_TITLE = "The Sutra Spoken by the Buddha on the Sea Dragon King"
 GURU = "His Holiness Living Buddha Lian Sheng"
 
+# English at the root is the source; each translation lives in its own
+# directory. Adding a language here gives it canonical, hreflang, OG locale
+# and sitemap entries throughout.
+LANGS = ["en", "es", "fr"]
+OG_LOCALE = {"en": "en_US", "es": "es_LA", "fr": "fr_FR"}
+
 # page -> (og:type, priority, changefreq, extra JSON-LD builder key)
 PAGES = {
     "index.html":        ("website", "1.0", "monthly", "home"),
@@ -46,6 +52,11 @@ CRUMBS = {
            "practice_h": "El Yoga del Jarrón del Tesoro del Rey Dragón",
            "wishes_h": "Deseos en la práctica del Jarrón del Tesoro del Rey Dragón",
            "nagas": "Nagas y Reyes Dragones"},
+    "fr": {"home": "Accueil", "read": "Lire le Soutra", "about": "À propos du Soutra",
+           "practice": "Pratique", "wishes": "Les souhaits dans le Vase du Trésor",
+           "practice_h": "Le Yoga du Vase du Trésor du Roi Dragon",
+           "wishes_h": "Les souhaits dans la pratique du Vase du Trésor du Roi Dragon",
+           "nagas": "Nagas et Rois Dragons"},
 }
 
 
@@ -130,7 +141,7 @@ def jsonld_for(key, page, url, title, desc, lang="en"):
     """Returns the @graph list for a page."""
     if key == "home":
         return [website(), book(), person_guru()]
-    home = SITE + ("/es/" if lang == "es" else "/")
+    home = SITE + (f"/{lang}/" if lang != "en" else "/")
     crumb = CRUMBS[lang]
     if key == "book":
         b = book()
@@ -172,8 +183,8 @@ def json_dumps(obj, indent=2):
 
 def canonical_path(page, lang="en"):
     """about.html -> /about   (html_handling: auto-trailing-slash serves both)
-    The Spanish twin of the same page lives under /es/."""
-    prefix = "" if lang == "en" else "/es"
+    A translated version of the same page lives under /<lang>/."""
+    prefix = "" if lang == "en" else f"/{lang}"
     if page == "index.html":
         return prefix + "/" if prefix else "/"
     return prefix + "/" + page[:-len(".html")]
@@ -187,9 +198,8 @@ def build_block(page, title, desc, lang="en"):
                 f'{END}')
 
     og_type, _prio, _freq, key = PAGES[page]
-    url = SITE + canonical_path(page, lang)
-    url_en = SITE + canonical_path(page, "en")
-    url_es = SITE + canonical_path(page, "es")
+    urls = {code: SITE + canonical_path(page, code) for code in LANGS}
+    url = urls[lang]
     graph = jsonld_for(key, page, url, title, desc, lang)
     ld = {"@context": "https://schema.org", "@graph": graph}
 
@@ -198,9 +208,8 @@ def build_block(page, title, desc, lang="en"):
     lines = [
         BEGIN,
         f'<link rel="canonical" href="{url}">',
-        f'<link rel="alternate" hreflang="en" href="{url_en}">',
-        f'<link rel="alternate" hreflang="es" href="{url_es}">',
-        f'<link rel="alternate" hreflang="x-default" href="{url_en}">',
+        *[f'<link rel="alternate" hreflang="{code}" href="{urls[code]}">' for code in LANGS],
+        f'<link rel="alternate" hreflang="x-default" href="{urls["en"]}">',
         '<meta name="robots" content="index, follow, max-image-preview:large">',
         '<meta name="theme-color" content="#070e1a">',
         '',
@@ -213,8 +222,9 @@ def build_block(page, title, desc, lang="en"):
         '<meta property="og:image:height" content="630">',
         f'<meta property="og:image:alt" content="A golden dragon coiled around a flaming pearl beneath a radiant Buddha — {html.escape(SUTRA_TITLE, quote=True)}">',
         '<meta property="og:site_name" content="Dragon King Sutra">',
-        f'<meta property="og:locale" content="{"es_LA" if lang == "es" else "en_US"}">',
-        f'<meta property="og:locale:alternate" content="{"en_US" if lang == "es" else "es_LA"}">',
+        f'<meta property="og:locale" content="{OG_LOCALE[lang]}">',
+        *[f'<meta property="og:locale:alternate" content="{OG_LOCALE[code]}">'
+          for code in LANGS if code != lang],
         '<meta property="og:locale:alternate" content="zh_TW">',
         '',
         '<meta name="twitter:card" content="summary_large_image">',
@@ -256,21 +266,22 @@ def process(path: Path, lang: str = "en") -> str:
         action = "inserted"
 
     path.write_text(s, encoding="utf-8")
-    return f"{'es/' if lang == 'es' else ''}{page}: {action}"
+    return f"{'' if lang == 'en' else lang + '/'}{page}: {action}"
 
 
 def sitemap():
     urls = []
     for page, (_t, prio, freq, _k) in PAGES.items():
-        en = SITE + canonical_path(page, "en")
-        es = SITE + canonical_path(page, "es")
-        for loc in (en, es):
+        alts = {code: SITE + canonical_path(page, code) for code in LANGS}
+        links = "".join(
+            f'    <xhtml:link rel="alternate" hreflang="{code}" href="{alts[code]}"/>\n'
+            for code in LANGS)
+        for loc in alts.values():
             urls.append(
                 "  <url>\n"
                 f"    <loc>{loc}</loc>\n"
-                f'    <xhtml:link rel="alternate" hreflang="en" href="{en}"/>\n'
-                f'    <xhtml:link rel="alternate" hreflang="es" href="{es}"/>\n'
-                f'    <xhtml:link rel="alternate" hreflang="x-default" href="{en}"/>\n'
+                + links
+                + f'    <xhtml:link rel="alternate" hreflang="x-default" href="{alts["en"]}"/>\n'
                 f"    <changefreq>{freq}</changefreq>\n"
                 f"    <priority>{prio}</priority>\n"
                 "  </url>"
@@ -280,7 +291,8 @@ def sitemap():
            '        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
            + "\n".join(urls) + "\n</urlset>\n")
     (ROOT / "sitemap.xml").write_text(xml, encoding="utf-8")
-    return f"sitemap.xml: {len(urls)} urls ({len(PAGES)} pages x 2 languages)"
+    return (f"sitemap.xml: {len(urls)} urls "
+            f"({len(PAGES)} pages x {len(LANGS)} languages)")
 
 
 def robots():
@@ -295,7 +307,10 @@ def robots():
 if __name__ == "__main__":
     for page in list(PAGES) + sorted(NOINDEX):
         print(" ", process(ROOT / page))
-    for page in PAGES:
-        print(" ", process(ROOT / "es" / page, lang="es"))
+    for lang in LANGS:
+        if lang == "en":
+            continue
+        for page in PAGES:
+            print(" ", process(ROOT / lang / page, lang=lang))
     print(" ", sitemap())
     print(" ", robots())

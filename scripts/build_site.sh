@@ -16,10 +16,10 @@ OUT="dist"
 # the source text the reader is generated FROM — never published
 SOURCE_HTML="Dragon king sutra hailongwang_complete.html"
 
-# the Spanish pages must stay structurally identical to their English twins
-python3 scripts/check_es_parity.py
+# the translated pages must stay structurally identical to their English twins
+python3 scripts/check_translation_parity.py
 
-# refresh canonical/OG/JSON-LD tags, sitemap.xml and robots.txt (both languages)
+# refresh canonical/OG/JSON-LD tags, sitemap.xml and robots.txt (all languages)
 python3 scripts/add_seo.py
 
 rm -rf "$OUT"
@@ -33,11 +33,13 @@ for f in *.html; do
   echo "  page    $f"
 done
 
-# --- Spanish twins ---
-mkdir -p "$OUT/es"
-for f in es/*.html; do
-  cp "$f" "$OUT/es/"
-  echo "  page    $f"
+# --- translated versions, one directory per language ---
+for lang in es fr; do
+  mkdir -p "$OUT/$lang"
+  for f in "$lang"/*.html; do
+    cp "$f" "$OUT/$lang/"
+    echo "  page    $f"
+  done
 done
 
 # --- static directories ---

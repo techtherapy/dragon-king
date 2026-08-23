@@ -13,9 +13,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 P1 = ROOT / "extra-content" / "Dragon King Treasure Vase Yoga Part 1.txt"
 P2 = ROOT / "extra-content" / "Dragon King Treasure Vase Yoga Part 2.txt"
-ES_DIR = ROOT / "translations" / "es"
 OUT = ROOT / "treasure-vase-yoga.html"
-OUT_ES = ROOT / "es" / "treasure-vase-yoga.html"
+
+# the translated versions; English at the root is the source they follow
+LANGS = ["es", "fr"]
+
+
+def out_path(lang):
+    return OUT if lang == "en" else ROOT / lang / "treasure-vase-yoga.html"
 
 # asset prefix for the page being rendered — "assets/" at the root,
 # "/assets/" for the Spanish page one directory down
@@ -31,23 +36,35 @@ HEADINGS = {
 }
 
 
-def chrome(lang="en"):
+# how this page appears in the nav of each language, so the current-page
+# marker can be moved onto it after the chrome is lifted
+NAV_ITEM = {
+    "en": ('treasure-vase-yoga.html', "Practice"),
+    "es": ('/es/treasure-vase-yoga.html', "Práctica"),
+    "fr": ('/fr/treasure-vase-yoga.html', "Pratique"),
+}
+
+
+def chrome(lang):
     """Header/footer lifted from the refuge page of the same language, with
     the nav state moved to Practice — so the chrome can never drift."""
-    path = ROOT / "refuge.html" if lang == "en" else ROOT / "es" / "refuge.html"
+    path = ROOT / "refuge.html" if lang == "en" else ROOT / lang / "refuge.html"
     src = path.read_text()
     header = src[src.index('<header class="site-header">'):src.index("</header>") + len("</header>")]
     header = header.replace(' aria-current="page"', "")
-    if lang == "en":
-        header = header.replace('<a href="treasure-vase-yoga.html">Practice</a>',
-                                '<a href="treasure-vase-yoga.html" aria-current="page">Practice</a>')
-        header = header.replace('href="/es/refuge.html" class="lang-switch"',
-                                'href="/es/treasure-vase-yoga.html" class="lang-switch"')
-    else:
-        header = header.replace('<a href="/es/treasure-vase-yoga.html">Práctica</a>',
-                                '<a href="/es/treasure-vase-yoga.html" aria-current="page">Práctica</a>')
-        header = header.replace('href="/refuge.html" class="lang-switch"',
-                                'href="/treasure-vase-yoga.html" class="lang-switch"')
+
+    href, label = NAV_ITEM[lang]
+    plain = f'<a href="{href}">{label}</a>'
+    assert plain in header, f"{lang}: no Practice nav item to mark current"
+    header = header.replace(plain, f'<a href="{href}" aria-current="page">{label}</a>')
+
+    # the switcher was lifted from refuge.html, so it still points at refuge's
+    # twins; aim its links at this page's instead
+    start = header.index('<span class="lang-switch">')
+    end = header.index("</span>", start) + len("</span>")
+    switcher = header[start:end].replace("refuge.html", "treasure-vase-yoga.html")
+    header = header[:start] + switcher + header[end:]
+
     footer = src[src.index('<footer class="site-footer">'):src.index("</footer>") + len("</footer>")]
     return header, footer
 
@@ -127,6 +144,14 @@ CAPTIONS = {
                                 "selladas con una moneda de cobre y atadas con cinco telas de colores",
         "casting-the-vase.svg": "抛瓶入海 · El jarrón consagrado es arrojado al mar",
     },
+    "fr": {
+        "mudra.svg": "手印 · Le mudra : l'index et le doigt du milieu des deux mains se croisent "
+                     "pour former 井",
+        "vase-preparation.svg": "寶瓶 · Les cinq herbes sont disposées en couches comme les cinq "
+                                "chakras, scellées d'une pièce de cuivre et liées de cinq tissus "
+                                "de couleur",
+        "casting-the-vase.svg": "抛瓶入海 · Le vase consacré est jeté à la mer",
+    },
 }
 
 UI = {
@@ -190,6 +215,38 @@ UI = {
         "closing": "Primero atráelos con el deseo; luego condúcelos a la sabiduría del Buda.",
         "btn_refuge": "Tomar Refugio", "btn_wishes": "Deseos en el Jarrón del Tesoro",
         "ends": '&hellip; <span class="muted">[aquí termina la transcripción grabada]</span>',
+    },
+    "fr": {
+        "lang": "fr", "assets": "/assets/", "root": "/fr/",
+        "title": "Le Yoga du Vase du Trésor du Roi Dragon — Dragon King Sutra",
+        "description": "Le Yoga du Vase du Trésor du Roi Dragon (龍王寶瓶法), enseigné par le Grand "
+                       "Maître Lu à Hong Kong en 1990 — la préparation du vase du trésor, le mudra, "
+                       "le mantra et la visualisation, et le lancement du vase à la mer.",
+        "eyebrow": "Pratique · 龍王寶瓶法",
+        "h1": "Le Yoga du Vase du Trésor du Roi Dragon",
+        "lede": "Un enseignement du Grand Maître Lu — Hong Kong, 4 février 1990.",
+        "credit": "Traduit en anglais par Janny Chow.",
+        "notice_h": "L'initiation est requise avant de pratiquer",
+        "notice_p": ("Pour accomplir le Yoga du Vase du Trésor du Roi Dragon, il faut d'abord "
+                     '<a href="/fr/refuge.html">prendre refuge</a> auprès de Sa Sainteté le Bouddha '
+                     "Vivant Lian Sheng, puis demander l'initiation à cette pratique à Sa Sainteté "
+                     "ou à un maître autorisé de la True Buddha School. En attendant, cette lecture "
+                     "n'est qu'une source d'inspiration."),
+        "vision_alt": ("La visualisation de la pratique : du vase du trésor scellé s'élève un dragon "
+                       "qui se transforme en les Cinq Bouddhas Dhyani, dont la lumière redescend sur "
+                       "le vase"),
+        "vision_cap": ("Le vase devient le Roi Dragon ;<br>le Roi Dragon devient les Cinq "
+                       "Bouddhas ;<br>leur lumière bénit le vase."),
+        "g_mudra": "Mudra", "g_mudra_v": "l'index et le doigt du milieu des deux mains croisés",
+        "g_mantra": "Mantra",
+        "g_mantra_v": "Namo sam-man-do,<br>mou-to-nam,<br>wadjila, mi",
+        "g_practice": "Pratique", "g_practice_v": "sept séances complètes",
+        "g_complete": "Achèvement", "g_complete_v": "le vase est jeté<br>à la mer",
+        "part1": "Première partie · L'enseignement", "part2": "Deuxième partie · La sadhana",
+        "toc_h": "Sur cette page", "toc_aria": "Sections de cet enseignement",
+        "closing": "Attirez-les d'abord par le désir ; puis conduisez-les vers la sagesse du Bouddha.",
+        "btn_refuge": "Prendre refuge", "btn_wishes": "Les souhaits dans le Vase du Trésor",
+        "ends": '&hellip; <span class="muted">[ici s\'arrête la transcription enregistrée]</span>',
     },
 }
 
@@ -294,16 +351,17 @@ def render(items, plan, captions, slugs):
     return "\n".join(frags)
 
 
-def spanish_items(name, english):
+def translated_items(name, english, lang):
     """The translated transcript, checked item-for-item against the English."""
-    data = json.loads((ES_DIR / f"{name}.json").read_text(encoding="utf-8"))
+    path = ROOT / "translations" / lang / f"{name}.json"
+    data = json.loads(path.read_text(encoding="utf-8"))
     items = [(d["kind"], d["text"]) for d in data["items"]]
     if len(items) != len(english):
-        raise SystemExit(f"es/{name}.json: {len(items)} items, source has {len(english)}")
-    kinds_es = [k for k, _ in items]
-    kinds_en = [k for k, _ in english]
-    if kinds_es != kinds_en:
-        raise SystemExit(f"es/{name}.json: heading/paragraph sequence differs from the source")
+        raise SystemExit(
+            f"{lang}/{name}.json: {len(items)} items, source has {len(english)}")
+    if [k for k, _ in items] != [k for k, _ in english]:
+        raise SystemExit(
+            f"{lang}/{name}.json: heading/paragraph sequence differs from the source")
     return items
 
 
@@ -319,8 +377,10 @@ def build():
     if missing:
         raise SystemExit("figure anchor not found in the transcript: " + "; ".join(missing))
 
-    parts = {"en": (part1, part2), "es": (spanish_items("practice-part1", part1),
-                                          spanish_items("practice-part2", part2))}
+    parts = {"en": (part1, part2)}
+    for lang in LANGS:
+        parts[lang] = (translated_items("practice-part1", part1, lang),
+                       translated_items("practice-part2", part2, lang))
 
     global ASSETS
     for lang, (p1, p2) in parts.items():
@@ -335,7 +395,7 @@ def build():
         page = render_page(ui, header, footer, toc,
                            render(p1, plan1, CAPTIONS[lang], slugs1),
                            render(p2, plan2, CAPTIONS[lang], slugs2))
-        out = OUT if lang == "en" else OUT_ES
+        out = out_path(lang)
         out.parent.mkdir(exist_ok=True)
         out.write_text(page, encoding="utf-8")
         print(f"{out.relative_to(ROOT)} written: {len(page) / 1024:.0f} KB")

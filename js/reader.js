@@ -1,14 +1,18 @@
 /* Dragon King Sutra — reader behaviour */
 (function () {
   /* --- language layer toggles (persisted) --- */
-  var LAYERS = ['zh', 'py', 'en', 'es'];
-  /* The two readers are separate pages with opposite defaults, so they keep
+  var LAYERS = ['zh', 'py', 'en', 'es', 'fr'];
+  /* The three readers are separate pages with different defaults, so they keep
      separate preferences — otherwise turning Spanish off on /es/read would
-     silently turn it off on /read too, and vice versa. */
-  var PAGE_LANG = document.documentElement.lang === 'es' ? 'es' : 'en';
-  var DEFAULT_ON = PAGE_LANG === 'es'
-    ? { zh: true, py: true, en: false, es: true }
-    : { zh: true, py: true, en: true, es: false };
+     silently turn it off on /read too. Each page opens with 漢字, pinyin and
+     its own language showing; the other two are a click away. */
+  var PAGE_LANG = { es: 'es', fr: 'fr' }[document.documentElement.lang] || 'en';
+  var DEFAULTS = {
+    en: { zh: true, py: true, en: true,  es: false, fr: false },
+    es: { zh: true, py: true, en: false, es: true,  fr: false },
+    fr: { zh: true, py: true, en: false, es: false, fr: true }
+  };
+  var DEFAULT_ON = DEFAULTS[PAGE_LANG];
   var STORE = 'dks-' + PAGE_LANG + '-show-';
   var chips = document.querySelectorAll('.chip[data-layer]');
 

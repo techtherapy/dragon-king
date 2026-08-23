@@ -173,24 +173,34 @@ body::after {
 }
 .site-nav .nav-cta:hover { background: var(--gold-ghost); border-color: var(--gold); }
 .site-nav .nav-cta::after { display: none; }
-/* the other-language link: quieter than the nav proper, marked with a globe */
-.site-nav .lang-switch { color: var(--muted); }
-.site-nav .lang-switch::before { content: "\2295"; margin-right: 0.4em; opacity: 0.8; }
-.site-nav .lang-switch:hover { color: var(--gold-bright); }
+/* The other two languages, quieter than the nav proper and marked with a
+   globe. Two-letter codes rather than language names: the bar already needed
+   ~1330px with one spelled-out name, and a second would not fit. */
+.site-nav .lang-switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7em;
+  color: var(--muted);
+}
+.site-nav .lang-switch::before { content: "\2295"; opacity: 0.8; }
+.site-nav .lang-switch a { color: var(--muted); }
+.site-nav .lang-switch a:hover { color: var(--gold-bright); }
 
-/* At full size the bar needs ~1330px with the language link. Between the
+/* At full size the bar needs ~1330px with the language switcher. Between the
    mobile breakpoint and that width, tighten the type so it still fits. */
 @media (min-width: 1081px) and (max-width: 1380px) {
   .site-nav { gap: 1rem; }
   .site-nav a { font-size: 0.92rem; letter-spacing: 0.06em; }
   .site-nav .nav-cta { padding: 8px 14px; }
+  .site-nav .lang-switch { gap: 0.55em; }
   .site-nav .lang-switch::before { display: none; }
   .brand-name { font-size: 1.15rem; }
   .brand-name .tc { font-size: 0.64rem; letter-spacing: 0.4em; }
   .brand-mark { width: 38px; height: 38px; }
 }
 
-/* ---- language banner: offered once to Spanish-language browsers ---- */
+/* ---- language banner: offered once, in the reader's own language ---- */
 /* The site header is fixed, so the banner is fixed directly beneath it
    rather than in normal flow — in flow it would sit under the header and
    behind the hero. It floats over the page instead of displacing it. */
