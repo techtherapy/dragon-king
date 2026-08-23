@@ -771,3 +771,89 @@ table.plain th, table.plain td {
   vertical-align: top;
 }
 table.plain th { font-family: var(--font-display); color: var(--gold); letter-spacing: 0.1em; }
+
+/* link directory (contact page) */
+.dir-group { margin-top: 3.2rem; }
+.dir-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  font-size: 1.45rem;
+  margin-bottom: 1.2rem;
+}
+.dir-head .tc-sub {
+  font-family: var(--font-tc);
+  color: var(--gold);
+  font-size: 1rem;
+  letter-spacing: 0.25em;
+  font-weight: 500;
+}
+.dir-head::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  align-self: center;
+  background: linear-gradient(90deg, var(--gold-faint), transparent);
+}
+.dir-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 0.9rem;
+}
+.dir-tile {
+  display: flex;
+  gap: 1.1rem;
+  padding: 1.15rem 1.3rem 1.05rem;
+  border: 1px solid var(--gold-ghost);
+  background: rgba(15, 31, 56, 0.4);
+  transition: border-color .3s ease, background .3s ease, transform .3s ease;
+}
+.dir-tile:hover {
+  border-color: var(--gold-faint);
+  background: rgba(22, 41, 74, 0.55);
+  transform: translateY(-3px);
+}
+.dir-glyph {
+  font-family: var(--font-tc);
+  font-size: 1.6rem;
+  line-height: 1.55;
+  color: var(--gold);
+  flex: none;
+  border-right: 1px solid var(--gold-ghost);
+  padding-right: 1rem;
+}
+.dir-name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.24rem;
+  color: var(--cream);
+  transition: color .3s ease;
+}
+.dir-tile:hover .dir-name { color: var(--gold-bright); }
+.dir-name .tc {
+  font-size: 0.82em;
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  margin-left: 0.3rem;
+  white-space: nowrap;
+}
+.dir-desc {
+  display: block;
+  font-size: 0.97rem;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-top: 0.3rem;
+}
+.dir-domain {
+  display: block;
+  margin-top: 0.55rem;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  color: var(--gold-dim);
+  transition: color .3s ease;
+}
+.dir-tile:hover .dir-domain { color: var(--gold); }
+@media (max-width: 560px) {
+  .dir-grid { grid-template-columns: 1fr; }
+}

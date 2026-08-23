@@ -82,6 +82,22 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://dragonkingsutra.org/nagas-and-dragon-kings</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/nagas-and-dragon-kings"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/nagas-and-dragon-kings"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/nagas-and-dragon-kings"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://dragonkingsutra.org/es/nagas-and-dragon-kings</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/nagas-and-dragon-kings"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/nagas-and-dragon-kings"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dragonkingsutra.org/nagas-and-dragon-kings"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://dragonkingsutra.org/his-holiness-living-buddha-lian-sheng</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://dragonkingsutra.org/his-holiness-living-buddha-lian-sheng"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://dragonkingsutra.org/es/his-holiness-living-buddha-lian-sheng"/>
