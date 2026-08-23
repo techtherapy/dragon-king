@@ -340,6 +340,7 @@ body::after {
 }
 .muted { color: var(--muted); }
 .prose { max-width: var(--measure); }
+.muted-note { color: var(--muted); font-size: 0.95em; margin-top: 1.4em; }
 .prose p { margin: 0 0 1.2em; }
 .prose .zh {
   font-family: var(--font-tc);

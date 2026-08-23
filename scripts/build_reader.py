@@ -12,7 +12,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SRC = ROOT / "Dragon king sutra hailongwang_complete.html"
+SRC = ROOT / "extra-content" / "Dragon king sutra hailongwang_complete.html"
 ES_DIR = ROOT / "translations" / "es"
 OUT = ROOT / "read.html"
 OUT_ES = ROOT / "es" / "read.html"
@@ -223,6 +223,7 @@ CHROME_FOOT = """
       <h4>The Sutra</h4>
       <ul>
         <li><a href="about.html">About the Sutra</a></li>
+        <li><a href="nagas-and-dragon-kings.html">Nagas &amp; Dragon Kings</a></li>
         <li><a href="read.html">Read the Sutra</a></li>
         <li><a href="about.html#reflection">Study Reflection</a></li>
         <li><a href="read.html?print">Print the Sutra</a></li>
@@ -353,6 +354,8 @@ CHROME_ES = [
     ("<h4>Online Teachings</h4>", "<h4>Enseñanzas en línea</h4>"),
     ('<a href="about.html">About the Sutra</a>',
      '<a href="/es/about.html">Acerca del Sutra</a>'),
+    ('<a href="nagas-and-dragon-kings.html">Nagas &amp; Dragon Kings</a>',
+     '<a href="/es/nagas-and-dragon-kings.html">Nagas y Reyes Dragones</a>'),
     ('<a href="read.html">Read the Sutra</a>', '<a href="/es/read.html">Leer el Sutra</a>'),
     ('<a href="about.html#reflection">Study Reflection</a>',
      '<a href="/es/about.html#reflection">Reflexión de estudio</a>'),

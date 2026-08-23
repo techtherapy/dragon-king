@@ -41,6 +41,7 @@ PAIRS = [
     "contact.html",
     "his-holiness-living-buddha-lian-sheng.html",
     "treasure-vase-wishes.html",
+    "nagas-and-dragon-kings.html",
 ]
 # Generated pages are omitted: one generator emits both languages from one
 # template, so they cannot drift structurally. Their risk is check 3.
