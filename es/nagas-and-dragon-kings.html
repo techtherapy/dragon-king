@@ -93,6 +93,20 @@
   }
   .src::before { content: "— "; }
   .src:hover { color: var(--gold); }
+  /* a photographic/painted figure sits in the same shrine-niche arch as
+     the photographs elsewhere on the site */
+  .photo-arch { position: relative; margin: 9px 9px 11px; }
+  .photo-arch img {
+    width: 100%; height: auto; display: block;
+    border: 1px solid rgba(217, 178, 95, 0.5);
+    border-radius: 50% 50% 4px 4px / 30% 30% 4px 4px;
+  }
+  .photo-arch::before {
+    content: ""; position: absolute; inset: -9px -9px -11px;
+    border: 1px solid var(--gold-ghost);
+    border-radius: 50% 50% 8px 8px / 30% 30% 8px 8px;
+    pointer-events: none;
+  }
   .inline-figure { margin: 2.8rem auto; text-align: center; }
   .inline-figure img { margin: 0 auto; height: auto; }
   .inline-figure.compact img { width: min(100%, 330px); }
@@ -212,7 +226,7 @@
       <p class="reveal">Su chofer, Steve Roth, recordó más tarde haber visto formarse las nubes mientras el Karmapa cantaba y hacía mudras. Las nubes se acumularon, el cielo se oscureció y siguió un fuerte aguacero.</p>
       <p class="reveal">Jigme Rinpoche relacionó más tarde el episodio específicamente con los nagas. Según este relato, el Karmapa explicó que los nagas locales estaban enfermos e indicó a los monjes colocar píldoras medicinales bendecidas en un manantial asociado con ellos. Los nagas se recuperaron, y después llegó la lluvia.</p>
       <figure class="inline-figure tall reveal">
-        <img src="/assets/naga-karmapa.svg" width="896" height="1000" alt="El Decimosexto Gyalwa Karmapa con su corona ceremonial de brocado — un detallado retrato de línea en oro" loading="lazy">
+        <div class="photo-arch"><img src="/assets/karmapa-portrait.jpg" width="544" height="720" alt="Un retrato pintado del Decimosexto Gyalwa Karmapa, sonriente, con hábitos monásticos granates y cuello dorado"></div>
         <figcaption>十六世大寶法王 · El Decimosexto Gyalwa Karmapa, quien llamó a la lluvia para la Nación Hopi en 1974</figcaption>
       </figure>
       <p class="reveal">Dentro de la comprensión budista tibetana del suceso, el Karmapa no estaba simplemente ordenando a seres sobrenaturales que produjeran lluvia. El problema era un desequilibrio que involucraba a los propios nagas. Ayudar a los nagas restauró la armonía, y la lluvia regresó.</p>

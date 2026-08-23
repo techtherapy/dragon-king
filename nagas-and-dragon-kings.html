@@ -93,6 +93,20 @@
   }
   .src::before { content: "— "; }
   .src:hover { color: var(--gold); }
+  /* a photographic/painted figure sits in the same shrine-niche arch as
+     the photographs elsewhere on the site */
+  .photo-arch { position: relative; margin: 9px 9px 11px; }
+  .photo-arch img {
+    width: 100%; height: auto; display: block;
+    border: 1px solid rgba(217, 178, 95, 0.5);
+    border-radius: 50% 50% 4px 4px / 30% 30% 4px 4px;
+  }
+  .photo-arch::before {
+    content: ""; position: absolute; inset: -9px -9px -11px;
+    border: 1px solid var(--gold-ghost);
+    border-radius: 50% 50% 8px 8px / 30% 30% 8px 8px;
+    pointer-events: none;
+  }
   .inline-figure { margin: 2.8rem auto; text-align: center; }
   .inline-figure img { margin: 0 auto; height: auto; }
   .inline-figure.compact img { width: min(100%, 330px); }
@@ -212,7 +226,7 @@
       <p class="reveal">His driver, Steve Roth, later recalled watching clouds form while the Karmapa was chanting and making mudras. The clouds gathered, the sky darkened and a heavy downpour followed.</p>
       <p class="reveal">Jigme Rinpoche later related the episode specifically to the nagas. According to this account, the Karmapa explained that local nagas were sick and instructed monks to place blessed medicinal pills in a spring associated with them. The nagas recovered, after which the rain came.</p>
       <figure class="inline-figure tall reveal">
-        <img src="assets/naga-karmapa.svg" width="896" height="1000" alt="The Sixteenth Gyalwa Karmapa in his brocade ceremonial crown — a detailed gold line portrait" loading="lazy">
+        <div class="photo-arch"><img src="assets/karmapa-portrait.jpg" width="544" height="720" alt="A painted portrait of the Sixteenth Gyalwa Karmapa, smiling, in maroon monastic robes with a golden collar"></div>
         <figcaption>十六世大寶法王 · The Sixteenth Gyalwa Karmapa, who called the rain for the Hopi Nation in 1974</figcaption>
       </figure>
       <p class="reveal">Within the Tibetan Buddhist understanding of the event, the Karmapa was not simply commanding supernatural beings to produce rain. The problem was an imbalance involving the nagas themselves. Helping the nagas restored harmony, and the rain returned.</p>

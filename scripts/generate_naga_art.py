@@ -447,10 +447,6 @@ def naga_garuda():
         "radiant jewel of the dharma between them"))
 
 
-# naga-karmapa.svg is traced from the owner's photograph by
-# scripts/trace_karmapa.py — not generated here.
-
-
 if __name__ == "__main__":
     for name, maker in (("naga-mucalinda.svg", mucalinda),
                         ("naga-king.svg", naga_king),
