@@ -41,6 +41,10 @@
 /* ---------- reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+/* anchored targets must clear the fixed header when jumped to */
+/* .chapter is excluded: the reader sets its own larger offset to clear
+   its sticky toolbar, and this rule would out-specify it */
+section[id]:not(.chapter) { scroll-margin-top: calc(var(--header-h) + 1.2rem); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
