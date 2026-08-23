@@ -238,6 +238,25 @@
   @media (max-width: 620px) {
     .dharma-record .row { grid-template-columns: 1fr; padding: 1.1rem 0; }
   }
+  /* the four lineage gurus: a small arched portrait beside each entry */
+  .dharma-record .row.guru-row { grid-template-columns: 130px 104px 1fr; align-items: center; }
+  .guru-photo { margin: 4px 4px 6px; position: relative; }
+  .guru-photo img {
+    width: 100%; height: auto; display: block;
+    border: 1px solid rgba(217, 178, 95, 0.5);
+    border-radius: 50% 50% 4px 4px / 36% 36% 4px 4px;
+  }
+  .guru-photo::before {
+    content: ""; position: absolute; inset: -4px -4px -6px;
+    border: 1px solid var(--gold-ghost);
+    border-radius: 50% 50% 7px 7px / 36% 36% 7px 7px;
+    pointer-events: none;
+  }
+  @media (max-width: 620px) {
+    .dharma-record .row.guru-row { grid-template-columns: 1fr; }
+    .guru-photo { max-width: 150px; margin: 4px 0 10px; }
+  }
+
   @media (max-width: 780px) {
     .phase, .phase:nth-child(even) { grid-template-columns: 1fr; padding: 2.2rem 0; }
     .phase:nth-child(even) .phase-photo { order: 0; }
@@ -319,23 +338,27 @@
       <p>He honors four teachers as his root lineage gurus — one for each of the four schools of Vajrayana Buddhism whose transmission he holds.</p>
     </div>
     <div class="dharma-record">
-      <div class="row reveal">
+      <div class="row guru-row reveal">
         <span class="yr">Nyingma · 紅教</span>
+        <div class="guru-photo"><img src="assets/guru-qingzhen.jpg" width="480" height="480" alt="A painted portrait of Taoist Master Qingzhen, Venerable Liaoming, enthroned in ornate robes" loading="lazy"></div>
         <div><h3>Taoist Master Qingzhen<span class="zh" lang="zh-Hant">清真道長 · 了鳴和尚</span></h3>
         <p>His first human teacher: the reclusive master of Lientou Mountain, also known as Venerable Liaoming, who trained him in the Taoist arts and transmitted the Nyingma tantras. His parting instruction: “Let offerings be voluntary in all Dharma matters.”</p></div>
       </div>
-      <div class="row reveal">
+      <div class="row guru-row reveal">
         <span class="yr">Kagyu · 白教</span>
+        <div class="guru-photo"><img src="assets/guru-karmapa.jpg" width="480" height="480" alt="The Sixteenth Gyalwa Karmapa performing the Black Crown ceremony" loading="lazy"></div>
         <div><h3>The Sixteenth Gyalwa Karmapa<span class="zh" lang="zh-Hant">十六世大寶法王</span></h3>
         <p>Rangjung Rigpe Dorje, who greeted him in 1980 with the words “I have been waiting for you for a long time,” and bestowed the Five Buddhas Crown empowerment and the Mahamudra.</p></div>
       </div>
-      <div class="row reveal">
+      <div class="row guru-row reveal">
         <span class="yr">Sakya · 花教</span>
+        <div class="guru-photo"><img src="assets/guru-zhengkong.jpg" width="480" height="480" alt="Master Sakya Zhengkong, His Eminence Dezhung Rinpoche, seated at a shrine in the red pandita hat" loading="lazy"></div>
         <div><h3>Master Sakya Zhengkong<span class="zh" lang="zh-Hant">薩迦證空上師</span></h3>
         <p>Dezhung Rinpoche, under whom he studied in Seattle, receiving the Lamdre and the Hevajra transmissions. “You are a truly diligent practitioner, and it is no surprise that your realization is profound.”</p></div>
       </div>
-      <div class="row reveal">
+      <div class="row guru-row reveal">
         <span class="yr">Gelug · 黃教</span>
+        <div class="guru-photo"><img src="assets/guru-dargye.jpg" width="480" height="480" alt="Guru Thubten Dargye in yellow robes, holding a vajra" loading="lazy"></div>
         <div><h3>Guru Thubten Dargye<span class="zh" lang="zh-Hant">吐登達爾吉上師</span></h3>
         <p>From whom he received the Yamantaka and Highest Yoga Tantra empowerments, together with the charge he has carried ever since: “Widely propagate the Kalachakra teachings across the five continents.”</p></div>
       </div>

@@ -447,127 +447,15 @@ def naga_garuda():
         "radiant jewel of the dharma between them"))
 
 
-# ----------------------------------------------------------------------
-# 5. the Sixteenth Karmapa calls the rain
-# ----------------------------------------------------------------------
-def karmapa():
-    """The Hopi story from the article: the Karmapa in his brocade crown,
-    hand raised in mudra; the spring's naga restored; the clouds gathering
-    and the first rain falling. The face is kept to the fewest possible
-    lines — serene, not a caricature."""
-    W, H = 460, 440
-    cx, fy = 208, 190          # face centre
-
-    # ---- the crown: tall flaring brocade panels with side flaps
-    crown = f"""
-  <path class="gild" d="M{cx - 40} {fy - 24} C{cx - 46} {fy - 66} {cx - 56} {fy - 104} {cx - 66} {fy - 128}
-       C{cx - 34} {fy - 148} {cx + 34} {fy - 148} {cx + 66} {fy - 128}
-       C{cx + 56} {fy - 104} {cx + 46} {fy - 66} {cx + 40} {fy - 24}
-       C{cx + 14} {fy - 30} {cx - 14} {fy - 30} {cx - 40} {fy - 24} Z"/>
-  <!-- central panel seams, as in the brocade crown -->
-  <path class="ln-thin" opacity=".6" d="M{cx - 14} {fy - 28} C{cx - 18} {fy - 70} {cx - 22} {fy - 108} {cx - 26} {fy - 136}
-       M{cx + 14} {fy - 28} C{cx + 18} {fy - 70} {cx + 22} {fy - 108} {cx + 26} {fy - 136}"/>
-  <!-- side flaps past the ears -->
-  <path class="gild" d="M{cx - 40} {fy - 26} C{cx - 52} {fy - 12} {cx - 56} {fy + 14} {cx - 52} {fy + 34}
-       L{cx - 36} {fy + 30} C{cx - 41} {fy + 10} {cx - 41} {fy - 10} {cx - 38} {fy - 24} Z"/>
-  <path class="gild" d="M{cx + 40} {fy - 26} C{cx + 52} {fy - 12} {cx + 56} {fy + 14} {cx + 52} {fy + 34}
-       L{cx + 36} {fy + 30} C{cx + 41} {fy + 10} {cx + 41} {fy - 10} {cx + 38} {fy - 24} Z"/>
-  <!-- lattice band along the top -->
-  <path class="ln-thin" d="M{cx - 48} {fy - 126} L{cx - 34} {fy - 138} M{cx - 34} {fy - 126} L{cx - 48} {fy - 138}
-       M{cx - 14} {fy - 130} L{cx} {fy - 142} M{cx} {fy - 130} L{cx - 14} {fy - 142}
-       M{cx + 14} {fy - 130} L{cx + 28} {fy - 142} M{cx + 28} {fy - 130} L{cx + 14} {fy - 142}
-       M{cx + 48} {fy - 126} L{cx + 34} {fy - 138}"/>
-  <!-- brow trim -->
-  <path class="ln" d="M{cx - 40} {fy - 24} C{cx - 14} {fy - 31} {cx + 14} {fy - 31} {cx + 40} {fy - 24}"/>
-"""
-    # flower rosettes on the brocade
-    def rosette(x, y, r):
-        petals = "".join(
-            f'<circle cx="{x + r * math.cos(math.radians(a)):.1f}" '
-            f'cy="{y + r * math.sin(math.radians(a)):.1f}" r="{r * 0.62:.1f}" class="ln-thin" fill="none"/>'
-            for a in range(18, 378, 72))
-        return petals + f'<circle cx="{x}" cy="{y}" r="{r * 0.4:.1f}" fill="{GOLD}"/>'
-    rosettes = (rosette(cx - 28, fy - 74, 6.4) + rosette(cx + 20, fy - 102, 5.6) +
-                rosette(cx + 32, fy - 52, 5.2) + rosette(cx - 8, fy - 46, 4.6) + rosette(cx - 47, fy + 8, 4.6) +
-                rosette(cx + 47, fy + 8, 4.6))
-
-    # ---- the face: as few lines as possible
-    face = f"""
-  <path class="skin" d="M{cx - 36} {fy - 24} C{cx - 38} {fy + 10} {cx - 26} {fy + 36} {cx} {fy + 38}
-       C{cx + 26} {fy + 36} {cx + 38} {fy + 10} {cx + 36} {fy - 24}
-       C{cx + 12} {fy - 30} {cx - 12} {fy - 30} {cx - 36} {fy - 24} Z"/>
-  <!-- serene eyes, gentle smile -->
-  <path class="ln-thin" d="M{cx - 22} {fy - 2} Q{cx - 14} {fy + 3} {cx - 6} {fy - 1}"/>
-  <path class="ln-thin" d="M{cx + 6} {fy - 1} Q{cx + 14} {fy + 3} {cx + 22} {fy - 2}"/>
-  <path class="ln-thin" opacity=".6" d="M{cx - 3} {fy + 14} Q{cx} {fy + 17} {cx + 3} {fy + 14}"/>
-  <path class="ln-thin" d="M{cx - 12} {fy + 25} Q{cx} {fy + 32} {cx + 12} {fy + 25}"/>
-"""
-
-    # ---- robes: fur-trimmed brocade cloak over the yellow robe, one hand
-    # raised in mudra
-    body = f"""
-  <path class="skin" d="M{cx - 76} {H - 4} C{cx - 78} {fy + 96} {cx - 60} {fy + 52} {cx - 28} {fy + 40}
-       L{cx + 28} {fy + 40} C{cx + 60} {fy + 52} {cx + 78} {fy + 96} {cx + 76} {H - 4} Z"/>
-  <!-- inner collar, crossed -->
-  <path class="ln" d="M{cx - 26} {fy + 42} L{cx + 2} {fy + 78} M{cx + 26} {fy + 42} L{cx - 8} {fy + 84}"/>
-  <!-- the cloak's brocade edges, fur-trimmed -->
-  <path class="ln-thin" d="M{cx - 44} {H - 4} C{cx - 46} {fy + 104} {cx - 38} {fy + 62} {cx - 20} {fy + 46}"/>
-  <path class="ln-thin" d="M{cx + 44} {H - 4} C{cx + 46} {fy + 104} {cx + 38} {fy + 62} {cx + 20} {fy + 46}"/>
-  <!-- right arm and open palm raised in mudra, apart from the body -->
-  <path class="skin" d="M{cx + 62} {fy + 130} C{cx + 84} {fy + 118} {cx + 96} {fy + 100} {cx + 98} {fy + 78} L{cx + 116} {fy + 80}
-       C{cx + 112} {fy + 110} {cx + 94} {fy + 134} {cx + 68} {fy + 146} Z"/>
-  <path class="skin" d="M{cx + 96} {fy + 80} L{cx + 96} {fy + 46} C{cx + 96} {fy + 42} {cx + 102} {fy + 42} {cx + 102} {fy + 46} L{cx + 102} {fy + 76}
-       L{cx + 104} {fy + 40} C{cx + 104} {fy + 36} {cx + 110} {fy + 36} {cx + 110} {fy + 40} L{cx + 110} {fy + 76}
-       L{cx + 112} {fy + 42} C{cx + 112} {fy + 38} {cx + 118} {fy + 38} {cx + 118} {fy + 42} L{cx + 118} {fy + 78}
-       L{cx + 120} {fy + 50} C{cx + 120} {fy + 46} {cx + 126} {fy + 46} {cx + 126} {fy + 50} L{cx + 124} {fy + 82}
-       C{cx + 122} {fy + 94} {cx + 112} {fy + 100} {cx + 102} {fy + 96} C{cx + 96} {fy + 93} {cx + 94} {fy + 87} {cx + 96} {fy + 80} Z"/>
-  <path class="ln-thin" d="M{cx + 93} {fy + 62} C{cx + 88} {fy + 64} {cx + 86} {fy + 70} {cx + 89} {fy + 75}"/>
-"""
-
-    # ---- the sky answering: clouds gathering, the first rain
-    clouds = "".join(curl(x, y, s, turns=1.5)
-                     for x, y, s in ((66, 64, 15), (98, 52, 11), (128, 66, 9),
-                                     (330, 46, 14), (362, 58, 10), (394, 44, 12),
-                                     (416, 78, 9)))
-    rain = "".join(f'<path class="ln-faint" opacity=".6" d="M{x} {y} l-6 22"/>'
-                   for x, y in ((330, 88, ), (356, 104), (384, 84), (408, 118),
-                                (342, 140), (372, 160), (398, 148), (424, 168)))
-
-    # ---- the spring, its naga restored
-    spring = f"""
-  <ellipse cx="384" cy="384" rx="52" ry="12" class="ln" fill="none"/>
-  <ellipse cx="384" cy="384" rx="30" ry="7" class="ln-faint" fill="none"/>
-  <path class="skin" d="M{376} {384} C{374} {372} {377} {362} {384} {356} C{389} {362} {390} {373} {389} {384} Z"/>
-  <ellipse cx="385" cy="351" rx="6.5" ry="7.5" class="skin" transform="rotate(-20 385 351)"/>
-  <circle cx="383" cy="349" r="1.2" fill="{BRIGHT}"/>
-  <path class="ln-thin" d="{curl(374, 341, 4.4, turns=1.3)}"/>
-  <!-- the blessed medicine given to the spring -->
-  <circle cx="404" cy="376" r="2.2" fill="{BRIGHT}"/>
-  <circle cx="412" cy="381" r="1.7" fill="{BRIGHT}" opacity=".7"/>
-"""
-
-    art = f"""
-{HEAD_DEFS}
-{clouds and f'<path class="ln-thin" d="{clouds}"/>'}
-{rain}
-{crown}
-{rosettes}
-{face}
-{body}
-{spring}
-"""
-    return svg(W, H, art, extra_css=HEAD_CSS, label=(
-        "The Sixteenth Karmapa, in his brocade ceremonial crown, hand raised in "
-        "mudra — the naga of the spring restored beside him, clouds gathering "
-        "and the first rain beginning to fall"))
+# naga-karmapa.svg is traced from the owner's photograph by
+# scripts/trace_karmapa.py — not generated here.
 
 
 if __name__ == "__main__":
     for name, maker in (("naga-mucalinda.svg", mucalinda),
                         ("naga-king.svg", naga_king),
                         ("naga-palace.svg", naga_palace),
-                        ("naga-garuda.svg", naga_garuda),
-                        ("naga-karmapa.svg", karmapa)):
+                        ("naga-garuda.svg", naga_garuda)):
         out = maker()
         (ASSETS / name).write_text(out, encoding="utf-8")
         print(f"  {name}: {len(out) / 1024:.1f} KB")
