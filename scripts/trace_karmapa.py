@@ -21,16 +21,16 @@ from pathlib import Path
 from trace_mudra import boundary_loops, rdp
 
 ROOT = Path(__file__).resolve().parent.parent
-SRC = ROOT / "extra-content" / "karmapa-reference.png"
+SRC = ROOT / "extra-content" / "karmapa-portrait-reference.png"
 OUT = ROOT / "assets" / "naga-karmapa.svg"
 
 GOLD = "#d9b25f"
-SIGMA = 2.0          # base blur radius of the DoG pair (px)
-K = 1.8              # ratio between the two blurs
-TAU = 9.0            # line response threshold
-DILATE = 1           # stroke body, in dilation passes
-EPSILON = 1.5
-MIN_LOOP = 34
+# two DoG scales: fine lines carry the detail, a coarser pass carries the
+# structure. (sigma, ratio, threshold, dilation passes)
+SCALES = [(2.2, 1.7, 8.0, 0),
+          (4.6, 1.7, 10.0, 1)]
+EPSILON = 1.6
+MIN_LOOP = 60
 VIEW_H = 1000
 
 
@@ -84,10 +84,10 @@ def box_blur(grid, w, h, radius):
 
 
 def arch_mask(w, h):
-    cx = w * 0.45
-    r = w * 0.345
-    top_cy = h * 0.34
-    bottom = h * 0.985
+    cx = w * 0.50
+    r = w * 0.42
+    top_cy = h * 0.30
+    bottom = h * 0.98
     def inside(x, y):
         if y > bottom or abs(x - cx) > r:
             return False
@@ -99,38 +99,61 @@ def arch_mask(w, h):
 
 
 def vignette(w, h):
-    cx, cy = w * 0.44, h * 0.44
-    rx, ry = w * 0.30, h * 0.38
+    cx, cy = w * 0.50, h * 0.46
+    rx, ry = w * 0.38, h * 0.41
     def f(x, y):
         d = math.hypot((x - cx) / rx, (y - cy) / ry)
         return 1.0 if d <= 1.0 else max(0.0, 1.0 - (d - 1.0) * 2.4)
     return f
 
 
+def face_boost(w, h):
+    """The face is softly lit and would vanish under a threshold tuned for
+    the high-contrast brocade — inside the face ellipse the threshold is
+    lowered so the features register."""
+    cx, cy = w * 0.50, h * 0.55
+    rx, ry = w * 0.20, h * 0.17
+    def f(x, y):
+        d = math.hypot((x - cx) / rx, (y - cy) / ry)
+        if d <= 1.0:
+            return 0.40
+        if d <= 1.35:
+            return 0.40 + (d - 1.0) / 0.35 * 0.60
+        return 1.0
+    return f
+
+
 def build():
     lum, w, h = load_lum()
-    g1 = box_blur(lum, w, h, SIGMA)
-    g2 = box_blur(lum, w, h, SIGMA * K)
     inside = arch_mask(w, h)
     fall = vignette(w, h)
+    boost = face_boost(w, h)
 
     mask = [bytearray(w) for _ in range(h)]
-    for y in range(h):
-        m = mask[y]
-        r1, r2 = g1[y], g2[y]
-        for x in range(w):
-            # negative DoG = locally darker than surround = a drawn line
-            if (r2[x] - r1[x]) * fall(x, y) > TAU and inside(x, y):
-                m[x] = 1
-
-    for _ in range(DILATE):
-        grown = [bytearray(row) for row in mask]
-        for y in range(1, h - 1):
-            for x in range(1, w - 1):
-                if not mask[y][x] and (mask[y][x - 1] or mask[y][x + 1] or
-                                       mask[y - 1][x] or mask[y + 1][x]):
-                    grown[y][x] = 1
-        mask = grown
+    for sigma, k, tau, dilate in SCALES:
+        g1 = box_blur(lum, w, h, sigma)
+        g2 = box_blur(lum, w, h, sigma * k)
+        level = [bytearray(w) for _ in range(h)]
+        for y in range(h):
+            m = level[y]
+            r1, r2 = g1[y], g2[y]
+            for x in range(w):
+                # negative DoG = locally darker than surround = a drawn line
+                if (r2[x] - r1[x]) * fall(x, y) > tau * boost(x, y) and inside(x, y):
+                    m[x] = 1
+        for _ in range(dilate):
+            grown = [bytearray(row) for row in level]
+            for y in range(1, h - 1):
+                for x in range(1, w - 1):
+                    if not level[y][x] and (level[y][x - 1] or level[y][x + 1] or
+                                            level[y - 1][x] or level[y + 1][x]):
+                        grown[y][x] = 1
+            level = grown
+        for y in range(h):
+            m, lv = mask[y], level[y]
+            for x in range(w):
+                if lv[x]:
+                    m[x] = 1
 
     loops = [l for l in boundary_loops(mask, w, h) if len(l) >= MIN_LOOP]
     s = VIEW_H / h
@@ -141,14 +164,14 @@ def build():
         if len(simp) >= 3:
             parts.append("M" + "L".join(f"{x * s:.1f} {y * s:.1f}" for x, y in simp) + "Z")
 
-    cx, r, top_cy = view_w * 0.45, view_w * 0.345, VIEW_H * 0.34
+    cx, r, top_cy = view_w * 0.50, view_w * 0.42, VIEW_H * 0.30
     frame = (f'<path fill="none" stroke="{GOLD}" stroke-width="2.5" '
-             f'd="M{cx - r:.0f} {VIEW_H * 0.985:.0f} L{cx - r:.0f} {top_cy:.0f} '
+             f'd="M{cx - r:.0f} {VIEW_H * 0.98:.0f} L{cx - r:.0f} {top_cy:.0f} '
              f'A{r:.0f} {top_cy * 0.92:.0f} 0 0 1 {cx + r:.0f} {top_cy:.0f} '
-             f'L{cx + r:.0f} {VIEW_H * 0.985:.0f} Z"/>')
+             f'L{cx + r:.0f} {VIEW_H * 0.98:.0f} Z"/>')
 
     svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {view_w} {VIEW_H}" '
-           f'role="img" aria-label="The Sixteenth Gyalwa Karmapa, smiling, in his '
+           f'role="img" aria-label="The Sixteenth Gyalwa Karmapa in his '
            f'brocade ceremonial crown — a gold line portrait traced from a photograph">\n'
            f'<path fill="{GOLD}" fill-rule="evenodd" stroke="{GOLD}" stroke-width="1.2" '
            f'stroke-linejoin="round" d="{" ".join(parts)}"/>\n{frame}\n</svg>\n')
