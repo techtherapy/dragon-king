@@ -34,6 +34,7 @@ methodology, recipes and the per-language glossaries:
 | `assets/mudra.svg` | `scripts/trace_mudra.py` (traces the owner's reference) |
 | `assets/dharmaraksa.svg` | `scripts/trace_dharmaraksa.py` |
 | `assets/vase-preparation.svg`, `casting-the-vase.svg`, `deco-*.svg` | `scripts/generate_practice_art.py` |
+| `assets/og-image.jpg`, `og-image-es.jpg`, `og-image-fr.jpg` | `scripts/generate_og_images.py` |
 | the SEO block in every page, `sitemap.xml`, `robots.txt` | `scripts/add_seo.py` |
 
 Edits to those files are destroyed on the next run. Change the generator.
