@@ -9,6 +9,11 @@
 /assets/*
   Cache-Control: public, max-age=604800
 
+# The subset font's filename carries a content stamp, so a rebuild produces a
+# new name and this copy can never go stale — cache it for a year.
+/assets/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+
 # The stylesheets and scripts have unversioned filenames, so a long max-age
 # would strand readers on the previous deploy's CSS. An hour fresh, then served
 # stale while a new copy is fetched in the background — the caching benefit

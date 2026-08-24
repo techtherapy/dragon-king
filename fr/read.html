@@ -115,12 +115,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-<!-- The Chinese face is loaded without blocking render: its stylesheet is
-     259KB of @font-face rules for 230 unicode subsets, which cost ~2.6s of
-     an ~11s first paint on a throttled phone. Until it arrives the 漢字
-     fall back to Kaiti/STKaiti, the same brush style. -->
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&display=swap" rel="stylesheet"></noscript>
+<!-- The Chinese face, self-hosted and cut to exactly the characters this
+     page shows. Google splits this font into 230 files by character code
+     rather than by use, so the reader's 1,273 characters pulled ~3.6MB across
+     72 of them; the subset is one file of about 400KB. Rebuild it with
+     scripts/build_font_subset.py — the build refuses to publish if a page
+     gains a character the subset does not carry. -->
+<style>@font-face{font-family:"LXGW WenKai TC";font-style:normal;font-weight:400;font-display:swap;src:url(/assets/wenkai-reader.9b2f28f0.woff2) format("woff2")}</style>
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/reader.css">
 </head>

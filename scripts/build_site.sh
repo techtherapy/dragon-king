@@ -26,6 +26,10 @@ python3 scripts/add_seo.py
 # runs after add_seo.py so the character set it sees is the final one
 python3 scripts/subset_font_links.py > /dev/null
 
+# the reader's Chinese face is a self-hosted subset; refuse to publish if the
+# page has gained a character it does not carry
+python3 scripts/check_font_subset.py
+
 rm -rf "$OUT"
 mkdir -p "$OUT"
 

@@ -35,6 +35,8 @@ methodology, recipes and the per-language glossaries:
 | `assets/dharmaraksa.svg` | `scripts/trace_dharmaraksa.py` |
 | `assets/vase-preparation.svg`, `casting-the-vase.svg`, `deco-*.svg` | `scripts/generate_practice_art.py` |
 | `assets/og-image.jpg`, `og-image-es.jpg`, `og-image-fr.jpg` | `scripts/generate_og_images.py` |
+| `assets/wenkai-reader.*.woff2` + `scripts/wenkai-subset.json` | `scripts/build_font_subset.py` |
+| the Chinese font link in every page's `<head>` | `scripts/subset_font_links.py` |
 | the SEO block in every page, `sitemap.xml`, `robots.txt` | `scripts/add_seo.py` |
 
 Edits to those files are destroyed on the next run. Change the generator.
@@ -53,6 +55,17 @@ npx wrangler deploy             # Cloudflare Workers
 `dist/` is the only thing published; the build fails if `scripts/`,
 `translations/`, `extra-content/`, `docs/` or the source sutra HTML ever
 land in it.
+
+The build also refuses to publish if the reader has gained a Chinese character
+the self-hosted subset font does not carry. Rebuild it — occasionally, only
+when new Chinese text is added — with:
+
+```bash
+python3 scripts/build_font_subset.py
+```
+
+It needs no global installs: fonttools and the 15 MB source font live in
+`~/.cache/dragon-king-fonts/`, and only the ~400 KB subset enters the repo.
 
 Cloudflare's git-triggered builds have been unreliable — deploys in this
 repo go out with `npx wrangler deploy` after pushing. Expect the edge to
