@@ -22,6 +22,10 @@ python3 scripts/check_translation_parity.py
 # refresh canonical/OG/JSON-LD tags, sitemap.xml and robots.txt (all languages)
 python3 scripts/add_seo.py
 
+# ask Google Fonts for only the Chinese characters each page actually shows —
+# runs after add_seo.py so the character set it sees is the final one
+python3 scripts/subset_font_links.py > /dev/null
+
 rm -rf "$OUT"
 mkdir -p "$OUT"
 
