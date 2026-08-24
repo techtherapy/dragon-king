@@ -5,8 +5,17 @@
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: SAMEORIGIN
 
-# Artwork and fonts are regenerated rarely; a week of caching is safe.
-/assets/*
+# Artwork is regenerated rarely; a week of caching is safe. The rules below
+# must not overlap: Cloudflare CONCATENATES matching rules rather than letting a
+# later one win, so /assets/* plus /assets/*.woff2 produced a single malformed
+# header carrying two max-age values. Each extension is listed once instead.
+/assets/*.svg
+  Cache-Control: public, max-age=604800
+/assets/*.jpg
+  Cache-Control: public, max-age=604800
+/assets/*.png
+  Cache-Control: public, max-age=604800
+/assets/*.txt
   Cache-Control: public, max-age=604800
 
 # The subset font's filename carries a content stamp, so a rebuild produces a
