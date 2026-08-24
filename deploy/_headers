@@ -8,3 +8,12 @@
 # Artwork and fonts are regenerated rarely; a week of caching is safe.
 /assets/*
   Cache-Control: public, max-age=604800
+
+# The stylesheets and scripts have unversioned filenames, so a long max-age
+# would strand readers on the previous deploy's CSS. An hour fresh, then served
+# stale while a new copy is fetched in the background — the caching benefit
+# without the staleness. (A content hash in the filename would allow a year.)
+/css/*
+  Cache-Control: public, max-age=3600, stale-while-revalidate=604800
+/js/*
+  Cache-Control: public, max-age=3600, stale-while-revalidate=604800

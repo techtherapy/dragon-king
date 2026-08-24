@@ -414,7 +414,12 @@ def render_page(ui, header, footer, toc, part1_html, part2_html):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&display=swap" rel="stylesheet">
+<!-- The Chinese face is loaded without blocking render: its stylesheet is
+     259KB of @font-face rules for 230 unicode subsets, which cost ~2.6s of
+     an ~11s first paint on a throttled phone. Until it arrives the 漢字
+     fall back to Kaiti/STKaiti, the same brush style. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="{ui['root'] and "/css/" or "css/"}style.css">
 <style>
   .article-sub {{
