@@ -131,6 +131,8 @@ Keep these stable — the checks enforce *presence*, not *wording*.
   *Buda Viviente Lian Sheng* as a bare nav label.
 - *el Honrado por el Mundo*, *el Rey Dragón del Mar*, *el Jarrón del Tesoro*,
   *el Gran Maestro*, *budeidad*.
+- Feminine **la dharani**, *las dharanis* — as in French, and for the same
+  reason: Sanskrit *dhāraṇī* is feminine.
 - Mantras: `Om Guru Lian Sheng Sidi Jom`; the Dragon King mantra ends
   *wad-lli-la, mi*.
 
@@ -170,6 +172,9 @@ Keep these stable — the checks enforce *presence*, not *wording*.
   and both are second-hand: they were made from the English, which is itself a
   translation of the Chinese. Neither has had a native-speaker review. Treat
   them as good working copy rather than canonical liturgy until they do.
-- The Spanish layer renders *dharani* inconsistently (37 feminine, 20
-  masculine). The French was normalised to feminine throughout; the Spanish has
-  not been, and would need the same pass.
+- *dharani* is feminine in both translations: *la dharani* / *las dharanis* in
+  Spanish, *la dharani* / *les dharanis* in French. The Spanish was inconsistent
+  until it was normalised to match the French, the awkward cases settled by
+  reading the French rendering of the same verse — which the verse alignment
+  makes trivial. Any new language should pick a gender before translating,
+  not after.
