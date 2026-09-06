@@ -20,7 +20,7 @@ kinds, and only one of them is edited by hand in three places.
 | Kind | Pages | Where to edit | How it stays in step |
 |---|---|---|---|
 | **Generated** | `read.html`, `treasure-vase-yoga.html` | the generator in `scripts/`, never the HTML | one template emits every language — structural drift is impossible |
-| **Hand-authored** | `index`, `about`, `refuge`, `contact`, `his-holiness-…`, `treasure-vase-wishes`, `nagas-and-dragon-kings` | the English file **and** its twin in `es/` **and** in `fr/` | `check_translation_parity.py` fails the build if you touch one and not the others |
+| **Hand-authored** | `index`, `about`, `refuge`, `contact`, `his-holiness-…`, `treasure-vase-wishes`, `nagas-and-dragon-kings`, `dragon-deity-stone` | the English file **and** its twin in `es/` **and** in `fr/` | `check_translation_parity.py` fails the build if you touch one and not the others |
 | **Shared** | `css/`, `js/`, `assets/` | once | every language loads the same files |
 
 If you edit `treasure-vase-yoga.html` directly, your change is destroyed the
@@ -73,7 +73,7 @@ heading sequence.
 `paragraphs()` (never the recordings in `extra-content/`, which stay as
 transcribed), then rerun the generator. Every language updates together.
 
-**Change the shared chrome** (nav, footer) — it lives in four places: the seven
+**Change the shared chrome** (nav, footer) — it lives in four places: the eight
 hand-authored English pages, their `es/` and `fr/` twins, `build_reader.py`'s
 `CHROME_HEAD`/`CHROME_FOOT` plus its `CHROME_TR` translation table, and
 `build_practice.py`, which lifts its chrome from `refuge.html` in each language

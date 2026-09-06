@@ -7,3 +7,6 @@ dist/
 # python
 __pycache__/
 *.pyc
+
+# owner-supplied source material, never published or committed
+content - do not commit/

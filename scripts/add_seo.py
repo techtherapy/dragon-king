@@ -50,6 +50,7 @@ PAGES = {
     "treasure-vase-yoga.html":   ("article", "0.8", "yearly", "practice"),
     "treasure-vase-wishes.html": ("article", "0.7", "yearly", "wishes"),
     "nagas-and-dragon-kings.html": ("article", "0.7", "yearly", "nagas"),
+    "dragon-deity-stone.html": ("article", "0.7", "yearly", "stone"),
     "his-holiness-living-buddha-lian-sheng.html": ("profile", "0.7", "yearly", "person"),
     "refuge.html":       ("article", "0.7", "yearly",  "page"),
     "contact.html":      ("website", "0.4", "yearly",  "page"),
@@ -61,17 +62,20 @@ CRUMBS = {
            "practice": "Practice", "wishes": "Wishes in the Treasure Vase",
            "practice_h": "The Dragon King Treasure Vase Yoga",
            "wishes_h": "Wishes in the Dragon King Treasure Vase Practice",
-           "nagas": "Nagas & Dragon Kings"},
+           "nagas": "Nagas & Dragon Kings",
+           "stone": "The Dragon Deity Stone"},
     "es": {"home": "Inicio", "read": "Leer el Sutra", "about": "Acerca del Sutra",
            "practice": "Práctica", "wishes": "Deseos en el Jarrón del Tesoro",
            "practice_h": "El Yoga del Jarrón del Tesoro del Rey Dragón",
            "wishes_h": "Deseos en la práctica del Jarrón del Tesoro del Rey Dragón",
-           "nagas": "Nagas y Reyes Dragones"},
+           "nagas": "Nagas y Reyes Dragones",
+           "stone": "La Piedra de la Deidad Dragón"},
     "fr": {"home": "Accueil", "read": "Lire le Soutra", "about": "À propos du Soutra",
            "practice": "Pratique", "wishes": "Les souhaits dans le Vase du Trésor",
            "practice_h": "Le Yoga du Vase du Trésor du Roi Dragon",
            "wishes_h": "Les souhaits dans la pratique du Vase du Trésor du Roi Dragon",
-           "nagas": "Nagas et Rois Dragons"},
+           "nagas": "Nagas et Rois Dragons",
+           "stone": "La Pierre de la Divinité Dragon"},
 }
 
 
@@ -177,9 +181,9 @@ def jsonld_for(key, page, url, title, desc, lang="en"):
                          "alternateName": "虛空中的孤鳥", "bookEdition": "Book 146",
                          "author": person_guru()}
         return [a, breadcrumb((crumb["home"], home), (crumb["wishes"], url))]
-    if key == "nagas":
+    if key in ("nagas", "stone"):
         a = article(url, title, desc, author_is_guru=False, lang=lang)
-        return [a, breadcrumb((crumb["home"], home), (crumb["nagas"], url))]
+        return [a, breadcrumb((crumb["home"], home), (crumb[key], url))]
 
     if key == "person":
         return [person_guru(),

@@ -1,37 +1,42 @@
 {
  "about.html": {
-  "en": "ff7ee78b35c888ff",
-  "es": "4c8c9023e596db85",
-  "fr": "1892866c61b84c85"
+  "en": "29160aba1bb0522f",
+  "es": "6559007ecd2d4c3f",
+  "fr": "11b1628b4a705b57"
  },
  "contact.html": {
-  "en": "d403e813e951c902",
-  "es": "e43bd9f8b5b0028e",
-  "fr": "1e6755442d647f02"
+  "en": "77dd78b4095b9dfe",
+  "es": "2898d5eea2129632",
+  "fr": "32e7e3b23021db04"
+ },
+ "dragon-deity-stone.html": {
+  "en": "aec98409c1f938e2",
+  "es": "a92b8404b6c63b2d",
+  "fr": "6cffde2004c1676e"
  },
  "his-holiness-living-buddha-lian-sheng.html": {
-  "en": "56c4936456a40e3f",
-  "es": "94deb2cd7c03bf4d",
-  "fr": "34894c0efb6c4857"
+  "en": "28bf18df9591e2db",
+  "es": "adca77e35abb99e6",
+  "fr": "94674b894ebbb330"
  },
  "index.html": {
-  "en": "a2d9d19d98b65534",
-  "es": "25f1da1f54ac005f",
-  "fr": "6e39eada3c973aaf"
+  "en": "d5b59f06654f04d5",
+  "es": "342b121de1ee40b0",
+  "fr": "a484137cdc85d8eb"
  },
  "nagas-and-dragon-kings.html": {
-  "en": "b1a0bf51753a9ea5",
-  "es": "5f4d448c7b9c2059",
-  "fr": "6008c27cd4b1f1f4"
+  "en": "5c13a422e580fa2f",
+  "es": "d7dea7ac5e0c32e3",
+  "fr": "ec2e4f8caf852dcc"
  },
  "refuge.html": {
-  "en": "2f6a18263b5bfc5a",
-  "es": "0389893e0d243683",
-  "fr": "b0237135779a1e01"
+  "en": "d0ed95b0642976f3",
+  "es": "a027e599055644d5",
+  "fr": "4a63d387cd4bcf1b"
  },
  "treasure-vase-wishes.html": {
-  "en": "4bf70456db79335b",
-  "es": "253ea41e9fd0b8ca",
-  "fr": "d525c92e3b6d5606"
+  "en": "261fb1cab2834c38",
+  "es": "b7c5beb59b0bc939",
+  "fr": "b510dbc70ca32376"
  }
 }

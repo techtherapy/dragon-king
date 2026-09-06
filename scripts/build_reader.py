@@ -258,6 +258,7 @@ CHROME_FOOT = """
       <ul>
         <li><a href="about.html">About the Sutra</a></li>
         <li><a href="nagas-and-dragon-kings.html">Nagas &amp; Dragon Kings</a></li>
+        <li><a href="dragon-deity-stone.html">The Dragon Deity Stone</a></li>
         <li><a href="read.html">Read the Sutra</a></li>
         <li><a href="about.html#reflection">Study Reflection</a></li>
         <li><a href="read.html?print">Print the Sutra</a></li>
@@ -444,6 +445,9 @@ CHROME_TR = [
     ('<a href="nagas-and-dragon-kings.html">Nagas &amp; Dragon Kings</a>',
      {"es": '<a href="/es/nagas-and-dragon-kings.html">Nagas y Reyes Dragones</a>',
       "fr": '<a href="/fr/nagas-and-dragon-kings.html">Nagas et Rois Dragons</a>'}),
+    ('<a href="dragon-deity-stone.html">The Dragon Deity Stone</a>',
+     {"es": '<a href="/es/dragon-deity-stone.html">La Piedra de la Deidad Dragón</a>',
+      "fr": '<a href="/fr/dragon-deity-stone.html">La Pierre de la Divinité Dragon</a>'}),
     ('<a href="read.html">Read the Sutra</a>',
      {"es": '<a href="/es/read.html">Leer el Sutra</a>',
       "fr": '<a href="/fr/read.html">Lire le Soutra</a>'}),
