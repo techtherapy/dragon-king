@@ -133,6 +133,29 @@ Keep these stable — the checks enforce *presence*, not *wording*.
   *el Gran Maestro*, *budeidad*.
 - Feminine **la dharani**, *las dharanis* — as in French, and for the same
   reason: Sanskrit *dhāraṇī* is feminine.
+- Settled sutra terminology: *Camino* (Way), *camino del buda* (buddha path),
+  *impureza* (defilement), *mancha* (stain), *defecto* (flaw), *aflicción*
+  (affliction), *efluvios* (outflows), *visión recta* (right view),
+  *recta absorción* (right absorption), *ausencia de deseos* (wishlessness),
+  *concentración unipuntual* (single-mindedness), *diez acciones virtuosas*
+  (ten wholesome deeds), *campos sensoriales* (sense-fields), *paciencia
+  flexible* (pliant forbearance), *no surgimiento* (non-arising), *bondad
+  amorosa* (loving-kindness), *puerta de la dharani* (dharani gate),
+  *retribución* (recompense), *un solo sabor* (single savor), *ojo de deva* and
+  *oído de deva* (deva eye and deva ear). The three speech precepts are *habla
+  divisiva*, *habla áspera* and *habla frívola*.
+- Settled sutra names: *Kalpa Digno* (Worthy Kalpa), *Gozo Maravilloso*
+  (Wondrous Joy), *Luz Inmaculada* (Undefiled Light), *Libre de Impureza* (Free
+  of Defilement), *el Firme* (the Steadfast One), *Liberación Insuperable*
+  (Surpassing Deliverance), distinct from *Liberación Suprema* (Supreme
+  Deliverance), and *Flor Suprema* (Foremost Flower).
+- Keep the two cosmological expressions distinct and singular:
+  *mundo de tres mil mundos* (three-thousandfold world) and *mundo de tres mil
+  grandes miles* (three-thousandfold great-thousand world).
+- Chapter labels use Spanish sentence case (*Capítulo uno: La práctica*).
+  Volume colophons use *primer*, *segundo*, *tercer* and *cuarto volumen*.
+  When a quotation continues in a new verse without closing, begin the
+  continuation with `»`, not a new `«`.
 - Mantras: `Om Guru Lian Sheng Sidi Jom`; the Dragon King mantra ends
   *wad-lli-la, mi*.
 
