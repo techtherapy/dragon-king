@@ -33,23 +33,6 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  /* reveal on scroll */
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var revealEls = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window && !reduced) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-    revealEls.forEach(function (el) { io.observe(el); });
-  } else {
-    revealEls.forEach(function (el) { el.classList.add('visible'); });
-  }
-
   /* hero parallax layers: [data-parallax="rate"] */
   /* Scroll parallax writes a transform to five layers every frame. That is
      cheap on a desktop GPU and expensive on an old mobile one, for an effect

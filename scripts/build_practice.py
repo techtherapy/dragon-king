@@ -441,15 +441,21 @@ def render_page(ui, header, footer, toc, part1_html, part2_html):
   .article::after {{ content: ""; display: block; clear: both; }}
   .article p {{ margin: 0 0 1.25em; color: var(--cream-dim); }}
   .notice {{
-    border: 1px solid rgba(217, 92, 66, 0.45);
-    background: linear-gradient(160deg, rgba(184, 69, 47, 0.12), rgba(13, 25, 48, 0.4));
-    padding: 1.8rem 2rem;
+    border-left: 2px solid var(--vermillion);
+    padding: 0.3rem 0 0.3rem 1.6rem;
     display: flex;
     gap: 1.4rem;
     align-items: flex-start;
     margin: 2.4rem 0;
   }}
-  .notice .seal {{ flex: none; }}
+  .notice .seal {{
+    flex: none;
+    width: auto; height: auto;
+    background: none; box-shadow: none;
+    color: var(--vermillion-bright);
+    font-size: 1.6rem; line-height: 1;
+    padding-top: 0.15rem;
+  }}
   .notice h3 {{ margin-bottom: 0.4rem; font-size: 1.25rem; }}
   .notice p {{ margin: 0; color: var(--cream-dim); }}
   /* Illustrations anchored to the passage they explain: inline in the column
@@ -500,35 +506,31 @@ def render_page(ui, header, footer, toc, part1_html, part2_html):
   .vision-figure img {{ width: 100%; filter: drop-shadow(0 18px 50px rgba(3, 7, 14, 0.7)); }}
   .vision-figure figcaption {{ margin-top: 1.1rem; color: var(--muted); font-style: italic; font-size: 1.12rem; }}
   .glance {{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: 1.1rem;
     margin: 2.4rem 0 0;
+    max-width: var(--measure);
+    border-top: 1px solid var(--gold-ghost);
   }}
   .glance .g {{
-    border: 1px solid var(--gold-ghost);
-    background: rgba(15, 31, 56, 0.4);
-    padding: 1.3rem 1.2rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    gap: 0.2rem 1.6rem;
+    align-items: baseline;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--gold-ghost);
   }}
-  /* The cards are equal height but hold one to three lines each. Keep the
-     gold labels aligned in a row across the top and centre the value in
-     whatever space is left, so short cards do not sit with a gap beneath. */
-  .glance .g > .k + .v {{ margin-top: auto; }}
-  .glance .g > .v:last-child {{ margin-bottom: auto; }}
   .glance .g .k {{
     font-family: var(--font-display);
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    font-size: 0.72rem;
+    font-size: 1.05rem;
+    letter-spacing: 0.04em;
     color: var(--gold);
-    display: block;
-    margin-bottom: 0.5rem;
   }}
   .glance .g .v {{ color: var(--cream); font-size: 1.05rem; }}
-  .glance .g .v.tc {{ font-size: 1.6rem; color: var(--gold-bright); }}
+  .glance .g .v.tc {{ font-size: 1.5rem; color: var(--gold-bright); line-height: 1; }}
+  .glance .g > .v ~ .v {{ grid-column: 2; }}
+  @media (max-width: 560px) {{
+    .glance .g {{ grid-template-columns: 1fr; gap: 0.25rem; }}
+    .glance .g > .v ~ .v {{ grid-column: 1; }}
+  }}
   /* section list at the top of the teaching */
   .page-toc {{
     margin: 1.1rem 0 0;
@@ -603,7 +605,7 @@ def render_page(ui, header, footer, toc, part1_html, part2_html):
     </figure>
 
     <div class="glance reveal">
-      <div class="g"><span class="k">{ui['g_mudra']}</span><span class="v tc" lang="zh-Hant">井</span><span class="v" style="display:block;margin-top:.3rem;font-size:.9rem;color:var(--muted)">{ui['g_mudra_v']}</span></div>
+      <div class="g"><span class="k">{ui['g_mudra']}</span><span class="v tc" lang="zh-Hant">井</span><span class="v" style="font-size:.92rem;color:var(--muted)">{ui['g_mudra_v']}</span></div>
       <div class="g"><span class="k">{ui['g_mantra']}</span><span class="v" style="font-style:italic">{ui['g_mantra_v']}</span></div>
       <div class="g"><span class="k">{ui['g_practice']}</span><span class="v">{ui['g_practice_v']}</span></div>
       <div class="g"><span class="k">{ui['g_complete']}</span><span class="v">{ui['g_complete_v']}</span></div>
