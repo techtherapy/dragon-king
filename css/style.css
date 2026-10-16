@@ -508,9 +508,11 @@ body::after {
 @media (max-width: 900px) { .ruled-list.two-up { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .ruled-list > li { grid-template-columns: 2.6rem 1fr; gap: 0.2rem 1rem; } }
 
-/* table of contents set by volume, the chapters running on in a line */
+/* table of contents set by volume, the chapters running on in a line.
+   Scoped to .toc-volumes: the reader's sidebar has its own .toc-vol (the
+   volume headings in css/reader.css), and these rules must not reach it. */
 .toc-volumes { margin-top: 2.6rem; border-top: 1px solid var(--gold-dim); }
-.toc-vol {
+.toc-volumes .toc-vol {
   display: grid;
   grid-template-columns: 4.5rem 1fr;
   gap: 1.4rem;
@@ -518,7 +520,7 @@ body::after {
   border-bottom: 1px solid var(--gold-ghost);
   align-items: start;
 }
-.toc-vol .vol {
+.toc-volumes .toc-vol .vol {
   font-family: var(--font-tc);
   color: var(--gold);
   font-size: 1.2rem;
@@ -528,14 +530,14 @@ body::after {
   justify-self: center;
   padding-top: 0.2rem;
 }
-.toc-vol ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.9rem 2.4rem; }
-.toc-vol a { display: block; color: var(--cream-dim); }
-.toc-vol .ch-zh { display: block; font-family: var(--font-tc); color: var(--gold-bright); font-size: 1.08rem; letter-spacing: 0.1em; }
-.toc-vol .ch-en { display: block; font-size: 0.88rem; color: var(--muted); margin-top: 2px; }
-.toc-vol a:hover .ch-zh { color: var(--gold); }
+.toc-volumes .toc-vol ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.9rem 2.4rem; }
+.toc-volumes .toc-vol a { display: block; color: var(--cream-dim); }
+.toc-volumes .toc-vol .ch-zh { display: block; font-family: var(--font-tc); color: var(--gold-bright); font-size: 1.08rem; letter-spacing: 0.1em; }
+.toc-volumes .toc-vol .ch-en { display: block; font-size: 0.88rem; color: var(--muted); margin-top: 2px; }
+.toc-volumes .toc-vol a:hover .ch-zh { color: var(--gold); }
 @media (max-width: 560px) {
-  .toc-vol { grid-template-columns: 3rem 1fr; gap: 1rem; }
-  .toc-vol ol { gap: 0.8rem 1.6rem; }
+  .toc-volumes .toc-vol { grid-template-columns: 3rem 1fr; gap: 1rem; }
+  .toc-volumes .toc-vol ol { gap: 0.8rem 1.6rem; }
 }
 
 /* quote band */
