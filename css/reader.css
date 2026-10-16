@@ -134,9 +134,103 @@
 /* ---------- the sutra text ---------- */
 .reader-main { min-width: 0; }
 .sutra {
+  --sutra-top: clamp(2rem, 5vw, 4rem);
+  /* satin: a bright fold down the middle, darker at the selvedges, with a
+     faint weave across — the ribbon and the tail it leaves by a verse */
+  --silk:
+    repeating-linear-gradient(180deg, rgba(255, 236, 220, 0.07) 0 1px, transparent 1px 3px),
+    linear-gradient(90deg, #7a2819 0%, var(--vermillion) 26%, #e4806a 50%, var(--vermillion) 72%, #84301f 100%);
+  --swallowtail: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%);
   max-width: 860px;
   margin: 0 auto;
-  padding: clamp(2rem, 5vw, 4rem) clamp(1.2rem, 4vw, 3rem) 6rem;
+  padding: var(--sutra-top) clamp(1.2rem, 4vw, 3rem) 6rem;
+}
+
+/* ---------- the ribbon: a returning reader's place ----------
+   Like the silk marker in a bound sutra, it hangs from the toolbar's edge
+   (the article's padding is pulled back so it starts flush) and leads to the
+   verse the reader last had at the top of the screen. reader.js unhides it. */
+.ribbon {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  width: fit-content;
+  margin: calc(-1 * var(--sutra-top)) 0 clamp(1.4rem, 3vw, 2.2rem);
+  color: var(--cream-dim);
+}
+.ribbon[hidden] { display: none; }
+.ribbon-silk {
+  flex: none;
+  width: 16px;
+  height: 6.4rem;
+  background: var(--silk);
+  clip-path: var(--swallowtail);
+  transform-origin: top;
+  transition: transform .35s cubic-bezier(.16, 1, .3, 1);
+}
+.ribbon-label {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1.15rem;
+}
+.ribbon-cta {
+  font-family: var(--font-display);
+  font-size: 0.74rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.ribbon-cta [lang="zh-Hant"] { font-family: var(--font-tc); letter-spacing: 0.2em; font-size: 0.86rem; }
+.ribbon-zh {
+  font-family: var(--font-tc);
+  font-size: clamp(1.15rem, 1.05rem + 0.4vw, 1.4rem);
+  letter-spacing: 0.12em;
+  color: var(--gold-bright);
+  margin-top: 0.45rem;
+  line-height: 1.4;
+}
+.ribbon-name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.15rem);
+  color: var(--cream-dim);
+  transition: color .25s ease;
+}
+.ribbon:hover .ribbon-silk, .ribbon:focus-visible .ribbon-silk { transform: scaleY(1.07); }
+.ribbon:hover .ribbon-name, .ribbon:focus-visible .ribbon-name { color: var(--cream); }
+.ribbon:focus-visible { outline: 1px solid var(--gold); outline-offset: 6px; }
+.ribbon:not([hidden]) .ribbon-silk { animation: silk-unfurl .9s .2s cubic-bezier(.16, 1, .3, 1) both; }
+.ribbon:not([hidden]) .ribbon-label { animation: ribbon-label .6s .55s cubic-bezier(.16, 1, .3, 1) both; }
+@keyframes silk-unfurl { from { clip-path: polygon(0 0, 100% 0, 100% 0, 50% 0, 0 0); } }
+@keyframes ribbon-label { from { opacity: 0; transform: translateX(-8px); } }
+
+/* the verse the ribbon kept: a short tail of the same silk lies in the
+   margin beside it, and the line warms, then both settle back */
+.prow.ribbon-here {
+  position: relative;
+  scroll-margin-top: calc(var(--header-h) + 120px);
+}
+.prow.ribbon-here:focus { outline: none; }
+.prow.ribbon-here.is-found::before {
+  content: "";
+  position: absolute;
+  left: max(-2rem, -4.2vw);
+  top: 0.2em;
+  width: 12px;
+  height: 4.2rem;
+  background: var(--silk);
+  clip-path: var(--swallowtail);
+  animation: ribbon-laid 6s cubic-bezier(.16, 1, .3, 1) both;
+}
+.prow.ribbon-here.is-found > p { animation: verse-found 3.6s ease-out both; }
+@keyframes ribbon-laid {
+  0% { clip-path: polygon(0 0, 100% 0, 100% 0, 50% 0, 0 0); }
+  12%, 70% { clip-path: var(--swallowtail); opacity: 1; }
+  100% { clip-path: var(--swallowtail); opacity: 0; }
+}
+@keyframes verse-found {
+  from { text-shadow: 0 0 22px rgba(244, 220, 150, 0.6); }
+  to   { text-shadow: 0 0 22px rgba(244, 220, 150, 0); }
 }
 .sutra-title {
   text-align: center;
@@ -246,6 +340,59 @@ body.hide-en .reader-toc .t-en:not(.espanol):not(.francais) { display: none; }
 body.hide-es .espanol { display: none !important; }
 body.hide-fr .francais { display: none !important; }
 
+/* ---------- the close: the Dragon King's garland of pearls ----------
+   Visible as drawn by default. reader.js holds it back (.is-waiting) only
+   where it can watch for the closing to arrive, then rains the pearls onto
+   the thread once (.is-offered). */
+.sutra-end {
+  margin: 4rem 0 0;
+  text-align: center;
+}
+.garland {
+  display: block;
+  width: min(100%, 520px);
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
+}
+.garland-caption { margin: 1.2rem 0 0; }
+.garland-caption .tc {
+  display: block;
+  color: var(--gold);
+  font-size: clamp(1.1rem, 1rem + 0.4vw, 1.4rem);
+  letter-spacing: 0.4em;
+  padding-left: 0.4em; /* the tracking trails the last character; recentre */
+}
+.garland-caption .cap {
+  display: block;
+  margin-top: 0.4rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.2rem);
+  color: var(--cream-dim);
+}
+.sutra-end.is-waiting .thread,
+.sutra-end.is-waiting .knot,
+.sutra-end.is-waiting .pendant,
+.sutra-end.is-waiting .pearl,
+.sutra-end.is-waiting .garland-caption { opacity: 0; }
+.sutra-end.is-offered .thread,
+.sutra-end.is-offered .knot { animation: garland-fade 1s cubic-bezier(.16, 1, .3, 1) both; }
+.sutra-end.is-offered .pearl {
+  animation: pearl-fall 1.2s var(--d) cubic-bezier(.2, .75, .3, 1) both;
+}
+.sutra-end.is-offered .pendant { animation: garland-fade 1.2s 1.75s ease-out both; }
+.sutra-end.is-offered .garland-caption { animation: garland-fade 1.4s 2.1s ease-out both; }
+@keyframes pearl-fall {
+  from { transform: translateY(var(--y)); opacity: 0; }
+  35%  { opacity: 1; }
+  to   { transform: none; opacity: 1; }
+}
+@keyframes garland-fade { from { opacity: 0; } }
+@media (min-width: 981px) {
+  .garland { filter: drop-shadow(0 0 14px rgba(244, 220, 150, 0.22)); }
+}
+
 /* back-to-top pearl */
 .to-top {
   position: fixed;
@@ -316,7 +463,10 @@ body.hide-fr .francais { display: none !important; }
   }
   .chip .dot { width: 6px; height: 6px; margin-right: 5px; }
   .tool-btn .btn-label { display: none; }
-  .sutra { padding-top: 1.5rem; }
+  .sutra { --sutra-top: 1.5rem; }
+  .ribbon-silk { width: 14px; height: 5.6rem; }
+  .ribbon { gap: 0.8rem; }
+  .ribbon-label { padding-top: 0.9rem; }
   .prow .hanzi { font-size: 1.32rem; }
   .seclabel { margin: 3rem 0 2rem; }
 }
@@ -325,7 +475,8 @@ body.hide-fr .francais { display: none !important; }
 @media print {
   body { background: #fff; color: #000; font-size: 11pt; }
   body::before, body::after { display: none; }
-  .site-header, .reader-tools, .reader-toc, .to-top, .site-footer, .progress-track, .toc-scrim { display: none !important; }
+  .site-header, .reader-tools, .reader-toc, .to-top, .site-footer, .progress-track, .toc-scrim,
+  .ribbon, .sutra-end { display: none !important; }
   .reader-shell { display: block; padding: 0; }
   .sutra { max-width: none; padding: 0; }
   .sutra-title .t1, .seclabel .s1, .prow .hanzi { color: #000; text-shadow: none; }

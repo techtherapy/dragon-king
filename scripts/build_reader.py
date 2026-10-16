@@ -7,7 +7,10 @@ trilingual text inside the site's reader chrome.
 
 Run from the repo root:  python3 scripts/build_reader.py
 """
+import bisect
 import json
+import math
+import random
 import re
 from pathlib import Path
 
@@ -417,6 +420,13 @@ CHROME_TR = [
     ('<span class="layer-label">Layers</span>',
      {"es": '<span class="layer-label">Capas</span>',
       "fr": '<span class="layer-label">Couches</span>'}),
+    ("</span> · Continue reading</span>",
+     {"es": "</span> · Seguir leyendo</span>",
+      "fr": "</span> · Reprendre la lecture</span>"}),
+    # the caption borrows each translation's own words for the closing verse
+    ('<span class="cap">Pearl garlands, in offering to this sutra</span>',
+     {"es": '<span class="cap">Guirnaldas de perlas, en ofrenda a este sutra</span>',
+      "fr": '<span class="cap">Guirlandes de perles, en offrande à ce soutra</span>'}),
     # Each reader opens with its own language lit. Without this the chips are
     # painted from the English defaults and flicker when reader.js corrects
     # them, which is the one thing on the page a reader is watching.
@@ -523,6 +533,81 @@ def short_en(label_en):
     return label_en.split(":", 1)[-1].strip() if ":" in label_en else label_en
 
 
+def pearl_garland():
+    """The close of the sutra: 爾時海龍王雨大珠瓔供養此經 — the Sea Dragon King
+    rains down pearl garlands in offering. One garland of pearls on a gold
+    thread, hung from two knots, with a drop below the great pearl at its
+    centre. Pearls are spaced by distance along the thread (not by curve
+    parameter, which would bunch them at the ends), and each carries the height
+    it falls from and when, so reader.js can rain them into place."""
+    a, c, b = (28.0, 24.0), (280.0, 132.0), (532.0, 24.0)   # quadratic: knots + control
+
+    def q(t):
+        u = 1 - t
+        return (u * u * a[0] + 2 * u * t * c[0] + t * t * b[0],
+                u * u * a[1] + 2 * u * t * c[1] + t * t * b[1])
+
+    steps = 600
+    pts = [q(i / steps) for i in range(steps + 1)]
+    run = [0.0]
+    for p0, p1 in zip(pts, pts[1:]):
+        run.append(run[-1] + math.dist(p0, p1))
+
+    def along(s):
+        i = min(max(bisect.bisect_left(run, s), 1), steps)
+        f = (s - run[i - 1]) / (run[i] - run[i - 1])
+        return (pts[i - 1][0] + f * (pts[i][0] - pts[i - 1][0]),
+                pts[i - 1][1] + f * (pts[i][1] - pts[i - 1][1]))
+
+    n, mid = 23, 11
+    margin = 16.0
+    gap = (run[-1] - 2 * margin) / (n - 1)
+    rng = random.Random(108)               # a mala's count: the same rain every build
+    order = list(range(n))
+    rng.shuffle(order)
+    rank = {p: r for r, p in enumerate(order)}
+
+    # cropped to the drawing (knots at the top, the drop's tip at the bottom);
+    # the pearls fall from above it, through overflow: visible
+    svg = ['<svg class="garland" viewBox="0 12 560 114" aria-hidden="true">',
+           '<defs><radialGradient id="garlandPearl" cx="38%" cy="32%">'
+           '<stop offset="0%" stop-color="#fffdf4"/><stop offset="45%" stop-color="#f4dc96"/>'
+           '<stop offset="100%" stop-color="#b3893f"/></radialGradient></defs>',
+           f'<path class="thread" d="M{a[0]:g} {a[1]:g} Q{c[0]:g} {c[1]:g} {b[0]:g} {b[1]:g}" '
+           'fill="none" stroke="#8d7440" stroke-width="1"/>']
+    for x, y in (a, b):
+        svg.append(f'<path class="knot" d="M{x:g} {y - 5:g} L{x + 4:g} {y:g} L{x:g} {y + 5:g} '
+                   f'L{x - 4:g} {y:g}Z" fill="#d9b25f"/>')
+
+    pearls = []
+    for i in range(n):
+        x, y = along(margin + i * gap)
+        k = abs(i - mid)
+        r = 9.5 if k == 0 else 3.2 + 4.0 * (1 - k / (mid + 1)) ** 1.25
+        if i in (mid - 5, mid + 5):
+            svg.append(f'<path class="pendant" d="M{x:.1f} {y + r:.1f} V{y + r + 13:.1f}" '
+                       'stroke="#8d7440" stroke-width="0.8"/>')
+            svg.append(f'<circle class="pendant" cx="{x:.1f}" cy="{y + r + 15.6:.1f}" r="2.6" '
+                       'fill="url(#garlandPearl)"/>')
+        if k == 0:
+            svg.append(f'<circle class="pendant" cx="{x:.1f}" cy="{y:.1f}" r="{r + 5.5:g}" '
+                       'fill="none" stroke="#8d7440" stroke-width="0.8" opacity=".6"/>')
+            svg.append(f'<path class="pendant" d="M{x:.1f} {y + r:.1f} V{y + r + 16:.1f}" '
+                       'stroke="#8d7440" stroke-width="0.8"/>')
+            # a teardrop jewel, point upward, hanging from the great pearl
+            ty = y + r + 16
+            svg.append(f'<path class="pendant" d="M{x:.1f} {ty:.1f} C{x + 1.5:.1f} {ty + 4:.1f} '
+                       f'{x + 5:.1f} {ty + 6.5:.1f} {x + 5:.1f} {ty + 10:.1f} A5 5 0 0 1 {x - 5:.1f} '
+                       f'{ty + 10:.1f} C{x - 5:.1f} {ty + 6.5:.1f} {x - 1.5:.1f} {ty + 4:.1f} '
+                       f'{x:.1f} {ty:.1f}Z" fill="url(#garlandPearl)"/>')
+        fall = 140 + rng.random() * 110
+        pearls.append(f'<circle class="pearl" cx="{x:.1f}" cy="{y:.1f}" r="{r:.2f}" '
+                      f'fill="url(#garlandPearl)" style="--d:{rank[i] * 52}ms;--y:-{fall:.0f}px"/>')
+    svg.extend(pearls)                     # pearls last, so they sit over the pendants' threads
+    svg.append("</svg>")
+    return "".join(svg)
+
+
 def build():
     title_lines, colophon, chapters = parse()
     assert len(chapters) == 20, f"expected 20 chapters, got {len(chapters)}"
@@ -566,6 +651,16 @@ def build():
     out.append("    </div>")
     out.append('    <article class="sutra">')
 
+    # the ribbon: hidden until reader.js finds a place kept from an earlier
+    # visit, then filled with that chapter's name from the contents
+    out.append('      <a class="ribbon" id="ribbon" href="#ch01" hidden>'
+               '<span class="ribbon-silk" aria-hidden="true"></span>'
+               '<span class="ribbon-label">'
+               '<span class="ribbon-cta"><span lang="zh-Hant">續讀</span> · Continue reading</span>'
+               '<span class="ribbon-zh" lang="zh-Hant"></span>'
+               '<span class="ribbon-name"></span>'
+               '</span></a>')
+
     # title
     t1, t2, t3 = title_lines[:3]
     out.append('      <header class="sutra-title">')
@@ -605,6 +700,12 @@ def build():
             out.append("      </div>")
         out.append("      </section>")
 
+    # the sutra's last image, drawn: the Dragon King's garland of pearls
+    out.append('      <footer class="sutra-end" id="sutraEnd">')
+    out.append("        " + pearl_garland())
+    out.append('        <p class="garland-caption"><span class="tc" lang="zh-Hant">珠瓔供養</span>'
+               '<span class="cap">Pearl garlands, in offering to this sutra</span></p>')
+    out.append("      </footer>")
     out.append("    </article>")
     out.append("  </div><!-- /reader-main -->")
     out.append(CHROME_FOOT)

@@ -37,6 +37,7 @@
   /* Scroll parallax writes a transform to five layers every frame. That is
      cheap on a desktop GPU and expensive on an old mobile one, for an effect
      barely visible on a small screen — so it is desktop-only. */
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var layers = document.querySelectorAll('[data-parallax]');
   var bigScreen = window.matchMedia('(min-width: 1081px)').matches &&
                   window.matchMedia('(hover: hover)').matches;
